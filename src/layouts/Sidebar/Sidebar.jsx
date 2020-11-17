@@ -108,7 +108,7 @@ const Sidebar = React.memo(function Sidebar(props) {
                 </div>
 
                 <div className="sidebar-card">
-                    <img className="sidebar-card-illustration mb-2" src="../../assets/img/undraw_rocket.svg" alt=""/>
+                    <img className="sidebar-card-illustration mb-2" src="../../assets/img/draw_rocket.svg" alt=""/>
                     <p className="text-center mb-2"><strong>SB Admin Pro</strong> is packed with
                         premium features,
                         components, and more!</p>
