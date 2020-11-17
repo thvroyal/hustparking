@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import './assets/scss/sb-admin-2.scss'
+import './assets/fonts/awesome/css/awesomefont.min.css'
 ReactDOM.render(
   <React.StrictMode>
     <App />
