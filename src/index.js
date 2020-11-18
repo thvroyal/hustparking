@@ -10,6 +10,8 @@ import {store} from './store'
 import './assets/scss/sb-admin-2.scss'
 import './assets/fonts/awesome/css/awesomefont.min.css'
 
+require('dotenv').config();
+
 ReactDOM.render(
     <Provider store = {store} >
     <BrowserRouter>
