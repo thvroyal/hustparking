@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import {withRouter} from "react-router";
 
 const Sidebar = React.memo(function Sidebar(props) {
+    const [toggle, handleToggle] = useState(false);
+
+    function handleToggleButton() {
+        handleToggle(!toggle);
+    }
+
     return (
         <>
-            <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${toggle ? 'toggled' : ''}`}
+                id="accordionSidebar">
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                     <div className="sidebar-brand-icon rotate-n-15">
                         <i className="fas fa-laugh-wink"/>
@@ -104,7 +111,7 @@ const Sidebar = React.memo(function Sidebar(props) {
                 <hr className="sidebar-divider d-none d-md-block"/>
 
                 <div className="text-center d-none d-md-inline">
-                    <button className="rounded-circle border-0" id="sidebarToggle"/>
+                    <button className="rounded-circle border-0" id="sidebarToggle" onClick={handleToggleButton}/>
                 </div>
 
                 <div className="sidebar-card">
