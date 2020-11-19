@@ -50,3 +50,25 @@
     }
   }
 }
+
+.btn-action {
+  background: transparent;
+  border: none;
+  &:hover {
+    background: $gray-200;
+    border-radius: $border-radius;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-status {
+  border: none;
+  border-radius: $border-radius;
+  font-size: .7rem;
+ &:focus {
+   outline: none;
+ }
+  padding: 1px 10px;
+}

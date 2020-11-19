@@ -1,10 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+const initState = [];
 const detector = createSlice({
     name: 'detector',
-    initialState: [],
+    initialState: initState,
     reducers: {
         loadingDetector: (state, action) => {
+            state = initState;
             state.loading = true;
         },
         successDetector: (state, action) => {
