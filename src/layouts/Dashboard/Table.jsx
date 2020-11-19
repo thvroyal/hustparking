@@ -1,8 +1,28 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteDetectors, getDetectors} from "../../apis/detectorsApi";
+import ModalDetector from "../../components/Modal/ModalDetector";
+import {openModalDetector} from "../../store/ModalSlice";
+import {Spinner} from "react-bootstrap";
 
 const Table = React.memo(function Table(props) {
-    const listDetectors = [1, 2, 3, 4, 5, 8, 6, 7, 10, 11, 12, 13, 15, 20];
+    const dispatch = useDispatch();
+    const listDetectors = useSelector(state => state.detector.data);
+    const statusModal = useSelector(state => state.ModalDetector.status);
+    const deleteStatus = useSelector(state => state.detector.delete);
+    useEffect(() => {
+        dispatch(getDetectors());
+    }, [dispatch, deleteStatus]);
+
+    function handleModal() {
+        dispatch(openModalDetector());
+    }
+
+    function deleteDetector(id) {
+        dispatch(deleteDetectors(id));
+    }
+
     return (
         <>
             {/*// <!-- Page Heading -->*/}
@@ -13,7 +33,8 @@ const Table = React.memo(function Table(props) {
             <div className="card shadow mb-4">
                 <div className="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
-                    <button className="btn-action p-2"><h6 className="m-0 font-weight-bold text-primary text-right"><i
+                    <button className="btn-action p-2" onClick={handleModal}><h6
+                        className="m-0 font-weight-bold text-primary text-right"><i
                         className="fa fa-plus-square"/> Create</h6></button>
                 </div>
                 <div className="card-body">
@@ -33,18 +54,18 @@ const Table = React.memo(function Table(props) {
                             </thead>
                             <tbody>
                             {listDetectors.map((item, index) => (
-                                <tr>
-                                    <td>{index}</td>
-                                    <td>222.222.2.2</td>
+                                <tr key={index}>
+                                    <td>{item.id}</td>
+                                    <td>{item.address}</td>
                                     <td>
                                         <button
-                                            className={`btn-status ${item % 2 === 0 ? 'btn-danger' : 'btn-success'}`}>{item % 2 === 0 ? 'Busy' : 'Free'}
+                                            className={`btn-status ${item.status ? 'btn-danger' : 'btn-success'}`}>{item.status ? 'Busy' : 'Free'}
                                         </button>
                                     </td>
-                                    <td>19/11/2020</td>
-                                    <td>60%</td>
-                                    <td>70</td>
-                                    <td>#NULL</td>
+                                    <td>{item.lastUpdate}</td>
+                                    <td>{item.baterryLevel}</td>
+                                    <td>{item.loraLevel}</td>
+                                    <td>{item.mode}</td>
                                     <td className="text-gray-200">
                                         <button className="btn-action mr-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -56,17 +77,22 @@ const Table = React.memo(function Table(props) {
                                                 <circle cx="12" cy="19" r="1"/>
                                             </svg>
                                         </button>
-                                        <button className="btn-action">
+                                        <button className="btn-action" onClick={() => deleteDetector(item.id)}>
+                                            {deleteStatus === item.id ?
+                                                <Spinner animation='border' size='sm' style={{
+                                                    color: '#e74a3b'
+                                                }}/> :
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  viewBox="0 0 24 24"
-                                                 fill="none" stroke="#e74a3b" strokeWidth="1.5" strokeLinecap="round"
+                                                 fill="none" stroke="#e74a3b" strokeWidth="1.5"
+                                                 strokeLinecap="round"
                                                  strokeLinejoin="round" className="feather feather-trash-2">
                                                 <polyline points="3 6 5 6 21 6"/>
                                                 <path
                                                     d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                                                 <line x1="10" y1="11" x2="10" y2="17"/>
                                                 <line x1="14" y1="11" x2="14" y2="17"/>
-                                            </svg>
+                                            </svg>}
                                         </button>
                                     </td>
                                 </tr>

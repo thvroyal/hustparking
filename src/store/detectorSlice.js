@@ -1,6 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const initState = [];
+const initState = {
+    loading: false,
+    err: null,
+    data: [],
+    delete: false,
+};
 const detector = createSlice({
     name: 'detector',
     initialState: initState,
@@ -16,10 +21,13 @@ const detector = createSlice({
         failDetector: (state, action) => {
             state.loading = false;
             state.err = action.payload;
+        },
+        isDeleteDetector: (state,action) => {
+            state.delete = action.payload;
         }
     }
 });
 
 const {reducer, actions} = detector;
-export const {loadingDetector, successDetector, failDetector} = actions;
+export const {loadingDetector, successDetector, failDetector, isDeleteDetector} = actions;
 export default reducer;
