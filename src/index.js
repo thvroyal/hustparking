@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-import {store} from './store'
+import store from './store/index'
 
 import './assets/scss/sb-admin-2.scss'
 import './assets/fonts/awesome/css/awesomefont.min.css'
