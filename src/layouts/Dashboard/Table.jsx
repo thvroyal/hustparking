@@ -2,22 +2,16 @@ import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteDetectors, getDetectors} from "../../apis/detectorsApi";
-import ModalDetector from "../../components/Modal/ModalDetector";
-import {openModalDetector} from "../../store/ModalSlice";
 import {Spinner} from "react-bootstrap";
 
 const Table = React.memo(function Table(props) {
     const dispatch = useDispatch();
     const listDetectors = useSelector(state => state.detector.data);
-    const statusModal = useSelector(state => state.ModalDetector.status);
     const deleteStatus = useSelector(state => state.detector.delete);
     useEffect(() => {
         dispatch(getDetectors());
     }, [dispatch, deleteStatus]);
 
-    function handleModal() {
-        dispatch(openModalDetector());
-    }
 
     function deleteDetector(id) {
         dispatch(deleteDetectors(id));
@@ -33,7 +27,7 @@ const Table = React.memo(function Table(props) {
             <div className="card shadow mb-4">
                 <div className="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
-                    <button className="btn-action p-2" onClick={handleModal}><h6
+                    <button className="btn-action p-2" ><h6
                         className="m-0 font-weight-bold text-primary text-right"><i
                         className="fa fa-plus-square"/> Create</h6></button>
                 </div>
