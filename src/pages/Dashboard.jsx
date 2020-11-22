@@ -1,9 +1,9 @@
 import React from "react";
-import Sidebar from "../../layouts/Sidebar/Sidebar";
-import Header from "../../layouts/Header/Header";
+import Sidebar from "../layouts/Sidebar/Sidebar";
+import Header from "../layouts/Header/Header";
 import {Route, Switch} from "react-router";
-import Table from "../../layouts/Dashboard/Table";
-import Footer from "../../layouts/Footer/Footer";
+import Table from "../layouts/Dashboard/Table";
+import Footer from "../layouts/Footer/Footer";
 
 function Dashboard(props) {
     return (
