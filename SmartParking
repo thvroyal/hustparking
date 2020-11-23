@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-23T02:37:19.941Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="EjHiCWHXk1q51mb6Uag5" version="13.10.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-23T02:54:47.787Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="1MhgrmcbfvE5JuxbEYni" version="13.10.1" type="github">
   <diagram name="Page-1" id="2c0d36ab-eaac-3732-788b-9136903baeff">
     <mxGraphModel dx="1483" dy="840" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
       <root>
@@ -78,6 +78,9 @@
         </mxCell>
         <mxCell id="ZorN-i2ikXQ9tpHLM-MN-111" value="Invoice" style="whiteSpace=wrap;html=1;rounded=1;fontFamily=Tahoma;fontSize=14;fontColor=#FFFFFF;fontStyle=1;strokeColor=none;fillColor=#23445D;" vertex="1" parent="1">
           <mxGeometry x="1170" y="740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZorN-i2ikXQ9tpHLM-MN-113" value="Blacklist" style="whiteSpace=wrap;html=1;rounded=1;fontFamily=Tahoma;fontSize=14;fontColor=#FFFFFF;fontStyle=1;strokeColor=none;fillColor=#23445D;" vertex="1" parent="1">
+          <mxGeometry x="1449.9999999999998" y="535.5" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
