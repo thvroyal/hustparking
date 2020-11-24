@@ -6,7 +6,7 @@ import {Spinner} from "react-bootstrap";
 import useModal from "../../helpers/useModal";
 import ModalDetector from "../../components/Modal/ModalDetector";
 
-const Table = React.memo(function Table(props) {
+const Detectors = React.memo(function Table(props) {
     const dispatch = useDispatch();
     const listDetectors = useSelector(state => state.detector.data);
     const deleteStatus = useSelector(state => state.detector.delete);
@@ -104,4 +104,4 @@ const Table = React.memo(function Table(props) {
     )
 })
 
-export default withRouter(Table);
+export default withRouter(Detectors);
