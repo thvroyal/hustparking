@@ -1,21 +1,8 @@
-import React from 'react';
-import {useDispatch} from "react-redux";
-import {hideModalDetector} from "../../store/ModalSlice";
+import React from "react";
+import ReactDOM from 'react-dom';
 
-const ModalDetector = React.memo((props) => {
-    // const {titleModal} = props;
-    const dispatch = useDispatch();
-    console.log('Hello');
-
-    function handleHideModal() {
-        dispatch(hideModalDetector);
-    }
-
-    function handleSubmit(data) {
-        dispatch(hideModalDetector);
-    }
-
-    return (
+const ModalDetector = ({isShowing, hide}) => isShowing ? ReactDOM.createPortal(
+    <React.Fragment>
         <div className="modal" id="exampleModalCenter" tabIndex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
@@ -25,18 +12,16 @@ const ModalDetector = React.memo((props) => {
                         <button className="close" type="button" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
                     </div>
-                    <div className="modal-body">...</div>
+                    <div className="modal-body"><h1>Show Modal Plzzzzzzzzzzzzz</h1></div>
                     <div className="modal-footer">
-                        <button className="btn btn-light" type="button" data-dismiss="modal"
-                                onClick={handleHideModal}>Close
+                        <button className="btn btn-secondary" type="button" data-dismiss="modal" onClick={hide}>Close
                         </button>
-                        <button className="btn btn-primary" type="button" onClick={() => handleSubmit()}>Save changes
-                        </button>
+                        <button className="btn btn-primary" type="button">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
-    )
-})
+    </React.Fragment>, document.getElementById('root')
+) : null;
 
 export default ModalDetector;
