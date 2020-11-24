@@ -8,7 +8,6 @@ export const getDetectors = () => {
             method: 'GET',
             url: `${process.env.REACT_APP_BASE_URL}/api/v1/detectors`,
         }).then(res => {
-            console.log(res);
             dispatch(successDetector(res.data));
         }).catch(err => {
             console.log('err', err);

@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {withRouter} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteDetectors, getDetectors} from "../../apis/detectorsApi";
 import {Spinner} from "react-bootstrap";
+import useModal from "../../helpers/useModal";
+import ModalDetector from "../../components/Modal/ModalDetector";
 
 const Table = React.memo(function Table(props) {
     const dispatch = useDispatch();
     const listDetectors = useSelector(state => state.detector.data);
     const deleteStatus = useSelector(state => state.detector.delete);
+    const {isShowing, toggle} = useModal();
     useEffect(() => {
         dispatch(getDetectors());
     }, [dispatch, deleteStatus]);
@@ -27,9 +30,10 @@ const Table = React.memo(function Table(props) {
             <div className="card shadow mb-4">
                 <div className="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
-                    <button className="btn-action p-2" ><h6
+                    <button className="btn-action p-2" onClick={toggle}><h6
                         className="m-0 font-weight-bold text-primary text-right"><i
                         className="fa fa-plus-square"/> Create</h6></button>
+                    {isShowing ? <ModalDetector isShowing={isShowing} hide={toggle}/> : null}
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
@@ -76,17 +80,17 @@ const Table = React.memo(function Table(props) {
                                                 <Spinner animation='border' size='sm' style={{
                                                     color: '#e74a3b'
                                                 }}/> :
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 viewBox="0 0 24 24"
-                                                 fill="none" stroke="#e74a3b" strokeWidth="1.5"
-                                                 strokeLinecap="round"
-                                                 strokeLinejoin="round" className="feather feather-trash-2">
-                                                <polyline points="3 6 5 6 21 6"/>
-                                                <path
-                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                                                <line x1="10" y1="11" x2="10" y2="17"/>
-                                                <line x1="14" y1="11" x2="14" y2="17"/>
-                                            </svg>}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     viewBox="0 0 24 24"
+                                                     fill="none" stroke="#e74a3b" strokeWidth="1.5"
+                                                     strokeLinecap="round"
+                                                     strokeLinejoin="round" className="feather feather-trash-2">
+                                                    <polyline points="3 6 5 6 21 6"/>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                    <line x1="10" y1="11" x2="10" y2="17"/>
+                                                    <line x1="14" y1="11" x2="14" y2="17"/>
+                                                </svg>}
                                         </button>
                                     </td>
                                 </tr>
