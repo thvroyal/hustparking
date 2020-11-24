@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import {withRouter} from "react-router";
+import {useRouteMatch, withRouter} from "react-router";
 import {Link} from "react-router-dom";
 
 const Sidebar = React.memo(function Sidebar(props) {
     const [toggle, handleToggle] = useState(false);
-
+    const [matchUrl, setUrl] = useState(useRouteMatch().url);
     function handleToggleButton() {
         handleToggle(!toggle);
     }
@@ -21,57 +21,39 @@ const Sidebar = React.memo(function Sidebar(props) {
                 </Link>
 
                 <hr className="sidebar-divider my-0"/>
-
-                <li className="nav-item active">
+                <li className="nav-item">
+                    <Link to={'/'} className={'nav-link'}>
+                        <i className="fas fa-fw fa-home"/>
+                        <span>Home</span></Link>
+                </li>
+                <li className="nav-item">
                     <Link to={'/dashboard'} className={'nav-link'}>
-                        <i className="fas fa-fw fa-tachometer-alt"/>
+                        <i className="fas fa-fw fa-car"/>
                         <span>Dashboard</span></Link>
                 </li>
 
                 <hr className="sidebar-divider"/>
-
                 <div className="sidebar-heading">
                     Manager
                 </div>
 
-                {/*<li className="nav-item">*/}
-                {/*    <a className="nav-link collapsed" href="#" data-toggle="collapse"*/}
-                {/*       data-target="#collapsePages"*/}
-                {/*       aria-expanded="true" aria-controls="collapsePages">*/}
-                {/*        <i className="fas fa-fw fa-folder"/>*/}
-                {/*        <span>Pages</span>*/}
-                {/*    </a>*/}
-                {/*    <div id="collapsePages" className="collapse" aria-labelledby="headingPages"*/}
-                {/*         data-parent="#accordionSidebar">*/}
-                {/*        <div className="bg-white py-2 collapse-inner rounded">*/}
-                {/*            <h6 className="collapse-header">Login Screens:</h6>*/}
-                {/*            <a className="collapse-item" href="login.html">Login</a>*/}
-                {/*            <a className="collapse-item" href="register.html">Register</a>*/}
-                {/*            <a className="collapse-item" href="forgot-password.html">Forgot Password</a>*/}
-                {/*            <div className="collapse-divider"/>*/}
-                {/*            <h6 className="collapse-header">Other Pages:</h6>*/}
-                {/*            <a className="collapse-item" href="404.html">404 Page</a>*/}
-                {/*            <a className="collapse-item" href="blank.html">Blank Page</a>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</li>*/}
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/fields'}>
-                        <i className="fas fa-fw fa-chart-area"/>
+                    <Link className="nav-link" to={'/dashboard/fields'}>
+                        <i className="fas fa-fw fa-route"/>
                         <span>Fields</span></Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/tables"}>
-                        <i className="fas fa-fw fa-table"/>
-                        <span>Selection 1</span></Link>
+                    <Link className="nav-link" to={"/dashboard/users"}>
+                        <i className="fas fa-fw fa-user"/>
+                        <span>List User</span></Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/tables"}>
-                        <i className="fas fa-fw fa-table"/>
-                        <span>Selection 2</span></Link>
+                    <Link className="nav-link" to={"/dashboard/contract"}>
+                        <i className="fas fa-fw fa-file-contract"/>
+                        <span>Contract</span></Link>
                 </li>
 
                 <hr className="sidebar-divider d-none d-md-block"/>
