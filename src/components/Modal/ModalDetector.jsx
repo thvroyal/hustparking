@@ -9,7 +9,7 @@ const ModalDetector = ({isShowing, hide}) => {
             document.body.classList.remove('modal-open')
         }
     })
-    const {register, handleSubmit, watch, errors} = useForm();
+    const {register, handleSubmit} = useForm();
     const onSubmit = data => console.log(data);
     return isShowing ? ReactDOM.createPortal(
         <React.Fragment>
@@ -51,13 +51,13 @@ const ModalDetector = ({isShowing, hide}) => {
                                     <label htmlFor="status">Status</label>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio"
-                                               name="status" ref={register}  value="1" id="busyStatus"/>
-                                        <label className="custom-control-label" htmlFor="busyStatus">Busy</label>
+                                               name="status" ref={register} value="0" id="freeStatus" defaultChecked/>
+                                        <label className="custom-control-label" htmlFor="freeStatus">Free</label>
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio"
-                                               name="status" ref={register} value="0" id="freeStatus"/>
-                                        <label className="custom-control-label" htmlFor="freeStatus">Free</label>
+                                               name="status" ref={register}  value="1" id="busyStatus"/>
+                                        <label className="custom-control-label" htmlFor="busyStatus">Busy</label>
                                     </div>
                                 </div>
                                 {/*End Status Input Radio*/}
