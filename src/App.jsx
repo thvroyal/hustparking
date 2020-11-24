@@ -9,9 +9,9 @@ function App() {
     return (
         <div className="App">
             <Switch>
-                <Route exact path={'/dashboard'} render={(props => <Dashboard/>)}/>
-                <Route exact path={'/login'} render={(props => <Login/>)}/>
-                <Route exact path={'/register'} render={(props => <Register/>)}/>
+                <Route  path={'/dashboard'} render={(props => <Dashboard/>)}/>
+                <Route  path={'/login'} render={(props => <Login/>)}/>
+                <Route  path={'/register'} render={(props => <Register/>)}/>
 
                 <Route path={'/'} render={(props => <Home/>)}/>
             </Switch>
