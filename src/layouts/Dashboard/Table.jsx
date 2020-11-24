@@ -33,7 +33,7 @@ const Table = React.memo(function Table(props) {
                     <button className="btn-action p-2" onClick={toggle}><h6
                         className="m-0 font-weight-bold text-primary text-right"><i
                         className="fa fa-plus-square"/> Create</h6></button>
-                    <ModalDetector isShowing={isShowing} hide={toggle}/>
+                    {isShowing ? <ModalDetector isShowing={isShowing} hide={toggle}/> : null}
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
