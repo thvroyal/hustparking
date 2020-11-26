@@ -65,7 +65,7 @@ const Detectors = React.memo(function Table(props) {
                                     <td>{item.loraLevel}</td>
                                     <td>{item.mode}</td>
                                     <td className="text-gray-200">
-                                        <button className="btn-action mr-3">
+                                        <button className="btn-action mr-3" onClick={toggle}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  viewBox="0 0 24 24" fill="none" stroke="#858796" strokeWidth="1.5"
                                                  strokeLinecap="round" strokeLinejoin="round"

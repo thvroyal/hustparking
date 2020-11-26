@@ -1,12 +1,17 @@
 import React, {useState} from "react";
-import {useRouteMatch, withRouter} from "react-router";
+import {useLocation, withRouter} from "react-router";
 import {Link} from "react-router-dom";
 
 const Sidebar = React.memo(function Sidebar(props) {
     const [toggle, handleToggle] = useState(false);
-    const [matchUrl, setUrl] = useState(useRouteMatch().url);
+    const [current, setUrl] = useState(useLocation().pathname);
+
     function handleToggleButton() {
         handleToggle(!toggle);
+    }
+
+    function updateCurrentUrl(url) {
+        setUrl(url);
     }
 
     return (
@@ -21,13 +26,15 @@ const Sidebar = React.memo(function Sidebar(props) {
                 </Link>
 
                 <hr className="sidebar-divider my-0"/>
-                <li className="nav-item">
-                    <Link to={'/'} className={'nav-link'}>
+                <li className={`nav-item ${'/' === current ? 'active' : null}`}>
+                    <Link to={'/'} className={`nav-link`}
+                          onClick={() => updateCurrentUrl("/")}>
                         <i className="fas fa-fw fa-home"/>
                         <span>Home</span></Link>
                 </li>
-                <li className="nav-item">
-                    <Link to={'/dashboard'} className={'nav-link'}>
+                <li className={`nav-item ${'/dashboard' === current ? 'active' : null}`}>
+                    <Link to={'/dashboard'} className={`nav-link`}
+                          onClick={() => updateCurrentUrl('/dashboard')}>
                         <i className="fas fa-fw fa-car"/>
                         <span>Dashboard</span></Link>
                 </li>
@@ -38,20 +45,23 @@ const Sidebar = React.memo(function Sidebar(props) {
                 </div>
 
 
-                <li className="nav-item">
-                    <Link className="nav-link" to={'/dashboard/fields'}>
+                <li className={`nav-item ${'/dashboard/fields' === current ? 'active' : null}`}>
+                    <Link className="nav-link" to={'/dashboard/fields'}
+                          onClick={() => updateCurrentUrl('/dashboard/fields')}>
                         <i className="fas fa-fw fa-route"/>
                         <span>Fields</span></Link>
                 </li>
 
-                <li className="nav-item">
-                    <Link className="nav-link" to={"/dashboard/users"}>
+                <li className={`nav-item ${'/dashboard/users' === current ? 'active' : null}`}>
+                    <Link className="nav-link" to={"/dashboard/users"}
+                          onClick={() => updateCurrentUrl('/dashboard/users')}>
                         <i className="fas fa-fw fa-user"/>
                         <span>List User</span></Link>
                 </li>
 
-                <li className="nav-item">
-                    <Link className="nav-link" to={"/dashboard/contract"}>
+                <li className={`nav-item ${'/dashboard/contract' === current ? 'active' : null}`}>
+                    <Link className="nav-link" to={"/dashboard/contract"}
+                          onClick={() => updateCurrentUrl('/dashboard/contract')}>
                         <i className="fas fa-fw fa-file-contract"/>
                         <span>Contract</span></Link>
                 </li>
