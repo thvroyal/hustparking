@@ -5,6 +5,7 @@ import {deleteDetectors, getDetectors} from "../../apis/detectorsApi";
 import {Spinner} from "react-bootstrap";
 import useModal from "../../helpers/useModal";
 import ModalDetector from "../../components/Modal/ModalDetector";
+import ModalEdit from "../../components/Modal/ModalEdit";
 
 const Detectors = React.memo(function Table(props) {
     const dispatch = useDispatch();
@@ -75,6 +76,7 @@ const Detectors = React.memo(function Table(props) {
                                                 <circle cx="12" cy="19" r="1"/>
                                             </svg>
                                         </button>
+                                        {isShowing ? <ModalEdit isShowing={isShowing} hide={toggle} item={item}/> : null}
                                         <button className="btn-action" onClick={() => deleteDetector(item.id)}>
                                             {deleteStatus === item.id ?
                                                 <Spinner animation='border' size='sm' style={{
