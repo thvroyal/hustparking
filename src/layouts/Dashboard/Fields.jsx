@@ -1,33 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {withRouter} from "react-router";
 import CardField from "../../components/CardField";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {getField} from "../../apis/fieldApi";
+import {Spinner} from "react-bootstrap";
 
 function Fields(props) {
+    const dispatch = useDispatch();
+    const listField = useSelector(state => state.field.data);
+
+    useEffect(() => {
+        dispatch(getField());
+    }, [dispatch]);
+
+    //10s Reload
     return (
         <>
             <h1 className="h3 mb-5 text-gray-800">Fields</h1>
             <div className="row">
-                <div className="col-xl-3 col-md-6 mb-4">
-                    <Link to={'/dashboard/fields/1'} className="card-link">
-                        <CardField name="D9 - Bach Khoa" color="primary" id={'#20172916'} data={[60,10]}/>
-                    </Link>
-                </div>
-                <div className="col-xl-3 col-md-6 mb-4">
-                    <CardField name="D3 - Bach Khoa" color="danger" id={'#20172916'}/>
-                </div>
-                <div className="col-xl-3 col-md-6 mb-4">
-                    <CardField name="C9 - Bach Khoa" color="success" id={'#20172916'}/>
-                </div>
-                <div className="col-xl-3 col-md-6 mb-4">
-                    <CardField name="D9 - Bach Khoa" color="dark" id={'#20172916'}/>
-                </div>
-                <div className="col-xl-3 col-md-6 mb-4">
-                    <CardField name="D9 - Bach Khoa" color="primary" id={'#20172916'}/>
-                </div>
-                <div className="col-xl-3 col-md-6 mb-4">
-                    <CardField name="D9 - Bach Khoa" color="primary" id={'#20172916'}/>
-                </div>
+                {listField ? listField.map((item, index) => (
+                    <div className="col-xl-3 col-md-6 mb-4" key={index}>
+                        <Link to={`/dashboard/fields/${item.id}`} className="card-link">
+                            <CardField name={item.position} id={`#${item.id}`}
+                                       data={[item.busySlot, item.totalSlot - item.busySlot]}/>
+                        </Link>
+                    </div>
+                )): <Spinner animation='border' color="primary"/> }
             </div>
         </>
     )

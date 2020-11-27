@@ -7,7 +7,7 @@ import useModal from "../../helpers/useModal";
 import ModalDetector from "../../components/Modal/ModalDetector";
 import ModalEdit from "../../components/Modal/ModalEdit";
 
-const Detectors = React.memo(function Table(props) {
+const Detectors = React.memo(function Table({id}) {
     const dispatch = useDispatch();
     const listDetectors = useSelector(state => state.detector.data);
     const deleteStatus = useSelector(state => state.detector.delete);
@@ -21,10 +21,12 @@ const Detectors = React.memo(function Table(props) {
     function deleteDetector(id) {
         dispatch(deleteDetectors(id));
     }
+
     function handleTypeModal(type) {
         toggle();
         changeTypeModal(type);
     }
+
     return (
         <>
             {/*// <!-- Page Heading -->*/}
@@ -34,7 +36,7 @@ const Detectors = React.memo(function Table(props) {
             {/*// <!-- DataTales Example -->*/}
             <div className="card shadow mb-4">
                 <div className="card-header py-3 d-flex justify-content-between align-items-center">
-                    <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
+                    <h6 className="m-0 font-weight-bold text-primary">{`Database Detectors`}</h6>
                     <button className="btn-action p-2" onClick={() => handleTypeModal(-1)}><h6
                         className="m-0 font-weight-bold text-primary text-right"><i
                         className="fa fa-plus-square"/> Create</h6></button>
@@ -47,11 +49,13 @@ const Detectors = React.memo(function Table(props) {
                             <tr>
                                 <th>Detector ID</th>
                                 <th>Address</th>
-                                <th>Status</th>
+                                <th>Slot ID</th>
+                                <th>Gateway ID</th>
                                 <th>Last Update</th>
+                                <th>Last Setup</th>
                                 <th>Battery Level</th>
-                                <th>Lora Level</th>
-                                <th>Mode</th>
+                                <th>LoraCom Level</th>
+                                <th>Operating Mode</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -59,18 +63,16 @@ const Detectors = React.memo(function Table(props) {
                             {listDetectors.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.id}</td>
-                                    <td>{item.address}</td>
-                                    <td>
-                                        <button
-                                            className={`btn-status ${item.status ? 'btn-danger' : 'btn-success'}`}>{item.status ? 'Busy' : 'Free'}
-                                        </button>
-                                    </td>
-                                    <td>{item.lastUpdate}</td>
-                                    <td>{item.baterryLevel}</td>
-                                    <td>{item.loraLevel}</td>
-                                    <td>{item.mode}</td>
+                                    <td>{item.addressDetector}</td>
+                                    <td>{item.slotId}</td>
+                                    <td>{item.gatewayId}</td>
+                                    <td>{item.lastTimeUpdate}</td>
+                                    <td>{item.lastTimeSetup}</td>
+                                    <td>{item.batteryLevel}</td>
+                                    <td>{item.loracomLevel}</td>
+                                    <td>{item.operatingMode}</td>
                                     <td className="text-gray-200">
-                                        <button className="btn-action mr-3" onClick={() => handleTypeModal(index)}>
+                                        <button className="btn-action" onClick={() => handleTypeModal(index)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  viewBox="0 0 24 24" fill="none" stroke="#858796" strokeWidth="1.5"
                                                  strokeLinecap="round" strokeLinejoin="round"
@@ -80,7 +82,8 @@ const Detectors = React.memo(function Table(props) {
                                                 <circle cx="12" cy="19" r="1"/>
                                             </svg>
                                         </button>
-                                        {isShowing && typeModal === index ? <ModalEdit isShowing={isShowing} hide={toggle} item={item}/> : null}
+                                        {isShowing && typeModal === index ?
+                                            <ModalEdit isShowing={isShowing} hide={toggle} item={item}/> : null}
                                         <button className="btn-action" onClick={() => deleteDetector(item.id)}>
                                             {deleteStatus === item.id ?
                                                 <Spinner animation='border' size='sm' style={{

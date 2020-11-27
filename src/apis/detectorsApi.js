@@ -1,14 +1,14 @@
 import axios from 'axios';
-import {failDetector, isDeleteDetector, isEditDetector, loadingDetector, successDetector} from "../store/detectorSlice";
+import {failDetector, isDeleteDetector, isEditDetector, loadingDetector, successDetector} from "../store/admin/detectorSlice";
 
 export const getDetectors = () => {
     return (dispatch) => {
         dispatch(loadingDetector);
         axios({
             method: 'GET',
-            url: `${process.env.REACT_APP_BASE_URL}/api/v1/detectors`,
+            url: `${process.env.REACT_APP_BASE_URL}/api/ad/detector/find_all`,
         }).then(res => {
-            dispatch(successDetector(res.data));
+            dispatch(successDetector(res.data.data));
         }).catch(err => {
             console.log('err', err);
             dispatch(failDetector(err));
@@ -22,7 +22,7 @@ export const editDetectors = (data) => {
         axios({
             method: 'PUT',
             url: `${process.env.REACT_APP_BASE_URL}/api/v1/detectors/${data.id}`,
-            data: JSON.stringify(data),
+            data: JSON.stringify(data)
         }).then(res => {
             dispatch(isEditDetector(false));
         }).catch(err => {

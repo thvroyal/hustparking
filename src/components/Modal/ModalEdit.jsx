@@ -15,16 +15,16 @@ const ModalEdit = ({isShowing, hide, item}) => {
     })
     const {register, handleSubmit} = useForm();
     const onSubmit = data => {
-        console.log(data);
         const newData = {
             id: data.id,
             address: data.address,
-            status: data.status  !== 0,
+            status: data.status  !== "1",
             lastUpdate: item.lastUpdate,
-            baterryLevel: data.baterryLevel,
+            batteryLevel: data.batteryLevel,
             loraLevel: data.loraLevel,
             mode: data.mode,
         }
+        console.log(JSON.stringify(newData));
         dispatch(editDetectors(newData));
     };
     return isShowing ? ReactDOM.createPortal(
@@ -69,13 +69,14 @@ const ModalEdit = ({isShowing, hide, item}) => {
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio"
                                                name="status" ref={register} value="0" id="freeStatus"
-                                               defaultChecked={item.status}/>
+                                               defaultChecked={!item.status}/>
+                                        {/*       status = true -> busy -> 1 ; status = false -> free -> 0*/}
                                         <label className="custom-control-label" htmlFor="freeStatus">Free</label>
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio"
                                                name="status" ref={register} value="1" id="busyStatus"
-                                               defaultChecked={!item.status}/>
+                                               defaultChecked={item.status}/>
                                         <label className="custom-control-label" htmlFor="busyStatus">Busy</label>
                                     </div>
                                 </div>
@@ -86,7 +87,7 @@ const ModalEdit = ({isShowing, hide, item}) => {
                                     <label htmlFor="battery">Battery Level</label>
                                     <input name="batteryLevel" className="form-control" ref={register}
                                            placeholder="Battery"
-                                           defaultValue={item.baterryLevel}/>
+                                           defaultValue={item.batteryLevel}/>
                                 </div>
                                 {/*End Battery Input*/}
 
