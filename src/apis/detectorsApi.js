@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {failDetector, isDeleteDetector, loadingDetector, successDetector} from "../store/detectorSlice";
+import {failDetector, isDeleteDetector, isEditDetector, loadingDetector, successDetector} from "../store/detectorSlice";
 
 export const getDetectors = () => {
     return (dispatch) => {
@@ -16,16 +16,18 @@ export const getDetectors = () => {
     }
 }
 
-export const putDetectors = (data) => {
+export const editDetectors = (data) => {
     return (dispatch) => {
+        dispatch(isEditDetector(data.id));
         axios({
             method: 'PUT',
             url: `${process.env.REACT_APP_BASE_URL}/api/v1/detectors/${data.id}`,
             data: JSON.stringify(data),
         }).then(res => {
-            getDetectors();
+            dispatch(isEditDetector(false));
         }).catch(err => {
             console.log('err', err);
+            dispatch(isEditDetector(false));
         })
     }
 }

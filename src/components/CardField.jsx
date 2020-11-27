@@ -27,7 +27,7 @@ function CardField(props) {
                         <div className={`h5 mb-0 text-${color} font-weight-bold text-uppercase`}>{name}</div>
                     </div>
                     <div className="col-auto">
-                        <Pie data={dataPie} options={{tooltips: {enabled: false}}} width={'58px'} height={'58px'}/>
+                        <Pie data={dataPie} options={{tooltips: {enabled: false}}} width={58} height={58}/>
                     </div>
                 </div>
             </div>

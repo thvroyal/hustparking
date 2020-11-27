@@ -5,6 +5,7 @@ const initState = {
     err: null,
     data: [],
     delete: false,
+    edit: false,
 };
 const detector = createSlice({
     name: 'detector',
@@ -24,10 +25,13 @@ const detector = createSlice({
         },
         isDeleteDetector: (state,action) => {
             state.delete = action.payload;
+        },
+        isEditDetector: (state, action) => {
+            state.edit = action.payload;
         }
     }
 });
 
 const {reducer, actions} = detector;
-export const {loadingDetector, successDetector, failDetector, isDeleteDetector} = actions;
+export const {loadingDetector, successDetector, failDetector, isDeleteDetector,isEditDetector} = actions;
 export default reducer;
