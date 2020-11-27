@@ -1,9 +1,12 @@
 import React, {useEffect} from "react";
 import ReactDOM from 'react-dom';
 import {useForm} from "react-hook-form";
+import {useDispatch} from "react-redux";
+import {editDetectors} from "../../apis/detectorsApi";
 
 const ModalEdit = ({isShowing, hide, item}) => {
     console.log('Edit Modal Open');
+    const dispatch = useDispatch();
     useEffect(() => {
         document.body.classList.add('modal-open');
         return () => {
@@ -11,7 +14,19 @@ const ModalEdit = ({isShowing, hide, item}) => {
         }
     })
     const {register, handleSubmit} = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log(data);
+        const newData = {
+            id: data.id,
+            address: data.address,
+            status: data.status  !== 0,
+            lastUpdate: item.lastUpdate,
+            baterryLevel: data.baterryLevel,
+            loraLevel: data.loraLevel,
+            mode: data.mode,
+        }
+        dispatch(editDetectors(newData));
+    };
     return isShowing ? ReactDOM.createPortal(
         <React.Fragment>
             <div className="modal fade show" id="staticBackdrop" data-backdrop="static" tabIndex="-1"
@@ -33,7 +48,7 @@ const ModalEdit = ({isShowing, hide, item}) => {
                                 {/*Detector Input*/}
                                 <div className="form-group">
                                     <label htmlFor="detectorID">Detector ID</label>
-                                    <input name="detectorID" className="form-control" ref={register}
+                                    <input name="id" className="form-control" ref={register}
                                            placeholder="New ID"
                                            defaultValue={item.id}/>
                                 </div>
@@ -75,6 +90,15 @@ const ModalEdit = ({isShowing, hide, item}) => {
                                 </div>
                                 {/*End Battery Input*/}
 
+                                {/*Lora Input*/}
+                                <div className="form-group">
+                                    <label htmlFor="battery">Lora Level</label>
+                                    <input name="loraLevel" className="form-control" ref={register}
+                                           placeholder="Battery"
+                                           defaultValue={item.loraLevel}/>
+                                </div>
+                                {/*End Lora Input*/}
+
                                 {/*Mode Input*/}
                                 <div className="form-group">
                                     <label htmlFor="battery">Mode</label>
@@ -85,7 +109,7 @@ const ModalEdit = ({isShowing, hide, item}) => {
                                 {/*End Mode Input*/}
                             </div>
                             <div className="modal-footer">
-                                <button className="btn btn-primary" type="submit">Create</button>
+                                <button className="btn btn-primary" type="submit">Save</button>
                             </div>
                         </form>
                     </div>
