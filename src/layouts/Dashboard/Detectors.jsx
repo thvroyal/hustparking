@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteDetectors, getDetectors} from "../../apis/detectorsApi";
@@ -12,6 +12,7 @@ const Detectors = React.memo(function Table(props) {
     const listDetectors = useSelector(state => state.detector.data);
     const deleteStatus = useSelector(state => state.detector.delete);
     const {isShowing, toggle} = useModal();
+    const [typeModal, changeTypeModal] = useState(null);
     useEffect(() => {
         dispatch(getDetectors());
     }, [dispatch, deleteStatus]);
@@ -20,7 +21,10 @@ const Detectors = React.memo(function Table(props) {
     function deleteDetector(id) {
         dispatch(deleteDetectors(id));
     }
-
+    function handleTypeModal(type) {
+        toggle();
+        changeTypeModal(type);
+    }
     return (
         <>
             {/*// <!-- Page Heading -->*/}
@@ -31,10 +35,10 @@ const Detectors = React.memo(function Table(props) {
             <div className="card shadow mb-4">
                 <div className="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
-                    <button className="btn-action p-2" onClick={toggle}><h6
+                    <button className="btn-action p-2" onClick={() => handleTypeModal(-1)}><h6
                         className="m-0 font-weight-bold text-primary text-right"><i
                         className="fa fa-plus-square"/> Create</h6></button>
-                    {isShowing ? <ModalDetector isShowing={isShowing} hide={toggle}/> : null}
+                    {isShowing && typeModal === -1 ? <ModalDetector isShowing={isShowing} hide={toggle}/> : null}
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
@@ -66,7 +70,7 @@ const Detectors = React.memo(function Table(props) {
                                     <td>{item.loraLevel}</td>
                                     <td>{item.mode}</td>
                                     <td className="text-gray-200">
-                                        <button className="btn-action mr-3" onClick={toggle}>
+                                        <button className="btn-action mr-3" onClick={() => handleTypeModal(index)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  viewBox="0 0 24 24" fill="none" stroke="#858796" strokeWidth="1.5"
                                                  strokeLinecap="round" strokeLinejoin="round"
@@ -76,7 +80,7 @@ const Detectors = React.memo(function Table(props) {
                                                 <circle cx="12" cy="19" r="1"/>
                                             </svg>
                                         </button>
-                                        {isShowing ? <ModalEdit isShowing={isShowing} hide={toggle} item={item}/> : null}
+                                        {isShowing && typeModal === index ? <ModalEdit isShowing={isShowing} hide={toggle} item={item}/> : null}
                                         <button className="btn-action" onClick={() => deleteDetector(item.id)}>
                                             {deleteStatus === item.id ?
                                                 <Spinner animation='border' size='sm' style={{
