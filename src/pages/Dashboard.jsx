@@ -10,6 +10,7 @@ import UserInfo from "../layouts/Dashboard/UserInfo";
 import Contract from "../layouts/Dashboard/Contract";
 import Invoice from "../layouts/Dashboard/Invoice";
 import Fields from "../layouts/Dashboard/Fields";
+import Slot from "../layouts/Dashboard/Slot";
 
 function Dashboard(props) {
     const match = useRouteMatch();
@@ -26,7 +27,7 @@ function Dashboard(props) {
                             <Route exact path={match.url} render={props => <DashboardHome {...props} />}/>
 
                             <Route exact path={`${match.url}/fields`} render={props => <Fields {...props}/>}/>
-                            <Route exact path={`${match.url}/fields/:idField`} render={props => <Detectors {...props}/>}/>
+                            <Route exact path={`${match.url}/fields/:idField`} render={props => <Slot {...props}/>}/>
 
                             <Route exact path={`${match.url}/users`} render={props => <Users {...props}/>}/>
                             <Route exact path={`${match.url}/users/:idUser`} render={props => <UserInfo {...props}/>}/>

@@ -60,7 +60,7 @@ const Detectors = React.memo(function Table({id}) {
                             </tr>
                             </thead>
                             <tbody>
-                            {listDetectors.map((item, index) => (
+                            {listDetectors ? listDetectors.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.id}</td>
                                     <td>{item.addressDetector}</td>
@@ -103,7 +103,7 @@ const Detectors = React.memo(function Table({id}) {
                                         </button>
                                     </td>
                                 </tr>
-                            ))}
+                            )): <tr><td><Spinner animation='border' color="primary"/></td></tr> }
                             </tbody>
                         </table>
                     </div>

@@ -6,24 +6,24 @@ const initState = {
     err: null,
 }
 
-const field = createSlice({
-    name: 'field',
+const slot = createSlice({
+    name: 'slot',
     initialState: initState,
     reducers: {
-        loadingField: (state, action) => {
+        loadingSlot: (state, action) => {
             state.loading = action.payload || true;
         },
-        successField: (state, action) => {
+        successSlot: (state, action) => {
             state.data = action.payload;
             state.loading = false;
         },
-        failedField: (state, action) => {
+        failedSlot: (state, action) => {
             state.err = action.payload;
             state.loading = false;
         }
     }
 });
 
-const {reducer, actions} = field;
-export const {loadingField, successField, failedField} = actions;
+const {reducer, actions} = slot;
+export const {loadingSlot, successSlot, failedSlot} = actions;
 export default reducer;
