@@ -3,7 +3,7 @@ import {Pie} from 'react-chartjs-2'
 
 
 function CardField(props) {
-    const {name, id, data} = props;
+    const {name, id, data, GW} = props;
     const dataPie = {
         datasets: [
             {
@@ -21,10 +21,15 @@ function CardField(props) {
             <div className="card-body">
                 <div className="row no-gutters align-items-center">
                     <div className="col mr-2">
-                        <div className={`text-xs font-weight-bold text-gray-800 text-uppercase mb-1`}>
-                            {id}
+                        <div className={`text-xs font-weight-bold text-primary text-uppercase mb-1`}>
+                            {`Field ${id}`}
                         </div>
-                        <div className={`h5 mb-0 text-primary font-weight-bold text-uppercase`}>{name}</div>
+                        <div className={`h5 mb-0 text-gray-800 font-weight-bold text-uppercase`}>{name}</div>
+                        {GW ? GW.map((item, index) => {
+                            if (item.fieldId === id) return (
+                            <div className="badge badge-primary font-weight-normal mr-1" key={index}>{`GW${item.gatewayId}`}</div>
+                        )}):null}
+
                     </div>
                     <div className="col-auto">
                         <Pie data={dataPie} options={{tooltips: {enabled: false}}} width={58} height={58}/>
