@@ -25,6 +25,7 @@ function CardField(props) {
                             {`Field ${id}`}
                         </div>
                         <div className={`h5 mb-0 text-gray-800 font-weight-bold text-uppercase`}>{name}</div>
+                        {/* eslint-disable-next-line array-callback-return */}
                         {GW ? GW.map((item, index) => {
                             if (item.fieldId === id) return (
                             <div className="badge badge-primary font-weight-normal mr-1" key={index}>{`GW${item.gatewayId}`}</div>
