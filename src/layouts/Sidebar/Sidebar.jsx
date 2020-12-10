@@ -52,6 +52,13 @@ const Sidebar = React.memo(function Sidebar(props) {
                         <span>Fields</span></Link>
                 </li>
 
+                <li className={`nav-item ${'/dashboard/gateway' === current ? 'active' : null}`}>
+                    <Link className="nav-link" to={"/dashboard/gateway"}
+                          onClick={() => updateCurrentUrl('/dashboard/gateway')}>
+                        <i className="fas fa-fw fa-sitemap"/>
+                        <span>Gateways</span></Link>
+                </li>
+
                 <li className={`nav-item ${'/dashboard/users' === current ? 'active' : null}`}>
                     <Link className="nav-link" to={"/dashboard/users"}
                           onClick={() => updateCurrentUrl('/dashboard/users')}>
@@ -64,6 +71,17 @@ const Sidebar = React.memo(function Sidebar(props) {
                           onClick={() => updateCurrentUrl('/dashboard/contract')}>
                         <i className="fas fa-fw fa-file-contract"/>
                         <span>Contract</span></Link>
+                </li>
+
+                <hr className="sidebar-divider"/>
+                <div className="sidebar-heading">
+                    Debug
+                </div>
+                <li className={`nav-item ${'/dashboard/debug-detector' === current ? 'active' : null}`}>
+                    <Link className="nav-link" to={"/dashboard/debug-detector"}
+                          onClick={() => updateCurrentUrl('/dashboard/debug-detector')}>
+                        <i className="fas fa-fw fa-bug"/>
+                        <span>Detector Debug</span></Link>
                 </li>
 
                 <hr className="sidebar-divider d-none d-md-block"/>

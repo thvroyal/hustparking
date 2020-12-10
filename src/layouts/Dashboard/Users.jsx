@@ -53,6 +53,83 @@ function Users(props) {
                         </td>
                         <td><i className="fa fa-ellipsis-v"/></td>
                     </tr>
+                    <tr>
+                        <td className="avatar"><img className="avatar-img" src={ImgAva} alt=""/> Nguyen Van A</td>
+                        <td>user1@gmail.com</td>
+                        <td>999</td>
+                        <td>1000</td>
+                        <td>1920</td>
+                        <td>
+                            <div className="badge badge-danger badge-pill">Offline</div>
+                        </td>
+                        <td><i className="fa fa-ellipsis-v"/></td>
+                    </tr>
+                    <tr>
+                        <td className="avatar"><img className="avatar-img" src={ImgAva} alt=""/> Nguyen Van A</td>
+                        <td>user1@gmail.com</td>
+                        <td>999</td>
+                        <td>1000</td>
+                        <td>1920</td>
+                        <td>
+                            <div className="badge badge-danger badge-pill">Offline</div>
+                        </td>
+                        <td><i className="fa fa-ellipsis-v"/></td>
+                    </tr>
+                    <tr>
+                        <td className="avatar"><img className="avatar-img" src={ImgAva} alt=""/> Nguyen Van A</td>
+                        <td>user1@gmail.com</td>
+                        <td>999</td>
+                        <td>1000</td>
+                        <td>1920</td>
+                        <td>
+                            <div className="badge badge-danger badge-pill">Offline</div>
+                        </td>
+                        <td><i className="fa fa-ellipsis-v"/></td>
+                    </tr>
+                    <tr>
+                        <td className="avatar"><img className="avatar-img" src={ImgAva} alt=""/> Nguyen Van A</td>
+                        <td>user1@gmail.com</td>
+                        <td>999</td>
+                        <td>1000</td>
+                        <td>1920</td>
+                        <td>
+                            <div className="badge badge-danger badge-pill">Offline</div>
+                        </td>
+                        <td><i className="fa fa-ellipsis-v"/></td>
+                    </tr>
+                    <tr>
+                        <td className="avatar"><img className="avatar-img" src={ImgAva} alt=""/> Nguyen Van A</td>
+                        <td>user1@gmail.com</td>
+                        <td>999</td>
+                        <td>1000</td>
+                        <td>1920</td>
+                        <td>
+                            <div className="badge badge-danger badge-pill">Offline</div>
+                        </td>
+                        <td><i className="fa fa-ellipsis-v"/></td>
+                    </tr>
+                    <tr>
+                        <td className="avatar"><img className="avatar-img" src={ImgAva} alt=""/> Nguyen Van A</td>
+                        <td>user1@gmail.com</td>
+                        <td>999</td>
+                        <td>1000</td>
+                        <td>1920</td>
+                        <td>
+                            <div className="badge badge-danger badge-pill">Offline</div>
+                        </td>
+                        <td><i className="fa fa-ellipsis-v"/></td>
+                    </tr>
+                    <tr>
+                        <td className="avatar"><img className="avatar-img" src={ImgAva} alt=""/> Nguyen Van A</td>
+                        <td>user1@gmail.com</td>
+                        <td>999</td>
+                        <td>1000</td>
+                        <td>1920</td>
+                        <td>
+                            <div className="badge badge-danger badge-pill">Offline</div>
+                        </td>
+                        <td><i className="fa fa-ellipsis-v"/></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
