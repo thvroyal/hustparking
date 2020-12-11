@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {withRouter} from "react-router";
-import ModalEdit from "../../../components/Modal/ModalEdit";
 import {Spinner} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {getPacket} from "../../../apis/packageApi";
 
 function DetectorDebug(props) {
-    const listDetectors = [];
+    const dispatch = useDispatch();
+    const listDetectors = useSelector(state => state.packet.data);
+
+    useEffect(() => {
+        const interval = setInterval(getData, 5000);
+        return () => clearInterval(interval);
+    }, [dispatch]);
+
+    function getData() {
+        dispatch(getPacket());
+    }
     return (
         <>
             {/*// <!-- Page Heading -->*/}
-            <h1 className="h3 mb-2 text-gray-800">Debug Detector</h1>
+            <h1 className="h3 mb-2 text-gray-800">Debug</h1>
             <p className="mb-4">Checking Realtime. . . </p>
 
             {/*// <!-- DataTales Example -->*/}
@@ -21,29 +32,31 @@ function DetectorDebug(props) {
                         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                             <thead>
                             <tr>
-                                <th>Detector ID</th>
-                                <th>Address</th>
-                                <th>Slot ID</th>
-                                <th>Gateway ID</th>
-                                <th>Last Update</th>
-                                <th>Last Setup</th>
-                                <th>Battery Level</th>
-                                <th>LoraCom Level</th>
-                                <th>Operating Mode</th>
+                                <th>Seq. Number</th>
+                                <th>Detector</th>
+                                <th>Battery</th>
+                                <th>Node Address</th>
+                                <th>State</th>
+                                <th>Communication Level</th>
+                                <th>Time</th>
+                                <th>Location</th>
                             </tr>
                             </thead>
                             <tbody>
                             {listDetectors ? listDetectors.map((item, index) => (
                                 <tr key={index}>
+                                    <td>{item.packetNumber}</td>
                                     <td>{item.id}</td>
-                                    <td>{item.addressDetector}</td>
-                                    <td>{item.slotId}</td>
-                                    <td>{item.gatewayId}</td>
-                                    <td>{item.lastTimeUpdate}</td>
-                                    <td>{item.lastTimeSetup}</td>
                                     <td>{item.batteryLevel}</td>
-                                    <td>{item.loracomLevel}</td>
-                                    <td>{item.operatingMode}</td>
+                                    <td>{item.nodeAddress}</td>
+                                    <td>
+                                        <button className={`btn-status ${item.state ? 'btn-danger' : 'btn-success'}`}>
+                                            {item.state ? 'Busy' : 'Free'}
+                                        </button>
+                                    </td>
+                                    <td>{item.communicationLevel}</td>
+                                    <td>{item.time}</td>
+                                    <td>{item.location}</td>
                                 </tr>
                             )) : <tr>
                                 <td><Spinner animation='border' color="primary"/></td>

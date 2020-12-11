@@ -7,6 +7,7 @@ import {deleteDetectors, getDetectors} from "../../apis/detectorsApi";
 import useModal from "../../helpers/useModal";
 import {getSlotOfField} from "../../apis/slotApi";
 import {useLocation} from "react-router";
+import {Link} from "react-router-dom";
 
 function Slot(props) {
     const match = useLocation();
@@ -65,8 +66,10 @@ function Slot(props) {
                             {listSlot ? listSlot.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.id}</td>
-                                    <td>{item.addressDetector || 'No Address'}</td>
-                                    <td>{item.addressGateway || 'No Address'}</td>
+                                    <td>{item.addressDetector ? <Link to={`/dashboard/detector/${item.addressDetector}`}
+                                                                      className="card-link">{item.addressDetector}
+                                    </Link> : "No Address"}</td>
+                                    <td>{item.addressGateway || "No Address"}</td>
                                     <td>
                                         <button className={`btn-status ${item.status ? 'btn-danger' : 'btn-success'}`}>
                                             {item.status ? 'Busy' : 'Free'}
@@ -106,7 +109,9 @@ function Slot(props) {
                                         </button>
                                     </td>
                                 </tr>
-                            )) : <tr><td><Spinner animation='border' color="primary"/></td></tr>}
+                            )) : <tr>
+                                <td><Spinner animation='border' color="primary"/></td>
+                            </tr>}
                             </tbody>
                         </table>
                     </div>

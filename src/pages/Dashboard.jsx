@@ -13,6 +13,7 @@ import Fields from "../layouts/Dashboard/Fields";
 import Slot from "../layouts/Dashboard/Slot";
 import Gateway from "../layouts/Dashboard/Gateway";
 import DetectorDebug from "../layouts/Dashboard/Debug/DetectorDebug";
+import DetectorInfo from "../layouts/Dashboard/DetectorInfo";
 
 function Dashboard(props) {
     const match = useRouteMatch();
@@ -32,16 +33,21 @@ function Dashboard(props) {
                             <Route exact path={`${match.url}/fields/:idSlot`} render={props => <Slot {...props}/>}/>
 
                             <Route exact path={`${match.url}/gateway`} render={props => <Gateway {...props}/>}/>
-                            <Route exact path={`${match.url}/gateway/:idDetector`} render={props => <Detectors {...props}/>}/>
-
+                            <Route exact path={`${match.url}/gateway/:idDetector`}
+                                   render={props => <Detectors {...props}/>}/>
 
                             <Route exact path={`${match.url}/users`} render={props => <Users {...props}/>}/>
                             <Route exact path={`${match.url}/users/:idUser`} render={props => <UserInfo {...props}/>}/>
 
                             <Route exact path={`${match.url}/contract`} render={props => <Contract {...props}/>}/>
-                            <Route exact path={`${match.url}/contract/:idContract`} render={props => <Invoice {...props}/>}/>
-                            <Route exact path={`${match.url}/debug-detector`} render={props => <DetectorDebug {...props}/>}/>
+                            <Route exact path={`${match.url}/contract/:idContract`}
+                                   render={props => <Invoice {...props}/>}/>
 
+                            <Route exact path={`${match.url}/debug-detector`}
+                                   render={props => <DetectorDebug {...props}/>}/>
+
+                            <Route exact path={`${match.url}/detector/:idDetector`}
+                                   render={props => <DetectorInfo {...props}/>}/>
 
                         </Switch>
                     </div>

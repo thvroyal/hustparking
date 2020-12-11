@@ -1,14 +1,15 @@
 import axios from 'axios';
 import {failDetector, isDeleteDetector, isEditDetector, loadingDetector, successDetector} from "../store/admin/detectorSlice";
 
-export const getDetectors = () => {
+export const getDetectors = (id) => {
     return (dispatch) => {
         dispatch(loadingDetector);
         axios({
             method: 'GET',
             url: `${process.env.REACT_APP_BASE_URL}/api/ad/detector/find_all`,
         }).then(res => {
-            dispatch(successDetector(res.data.data));
+            const detectorOfGW = res.data.data.filter(item => item.gatewayId === parseInt(id));
+            dispatch(successDetector(detectorOfGW));
         }).catch(err => {
             console.log('err', err);
             dispatch(failDetector(err));

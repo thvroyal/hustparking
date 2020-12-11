@@ -81,7 +81,7 @@ const Sidebar = React.memo(function Sidebar(props) {
                     <Link className="nav-link" to={"/dashboard/debug-detector"}
                           onClick={() => updateCurrentUrl('/dashboard/debug-detector')}>
                         <i className="fas fa-fw fa-bug"/>
-                        <span>Detector Debug</span></Link>
+                        <span>Debug</span></Link>
                 </li>
 
                 <hr className="sidebar-divider d-none d-md-block"/>
