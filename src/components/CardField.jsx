@@ -1,5 +1,6 @@
 import React from "react";
 import {Pie} from 'react-chartjs-2'
+import {Link} from "react-router-dom";
 
 
 function CardField(props) {
@@ -25,13 +26,17 @@ function CardField(props) {
                         <div className={`text-xs font-weight-bold text-primary text-uppercase mb-1`}>
                             {`Field ${id}`}
                         </div>
-                        <div className={`h5 mb-0 text-gray-800 font-weight-bold text-uppercase`}>{name}</div>
+                        <Link to={`/dashboard/fields/${id}`} className="card-link">
+                            <div className={`h5 mb-0 text-gray-800 font-weight-bold text-uppercase`}>{name}</div>
+                        </Link>
                         {/* eslint-disable-next-line array-callback-return */}
-                        {GW ? GW.map((item, index) => {
-                            if (item.fieldId === id) return (
-                            <div className="badge badge-primary font-weight-normal mr-1" key={index}>{`GW${item.gatewayId}`}</div>
-                        )}):null}
-
+                        {GW ? GW.map((item, index) =>
+                            (
+                                <Link to={`/dashboard/gateway/${item.id}`} className="btn-link">
+                                    <div className="badge badge-primary font-weight-normal mr-1"
+                                         key={index}>{`GW${item.id}`}</div>
+                                </Link>
+                            )) : null}
                     </div>
                     <div className="col-auto">
                         <Pie data={dataPie} options={{tooltips: {enabled: false}}} width={58} height={58}/>

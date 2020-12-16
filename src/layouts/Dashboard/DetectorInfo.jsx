@@ -1,7 +1,18 @@
-import React from 'react';
-import {withRouter} from "react-router";
+import React, {useEffect} from 'react';
+import {useLocation, withRouter} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {getDetectorById} from "../../apis/detectorByIdApi";
 
 function DetectorInfo(props) {
+    const dispatch = useDispatch();
+    const match = useLocation();
+    const detectorId = match.pathname.split('/')[3];
+    const infoDetector = useSelector(state => state.detectorById.data);
+
+    useEffect(() => {
+        dispatch(getDetectorById(detectorId));
+    }, [detectorId, dispatch])
+
     return (
         <div className="card mb-4 w-50">
             <div className="card-header text-primary text-lg">Detector Info</div>
@@ -9,59 +20,66 @@ function DetectorInfo(props) {
                 <form>
                     {/*// <!-- Form Group (username)-->*/}
                     <div className="form-group">
-                        <label className="small mb-1" htmlFor="inputUsername">Detector ID</label>
-                        <input className="form-control" id="inputUsername" type="text" placeholder="Enter your username"
-                               value="100"/>
+                        <label className="small mb-1" htmlFor="detectorId">Detector ID</label>
+                        <input className="form-control" id="detectorId" type="text"
+                               value={infoDetector.id}/>
                     </div>
                     {/*// <!-- Form Row-->*/}
                     <div className="form-row">
                         {/*// <!-- Form Group (first name)-->*/}
                         <div className="form-group col-md-6">
-                            <label className="small mb-1" htmlFor="inputFirstName">Address Detector</label>
-                            <input className="form-control" id="inputFirstName" type="text"
-                                   placeholder="Enter your first name" value="2.2.2.555"/>
+                            <label className="small mb-1" htmlFor="addressDetector">Address Detector</label>
+                            <input className="form-control" id="addressDetector" type="text"
+                                   value={infoDetector['address_detector']}/>
                         </div>
                         {/*// <!-- Form Group (last name)-->*/}
                         <div className="form-group col-md-6">
-                            <label className="small mb-1" htmlFor="inputLastName">Address Gateway</label>
-                            <input className="form-control" id="inputLastName" type="text"
-                                   placeholder="Enter your last name" value="1.1.1.1"/>
+                            <label className="small mb-1" htmlFor="addressGateway">Address Gateway</label>
+                            <input className="form-control" id="addressGateway" type="text"
+                                   value={infoDetector['gateway_id']}/>
                         </div>
                     </div>
                     {/*// <!-- Form Row        -->*/}
                     <div className="form-row">
                         {/*// <!-- Form Group (organization name)-->*/}
-                        <div className="form-group col-md-6">
-                            <label className="small mb-1" htmlFor="inputOrgName">Status</label>
-                            <input className="form-control" id="inputOrgName" type="text"
-                                   placeholder="Enter your organization name" value="Busy"/>
-                        </div>
+                        {/*<div className="form-group col-md-6">*/}
+                        {/*    <label className="small mb-1" htmlFor="status">Status</label>*/}
+                        {/*    <input className="form-control" id="status" type="text"*/}
+                        {/*           value="Busy"/>*/}
+                        {/*</div>*/}
                         {/*// <!-- Form Group (location)-->*/}
                         <div className="form-group col-md-6">
-                            <label className="small mb-1" htmlFor="inputLocation">Batery</label>
-                            <input className="form-control" id="inputLocation" type="text"
-                                   placeholder="Enter your location" value="60%"/>
+                            <label className="small mb-1" htmlFor="battery">Batery</label>
+                            <input className="form-control" id="battery" type="text"
+                                   value={infoDetector['battery_level']}/>
                         </div>
                     </div>
                     {/*// <!-- Form Group (email address)-->*/}
-                    <div className="form-group">
-                        <label className="small mb-1" htmlFor="inputEmailAddress">Communication Level</label>
-                        <input className="form-control" id="inputEmailAddress" type="email"
-                               placeholder="Enter your email address" value="02"/>
+                    <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label className="small mb-1" htmlFor="slotId">Slot Id</label>
+                            <input className="form-control" id="slotId" type="email"
+                                   value={infoDetector['slot_id']}/>
+                        </div>
+                        <div className="form-group col-md-6">
+                            <label className="small mb-1" htmlFor="communicationLevel">Communication Level</label>
+                            <input className="form-control" id="communicationLevel" type="email"
+                                   value={infoDetector['loracom_level']}/>
+                        </div>
                     </div>
                     {/*// <!-- Form Row-->*/}
                     <div className="form-row">
                         {/*// <!-- Form Group (phone number)-->*/}
                         <div className="form-group col-md-6">
-                            <label className="small mb-1" htmlFor="inputPhone">Last Update</label>
-                            <input className="form-control" id="inputPhone" type="text"
-                                   placeholder="Enter your phone number" value="10/02/2020 8:00AM"/>
+                            <label className="small mb-1" htmlFor="lastTimeUpdate">Last Update</label>
+                            <input className="form-control" id="lastTimeUpdate" type="text"
+                                   value={infoDetector['last_time_update']}/>
                         </div>
                         {/*// <!-- Form Group (birthday)-->*/}
                         <div className="form-group col-md-6">
-                            <label className="small mb-1" htmlFor="inputBirthday">Last Setup</label>
-                            <input className="form-control" id="inputBirthday" type="text" name="birthday"
-                                   placeholder="Enter your birthday" value="01/01/2019 10:00AM"/>
+                            <label className="small mb-1" htmlFor="lastTimeSetup">Last Setup</label>
+                            <input className="form-control" id="lastTimeSetup" type="text"
+                                   value={infoDetector['last_time_setup']}/>
                         </div>
                     </div>
                     {/*// <!-- Save changes button-->*/}

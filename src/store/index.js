@@ -5,6 +5,8 @@ import slotReducer from './admin/SlotSlice';
 import gatewayFieldReducer from './admin/gatewayfieldSlice';
 import gatewayReducer from './admin/gatewaySlice'
 import packetReducer from './debug/packageSlice'
+import detectorByIdReducer from './admin/detectorByIdSlice';
+import slotByIdReducer from './admin/slotByIdSlice';
 
 const rootReducer = {
     detector: detectorReducer,
@@ -13,6 +15,8 @@ const rootReducer = {
     gatewayField: gatewayFieldReducer,
     gateway: gatewayReducer,
     packet: packetReducer,
+    detectorById: detectorByIdReducer,
+    slotById: slotByIdReducer
 }
 const store = configureStore({
     reducer: rootReducer,
