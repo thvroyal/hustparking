@@ -14,6 +14,8 @@ import Slot from "../layouts/Dashboard/Slot";
 import Gateway from "../layouts/Dashboard/Gateway";
 import DetectorDebug from "../layouts/Dashboard/Debug/DetectorDebug";
 import DetectorInfo from "../layouts/Dashboard/DetectorInfo";
+import Image1 from "../layouts/Dashboard/Image1";
+import Image2 from "../layouts/Dashboard/Image2";
 
 function Dashboard(props) {
     const match = useRouteMatch();
@@ -48,6 +50,9 @@ function Dashboard(props) {
 
                             <Route exact path={`${match.url}/detector/:idDetector`}
                                    render={props => <DetectorInfo {...props}/>}/>
+
+                            <Route exact path={`${match.url}/image1`} render={props => <Image1 {...props}/>}/>
+                            <Route exact path={`${match.url}/image2`} render={props => <Image2 {...props}/>}/>
 
                         </Switch>
                     </div>

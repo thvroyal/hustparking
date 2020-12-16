@@ -52,13 +52,6 @@ const Sidebar = React.memo(function Sidebar(props) {
                         <span>Fields</span></Link>
                 </li>
 
-                <li className={`nav-item ${'/dashboard/gateway' === current ? 'active' : null}`}>
-                    <Link className="nav-link" to={"/dashboard/gateway"}
-                          onClick={() => updateCurrentUrl('/dashboard/gateway')}>
-                        <i className="fas fa-fw fa-sitemap"/>
-                        <span>Gateways</span></Link>
-                </li>
-
                 <li className={`nav-item ${'/dashboard/users' === current ? 'active' : null}`}>
                     <Link className="nav-link" to={"/dashboard/users"}
                           onClick={() => updateCurrentUrl('/dashboard/users')}>
@@ -71,6 +64,20 @@ const Sidebar = React.memo(function Sidebar(props) {
                           onClick={() => updateCurrentUrl('/dashboard/contract')}>
                         <i className="fas fa-fw fa-file-contract"/>
                         <span>Contract</span></Link>
+                </li>
+
+                <li className={`nav-item ${'/dashboard/image1' === current ? 'active' : null}`}>
+                    <Link className="nav-link" to={"/dashboard/image1"}
+                          onClick={() => updateCurrentUrl('/dashboard/image1')}>
+                        <i className="fas fa-fw fa-image"/>
+                        <span>Image 1</span></Link>
+                </li>
+
+                <li className={`nav-item ${'/dashboard/image2' === current ? 'active' : null}`}>
+                    <Link className="nav-link" to={"/dashboard/image2"}
+                          onClick={() => updateCurrentUrl('/dashboard/image2')}>
+                        <i className="fas fa-fw fa-image"/>
+                        <span>Image 2</span></Link>
                 </li>
 
                 <hr className="sidebar-divider"/>

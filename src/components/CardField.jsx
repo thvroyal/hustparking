@@ -7,10 +7,11 @@ function CardField(props) {
     const dataPie = {
         datasets: [
             {
-                data: data || [10, 100],
+                data: data || [0, 10, 100],
                 backgroundColor: [
-                    '#2E59D9',
-                    '#fff'
+                    '#f6c23e',
+                    '#e74a3b',
+                    '#1cc88a'
                 ],
                 borderWidth: 0,
             }

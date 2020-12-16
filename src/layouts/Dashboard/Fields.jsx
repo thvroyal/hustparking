@@ -26,7 +26,7 @@ function Fields(props) {
                     <div className="col-xl-3 col-md-6 mb-4" key={index}>
                         <Link to={`/dashboard/fields/${item.id}`} className="card-link">
                             <CardField name={item.position} id={item.id}
-                                       data={[item.busySlot, item.totalSlot - item.busySlot]} GW={listGWField}/>
+                                       data={[item.totalBook, item.busySlot, item.totalSlot - item.busySlot - item.totalBook]} GW={listGWField}/>
                         </Link>
                     </div>
                 )): <Spinner animation='border' color="primary"/> }

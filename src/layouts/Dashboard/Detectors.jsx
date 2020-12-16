@@ -26,7 +26,7 @@ const Detectors = React.memo(function Table() {
                     <h6 className="m-0 font-weight-bold text-primary">{`Database Detectors`}</h6>
                 </div>
                 <div className="card-body">
-                    <div className="table-responsive">
+                    <div className="table-responsive table-hover">
                         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                             <thead>
                             <tr>

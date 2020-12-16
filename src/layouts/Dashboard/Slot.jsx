@@ -8,18 +8,22 @@ import useModal from "../../helpers/useModal";
 import {getSlotOfField} from "../../apis/slotApi";
 import {useLocation} from "react-router";
 import {Link} from "react-router-dom";
+import {getField} from "../../apis/fieldApi";
 
 function Slot(props) {
     const match = useLocation();
     const fieldId = match.pathname.split('/')[3];
     const dispatch = useDispatch();
     const listSlot = useSelector(state => state.slot.data);
-    const deleteStatus = useSelector(state => state.detector.delete); // fix later
+    const field = useSelector(state => state.field.data);
+    let fieldName;
+    if (field) fieldName = field.filter(item => item.id === parseInt(fieldId))[0].position; else fieldName = '';
     const {isShowing, toggle} = useModal();
     const [typeModal, changeTypeModal] = useState(null);
     useEffect(() => {
         dispatch(getSlotOfField(fieldId));
-    }, [dispatch, deleteStatus, fieldId]);
+        dispatch(getField());
+    }, [dispatch, fieldId]);
 
     // Fix later-------------------------------
     function deleteDetector(id) {
@@ -36,7 +40,7 @@ function Slot(props) {
     return (
         <>
             {/*// <!-- Page Heading -->*/}
-            <h1 className="h3 mb-2 text-gray-800">{`Slot Of Field ${fieldId}`}</h1>
+            <h1 className="h3 mb-2 text-gray-800 text-capitalize">{`Field ${fieldName}`}</h1>
             <p className="mb-4">Update after 10 seconds.</p>
 
             {/*// <!-- DataTales Example -->*/}
@@ -49,7 +53,7 @@ function Slot(props) {
                     {isShowing && typeModal === -1 ? <ModalDetector isShowing={isShowing} hide={toggle}/> : null}
                 </div>
                 <div className="card-body">
-                    <div className="table-responsive">
+                    <div className="table-responsive table-hover">
                         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                             <thead>
                             <tr>
@@ -91,21 +95,18 @@ function Slot(props) {
                                         {isShowing && typeModal === index ?
                                             <ModalEdit isShowing={isShowing} hide={toggle} item={item}/> : null}
                                         <button className="btn-action" onClick={() => deleteDetector(item.id)}>
-                                            {deleteStatus === item.id ?
-                                                <Spinner animation='border' size='sm' style={{
-                                                    color: '#e74a3b'
-                                                }}/> :
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                     viewBox="0 0 24 24"
-                                                     fill="none" stroke="#e74a3b" strokeWidth="1.5"
-                                                     strokeLinecap="round"
-                                                     strokeLinejoin="round" className="feather feather-trash-2">
-                                                    <polyline points="3 6 5 6 21 6"/>
-                                                    <path
-                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                                                    <line x1="10" y1="11" x2="10" y2="17"/>
-                                                    <line x1="14" y1="11" x2="14" y2="17"/>
-                                                </svg>}
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none" stroke="#e74a3b" strokeWidth="1.5"
+                                                 strokeLinecap="round"
+                                                 strokeLinejoin="round" className="feather feather-trash-2">
+                                                <polyline points="3 6 5 6 21 6"/>
+                                                <path
+                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                <line x1="10" y1="11" x2="10" y2="17"/>
+                                                <line x1="14" y1="11" x2="14" y2="17"/>
+                                            </svg>
                                         </button>
                                     </td>
                                 </tr>
