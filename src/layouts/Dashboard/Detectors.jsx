@@ -47,7 +47,7 @@ const Detectors = React.memo(function Table() {
                                         <td>{item.id}</td>
                                         <td>
                                             <Link className="card-link"
-                                                  to={`/dashboard/detector/${item.addressDetector}`}>
+                                                  to={`/dashboard/detector/${item.id}`}>
                                                 {item.addressDetector}
                                             </Link>
                                         </td>

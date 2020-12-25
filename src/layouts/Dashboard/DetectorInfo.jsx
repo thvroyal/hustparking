@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useLocation, withRouter} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {getDetectorById} from "../../apis/detectorByIdApi";
+import {resetDetectorById} from "../../store/admin/detectorByIdSlice";
 
 function DetectorInfo(props) {
     const dispatch = useDispatch();
@@ -11,6 +12,9 @@ function DetectorInfo(props) {
 
     useEffect(() => {
         dispatch(getDetectorById(detectorId));
+        return () => {
+            dispatch(resetDetectorById()); // reset data when unmounted
+        }
     }, [detectorId, dispatch])
 
     return (
@@ -30,13 +34,13 @@ function DetectorInfo(props) {
                         <div className="form-group col-md-6">
                             <label className="small mb-1" htmlFor="addressDetector">Address Detector</label>
                             <input className="form-control" id="addressDetector" type="text"
-                                   value={infoDetector['address_detector']}/>
+                                   value={infoDetector.addressDetector}/>
                         </div>
                         {/*// <!-- Form Group (last name)-->*/}
                         <div className="form-group col-md-6">
                             <label className="small mb-1" htmlFor="addressGateway">Address Gateway</label>
                             <input className="form-control" id="addressGateway" type="text"
-                                   value={infoDetector['gateway_id']}/>
+                                   value={infoDetector.gatewayId}/>
                         </div>
                     </div>
                     {/*// <!-- Form Row        -->*/}
@@ -51,7 +55,7 @@ function DetectorInfo(props) {
                         <div className="form-group col-md-6">
                             <label className="small mb-1" htmlFor="battery">Batery</label>
                             <input className="form-control" id="battery" type="text"
-                                   value={infoDetector['battery_level']}/>
+                                   value={infoDetector.batteryLevel}/>
                         </div>
                     </div>
                     {/*// <!-- Form Group (email address)-->*/}
@@ -59,12 +63,12 @@ function DetectorInfo(props) {
                         <div className="form-group col-md-6">
                             <label className="small mb-1" htmlFor="slotId">Slot Id</label>
                             <input className="form-control" id="slotId" type="email"
-                                   value={infoDetector['slot_id']}/>
+                                   value={infoDetector.slotId}/>
                         </div>
                         <div className="form-group col-md-6">
                             <label className="small mb-1" htmlFor="communicationLevel">Communication Level</label>
                             <input className="form-control" id="communicationLevel" type="email"
-                                   value={infoDetector['loracom_level']}/>
+                                   value={infoDetector.communication_level}/>
                         </div>
                     </div>
                     {/*// <!-- Form Row-->*/}
@@ -73,13 +77,13 @@ function DetectorInfo(props) {
                         <div className="form-group col-md-6">
                             <label className="small mb-1" htmlFor="lastTimeUpdate">Last Update</label>
                             <input className="form-control" id="lastTimeUpdate" type="text"
-                                   value={infoDetector['last_time_update']}/>
+                                   value={infoDetector.lastTimeUpdate}/>
                         </div>
                         {/*// <!-- Form Group (birthday)-->*/}
                         <div className="form-group col-md-6">
                             <label className="small mb-1" htmlFor="lastTimeSetup">Last Setup</label>
                             <input className="form-control" id="lastTimeSetup" type="text"
-                                   value={infoDetector['last_time_setup']}/>
+                                   value={infoDetector.lastTimeSetup}/>
                         </div>
                     </div>
                     {/*// <!-- Save changes button-->*/}

@@ -16,6 +16,7 @@ function Slot(props) {
     const dispatch = useDispatch();
     const listSlot = useSelector(state => state.slot.data);
     const field = useSelector(state => state.field.data);
+    const [showNull, setShowNull] = useState(false);
     let fieldName;
     if (field) fieldName = field.filter(item => item.id === parseInt(fieldId))[0].position; else fieldName = '';
     const {isShowing, toggle} = useModal();
@@ -35,6 +36,10 @@ function Slot(props) {
     function handleTypeModal(type) {
         toggle();
         changeTypeModal(type);
+    }
+
+    function changeFilterShowNull() {
+        setShowNull(!showNull);
     }
 
     return (
@@ -60,57 +65,52 @@ function Slot(props) {
                                 <th>Slot ID</th>
                                 <th>Address Detector</th>
                                 <th>Address Gateway</th>
-                                <th>Status</th>
+                                <th>Status Detector</th>
+                                <th>Status Cam</th>
+                                <th>Status <i className="fa fa-eye" onClick={changeFilterShowNull}/></th>
                                 <th>Last Update</th>
                                 <th>Last Setup</th>
-                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {listSlot ? listSlot.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.id}</td>
-                                    <td>{item.addressDetector ? <Link to={`/dashboard/detector/${item.addressDetector}`}
-                                                                      className="card-link">{item.addressDetector}
-                                    </Link> : "No Address"}</td>
-                                    <td>{item.addressGateway || "No Address"}</td>
-                                    <td>
-                                        <button className={`btn-status ${item.status ? 'btn-danger' : 'btn-success'}`}>
-                                            {item.status ? 'Busy' : 'Free'}
-                                        </button>
-                                    </td>
-                                    <td>{item.lastTimeUpdate || 'No Data'}</td>
-                                    <td>{item.lastTimeSetup || 'No Data'}</td>
-                                    <td className="text-gray-200">
-                                        <button className="btn-action" onClick={() => handleTypeModal(index)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 viewBox="0 0 24 24" fill="none" stroke="#858796" strokeWidth="1.5"
-                                                 strokeLinecap="round" strokeLinejoin="round"
-                                                 className="feather feather-more-vertical">
-                                                <circle cx="12" cy="12" r="1"/>
-                                                <circle cx="12" cy="5" r="1"/>
-                                                <circle cx="12" cy="19" r="1"/>
-                                            </svg>
-                                        </button>
-                                        {isShowing && typeModal === index ?
-                                            <ModalEdit isShowing={isShowing} hide={toggle} item={item}/> : null}
-                                        <button className="btn-action" onClick={() => deleteDetector(item.id)}>
+                            {listSlot ? listSlot.map((item, index) => {
+                                let statusAnd;
+                                if (item.statusCam === null) statusAnd = item.statusDetector;
+                                if (item.statusDetector === null) statusAnd = item.statusCam;
+                                if (item.statusCam === null && item.statusDetector === null) statusAnd = null;
+                                if (item.statusCam !== null && item.statusDetector !== null) statusAnd = (item.statusDetector && item.statusCam);
+                                if (statusAnd === null && showNull) return null; else return (
+                                    <tr key={index}>
+                                        <td>{item.id}</td>
+                                        <td>{item.addressDetector ?
+                                            <Link to={`/dashboard/detector/${item.detectorId}`}
+                                                  className="card-link">{item.addressDetector}
+                                            </Link> : "No Address"}</td>
+                                        <td>{item.addressGateway || "No Address"}</td>
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 viewBox="0 0 24 24"
-                                                 fill="none" stroke="#e74a3b" strokeWidth="1.5"
-                                                 strokeLinecap="round"
-                                                 strokeLinejoin="round" className="feather feather-trash-2">
-                                                <polyline points="3 6 5 6 21 6"/>
-                                                <path
-                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                                                <line x1="10" y1="11" x2="10" y2="17"/>
-                                                <line x1="14" y1="11" x2="14" y2="17"/>
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                            )) : <tr>
+                                        <td>
+                                            <button
+                                                className={`btn-status ${item.statusDetector ? 'btn-danger' : item.statusDetector === null ? 'btn-white' : 'btn-success'}`}>
+                                                {item.statusDetector ? 'Busy' : item.statusDetector === null ? 'Null' : 'Free'}
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                className={`btn-status ${item.statusCam ? 'btn-danger' : item.statusCam === null ? 'btn-white' : 'btn-success'}`}>
+                                                {item.statusCam ? 'Busy' : item.statusCam === null ? 'Null' : 'Free'}
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                className={`btn-status ${statusAnd ? 'btn-danger' : statusAnd === null ? 'btn-white' : 'btn-success'}`}>
+                                                {statusAnd ? 'Busy' : statusAnd === null ? 'Null' : 'Free'}
+                                            </button>
+                                        </td>
+                                        <td>{item.lastTimeUpdate || 'No Data'}</td>
+                                        <td>{item.lastTimeSetup || 'No Data'}</td>
+                                    </tr>
+                                )
+                            }) : <tr>
                                 <td><Spinner animation='border' color="primary"/></td>
                             </tr>}
                             </tbody>
@@ -121,5 +121,6 @@ function Slot(props) {
         </>
     );
 }
+
 
 export default Slot;

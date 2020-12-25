@@ -9,6 +9,9 @@ const detectorById = createSlice({
     name: 'detectorId',
     initialState: initState,
     reducers: {
+        resetDetectorById: (state, action) => {
+            state = initState;
+        },
         loadingDetectorById: (state, action) => {
             state = initState;
             state.loading = true;
@@ -25,5 +28,5 @@ const detectorById = createSlice({
 });
 
 const {reducer, actions} = detectorById;
-export const {loadingDetectorById, successDetectorById, failDetectorById} = actions;
+export const {loadingDetectorById, successDetectorById, failDetectorById, resetDetectorById} = actions;
 export default reducer;
