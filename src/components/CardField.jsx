@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import {Pie} from 'react-chartjs-2'
 import {Link} from "react-router-dom";
+import {Tooltip} from "reactstrap";
 
 
 function CardField(props) {
@@ -18,6 +19,12 @@ function CardField(props) {
             }
         ]
     }
+
+    const [tooltipOpen, setTooltipOpen] = useState(false);
+
+    const toggle = () => setTooltipOpen(!tooltipOpen);
+
+
     return (
         <div className={`card border-left-primary shadow h-100 py-2 card-field`}>
             <div className="card-body">
@@ -33,8 +40,11 @@ function CardField(props) {
                         {GW ? GW.map((item, index) =>
                             (
                                 <Link to={`/dashboard/gateway/${item.id}`} className="btn-link">
-                                    <div className="badge badge-primary font-weight-normal mr-1"
+                                    <div className="badge badge-primary font-weight-normal mr-1" id={`tooltip${index}`}
                                          key={index}>{`GW${item.id}`}</div>
+                                    <Tooltip placement="bottom" isOpen={tooltipOpen} target={`tooltip${index}`} toggle={toggle}>
+                                        {`Click to show all detectors of Gateway ${item.id}`}
+                                    </Tooltip>
                                 </Link>
                             )) : null}
                     </div>

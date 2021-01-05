@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {withRouter} from "react-router";
 import CardField from "../../components/CardField";
-import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getField} from "../../apis/fieldApi";
 import {Spinner} from "react-bootstrap";
@@ -20,6 +19,7 @@ function Fields(props) {
         dispatch(getField());
         dispatch(getGateway());
     }, [dispatch]);
+
 
     //10s Reload
     return (
