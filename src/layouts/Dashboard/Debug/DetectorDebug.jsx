@@ -46,7 +46,7 @@ function DetectorDebug(props) {
                             {listDetectors ? listDetectors.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.packetNumber}</td>
-                                    <td>{item.id}</td>
+                                    <td>{item.addressDetector}</td>
                                     <td>{item.batteryLevel}</td>
                                     <td>{item.nodeAddress}</td>
                                     <td>
