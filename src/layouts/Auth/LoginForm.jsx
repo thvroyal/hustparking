@@ -1,10 +1,12 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { TextField } from "../../components/TextField";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as Yup from "yup";
+import Axios from "axios";
 
 const LoginForm = () => {
+  const history = useHistory();
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const validate = Yup.object({
     phone: Yup.string()
@@ -21,8 +23,20 @@ const LoginForm = () => {
         password: "",
       }}
       validationSchema={validate}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        try {
+          const response = await Axios.post(
+            `${process.env.REACT_APP_BASE_URL}/api/public/login`,
+            values
+          );
+          const { data } = response;
+          localStorage.setItem("AccessToken", data.data);
+          if (data.message === "user") history.push("/");
+          else if (data.message === "admin") history.push("/dashboard");
+          //set role to store
+        } catch (err) {
+          console.error(err);
+        }
       }}
     >
       {(formik) => (

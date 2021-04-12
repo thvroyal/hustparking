@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { TextField } from "../../components/TextField";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 import * as Yup from "yup";
+import Axios from "axios";
 
 const RegisterForm = () => {
+  const [isSuccess, handleIsSuccess] = useState(false);
+  const history = useHistory();
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const validate = Yup.object({
     address: Yup.string().required("Address is required"),
@@ -31,13 +35,31 @@ const RegisterForm = () => {
         idNumber: "",
       }}
       validationSchema={validate}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        try {
+          const response = await Axios.post(
+            `${process.env.REACT_APP_BASE_URL}/api/public/register`,
+            values
+          );
+          if (response.data.message === "success") {
+            handleIsSuccess(true);
+            setTimeout(function () {
+              history.push("/login");
+            }, 1000);
+          }
+        } catch (err) {
+          console.err(err);
+        }
       }}
     >
       {(formik) => (
         <div>
           <Form className="user">
+            {isSuccess ? (
+              <div className="alert alert-success" role="alert">
+                Sign up success
+              </div>
+            ) : null}
             <TextField
               label="Phone"
               name="phone"
@@ -82,18 +104,18 @@ const RegisterForm = () => {
             </button>
             <hr />
             <a href="index.html" className="btn btn-google btn-user btn-block">
-              <i class="fab fa-google fa-fw"></i> Register with Google
+              <i className="fab fa-google fa-fw"></i> Register with Google
             </a>
             <a
               href="index.html"
               className="btn btn-facebook btn-user btn-block"
             >
-              <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+              <i className="fab fa-facebook-f fa-fw"></i> Register with Facebook
             </a>
           </Form>
           <hr />
-          <div class="text-center">
-            <Link class="small" to="/login">
+          <div className="text-center">
+            <Link className="small" to="/login">
               Already have an account? Login now
             </Link>
           </div>
