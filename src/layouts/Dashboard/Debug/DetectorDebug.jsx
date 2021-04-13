@@ -58,7 +58,7 @@ function DetectorDebug(props) {
               <thead>
                 <tr>
                   <th>Seq. Number</th>
-                  <th>Detector</th>
+                  <th>ID Slot</th>
                   <th>Battery</th>
                   <th>
                     <div className="d-flex justify-content-between align-items-center">
@@ -137,7 +137,7 @@ function DetectorDebug(props) {
                       return (
                         <tr key={index}>
                           <td>{item.packetNumber}</td>
-                          <td>{item.addressDetector}</td>
+                          <td>{item.id}</td>
                           <td>{item.batteryLevel}</td>
                           <td>{item.nodeAddress}</td>
                           <td>

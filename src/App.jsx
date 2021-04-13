@@ -11,15 +11,15 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        {/* <AuthenticatedRoute
-          restrict={[0]} // only admin can access dashboard
+        <AuthenticatedRoute
+          restrict={[2]} // only admin can access dashboard
           path={"/dashboard"}
         >
           <Dashboard />
-        </AuthenticatedRoute> */}
-        <UnauthenticatedRoute target="/" path={"/dashboard"}>
+        </AuthenticatedRoute>
+        {/* <UnauthenticatedRoute target="/" path={"/dashboard"}>
           <Dashboard />
-        </UnauthenticatedRoute>
+        </UnauthenticatedRoute> */}
         <UnauthenticatedRoute target="/" path={"/login"}>
           <Login />
         </UnauthenticatedRoute>

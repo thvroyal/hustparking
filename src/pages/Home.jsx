@@ -13,6 +13,7 @@ function Home() {
   }
   function handleLogOut() {
     dispatch(ClearTokenBackend);
+    window.location.reload();
   }
   return (
     <header className="p-3 mb-3 border-bottom">

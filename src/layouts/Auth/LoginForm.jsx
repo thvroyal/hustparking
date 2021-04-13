@@ -3,24 +3,22 @@ import { Formik, Form } from "formik";
 import { TextField } from "../../components/TextField";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SignIn } from "../../apis/auth";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const error = useSelector((state) => state.auth.error);
   const validate = Yup.object({
-    phone: Yup.string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .required("Phone number is required"),
+    email: Yup.string().required("Email is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 charaters")
+      .min(2, "Password must be at least 2 charaters")
       .required("Password is required"),
   });
   return (
     <Formik
       initialValues={{
-        phone: "",
+        email: "",
         password: "",
       }}
       validationSchema={validate}
@@ -30,12 +28,17 @@ const LoginForm = () => {
     >
       {(formik) => (
         <div>
+          {error ? (
+            <div className="alert alert-danger" role="alert">
+              {error}
+            </div>
+          ) : null}
           <Form className="user">
             <TextField
-              label="Phone"
-              name="phone"
-              type="tel"
-              placeholder="Phone number"
+              label="email"
+              name="email"
+              type="email"
+              placeholder="Email"
             />
             <TextField
               label="Password"

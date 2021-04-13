@@ -9,14 +9,11 @@ import Axios from "axios";
 const RegisterForm = () => {
   const [isSuccess, handleIsSuccess] = useState(false);
   const history = useHistory();
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const validate = Yup.object({
     address: Yup.string().required("Address is required"),
-    phone: Yup.string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .required("Phone number is required"),
+    email: Yup.string().required("Email is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 charaters")
+      .min(2, "Password must be at least 2 charaters")
       .required("Password is required"),
     rePassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Password must match")
@@ -29,7 +26,7 @@ const RegisterForm = () => {
       initialValues={{
         address: "",
         equipment: "",
-        phone: "",
+        email: "",
         password: "",
         rePassword: "",
         idNumber: "",
@@ -61,10 +58,10 @@ const RegisterForm = () => {
               </div>
             ) : null}
             <TextField
-              label="Phone"
-              name="phone"
-              type="tel"
-              placeholder="Phone number"
+              label="email"
+              name="email"
+              type="mail"
+              placeholder="Email"
             />
             <TextField
               label="address"

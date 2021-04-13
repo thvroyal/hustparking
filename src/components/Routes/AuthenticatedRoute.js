@@ -10,14 +10,15 @@ export default function AuthenticatedRoute({ children, restrict, ...rest }) {
   if (isAuthenticated && !restrict.includes(role)) {
     console.log("Not Restrict");
     dispatch(ClearTokenBackend());
-  }
-  return (
-    <Route {...rest}>
-      {isAuthenticated && restrict.includes(role) ? (
-        children
-      ) : (
-        <Redirect to={`/login?redirect=${pathname}${search}`} />
-      )}
-    </Route>
-  );
+    return <Redirect to="/login" />;
+  } else
+    return (
+      <Route {...rest}>
+        {isAuthenticated && restrict.includes(role) ? (
+          children
+        ) : (
+          <Redirect to={`/login?redirect=${pathname}${search}`} />
+        )}
+      </Route>
+    );
 }
