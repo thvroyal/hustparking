@@ -7,11 +7,11 @@ import { getPacket } from "../../../apis/packageApi";
 function DetectorDebug(props) {
   const dispatch = useDispatch();
   const listDetectors = useSelector((state) => state.packet.data);
-  const listNode = ["2.2.2.2", "3.3.3.33", "10.2.1.9"];
-  // if (listDetectors) {
-  //   for (let item in listDetectors)
-  //     if (!listNode.includes(item.nodeAddress)) listNode.push(item.nodeAddress);
-  // }
+  const listNode = [];
+  if (listDetectors) {
+    for (let item in listDetectors)
+      if (!listNode.includes(item.nodeAddress)) listNode.push(item.nodeAddress);
+  }
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getPacket());
