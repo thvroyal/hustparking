@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router";
 import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,11 @@ import { getPacket } from "../../../apis/packageApi";
 function DetectorDebug(props) {
   const dispatch = useDispatch();
   const listDetectors = useSelector((state) => state.packet.data);
-
+  const listNode = ["2.2.2.2", "3.3.3.33", "10.2.1.9"];
+  // if (listDetectors) {
+  //   for (let item in listDetectors)
+  //     if (!listNode.includes(item.nodeAddress)) listNode.push(item.nodeAddress);
+  // }
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getPacket());
@@ -15,6 +19,20 @@ function DetectorDebug(props) {
     return () => clearInterval(interval);
   }, [dispatch]);
 
+  //Filter Node Address
+  const [toggle, isToggle] = useState(false);
+  const [filter, mapFilter] = useState([]);
+  function handleFilterShow() {
+    isToggle(!toggle);
+  }
+  function handleFilter(data) {
+    if (filter.includes(data))
+      mapFilter([...filter.filter((value) => value !== data)]);
+    else mapFilter([...filter, data]);
+  }
+  function clearFilter() {
+    mapFilter([]);
+  }
   //   function getData() {
   //     dispatch(getPacket());
   //   }
@@ -42,7 +60,70 @@ function DetectorDebug(props) {
                   <th>Seq. Number</th>
                   <th>Detector</th>
                   <th>Battery</th>
-                  <th>Node Address</th>
+                  <th>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>Node Address</div>{" "}
+                      <i
+                        className={`fas fa-filter ${
+                          toggle || filter.length ? "text-primary" : ""
+                        }`}
+                        onClick={handleFilterShow}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+                    <div className="dropdown text-end">
+                      <ul
+                        className={`dropdown-menu text-small ${
+                          toggle ? "show" : ""
+                        }`}
+                        aria-labelledby="dropdownUser1"
+                        style={
+                          toggle
+                            ? {
+                                position: "absolute",
+                                inset: "0px auto auto 0px",
+                                margin: "0px",
+                                transform: "translate(-8px, 13px)",
+                                overflow: "auto",
+                                height: "200px",
+                              }
+                            : {}
+                        }
+                      >
+                        <li>
+                          <a
+                            className="dropdown-item text-small text-end text-danger"
+                            href="#foo"
+                            onClick={clearFilter}
+                          >
+                            Clear all
+                          </a>
+                          <hr className="dropdown-divider" />
+                        </li>
+                        {listNode
+                          ? listNode.map((item, key) => {
+                              return (
+                                <li>
+                                  <a
+                                    className="dropdown-item"
+                                    href="#foo"
+                                    onClick={() => handleFilter(item)}
+                                  >
+                                    {item}
+                                    {filter.includes(item) ? (
+                                      <i className="ml-2 fas fa-check text-primary" />
+                                    ) : (
+                                      ""
+                                    )}
+                                  </a>
+                                  <hr className="dropdown-divider" />
+                                </li>
+                              );
+                            })
+                          : null}
+                      </ul>
+                    </div>
+                  </th>
                   <th>State</th>
                   <th>Communication Level</th>
                   <th>Time</th>
@@ -51,26 +132,30 @@ function DetectorDebug(props) {
               </thead>
               <tbody>
                 {listDetectors ? (
-                  listDetectors.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.packetNumber}</td>
-                      <td>{item.addressDetector}</td>
-                      <td>{item.batteryLevel}</td>
-                      <td>{item.nodeAddress}</td>
-                      <td>
-                        <button
-                          className={`btn-status ${
-                            item.state ? "btn-danger" : "btn-success"
-                          }`}
-                        >
-                          {item.state ? "Busy" : "Free"}
-                        </button>
-                      </td>
-                      <td>{item.communicationLevel}</td>
-                      <td>{item.time}</td>
-                      <td>{item.location}</td>
-                    </tr>
-                  ))
+                  listDetectors.map((item, index) => {
+                    if (filter.includes(item.nodeAddress) || !filter.length)
+                      return (
+                        <tr key={index}>
+                          <td>{item.packetNumber}</td>
+                          <td>{item.addressDetector}</td>
+                          <td>{item.batteryLevel}</td>
+                          <td>{item.nodeAddress}</td>
+                          <td>
+                            <button
+                              className={`btn-status ${
+                                item.state ? "btn-danger" : "btn-success"
+                              }`}
+                            >
+                              {item.state ? "Busy" : "Free"}
+                            </button>
+                          </td>
+                          <td>{item.communicationLevel}</td>
+                          <td>{item.time}</td>
+                          <td>{item.location}</td>
+                        </tr>
+                      );
+                    else return null;
+                  })
                 ) : (
                   <tr>
                     <td>

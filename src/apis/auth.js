@@ -25,10 +25,11 @@ export const SignIn = (data) => {
 };
 
 export const ClearTokenBackend = () => {
-  return async (dispatch) => {
+  return (dispatch) => {
+    console.log("hello");
     const token = localStorage.getItem("AccessToken");
     localStorage.removeItem("AccessToken");
-    axios({
+    axios(`${process.env.REACT_APP_BASE_URL}/api/public/logout`, {
       method: "GET",
       headers: {
         token: token,

@@ -1,20 +1,13 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { TextField } from "../../components/TextField";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SignIn } from "../../apis/auth";
-import { useEffect } from "react";
 
 const LoginForm = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const role = useSelector((state) => state.auth.role);
-  useEffect(() => {
-    if (role === 1) history.push("/");
-    else if (role === 2) history.push("/dashboard");
-  }, [role, history]);
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const validate = Yup.object({
     phone: Yup.string()
@@ -33,8 +26,6 @@ const LoginForm = () => {
       validationSchema={validate}
       onSubmit={(values) => {
         dispatch(SignIn(values));
-        if (role === 1) history.push("/");
-        else if (role === 2) history.push("/dashboard");
       }}
     >
       {(formik) => (
