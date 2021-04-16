@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { SignIn } from "../../apis/auth";
+import GoogleLogin from "react-google-login";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,19 @@ const LoginForm = () => {
       .min(2, "Password must be at least 2 charaters")
       .required("Password is required"),
   });
+
+  const handleLogin = async (googleData) => {
+    console.log(googleData);
+    // const res = await fetch("/api/v1/auth/google", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     token: googleData.tokenId,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+  };
   return (
     <Formik
       initialValues={{
@@ -53,16 +67,24 @@ const LoginForm = () => {
               Login
             </button>
             <hr />
-            <a href="index.html" className="btn btn-google btn-user btn-block">
-              <i className="fab fa-google fa-fw"></i> Login with Google
-            </a>
-            <a
-              href="index.html"
-              className="btn btn-facebook btn-user btn-block"
-            >
-              <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
-            </a>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_CLIENT_ID}
+              render={(renderProps) => (
+                <button
+                  className="btn btn-google btn-user btn-block"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <i className="fab fa-google fa-fw"></i> Login with Google
+                </button>
+              )}
+              buttonText="Log in with Google"
+              onSuccess={handleLogin}
+              onFailure={handleLogin}
+              cookiePolicy={"single_host_origin"}
+            />
           </Form>
+
           <hr />
           <div className="text-center">
             <Link className="small" to="/register">
