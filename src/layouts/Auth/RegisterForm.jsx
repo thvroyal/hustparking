@@ -99,16 +99,6 @@ const RegisterForm = () => {
             >
               Register
             </button>
-            <hr />
-            <a href="index.html" className="btn btn-google btn-user btn-block">
-              <i className="fab fa-google fa-fw"></i> Register with Google
-            </a>
-            <a
-              href="index.html"
-              className="btn btn-facebook btn-user btn-block"
-            >
-              <i className="fab fa-facebook-f fa-fw"></i> Register with Facebook
-            </a>
           </Form>
           <hr />
           <div className="text-center">
