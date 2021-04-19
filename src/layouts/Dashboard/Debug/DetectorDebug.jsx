@@ -143,7 +143,7 @@ function DetectorDebug(props) {
                       return (
                         <tr key={index}>
                           <td>{item.packetNumber}</td>
-                          <td>{item.idNode}</td>
+                          <td>{parseInt(item.idNode)}</td>
                           <td>{item.batteryLevel}</td>
                           <td>{item.nodeAddress}</td>
                           <td>
