@@ -92,7 +92,6 @@ function DetectorDebug(props) {
                                 margin: "0px",
                                 transform: "translate(-8px, 13px)",
                                 overflow: "auto",
-                                height: "200px",
                               }
                             : {}
                         }
