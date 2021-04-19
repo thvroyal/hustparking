@@ -7,11 +7,18 @@ import { getPacket } from "../../../apis/packageApi";
 function DetectorDebug(props) {
   const dispatch = useDispatch();
   const listDetectors = useSelector((state) => state.packet.data);
-  const listNode = [];
-  if (listDetectors) {
-    for (let item in listDetectors)
-      if (!listNode.includes(item.nodeAddress)) listNode.push(item.nodeAddress);
-  }
+  const [listNode, setListFilter] = useState([]);
+  useEffect(() => {
+    if (listDetectors) {
+      const tempArr = listNode ?? [];
+      for (let item in listDetectors) {
+        if (!tempArr.includes(listDetectors[item].nodeAddress))
+          tempArr.push(listDetectors[item].nodeAddress);
+      }
+      setListFilter(tempArr);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listDetectors]);
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getPacket());
