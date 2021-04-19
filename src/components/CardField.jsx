@@ -55,7 +55,7 @@ function CardField(props) {
                       target={`tooltip${index}`}
                       toggle={toggle}
                     >
-                      {`Click to show all detectors of Gateway ${item.id}`}
+                      {`Click to show all detectors`}
                     </Tooltip>
                   </Link>
                 ))
