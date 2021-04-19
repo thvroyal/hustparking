@@ -9,7 +9,7 @@ export const getField = () => {
   return (dispatch) => {
     dispatch(loadingField);
     axios({
-      url: `${process.env.REACT_APP_BASE_URL}/api/public/field/find_all`,
+      url: `${process.env.REACT_APP_BASE_URL}/api/ad/field/find_all`,
       method: "GET",
       headers: {
         token: localStorage.getItem("AccessToken"),
