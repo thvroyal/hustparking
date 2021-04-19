@@ -138,30 +138,32 @@ function DetectorDebug(props) {
               </thead>
               <tbody>
                 {listDetectors ? (
-                  listDetectors.map((item, index) => {
-                    if (filter.includes(item.nodeAddress) || !filter.length)
-                      return (
-                        <tr key={index}>
-                          <td>{item.packetNumber}</td>
-                          <td>{parseInt(item.idNode)}</td>
-                          <td>{item.batteryLevel}</td>
-                          <td>{item.nodeAddress}</td>
-                          <td>
-                            <button
-                              className={`btn-status ${
-                                item.state ? "btn-danger" : "btn-success"
-                              }`}
-                            >
-                              {item.state ? "Busy" : "Free"}
-                            </button>
-                          </td>
-                          <td>{item.communicationLevel}</td>
-                          <td>{item.time}</td>
-                          <td>{item.location}</td>
-                        </tr>
-                      );
-                    else return null;
-                  })
+                  listDetectors
+                    .slice(listDetectors.length - 25, listDetectors.length)
+                    .map((item, index) => {
+                      if (filter.includes(item.nodeAddress) || !filter.length)
+                        return (
+                          <tr key={index}>
+                            <td>{item.packetNumber}</td>
+                            <td>{parseInt(item.idNode)}</td>
+                            <td>{item.batteryLevel}</td>
+                            <td>{item.nodeAddress}</td>
+                            <td>
+                              <button
+                                className={`btn-status ${
+                                  item.state ? "btn-danger" : "btn-success"
+                                }`}
+                              >
+                                {item.state ? "Busy" : "Free"}
+                              </button>
+                            </td>
+                            <td>{item.communicationLevel}</td>
+                            <td>{item.time}</td>
+                            <td>{item.location}</td>
+                          </tr>
+                        );
+                      else return null;
+                    })
                 ) : (
                   <tr>
                     <td>
