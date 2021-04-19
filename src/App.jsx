@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthenticatedRoute from "./components/Routes/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/Routes/UnauthenticatedRoute";
+import Verify from "./pages/Verify";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </UnauthenticatedRoute>
         <UnauthenticatedRoute target="/login" path={"/register"}>
           <Register />
+        </UnauthenticatedRoute>
+        <UnauthenticatedRoute target="/login" path={"/verify"}>
+          <Verify />
         </UnauthenticatedRoute>
 
         <AuthenticatedRoute restrict={[1, 2]} path={"/"}>

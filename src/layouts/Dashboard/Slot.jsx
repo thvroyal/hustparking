@@ -17,8 +17,7 @@ function Slot(props) {
   const [showNull, setShowNull] = useState(false);
   let fieldName;
   if (field)
-    fieldName = field.filter((item) => item.id === parseInt(fieldId))[0]
-      .position;
+    fieldName = field.filter((item) => item.id === parseInt(fieldId))[0].name;
   else fieldName = "";
   const { isShowing, toggle } = useModal();
   const [typeModal, changeTypeModal] = useState(null);
@@ -46,8 +45,7 @@ function Slot(props) {
   return (
     <>
       {/*// <!-- Page Heading -->*/}
-      <h1 className="h3 mb-2 text-gray-800 text-capitalize">{`Field ${fieldName}`}</h1>
-      <p className="mb-4">Update after 10 seconds.</p>
+      <h1 className="h3 mb-4 text-gray-800 text-capitalize">{`Field ${fieldName}`}</h1>
 
       {/*// <!-- DataTales Example -->*/}
       <div className="card shadow mb-4">

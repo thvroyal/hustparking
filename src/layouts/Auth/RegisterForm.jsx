@@ -41,7 +41,7 @@ const RegisterForm = () => {
           if (response.data.message === "success") {
             handleIsSuccess(true);
             setTimeout(function () {
-              history.push("/login");
+              history.push(`/verify?email=${values.email}`);
             }, 1000);
           }
         } catch (err) {
@@ -53,8 +53,8 @@ const RegisterForm = () => {
         <div>
           <Form className="user">
             {isSuccess ? (
-              <div className="alert alert-success" role="alert">
-                Sign up success
+              <div className="alert alert-warning" role="alert">
+                You need to verify your email to finish register!
               </div>
             ) : null}
             <TextField
