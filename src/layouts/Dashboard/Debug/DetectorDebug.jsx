@@ -103,7 +103,7 @@ function DetectorDebug(props) {
                         {listNode
                           ? listNode.map((item, key) => {
                               return (
-                                <li>
+                                <li key={key}>
                                   <a
                                     className="dropdown-item"
                                     href="#foo"
