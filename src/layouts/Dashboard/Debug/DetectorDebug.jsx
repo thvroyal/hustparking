@@ -133,7 +133,7 @@ function DetectorDebug(props) {
                   <th>State</th>
                   <th>Communication Level</th>
                   <th>Time</th>
-                  <th>Location</th>
+                  <th>Node ID</th>
                 </tr>
               </thead>
               <tbody>
@@ -145,7 +145,7 @@ function DetectorDebug(props) {
                         return (
                           <tr key={index}>
                             <td>{item.packetNumber}</td>
-                            <td>{parseInt(item.idNode)}</td>
+                            <td>{item.location}</td>
                             <td>{item.batteryLevel}</td>
                             <td>{item.nodeAddress}</td>
                             <td>
@@ -159,7 +159,7 @@ function DetectorDebug(props) {
                             </td>
                             <td>{item.communicationLevel}</td>
                             <td>{item.time}</td>
-                            <td>{item.location}</td>
+                            <td>{parseInt(item.idNode)}</td>
                           </tr>
                         );
                       else return null;
