@@ -9,7 +9,7 @@ function Users(props) {
   const dispatch = useDispatch();
   const listUser = useSelector((state) => state.listUser.data);
   useEffect(() => {
-    dispatch(fetchListUser);
+    dispatch(fetchListUser());
   }, [dispatch]);
   return (
     <>

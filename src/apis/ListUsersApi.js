@@ -6,27 +6,28 @@ import {
 } from "../store/admin/UsersSlice";
 
 export const fetchListUser = () => {
-  return async (dispatch) => {
-    dispatch(loadingListUsers(true));
-    try {
-      const response = await axios({
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/user/find_all`,
-        method: "get",
-        headers: {
-          token: localStorage.getItem("AccessToken"),
-        },
+  return (dispatch) => {
+    dispatch(loadingListUsers(false));
+    axios({
+      url: `${process.env.REACT_APP_BASE_URL}/api/ad/user/find_all`,
+      method: "get",
+      headers: {
+        token: localStorage.getItem("AccessToken"),
+      },
+    })
+      .then((response) => {
+        if (response.data.message === "success") {
+          dispatch(loadingListUsers(false));
+          dispatch(successListUsers(response.data.data));
+        } else {
+          dispatch(loadingListUsers(false));
+          dispatch(failedListUsers(response.data.message));
+        }
+      })
+      .catch((error) => {
+        dispatch(loadingListUsers(false));
+        dispatch(failedListUsers("Failed to loading list users"));
+        console.log(error);
       });
-      if (response.data.message === "success") {
-        dispatch(loadingListUsers(false));
-        dispatch(successListUsers(response.data.data));
-      } else {
-        dispatch(loadingListUsers(false));
-        dispatch(failedListUsers(response.data.message));
-      }
-    } catch (error) {
-      dispatch(loadingListUsers(false));
-      dispatch(failedListUsers("Failed to loading list users"));
-      console.log(error);
-    }
   };
 };

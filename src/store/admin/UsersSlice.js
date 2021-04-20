@@ -10,7 +10,7 @@ const listUsers = createSlice({
   name: "listUsers",
   initialState: initState,
   reducers: {
-    loadinglistUsers: (state, action) => {
+    loadingListUsers: (state, action) => {
       state.loading = action.payload || true;
     },
     successListUsers: (state, action) => {
