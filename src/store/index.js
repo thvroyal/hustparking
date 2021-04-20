@@ -8,6 +8,7 @@ import packetReducer from "./debug/packageSlice";
 import detectorByIdReducer from "./admin/detectorByIdSlice";
 import slotByIdReducer from "./admin/slotByIdSlice";
 import authReducer from "./authSlice";
+import listUsersReducer from "./admin/UsersSlice";
 
 const rootReducer = {
   detector: detectorReducer,
@@ -19,6 +20,7 @@ const rootReducer = {
   detectorById: detectorByIdReducer,
   slotById: slotByIdReducer,
   auth: authReducer,
+  listUser: listUsersReducer,
 };
 const store = configureStore({
   reducer: rootReducer,
