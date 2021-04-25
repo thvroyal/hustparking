@@ -32,11 +32,7 @@ function Fields(props) {
               <CardField
                 name={item.name}
                 id={item.id}
-                data={[
-                  item.totalBook,
-                  item.busySlot,
-                  item.totalSlot - item.busySlot - item.totalBook,
-                ]}
+                data={[item.totalBook, item.busySlot, item.totalSlot]}
                 GW={searchGW(item.id)}
               />
             </div>
