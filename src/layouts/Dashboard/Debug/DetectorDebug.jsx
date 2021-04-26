@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPacket } from "../../../apis/packageApi";
+import ExportExcel from "../../../utils/ExportExcel";
 
 function DetectorDebug(props) {
   const dispatch = useDispatch();
@@ -11,9 +12,13 @@ function DetectorDebug(props) {
   useEffect(() => {
     if (listDetectors) {
       const tempArr = listNode ?? [];
-      for (let item in listDetectors) {
-        if (!tempArr.includes(listDetectors[item].nodeAddress))
-          tempArr.push(listDetectors[item].nodeAddress);
+      let detector = listDetectors.slice(
+        listDetectors.length - 25,
+        listDetectors.length
+      );
+      for (let item in detector) {
+        if (!tempArr.includes(detector[item].nodeAddress))
+          tempArr.push(detector[item].nodeAddress);
       }
       setListFilter(tempArr);
     }
@@ -40,6 +45,15 @@ function DetectorDebug(props) {
   function clearFilter() {
     mapFilter([]);
   }
+  function nowDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today = mm + dd + yyyy;
+    return today;
+  }
   //   function getData() {
   //     dispatch(getPacket());
   //   }
@@ -53,6 +67,15 @@ function DetectorDebug(props) {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
           <h6 className="m-0 font-weight-bold text-primary">{`Database Detectors`}</h6>
+          {listDetectors ? (
+            <ExportExcel dataSet={listDetectors} name={`Detector-${nowDate()}`}>
+              <button className="btn-action p-2">
+                <h6 className="m-0 font-weight-bold text-primary text-right">
+                  <i className="fa fa-file-export" /> Export Excel
+                </h6>
+              </button>
+            </ExportExcel>
+          ) : null}
         </div>
         <div className="card-body">
           <div className="table-responsive table-hover">
@@ -78,7 +101,7 @@ function DetectorDebug(props) {
                         style={{ cursor: "pointer" }}
                       />
                     </div>
-                    <div className="dropdown text-end">
+                    <div className="dropdown text-end position-absolute">
                       <ul
                         className={`dropdown-menu text-small ${
                           toggle ? "show" : ""
@@ -165,11 +188,11 @@ function DetectorDebug(props) {
                       else return null;
                     })
                 ) : (
-                  <tr>
-                    <td>
-                      <Spinner animation="border" color="primary" />
-                    </td>
-                  </tr>
+                  <Spinner
+                    animation="border"
+                    color="primary"
+                    className="mt-3"
+                  />
                 )}
               </tbody>
             </table>

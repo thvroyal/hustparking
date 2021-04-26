@@ -7,14 +7,19 @@ import { getSlotOfField } from "../../apis/slotApi";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { getField } from "../../apis/fieldApi";
+import { sortSlot } from "../../store/admin/SlotSlice";
 
 function Slot(props) {
   const match = useLocation();
+  //get id field from url
   const fieldId = match.pathname.split("/")[3];
   const dispatch = useDispatch();
+  //get list slot from store redux
   const listSlot = useSelector((state) => state.slot.data);
   const field = useSelector((state) => state.field.data);
   const [showNull, setShowNull] = useState(false);
+  const [descLastUpdated, invertLastUpdated] = useState(null);
+  //get fieldName from list field by ID
   let fieldName;
   if (field)
     fieldName = field.filter((item) => item.id === parseInt(fieldId))[0].name;
@@ -42,6 +47,23 @@ function Slot(props) {
     setShowNull(!showNull);
   }
 
+  //handle Sort Type
+  function handleSortLastUpdated() {
+    if (descLastUpdated === null) invertLastUpdated(true);
+    // invert sort
+    else invertLastUpdated(!descLastUpdated);
+    dispatch(
+      sortSlot({
+        prop: "lastTimeUpdate",
+        desc: descLastUpdated,
+        parser: function (item) {
+          return new Date(item);
+        },
+      })
+    );
+    // sort function
+  }
+
   return (
     <>
       {/*// <!-- Page Heading -->*/}
@@ -51,7 +73,7 @@ function Slot(props) {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
           <h6 className="m-0 font-weight-bold text-primary">{`Database`}</h6>
-          <button
+          {/* <button
             className="btn-action p-2"
             onClick={() => handleTypeModal(-1)}
           >
@@ -61,7 +83,7 @@ function Slot(props) {
           </button>
           {isShowing && typeModal === -1 ? (
             <ModalDetector isShowing={isShowing} hide={toggle} />
-          ) : null}
+          ) : null} */}
         </div>
         <div className="card-body">
           <div className="table-responsive table-hover">
@@ -79,10 +101,31 @@ function Slot(props) {
                   <th>Status Detector</th>
                   <th>Status Cam</th>
                   <th>
-                    Status{" "}
-                    <i className="fa fa-eye" onClick={changeFilterShowNull} />
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>Status</div>
+                      <i
+                        className={`fa ${
+                          !showNull ? "fa-eye" : "fa-eye-slash"
+                        } small`}
+                        onClick={changeFilterShowNull}
+                      />
+                    </div>
                   </th>
-                  <th>Last Update</th>
+                  <th>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>Last Update</div>
+                      <i
+                        className={`fa ${
+                          descLastUpdated === null
+                            ? "fa-sort"
+                            : !descLastUpdated
+                            ? "fa-sort-down"
+                            : "fa-sort-up"
+                        }`}
+                        onClick={handleSortLastUpdated}
+                      />
+                    </div>
+                  </th>
                   <th>Last Setup</th>
                 </tr>
               </thead>

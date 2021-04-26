@@ -8,7 +8,7 @@ function CardField(props) {
   const dataPie = {
     datasets: [
       {
-        data: data || [0, 10, 100],
+        data: [data[0], data[1], data[2] - data[0] - data[1]] || [0, 0, 0],
         backgroundColor: ["#f6c23e", "#e74a3b", "#1cc88a"],
         borderWidth: 0,
       },
@@ -24,12 +24,12 @@ function CardField(props) {
       <div className="card-body">
         <div className="row no-gutters align-items-center">
           <div className="col mr-2">
-            <div
-              className={`text-xs font-weight-bold text-primary text-uppercase mb-1`}
-            >
-              {`Field ${id}`}
-            </div>
             <Link to={`/dashboard/fields/${id}`} className="card-link">
+              <div
+                className={`text-xs font-weight-bold text-primary text-uppercase mb-1`}
+              >
+                {`Field ${id}`}
+              </div>
               <div
                 className={`h5 mb-0 text-gray-800 font-weight-bold text-uppercase`}
               >
@@ -61,13 +61,16 @@ function CardField(props) {
                 ))
               : null}
           </div>
-          <div className="col-auto">
-            <Pie
-              data={dataPie}
-              options={{ tooltips: { enabled: false } }}
-              width={58}
-              height={58}
-            />
+          <div className="col-2">
+            <div className="d-flex flex-column align-items-center">
+              <Pie
+                data={dataPie}
+                options={{ tooltips: { enabled: false } }}
+                width={58}
+                height={58}
+              />
+              <div className="badge badge-primary font-weight-normal mr-1 mt-2">{`${data[1]}/${data[2]}`}</div>
+            </div>
           </div>
         </div>
       </div>

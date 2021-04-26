@@ -85,7 +85,7 @@ function Home() {
             >
               <li>
                 <a className="dropdown-item" href="#foo">
-                  New project...
+                  Profile
                 </a>
               </li>
               <li>
@@ -93,11 +93,7 @@ function Home() {
                   Settings
                 </a>
               </li>
-              <li>
-                <a className="dropdown-item" href="#foo">
-                  Profile
-                </a>
-              </li>
+
               <li>
                 <hr className="dropdown-divider" />
               </li>
