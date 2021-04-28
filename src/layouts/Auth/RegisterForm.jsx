@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import { TextField } from "../../components/TextField";
+import { RadioField } from "../../components/RadioField";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
@@ -25,11 +26,15 @@ const RegisterForm = () => {
     <Formik
       initialValues={{
         address: "",
-        equipment: "",
+        birth: "",
         email: "",
-        password: "",
-        rePassword: "",
+        image: "",
+        equipment: "",
         idNumber: "",
+        password: "",
+        phone: "",
+        rePassword: "",
+        sex: "",
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
@@ -62,6 +67,25 @@ const RegisterForm = () => {
               name="email"
               type="mail"
               placeholder="Email"
+            />
+            <TextField
+              label="birth"
+              name="birth"
+              type="date"
+              placeholder="Your birth"
+            />
+            <div className="mt-3 float-left">
+              <p style={{ textAlign: "left" }}>Gender</p>
+              <RadioField label="Female" name="sex" value="female" />
+              <RadioField label="Male" name="sex" value="male" />
+              <RadioField label="Other" name="sex" value="other" />
+            </div>
+
+            <TextField
+              label="phone"
+              name="phone"
+              type="tel"
+              placeholder="Your phone"
             />
             <TextField
               label="address"

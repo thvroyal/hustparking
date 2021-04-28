@@ -51,7 +51,7 @@ const LoginForm = () => {
             <TextField
               label="email"
               name="email"
-              type="email"
+              type="text"
               placeholder="Email"
             />
             <TextField
