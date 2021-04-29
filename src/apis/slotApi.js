@@ -13,9 +13,16 @@ export const getSlotOfField = (fieldId) => {
       },
     })
       .then((res) => {
-        const slotInField = res.data.data.filter(
+        let slotInField = res.data.data.filter(
           (item) => item.fieldId === parseInt(fieldId)
         );
+        slotInField = slotInField.map((item, index) => {
+          let dCam = new Date(item.lastTimeCam).getTime();
+          let dDetector = new Date(item.lastTimeDetector).getTime();
+          if (dCam > dDetector) item["lastTimeUpdate"] = item.lastTimeCam;
+          else item["lastTimeUpdate"] = item.lastTimeDetector;
+          return item;
+        });
         dispatch(successSlot(slotInField));
       })
       .catch((err) => {
