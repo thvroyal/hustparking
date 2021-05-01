@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import detectorReducer from "./admin/detectorSlice";
 import fieldReducer from "./admin/fieldSlice";
 import slotReducer from "./admin/SlotSlice";
@@ -9,6 +9,7 @@ import detectorByIdReducer from "./admin/detectorByIdSlice";
 import slotByIdReducer from "./admin/slotByIdSlice";
 import authReducer from "./authSlice";
 import listUsersReducer from "./admin/UsersSlice";
+import contractReducer from "./admin/contractSlice";
 
 const rootReducer = {
   detector: detectorReducer,
@@ -21,6 +22,7 @@ const rootReducer = {
   slotById: slotByIdReducer,
   auth: authReducer,
   listUser: listUsersReducer,
+  contract: contractReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

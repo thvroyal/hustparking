@@ -7,7 +7,7 @@ import {
 
 export const fetchListUser = () => {
   return (dispatch) => {
-    dispatch(loadingListUsers(false));
+    dispatch(loadingListUsers(true));
     axios({
       url: `${process.env.REACT_APP_BASE_URL}/api/ad/user/find_all`,
       method: "get",
