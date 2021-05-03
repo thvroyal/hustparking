@@ -5,7 +5,7 @@ import {
   successContract,
 } from "../store/admin/contractSlice";
 
-export function getContract() {
+export function getContract(idUser) {
   return async (dispatch) => {
     dispatch(loadingContract);
     try {
@@ -18,11 +18,15 @@ export function getContract() {
       });
       if (response.data.message === "success") {
         let { data } = response.data;
+        // console.log(data, idUser);
+        if (idUser !== "all")
+          data = data.filter((x) => x.userId === parseInt(idUser));
+        // console.log(data);
         let dataProcessed = data.map((ctr) => {
           let tCarIn = new Date(ctr.timeCarIn).getTime();
           let tCarOut = new Date(ctr.timeCarOut).getTime();
           let tBookIn = new Date(ctr.timeInBook).getTime();
-          let tBookOut = new Date(ctr.timeOutBook).getTime();
+          // let tBookOut = new Date(ctr.timeOutBook).getTime();
 
           if (!tCarIn && tBookIn) {
             ctr.status = "Booking";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Switch, withRouter } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { ClearTokenBackend } from "../apis/auth";
 import BookingForm from "../layouts/User/BookingForm";
@@ -9,6 +9,7 @@ import BookingForm from "../layouts/User/BookingForm";
 function Home() {
   const dispatch = useDispatch();
   const [show, toggleShow] = useState(false);
+  const { role, isAuthenticated } = useSelector((state) => state.auth);
   function handleShow() {
     toggleShow(!show);
   }
@@ -114,7 +115,7 @@ function Home() {
         </div>
       </header>
       <div className="container">
-        <BookingForm />
+        {role === 1 && isAuthenticated && <BookingForm />}
       </div>
     </>
   );

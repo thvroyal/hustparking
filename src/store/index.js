@@ -10,6 +10,7 @@ import slotByIdReducer from "./admin/slotByIdSlice";
 import authReducer from "./authSlice";
 import listUsersReducer from "./admin/UsersSlice";
 import contractReducer from "./admin/contractSlice";
+import utilsReducer from "./utilsSlice";
 
 const rootReducer = {
   detector: detectorReducer,
@@ -23,6 +24,7 @@ const rootReducer = {
   auth: authReducer,
   listUser: listUsersReducer,
   contract: contractReducer,
+  utils: utilsReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

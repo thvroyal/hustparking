@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchListUser } from "../../apis/ListUsersApi";
+import { Link } from "react-router-dom";
 
 function Users(props) {
   const dispatch = useDispatch();
@@ -38,7 +39,12 @@ function Users(props) {
                 <tr key={index}>
                   <td className="avatar">
                     <img className="avatar-img" src={ImgAva} alt="" />{" "}
-                    {user.idNumber}
+                    <Link
+                      to={`/dashboard/contract/${user.id}`}
+                      className="nav-link"
+                    >
+                      {user.idNumber}
+                    </Link>
                   </td>
                   <td>{user.email}</td>
                   <td>{user.address}</td>

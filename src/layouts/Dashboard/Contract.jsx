@@ -2,19 +2,20 @@ import React from "react";
 import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router";
+import { withRouter, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getContract } from "../../apis/contractApi";
 
 function Contract(props) {
   const dispatch = useDispatch();
+  const { idUser } = useParams();
   const contractList = useSelector((state) => state.contract.data);
 
   useEffect(
     function () {
-      dispatch(getContract());
+      dispatch(getContract(idUser));
     },
-    [dispatch]
+    [dispatch, idUser]
   );
   return (
     <>
@@ -23,7 +24,7 @@ function Contract(props) {
       <div className="card mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
-            History Contracts
+            {idUser === "all" ? "All Contracts" : `Contracts of User ${idUser}`}
           </h6>
         </div>
         <div className="card-body p-0">
