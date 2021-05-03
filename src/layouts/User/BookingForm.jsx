@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getField } from "../../apis/fieldApi";
+import { getFieldUser } from "../../apis/fieldApi";
 import { Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { useRef } from "react";
@@ -16,9 +16,10 @@ function BookingForm(props) {
   const [mess, setMess] = useState({ type: null, content: null }); // success: type = 1 , err: type = 0
   const timeInRef = useRef();
   const timeOutRef = useRef();
+  const carNumberRef = useRef();
 
   useEffect(() => {
-    dispatch(getField());
+    dispatch(getFieldUser());
   }, [dispatch]);
 
   function handleSelectField(id) {
@@ -51,8 +52,9 @@ function BookingForm(props) {
   async function handleBooking() {
     const data = {
       fieldId: fieldSelected,
-      timeInBook: new Date(timeInRef.current.value),
-      timeOutBook: new Date(timeOutRef.current.value),
+      timeInBook: timeInRef.current.value.split("T").join(" "),
+      timeOutBook: timeOutRef.current.value.split("T").join(" "),
+      carNumber: carNumberRef.current.value,
     };
     console.log(data);
     setLoadingBook(true);
@@ -62,6 +64,7 @@ function BookingForm(props) {
         url: `${process.env.REACT_APP_BASE_URL}/api/us/book`,
         headers: {
           token: localStorage.getItem("AccessToken"),
+          "Content-Type": "application/json",
         },
         data: JSON.stringify(data),
       });
@@ -126,6 +129,14 @@ function BookingForm(props) {
         {/* Pick time */}
         <hr className="mt-3" />
         <div className="mt-3">
+          Car Number
+          <input
+            className="form-control form-control mt-2 mb-3"
+            type="text"
+            required
+            ref={carNumberRef}
+            placeholder="Enter your car number"
+          ></input>
           <div className="row">
             <div className="col">
               Time In
@@ -170,7 +181,9 @@ function BookingForm(props) {
         </div>
         {mess.type != null && (
           <div
-            class={`alert mt-3 ${mess.type ? "alert-success" : "alert-danger"}`}
+            className={`alert mt-3 ${
+              mess.type ? "alert-success" : "alert-danger"
+            }`}
             role="alert"
           >
             {mess.content}

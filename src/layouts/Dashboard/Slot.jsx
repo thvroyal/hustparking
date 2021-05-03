@@ -111,6 +111,8 @@ function Slot(props) {
                       />
                     </div>
                   </th>
+                  <th>Last Time Cam</th>
+                  <th>Last Time Detector</th>
                   <th>
                     <div className="d-flex justify-content-between align-items-center">
                       <div>Last Update</div>
@@ -126,7 +128,6 @@ function Slot(props) {
                       />
                     </div>
                   </th>
-                  <th>Last Setup</th>
                 </tr>
               </thead>
               <tbody>
@@ -211,8 +212,9 @@ function Slot(props) {
                                 : "Free"}
                             </button>
                           </td>
+                          <td>{item.lastTimeCam || "No Data"}</td>
+                          <td>{item.lastTimeDetector || "No Data"}</td>
                           <td>{item.lastTimeUpdate || "No Data"}</td>
-                          <td>{item.lastTimeSetup || "No Data"}</td>
                         </tr>
                       );
                   })

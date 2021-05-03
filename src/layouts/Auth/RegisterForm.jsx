@@ -74,11 +74,11 @@ const RegisterForm = () => {
               type="date"
               placeholder="Your birth"
             />
-            <div className="mt-3 float-left">
+            <div className="mt-3 float-left mb-3">
               <p style={{ textAlign: "left" }}>Gender</p>
-              <RadioField label="Female" name="sex" value="female" />
-              <RadioField label="Male" name="sex" value="male" />
-              <RadioField label="Other" name="sex" value="other" />
+              <RadioField label="Female" name="sex" value="F" />
+              <RadioField label="Male" name="sex" value="M" />
+              <RadioField label="Other" name="sex" value="O" />
             </div>
 
             <TextField

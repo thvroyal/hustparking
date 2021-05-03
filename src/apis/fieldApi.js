@@ -26,6 +26,23 @@ export const getField = () => {
   };
 };
 
+export const getFieldUser = () => {
+  return (dispatch) => {
+    dispatch(loadingField);
+    axios({
+      url: `${process.env.REACT_APP_BASE_URL}/api/public/field/find_all`,
+      method: "GET",
+    })
+      .then((res) => {
+        dispatch(successField(res.data.data));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(failedField(err));
+      });
+  };
+};
+
 export const postField = (data) => {
   return (dispatch) => {
     dispatch(loadingField);

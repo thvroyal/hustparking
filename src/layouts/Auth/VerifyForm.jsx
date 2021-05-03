@@ -48,7 +48,7 @@ const VerifyForm = () => {
       }}
       validationSchema={validate}
       onSubmit={(values) => {
-        handleVerify(values);
+        handleVerify(values.code);
       }}
     >
       {(formik) => (
@@ -58,12 +58,12 @@ const VerifyForm = () => {
             <span className="font-weight-bold">{` ${query.get("email")}`}</span>
           </div>
           {err ? (
-            <div className="alert alert-danger" role="alert">
+            <div className="alert alert-danger mt-2" role="alert">
               {err}
             </div>
           ) : null}
           {msg ? (
-            <div className="alert alert-success" role="alert">
+            <div className="alert alert-success mt-2" role="alert">
               {msg}
             </div>
           ) : null}
