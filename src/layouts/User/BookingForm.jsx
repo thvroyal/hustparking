@@ -49,6 +49,11 @@ function BookingForm(props) {
     setTimeNow(dateFormatted);
     // console.log(dateFormatted);
   }
+  // return the time value in miliseconds, if no params return now time
+  function getTime(string = "") {
+    if (!string) return Date.now();
+    return new Date(string).getTime();
+  }
   async function handleBooking() {
     const data = {
       fieldId: fieldSelected,
@@ -56,6 +61,22 @@ function BookingForm(props) {
       timeOutBook: timeOutRef.current.value.split("T").join(" ") + ":00",
       carNumber: carNumberRef.current.value,
     };
+    //validate time : timeInBook > time OutBook && timeInBook  < timeNow + 30p
+    if (getTime(data.timeInBook) >= getTime(data.timeOutBook)) {
+      setMess({
+        type: 0,
+        content: "Time in must greater than time out. Change your time out!",
+      });
+      return;
+    }
+    if (getTime(data.timeInBook) <= getTime() + 30 * 60 * 1000) {
+      setMess({
+        type: 0,
+        content:
+          "Bookings are only available 30 minutes after the current time. Change your time in!",
+      });
+      return;
+    }
     setLoadingBook(true);
     try {
       const response = await Axios({
