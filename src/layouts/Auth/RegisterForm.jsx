@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
 import Axios from "axios";
+import { Spinner } from "react-bootstrap";
 
 const RegisterForm = () => {
   const [isSuccess, handleIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const validate = Yup.object({
     address: Yup.string().required("Address is required"),
@@ -38,11 +40,13 @@ const RegisterForm = () => {
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
+        setLoading(true);
         try {
           const response = await Axios.post(
             `${process.env.REACT_APP_BASE_URL}/api/public/register`,
             values
           );
+          setLoading(false);
           if (response.data.message === "success") {
             handleIsSuccess(true);
             setTimeout(function () {
@@ -50,6 +54,7 @@ const RegisterForm = () => {
             }, 1000);
           }
         } catch (err) {
+          setLoading(false);
           console.err(err);
         }
       }}
@@ -120,7 +125,16 @@ const RegisterForm = () => {
             <button
               type="submit"
               className="btn btn-primary btn-user btn-block mt-5"
+              disabled={loading}
             >
+              {loading && (
+                <Spinner
+                  animation="border"
+                  color="primary"
+                  size="sm"
+                  className="mr-3"
+                />
+              )}{" "}
               Register
             </button>
           </Form>

@@ -6,10 +6,12 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { SignIn } from "../../apis/auth";
 import GoogleLogin from "react-google-login";
+import { Spinner } from "react-bootstrap";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
+  const loading = useSelector((state) => state.auth.loading);
   const validate = Yup.object({
     email: Yup.string().required("Email is required"),
     password: Yup.string()
@@ -63,7 +65,16 @@ const LoginForm = () => {
             <button
               type="submit"
               className="btn btn-primary btn-user btn-block mt-4"
+              disabled={loading}
             >
+              {loading && (
+                <Spinner
+                  animation="border"
+                  color="primary"
+                  size="sm"
+                  className="mr-3"
+                />
+              )}{" "}
               Login
             </button>
             <hr />

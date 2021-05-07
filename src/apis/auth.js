@@ -1,13 +1,15 @@
 import axios from "axios";
-import { handleError, setRole, logOut } from "../store/authSlice";
+import { handleError, setRole, logOut, setLoading } from "../store/authSlice";
 
 export const SignIn = (data) => {
   return async (dispatch) => {
+    dispatch(setLoading(true));
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/public/login`,
         data
       );
+      dispatch(setLoading(false));
       if (response.data.message === "fail")
         dispatch(handleError(response.data.data));
       else {
@@ -19,6 +21,7 @@ export const SignIn = (data) => {
         }
       }
     } catch (error) {
+      dispatch(setLoading(false));
       dispatch(handleError("Something Wrong"));
     }
   };
@@ -26,7 +29,6 @@ export const SignIn = (data) => {
 
 export const ClearTokenBackend = () => {
   return (dispatch) => {
-    console.log("hello");
     const token = localStorage.getItem("AccessToken");
     localStorage.removeItem("AccessToken");
     axios(`${process.env.REACT_APP_BASE_URL}/api/public/logout`, {
