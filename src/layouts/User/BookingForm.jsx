@@ -31,7 +31,7 @@ function BookingForm(props) {
   }
   function getDateNow() {
     // format date: yyyy-MM-ddThh:mm
-    let timeNow = new Date(Date.now() + 30 * 60 * 1000); // + 7h30p -> GMT+7
+    let timeNow = new Date(Date.now() + 30 * 60 * 1000); // + 30p
     let timeNowString = timeNow.toLocaleString("vi-VN"); // format: hh:mm:ss, dd/mm/yyyy
     let timeNowArray = timeNowString.split(", ");
     let date = timeNowArray[1].split("/");
@@ -47,16 +47,15 @@ function BookingForm(props) {
       ":" +
       convertNum(time[1]);
     setTimeNow(dateFormatted);
-    console.log(dateFormatted);
+    // console.log(dateFormatted);
   }
   async function handleBooking() {
     const data = {
       fieldId: fieldSelected,
-      timeInBook: timeInRef.current.value.split("T").join(" "),
-      timeOutBook: timeOutRef.current.value.split("T").join(" "),
+      timeInBook: timeInRef.current.value.split("T").join(" ") + ":00",
+      timeOutBook: timeOutRef.current.value.split("T").join(" ") + ":00",
       carNumber: carNumberRef.current.value,
     };
-    console.log(data);
     setLoadingBook(true);
     try {
       const response = await Axios({
