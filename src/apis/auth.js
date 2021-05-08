@@ -45,3 +45,26 @@ export const ClearTokenBackend = () => {
       });
   };
 };
+
+export const verifyToken = () => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_BASE_URL}/api/public/get_role`,
+        headers: {
+          token: localStorage.getItem("AccessToken"),
+        },
+      });
+      dispatch(setLoading(false));
+      if (response.data.message === "success" && response.data.data) {
+        if (response.data.data === "admin") dispatch(setRole(2));
+        else if (response.data.data === "user") dispatch(setRole(1));
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      console.log(error);
+    }
+  };
+};
