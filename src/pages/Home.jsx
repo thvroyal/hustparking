@@ -1,124 +1,31 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
-import { ClearTokenBackend } from "../apis/auth";
+
+import { Switch, useRouteMatch, withRouter } from "react-router";
+
+import AuthenticatedRoute from "../components/Routes/AuthenticatedRoute";
+import Footer from "../layouts/Footer/Footer";
 import BookingForm from "../layouts/User/BookingForm";
+import Contracts from "../pages/User/Contracts";
+import HeaderMain from "../layouts/Header/HeaderMain";
 
 function Home() {
-  const dispatch = useDispatch();
-  const [show, toggleShow] = useState(false);
-  const { role, isAuthenticated } = useSelector((state) => state.auth);
-  function handleShow() {
-    toggleShow(!show);
-  }
-  function handleLogOut() {
-    dispatch(ClearTokenBackend);
-    window.location.reload();
-  }
+  const { url } = useRouteMatch();
   return (
     <>
-      <header className="p-3 mb-3 border-bottom">
-        <div className="container">
-          <div className="d-flex flex-wrap align-items-center justify-content-between">
-            {/* <a
-            href="/"
-            className="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
-          >
-            <svg className="bi me-2" width="40" height="32">
-              <use xlink:href="#bootstrap"></use>
-            </svg>
-          </a> */}
-
-            <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li>
-                <Link to="/" className="nav-link px-2 link-secondary">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/dashboard" className="nav-link px-2 link-dark">
-                  Dashboard
-                </Link>
-              </li>
-            </ul>
-
-            {/* <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search..."
-            />
-          </form> */}
-
-            <div className="dropdown text-end">
-              <a
-                href="#foo"
-                className={`d-block link-dark text-decoration-none dropdown-toggle ${
-                  show ? "show" : ""
-                }`}
-                id="dropdownUser1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                onClick={handleShow}
-              >
-                <img
-                  src="https://github.com/mdo.png"
-                  alt="mdo"
-                  width="32"
-                  height="32"
-                  className="rounded-circle"
-                />
-              </a>
-              <ul
-                className={`dropdown-menu text-small ${show ? "show" : ""}`}
-                aria-labelledby="dropdownUser1"
-                style={
-                  show
-                    ? {
-                        position: "absolute",
-                        inset: "0px auto auto 0px",
-                        margin: "0px",
-                        transform: "translate(-109px, 34px)",
-                      }
-                    : {}
-                }
-                data-popper-placement="bottom-end"
-              >
-                <li>
-                  <a className="dropdown-item" href="#foo">
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#foo">
-                    Settings
-                  </a>
-                </li>
-
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#foo"
-                    onClick={handleLogOut}
-                  >
-                    Sign out
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </header>
+      <HeaderMain />
       <div className="container">
-        {role === 1 && isAuthenticated && <BookingForm />}
+        <Switch>
+          <AuthenticatedRoute restrict={[1]} path={`${url}`} exact>
+            <BookingForm />
+          </AuthenticatedRoute>
+          <AuthenticatedRoute restrict={[1]} path={`${url}/contracts`} exact>
+            <Contracts />
+          </AuthenticatedRoute>
+        </Switch>
       </div>
+      <Footer />
     </>
   );
 }
 
-export default React.memo(withRouter(Home));
+export default React.memo(Home);

@@ -1,0 +1,24 @@
+.cursor {
+  cursor: pointer;
+}
+
+.car-number {
+  border: 2px solid $gray-600;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.booking-card {
+  &:hover {
+    background-color: $gray-200;
+  }
+}
+.booking {
+  border-left: 7px solid $yellow;
+}
+.leaved {
+  border-left: 7px solid $red;
+}
+.parking {
+  border-left: 7px solid $green;
+}

@@ -270,7 +270,7 @@ const Header = React.memo(function Header(props) {
             </a>
             <a className="dropdown-item" href="#foo">
               <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
-              Activity Log
+              Contracts
             </a>
             <div className="dropdown-divider" />
             <a

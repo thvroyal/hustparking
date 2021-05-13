@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -30,7 +30,7 @@ function App() {
           {/* <UnauthenticatedRoute target="/" path={"/dashboard"}>
           <Dashboard />
         </UnauthenticatedRoute> */}
-          <UnauthenticatedRoute target="/" path={"/login"}>
+          <UnauthenticatedRoute target="/home" path={"/login"}>
             <Login />
           </UnauthenticatedRoute>
           <UnauthenticatedRoute target="/login" path={"/register"}>
@@ -39,8 +39,10 @@ function App() {
           <UnauthenticatedRoute target="/login" path={"/verify"}>
             <Verify />
           </UnauthenticatedRoute>
-
-          <AuthenticatedRoute restrict={[1, 2]} path={"/"} exact>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+          <AuthenticatedRoute restrict={[1, 2]} path={"/home"}>
             <Home />
           </AuthenticatedRoute>
           <Route component={PageNotFound} />

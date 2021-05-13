@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Formik, Form } from "formik";
 import { TextField } from "../../components/TextField";
 import { Link } from "react-router-dom";
@@ -20,16 +21,25 @@ const LoginForm = () => {
   });
 
   const handleLogin = async (googleData) => {
-    console.log(googleData);
-    // const res = await fetch("/api/v1/auth/google", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     token: googleData.tokenId,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
+    console.log("success", googleData);
+    try {
+      const res = await axios(
+        `${process.env.REACT_APP_BASE_URL}/api/login-google`,
+        {
+          method: "GET",
+          headers: {
+            token: googleData.tokenObj.access_token,
+          },
+        }
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      // }
+    }
+  };
+  const handleErrorGoogle = async (googleData) => {
+    console.log("error", googleData);
   };
   return (
     <Formik
@@ -91,7 +101,7 @@ const LoginForm = () => {
               )}
               buttonText="Log in with Google"
               onSuccess={handleLogin}
-              onFailure={handleLogin}
+              onFailure={handleErrorGoogle}
               cookiePolicy={"single_host_origin"}
             />
           </Form>

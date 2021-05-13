@@ -13,7 +13,7 @@ export const SignIn = (data) => {
       if (response.data.message === "fail")
         dispatch(handleError(response.data.data));
       else {
-        localStorage.setItem("AccessToken", response.data.data);
+        localStorage.setItem("AccessToken", response.data.data.token);
         if (response.data.message === "user") {
           dispatch(setRole(1));
         } else if (response.data.message === "admin") {
@@ -39,6 +39,7 @@ export const ClearTokenBackend = () => {
     })
       .then((res) => {
         dispatch(logOut);
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
