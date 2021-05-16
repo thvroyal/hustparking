@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { Pie } from "react-chartjs-2";
-import { Link } from "react-router-dom";
-import { Tooltip } from "reactstrap";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Pie } from 'react-chartjs-2';
+import { Link } from 'react-router-dom';
+import { Tooltip } from 'reactstrap';
 
 function CardField(props) {
-  const { name, id, data, GW } = props;
+  const {
+    name, id, data, GW,
+  } = props;
   const dataPie = {
     datasets: [
       {
-        data: [data[0], data[1], data[2] - data[0] - data[1]] || [0, 0, 0],
-        backgroundColor: ["#f6c23e", "#e74a3b", "#1cc88a"],
+        data: [data[0], data[1], data[2] - data[0] - data[1]],
+        backgroundColor: ['#f6c23e', '#e74a3b', '#1cc88a'],
         borderWidth: 0,
       },
     ],
@@ -20,45 +23,46 @@ function CardField(props) {
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
   return (
-    <div className={`card border-left-primary shadow h-100 py-2 card-field`}>
+    <div className="card border-left-primary shadow h-100 py-2 card-field">
       <div className="card-body">
         <div className="row no-gutters align-items-center">
           <div className="col mr-2">
             <Link to={`/dashboard/fields/${id}`} className="card-link">
               <div
-                className={`text-xs font-weight-bold text-primary text-uppercase mb-1`}
+                className="text-xs font-weight-bold text-primary text-uppercase mb-1"
               >
                 {`Field ${id}`}
               </div>
               <div
-                className={`h5 mb-0 text-gray-800 font-weight-bold text-uppercase`}
+                className="h5 mb-0 text-gray-800 font-weight-bold text-uppercase"
               >
                 {name}
               </div>
             </Link>
-            {/* eslint-disable-next-line array-callback-return */}
             {GW
               ? GW.map((item, index) => (
-                  <Link
-                    to={`/dashboard/gateway/${item.id}`}
-                    className="btn-link"
-                    key={index}
+                <Link
+                  to={`/dashboard/gateway/${item.id}`}
+                  className="btn-link"
+                  key={item.id}
+                >
+                  <div
+                    className="badge badge-primary font-weight-normal mr-1"
+                    id={`tooltip${index}`}
                   >
-                    <div
-                      className="badge badge-primary font-weight-normal mr-1"
-                      id={`tooltip${index}`}
-                      key={index}
-                    >{`GW${item.id}`}</div>
-                    <Tooltip
-                      placement="bottom"
-                      isOpen={tooltipOpen}
-                      target={`tooltip${index}`}
-                      toggle={toggle}
-                    >
-                      {`Click to show all detectors`}
-                    </Tooltip>
-                  </Link>
-                ))
+                    {`GW${item.id}`}
+
+                  </div>
+                  <Tooltip
+                    placement="bottom"
+                    isOpen={tooltipOpen}
+                    target={`tooltip${index}`}
+                    toggle={toggle}
+                  >
+                    Click to show all detectors
+                  </Tooltip>
+                </Link>
+              ))
               : null}
           </div>
           <div className="col-2">
@@ -79,3 +83,13 @@ function CardField(props) {
 }
 
 export default React.memo(CardField);
+
+CardField.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.number),
+  GW: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+CardField.defaultProps = {
+  data: [0, 0, 0],
+};

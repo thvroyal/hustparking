@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Switch, useRouteMatch, withRouter } from "react-router";
+import { Switch, useRouteMatch } from 'react-router';
 
-import AuthenticatedRoute from "../components/Routes/AuthenticatedRoute";
-import Footer from "../layouts/Footer/Footer";
-import BookingForm from "../layouts/User/BookingForm";
-import Contracts from "../pages/User/Contracts";
-import HeaderMain from "../layouts/Header/HeaderMain";
+import AuthenticatedRoute from '../components/Routes/AuthenticatedRoute';
+import Footer from '../layouts/Footer/Footer';
+import BookingForm from '../layouts/User/BookingForm';
+import Contracts from './User/Contracts';
+import HeaderMain from '../layouts/Header/HeaderMain';
+import Profile from './User/Profile';
 
 function Home() {
   const { url } = useRouteMatch();
@@ -20,6 +21,9 @@ function Home() {
           </AuthenticatedRoute>
           <AuthenticatedRoute restrict={[1]} path={`${url}/contracts`} exact>
             <Contracts />
+          </AuthenticatedRoute>
+          <AuthenticatedRoute restrict={[1]} path={`${url}/profile`} exact>
+            <Profile />
           </AuthenticatedRoute>
         </Switch>
       </div>

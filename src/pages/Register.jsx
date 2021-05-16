@@ -1,17 +1,17 @@
-import React from "react";
-import { withRouter } from "react-router";
-import RegisterForm from "../layouts/Auth/RegisterForm";
+import React from 'react';
+import { withRouter } from 'react-router';
+import RegisterForm from '../layouts/Auth/RegisterForm';
 
 function Register() {
   return (
-    <div className="bg-gradient-primary" style={{ height: "100vh" }}>
+    <div className="bg-gradient-primary" style={{ height: '100vh' }}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-xl-10 col-lg-12 col-md-9">
             <div className="card o-hidden border-0 shadow-lg my-5">
               <div className="card-body p-0">
                 <div className="row">
-                  <div className="col-lg-6 d-none d-lg-block bg-register-image"></div>
+                  <div className="col-lg-6 d-none d-lg-block bg-register-image" />
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center">

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initState = {
   isExpandedSidebar: true,
@@ -6,16 +6,16 @@ const initState = {
 };
 
 const utils = createSlice({
-  name: "utils",
+  name: 'utils',
   initialState: initState,
   reducers: {
     initSidebar: (state, action) => {
-      state.isExpandedSidebar = localStorage["sidebar"] ?? false;
+      state.isExpandedSidebar = localStorage.sidebar ?? false;
       state.widthSidebar = action.payload;
     },
-    toggleSideBar: (state, action) => {
+    toggleSideBar: (state) => {
       state.isExpandedSidebar = !state.isExpandedSidebar;
-      localStorage.setItem("sidebar", state.isExpandedSidebar);
+      localStorage.setItem('sidebar', state.isExpandedSidebar);
     },
   },
 });

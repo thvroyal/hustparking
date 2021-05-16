@@ -1,10 +1,10 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { ClearTokenBackend } from "../../apis/auth";
+import React, { useState } from 'react';
 
-function HeaderMain(props) {
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { ClearTokenBackend } from '../../apis/auth';
+
+function HeaderMain() {
   const dispatch = useDispatch();
   const [show, toggleShow] = useState(false);
 
@@ -52,7 +52,7 @@ function HeaderMain(props) {
             <a
               href="#foo"
               className={`d-block link-dark text-decoration-none dropdown-toggle ${
-                show ? "show" : ""
+                show ? 'show' : ''
               }`}
               id="dropdownUser1"
               data-bs-toggle="dropdown"
@@ -68,24 +68,24 @@ function HeaderMain(props) {
               />
             </a>
             <ul
-              className={`dropdown-menu text-small ${show ? "show" : ""}`}
+              className={`dropdown-menu text-small ${show ? 'show' : ''}`}
               aria-labelledby="dropdownUser1"
               style={
                 show
                   ? {
-                      position: "absolute",
-                      inset: "0px auto auto 0px",
-                      margin: "0px",
-                      transform: "translate(-109px, 34px)",
-                    }
+                    position: 'absolute',
+                    inset: '0px auto auto 0px',
+                    margin: '0px',
+                    transform: 'translate(-109px, 34px)',
+                  }
                   : {}
               }
               data-popper-placement="bottom-end"
             >
               <li>
-                <a className="nav-link dropdown-item" href="#foo">
+                <Link className="nav-link dropdown-item" to="/home/profile">
                   Profile
-                </a>
+                </Link>
               </li>
               <li>
                 <Link className="nav-link dropdown-item" to="/home/contracts">

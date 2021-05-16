@@ -1,31 +1,25 @@
-import React, { useEffect, useState } from "react";
-import ModalDetector from "../../components/Modal/ModalDetector";
-import { Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import useModal from "../../helpers/useModal";
-import { getSlotOfField } from "../../apis/slotApi";
-import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
-import { getField } from "../../apis/fieldApi";
-import { sortSlot } from "../../store/admin/SlotSlice";
+import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
+import { getSlotOfField } from '../../apis/slotApi';
+import { getField } from '../../apis/fieldApi';
+import { sortSlot } from '../../store/admin/SlotSlice';
 
-function Slot(props) {
+function Slot() {
   const match = useLocation();
-  //get id field from url
-  const fieldId = match.pathname.split("/")[3];
+  // get id field from url
+  const fieldId = match.pathname.split('/')[3];
   const dispatch = useDispatch();
-  //get list slot from store redux
+  // get list slot from store redux
   const listSlot = useSelector((state) => state.slot.data);
   const field = useSelector((state) => state.field.data);
   const [showNull, setShowNull] = useState(false);
   const [descLastUpdated, invertLastUpdated] = useState(null);
-  //get fieldName from list field by ID
+  // get fieldName from list field by ID
   let fieldName;
-  if (field)
-    fieldName = field.filter((item) => item.id === parseInt(fieldId))[0].name;
-  else fieldName = "";
-  const { isShowing, toggle } = useModal();
-  const [typeModal, changeTypeModal] = useState(null);
+  if (field) { fieldName = field.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
   useEffect(() => {
     dispatch(getSlotOfField(fieldId));
     dispatch(getField());
@@ -36,43 +30,38 @@ function Slot(props) {
   //     dispatch(deleteDetectors(id));
   //   }
 
-  //Fix later----------------------------
-
-  function handleTypeModal(type) {
-    toggle();
-    changeTypeModal(type);
-  }
+  // Fix later----------------------------
 
   function changeFilterShowNull() {
     setShowNull(!showNull);
   }
 
-  //handle Sort Type
+  // handle Sort Type
   function handleSortLastUpdated() {
     if (descLastUpdated === null) invertLastUpdated(true);
     // invert sort
     else invertLastUpdated(!descLastUpdated);
     dispatch(
       sortSlot({
-        prop: "lastTimeUpdate",
+        prop: 'lastTimeUpdate',
         desc: descLastUpdated,
-        parser: function (item) {
+        parser(item) {
           return new Date(item);
         },
-      })
+      }),
     );
     // sort function
   }
 
   return (
     <>
-      {/*// <!-- Page Heading -->*/}
+      {/* // <!-- Page Heading --> */}
       <h1 className="h3 mb-4 text-gray-800 text-capitalize">{`Field ${fieldName}`}</h1>
 
-      {/*// <!-- DataTales Example -->*/}
+      {/* // <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
-          <h6 className="m-0 font-weight-bold text-primary">{`Database`}</h6>
+          <h6 className="m-0 font-weight-bold text-primary">Database</h6>
           {/* <button
             className="btn-action p-2"
             onClick={() => handleTypeModal(-1)}
@@ -105,9 +94,10 @@ function Slot(props) {
                       <div>Status</div>
                       <i
                         className={`fa ${
-                          !showNull ? "fa-eye" : "fa-eye-slash"
+                          !showNull ? 'fa-eye' : 'fa-eye-slash'
                         } small`}
                         onClick={changeFilterShowNull}
+                        aria-hidden="true"
                       />
                     </div>
                   </th>
@@ -119,12 +109,13 @@ function Slot(props) {
                       <i
                         className={`fa ${
                           descLastUpdated === null
-                            ? "fa-sort"
+                            ? 'fa-sort'
                             : !descLastUpdated
-                            ? "fa-sort-down"
-                            : "fa-sort-up"
+                              ? 'fa-sort-down'
+                              : 'fa-sort-up'
                         }`}
                         onClick={handleSortLastUpdated}
+                        aria-hidden="true"
                       />
                     </div>
                   </th>
@@ -132,91 +123,91 @@ function Slot(props) {
               </thead>
               <tbody>
                 {listSlot ? (
-                  listSlot.map((item, index) => {
+                  listSlot.map((item) => {
                     let statusAnd;
-                    if (item.statusCam === null)
-                      statusAnd = item.statusDetector;
-                    if (item.statusDetector === null)
-                      statusAnd = item.statusCam;
-                    if (item.statusCam === null && item.statusDetector === null)
-                      statusAnd = null;
-                    if (item.statusCam !== null && item.statusDetector !== null)
+                    if (item.statusCam === null) statusAnd = item.statusDetector;
+                    if (item.statusDetector === null) statusAnd = item.statusCam;
+                    if (item.statusCam === null && item.statusDetector === null) statusAnd = null;
+                    if (item.statusCam !== null && item.statusDetector !== null) {
                       statusAnd = item.statusDetector && item.statusCam;
+                    }
                     if (statusAnd === null && showNull) return null;
-                    else
-                      return (
-                        <tr key={index}>
-                          <td>{item.id}</td>
-                          <td>
-                            {item.addressDetector ? (
-                              <Link
-                                to={`/dashboard/detector/${item.detectorId}`}
-                                className="card-link"
-                              >
-                                {item.addressDetector}
-                              </Link>
-                            ) : (
-                              "No Address"
-                            )}
-                          </td>
-                          <td>{item.addressGateway || "No Address"}</td>
+                    return (
+                      <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>
+                          {item.addressDetector ? (
+                            <Link
+                              to={`/dashboard/detector/${item.detectorId}`}
+                              className="card-link"
+                            >
+                              {item.addressDetector}
+                            </Link>
+                          ) : (
+                            'No Address'
+                          )}
+                        </td>
+                        <td>{item.addressGateway || 'No Address'}</td>
 
-                          <td>
-                            <button
-                              className={`btn-status ${
-                                item.statusDetector
-                                  ? "btn-danger"
-                                  : item.statusDetector === null
-                                  ? "btn-white"
-                                  : "btn-success"
-                              }`}
-                            >
-                              {item.statusDetector
-                                ? "Busy"
+                        <td>
+                          <button
+                            className={`btn-status ${
+                              item.statusDetector
+                                ? 'btn-danger'
                                 : item.statusDetector === null
-                                ? "Null"
-                                : "Free"}
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              className={`btn-status ${
-                                item.statusCam
-                                  ? "btn-danger"
-                                  : item.statusCam === null
-                                  ? "btn-white"
-                                  : "btn-success"
-                              }`}
-                            >
-                              {item.statusCam
-                                ? "Busy"
+                                  ? 'btn-white'
+                                  : 'btn-success'
+                            }`}
+                            type="button"
+                          >
+                            {item.statusDetector
+                              ? 'Busy'
+                              : item.statusDetector === null
+                                ? 'Null'
+                                : 'Free'}
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            className={`btn-status ${
+                              item.statusCam
+                                ? 'btn-danger'
                                 : item.statusCam === null
-                                ? "Null"
-                                : "Free"}
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              className={`btn-status ${
-                                statusAnd
-                                  ? "btn-danger"
-                                  : statusAnd === null
-                                  ? "btn-white"
-                                  : "btn-success"
-                              }`}
-                            >
-                              {statusAnd
-                                ? "Busy"
+                                  ? 'btn-white'
+                                  : 'btn-success'
+                            }`}
+                            type="button"
+                          >
+                            {item.statusCam
+                              ? 'Busy'
+                              : item.statusCam === null
+                                ? 'Null'
+                                : 'Free'}
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            className={`btn-status ${
+                              statusAnd
+                                ? 'btn-danger'
                                 : statusAnd === null
-                                ? "Null"
-                                : "Free"}
-                            </button>
-                          </td>
-                          <td>{item.lastTimeCam || "No Data"}</td>
-                          <td>{item.lastTimeDetector || "No Data"}</td>
-                          <td>{item.lastTimeUpdate || "No Data"}</td>
-                        </tr>
-                      );
+                                  ? 'btn-white'
+                                  : 'btn-success'
+                            }`}
+                            type="button"
+                          >
+                            {statusAnd
+                              ? 'Busy'
+                              : statusAnd === null
+                                ? 'Null'
+                                : 'Free'}
+                          </button>
+                        </td>
+                        <td>{item.lastTimeCam || 'No Data'}</td>
+                        <td>{item.lastTimeDetector || 'No Data'}</td>
+                        <td>{item.lastTimeUpdate || 'No Data'}</td>
+                      </tr>
+                    );
                   })
                 ) : (
                   <tr>

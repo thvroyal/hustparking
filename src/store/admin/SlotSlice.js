@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { sortBy } from "../../helpers/sort";
+import { createSlice } from '@reduxjs/toolkit';
+import sortBy from '../../helpers/sort';
 
 const initState = {
   loading: false,
@@ -8,7 +8,7 @@ const initState = {
 };
 
 const slot = createSlice({
-  name: "slot",
+  name: 'slot',
   initialState: initState,
   reducers: {
     loadingSlot: (state, action) => {
@@ -23,7 +23,7 @@ const slot = createSlice({
       state.loading = false;
     },
     sortSlot: (state, action) => {
-      let sortedState = [...state.data];
+      const sortedState = [...state.data];
       sortBy(sortedState, action.payload);
       state.data = sortedState;
     },
@@ -31,5 +31,7 @@ const slot = createSlice({
 });
 
 const { reducer, actions } = slot;
-export const { loadingSlot, successSlot, failedSlot, sortSlot } = actions;
+export const {
+  loadingSlot, successSlot, failedSlot, sortSlot,
+} = actions;
 export default reducer;

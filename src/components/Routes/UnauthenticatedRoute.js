@@ -1,35 +1,45 @@
-import React from "react";
-import { Redirect, Route } from "react-router";
-import { useSelector } from "react-redux";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Redirect, Route } from 'react-router';
+import { useSelector } from 'react-redux';
 
 function querystring(name, url = window.location.href) {
-  name = name.replace(/[[]]/g, "\\$&");
+  const namee = name.replace(/[[]]/g, '\\$&');
 
-  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i");
+  const regex = new RegExp(`[?&]${namee}(=([^&#]*)|&|#|$)`, 'i');
   const results = regex.exec(url);
 
   if (!results) {
     return null;
   }
   if (!results[2]) {
-    return "";
+    return '';
   }
 
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 export default function UnauthenticatedRoute({ children, target, ...rest }) {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const redirect = querystring("redirect");
+  const redirect = querystring('redirect');
   return (
     <Route {...rest}>
       {!isAuthenticated ? (
         children
       ) : (
         <Redirect
-          to={redirect === "" || redirect === null ? target : redirect}
+          to={redirect === '' || redirect === null ? target : redirect}
         />
       )}
     </Route>
   );
 }
+
+UnauthenticatedRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+  target: PropTypes.string,
+};
+
+UnauthenticatedRoute.defaultProps = {
+  target: '',
+};

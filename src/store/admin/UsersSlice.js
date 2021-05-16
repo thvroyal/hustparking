@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initState = {
   loading: false,
@@ -7,7 +7,7 @@ const initState = {
 };
 
 const listUsers = createSlice({
-  name: "listUsers",
+  name: 'listUsers',
   initialState: initState,
   reducers: {
     loadingListUsers: (state, action) => {

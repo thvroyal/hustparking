@@ -1,21 +1,20 @@
-import React from "react";
-import { useEffect } from "react";
-import { Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { withRouter, useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { getContract } from "../../apis/contractApi";
+import React, { useEffect } from 'react';
 
-function Contract(props) {
+import { Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter, useParams } from 'react-router';
+import { getContract } from '../../apis/contractApi';
+
+function Contract() {
   const dispatch = useDispatch();
   const { idUser } = useParams();
   const contractList = useSelector((state) => state.contract.data);
 
   useEffect(
-    function () {
+    () => {
       dispatch(getContract(idUser));
     },
-    [dispatch, idUser]
+    [dispatch, idUser],
   );
   return (
     <>
@@ -24,11 +23,11 @@ function Contract(props) {
       <div className="card mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
-            {idUser === "all" ? "All Contracts" : `Contracts of User ${idUser}`}
+            {idUser === 'all' ? 'All Contracts' : `Contracts of User ${idUser}`}
           </h6>
         </div>
         <div className="card-body p-0">
-          {/*// <!-- Billing history table-->*/}
+          {/* // <!-- Billing history table--> */}
           <div className="table-responsive table-billing-history table-hover">
             <table className="table mb-0">
               <thead>
@@ -46,9 +45,8 @@ function Contract(props) {
               </thead>
               <tbody>
                 {contractList ? (
-                  contractList.map((ctr, key) => (
-                    <tr key={key}>
-                      {/* <td><Link to={`/dashboard/contract/39201`} className="card-link">#39201</Link></td> */}
+                  contractList.map((ctr) => (
+                    <tr key={ctr.id}>
                       <td>{ctr.id}</td>
                       <td>{ctr.userId}</td>
                       <td>{ctr.fieldId}</td>
@@ -60,11 +58,11 @@ function Contract(props) {
                       <td>
                         <span
                           className={`badge ${
-                            ctr.status === "Booking"
-                              ? "badge-warning"
-                              : ctr.status === "Parking"
-                              ? "badge-success"
-                              : "badge-secondary"
+                            ctr.status === 'Booking'
+                              ? 'badge-warning'
+                              : ctr.status === 'Parking'
+                                ? 'badge-success'
+                                : 'badge-secondary'
                           }`}
                         >
                           {ctr.status}

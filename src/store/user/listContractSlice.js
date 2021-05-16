@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initState = {
   listContract: [],
@@ -7,7 +7,7 @@ const initState = {
 };
 
 const listContract = createSlice({
-  name: "listContract",
+  name: 'listContract',
   initialState: initState,
   reducers: {
     setLoading: (state, action) => {

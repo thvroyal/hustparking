@@ -1,32 +1,32 @@
-import React from "react";
-import Sidebar from "../layouts/Sidebar/Sidebar";
-import Header from "../layouts/Header/Header";
-import { Route, Switch, useRouteMatch } from "react-router";
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router';
+import Sidebar from '../layouts/Sidebar/Sidebar';
+import Header from '../layouts/Header/Header';
 
-import Footer from "../layouts/Footer/Footer";
-import Detectors from "../layouts/Dashboard/Detectors";
-import DashboardHome from "../layouts/Dashboard/DashboardHome";
-import Users from "../layouts/Dashboard/Users";
-import UserInfo from "../layouts/Dashboard/UserInfo";
-import Contract from "../layouts/Dashboard/Contract";
+import Footer from '../layouts/Footer/Footer';
+import Detectors from '../layouts/Dashboard/Detectors';
+import DashboardHome from '../layouts/Dashboard/DashboardHome';
+import Users from '../layouts/Dashboard/Users';
+import UserInfo from '../layouts/Dashboard/UserInfo';
+import Contract from '../layouts/Dashboard/Contract';
 // import Invoice from "../layouts/Dashboard/Invoice";
-import Fields from "../layouts/Dashboard/Fields";
-import Slot from "../layouts/Dashboard/Slot";
-import Gateway from "../layouts/Dashboard/Gateway";
-import DetectorDebug from "../layouts/Dashboard/Debug/DetectorDebug";
-import DetectorInfo from "../layouts/Dashboard/DetectorInfo";
-import Image1 from "../layouts/Dashboard/Image1";
-import Image2 from "../layouts/Dashboard/Image2";
+import Fields from '../layouts/Dashboard/Fields';
+import Slot from '../layouts/Dashboard/Slot';
+import Gateway from '../layouts/Dashboard/Gateway';
+import DetectorDebug from '../layouts/Dashboard/Debug/DetectorDebug';
+import DetectorInfo from '../layouts/Dashboard/DetectorInfo';
+import Image1 from '../layouts/Dashboard/Image1';
+import Image2 from '../layouts/Dashboard/Image2';
 
-function Dashboard(props) {
+function Dashboard() {
   const match = useRouteMatch();
 
   return (
     <div id="wrapper">
-      {/*Page Wrapper*/}
+      {/* Page Wrapper */}
       <Sidebar />
       <div id="content-wrapper" className="d-flex flex-column">
-        {/*Content Wrapper*/}
+        {/* Content Wrapper */}
         <div id="content">
           <Header />
           <div className="container-fluid">
@@ -103,7 +103,7 @@ function Dashboard(props) {
             </Switch>
           </div>
         </div>
-        {/*    End Of Content Wrapper*/}
+        {/*    End Of Content Wrapper */}
         <Footer />
       </div>
     </div>

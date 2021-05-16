@@ -1,9 +1,9 @@
-import { React, useState } from "react";
-import { Formik, Form } from "formik";
-import { TextField } from "../../components/TextField";
-import { useHistory, useLocation } from "react-router-dom";
-import * as Yup from "yup";
-import axios from "axios";
+import { React, useState } from 'react';
+import { Formik, Form } from 'formik';
+import { useHistory, useLocation } from 'react-router-dom';
+import * as Yup from 'yup';
+import axios from 'axios';
+import TextField from '../../components/TextField';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -14,28 +14,28 @@ const VerifyForm = () => {
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
   const validate = Yup.object({
-    code: Yup.number().required("Code is required"),
+    code: Yup.number().required('Code is required'),
   });
 
   const handleVerify = async (code) => {
     const data = {
-      email: query.get("email"),
-      code: code,
+      email: query.get('email'),
+      code,
     };
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/public/verify`,
-        data
+        data,
       );
-      if (response.data.message === "success" && response.data.data) {
-        setMsg("Your email is verified. Login now!");
+      if (response.data.message === 'success' && response.data.data) {
+        setMsg('Your email is verified. Login now!');
         setErr(null);
       } else {
-        setErr("Wrong code. Try again!");
+        setErr('Wrong code. Try again!');
         setMsg(null);
       }
-      setTimeout(function () {
-        history.push("/login");
+      setTimeout(() => {
+        history.push('/login');
       }, 1000);
     } catch (error) {
       console.log(error);
@@ -44,18 +44,18 @@ const VerifyForm = () => {
   return (
     <Formik
       initialValues={{
-        code: "",
+        code: '',
       }}
       validationSchema={validate}
       onSubmit={(values) => {
         handleVerify(values.code);
       }}
     >
-      {(formik) => (
+      {() => (
         <div>
           <div className="small">
             Please enter the verification code that you will receive at
-            <span className="font-weight-bold">{` ${query.get("email")}`}</span>
+            <span className="font-weight-bold">{` ${query.get('email')}`}</span>
           </div>
           {err ? (
             <div className="alert alert-danger mt-2" role="alert">

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initState = {
   loading: false,
@@ -6,10 +6,11 @@ const initState = {
   data: [],
 };
 const contract = createSlice({
-  name: "contract",
+  name: 'contract',
   initialState: initState,
   reducers: {
     loadingContract: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
       state = initState;
       state.loading = action.payload || true;
     },

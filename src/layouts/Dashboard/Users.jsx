@@ -1,12 +1,12 @@
-import React from "react";
-import ImgAva from "../../assets/img/profile-1.png";
-import { withRouter } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchListUser } from "../../apis/ListUsersApi";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { withRouter } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Users(props) {
+import { Link } from 'react-router-dom';
+import ImgAva from '../../assets/img/profile-1.png';
+import { fetchListUser } from '../../apis/ListUsersApi';
+
+function Users() {
   const dispatch = useDispatch();
   const listUser = useSelector((state) => state.listUser.data);
   useEffect(() => {
@@ -15,7 +15,7 @@ function Users(props) {
   return (
     <>
       <h1 className="h3 mb-2 text-gray-800">List Users</h1>
-      {/*<p className="mb-4">Update after 10 seconds.</p>*/}
+      {/* <p className="mb-4">Update after 10 seconds.</p> */}
 
       <div className="table-responsive mt-4">
         {listUser ? (
@@ -35,10 +35,11 @@ function Users(props) {
               </tr>
             </thead>
             <tbody>
-              {listUser.map((user, index) => (
-                <tr key={index}>
+              {listUser.map((user) => (
+                <tr key={user.id}>
                   <td className="avatar">
-                    <img className="avatar-img" src={ImgAva} alt="" />{" "}
+                    <img className="avatar-img" src={ImgAva} alt="" />
+                    {' '}
                     <Link
                       to={`/dashboard/contract/${user.id}`}
                       className="nav-link"

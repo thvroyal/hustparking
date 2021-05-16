@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router";
-import { Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { getPacket } from "../../../apis/packageApi";
-import ExportExcel from "../../../utils/ExportExcel";
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router';
+import { Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPacket } from '../../../apis/packageApi';
+import ExportExcel from '../../../utils/ExportExcel';
 
-function DetectorDebug(props) {
+function DetectorDebug() {
   const dispatch = useDispatch();
   const listDetectors = useSelector((state) => state.packet.data);
   const [listNode, setListFilter] = useState([]);
   useEffect(() => {
     if (listDetectors) {
       const tempArr = listNode ?? [];
-      let detector = listDetectors.slice(
+      const detector = listDetectors.slice(
         listDetectors.length - 25,
-        listDetectors.length
+        listDetectors.length,
       );
-      for (let item in detector) {
-        if (!tempArr.includes(detector[item].nodeAddress))
+      for (const item in detector) {
+        if (!tempArr.includes(detector[item].nodeAddress)) {
           tempArr.push(detector[item].nodeAddress);
+        }
       }
       setListFilter(tempArr);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listDetectors]);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,25 +31,25 @@ function DetectorDebug(props) {
     return () => clearInterval(interval);
   }, [dispatch]);
 
-  //Filter Node Address
+  // Filter Node Address
   const [toggle, isToggle] = useState(false);
   const [filter, mapFilter] = useState([]);
   function handleFilterShow() {
     isToggle(!toggle);
   }
   function handleFilter(data) {
-    if (filter.includes(data))
+    if (filter.includes(data)) {
       mapFilter([...filter.filter((value) => value !== data)]);
-    else mapFilter([...filter, data]);
+    } else mapFilter([...filter, data]);
   }
   function clearFilter() {
     mapFilter([]);
   }
   function nowDate() {
     let today = new Date();
-    let dd = String(today.getDate()).padStart(2, "0");
-    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    let yyyy = today.getFullYear();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = today.getFullYear();
 
     today = mm + dd + yyyy;
     return today;
@@ -59,19 +59,21 @@ function DetectorDebug(props) {
   //   }
   return (
     <>
-      {/*// <!-- Page Heading -->*/}
+      {/* // <!-- Page Heading --> */}
       <h1 className="h3 mb-2 text-gray-800">Debug</h1>
       <p className="mb-4">Checking Realtime. . . </p>
 
-      {/*// <!-- DataTales Example -->*/}
+      {/* // <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
-          <h6 className="m-0 font-weight-bold text-primary">{`Database Detectors`}</h6>
+          <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
           {listDetectors ? (
             <ExportExcel dataSet={listDetectors} name={`Detector-${nowDate()}`}>
-              <button className="btn-action p-2">
+              <button className="btn-action p-2" type="button">
                 <h6 className="m-0 font-weight-bold text-primary text-right">
-                  <i className="fa fa-file-export" /> Export Excel
+                  <i className="fa fa-file-export" />
+                  {' '}
+                  Export Excel
                 </h6>
               </button>
             </ExportExcel>
@@ -92,30 +94,32 @@ function DetectorDebug(props) {
                   <th>Battery</th>
                   <th>
                     <div className="d-flex justify-content-between align-items-center">
-                      <div>Node Address</div>{" "}
+                      <div>Node Address</div>
+                      {' '}
                       <i
                         className={`fas fa-filter ${
-                          toggle || filter.length ? "text-primary" : ""
+                          toggle || filter.length ? 'text-primary' : ''
                         }`}
                         onClick={handleFilterShow}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
+                        aria-hidden="true"
                       />
                     </div>
                     <div className="dropdown text-end position-absolute">
                       <ul
                         className={`dropdown-menu text-small ${
-                          toggle ? "show" : ""
+                          toggle ? 'show' : ''
                         }`}
                         aria-labelledby="dropdownUser1"
                         style={
                           toggle
                             ? {
-                                position: "absolute",
-                                inset: "0px auto auto 0px",
-                                margin: "0px",
-                                transform: "translate(-8px, 13px)",
-                                overflow: "auto",
-                              }
+                              position: 'absolute',
+                              inset: '0px auto auto 0px',
+                              margin: '0px',
+                              transform: 'translate(-8px, 13px)',
+                              overflow: 'auto',
+                            }
                             : {}
                         }
                       >
@@ -130,25 +134,23 @@ function DetectorDebug(props) {
                           <hr className="dropdown-divider" />
                         </li>
                         {listNode
-                          ? listNode.map((item, key) => {
-                              return (
-                                <li key={key}>
-                                  <a
-                                    className="dropdown-item"
-                                    href="#foo"
-                                    onClick={() => handleFilter(item)}
-                                  >
-                                    {item}
-                                    {filter.includes(item) ? (
-                                      <i className="ml-2 fas fa-check text-primary" />
-                                    ) : (
-                                      ""
-                                    )}
-                                  </a>
-                                  <hr className="dropdown-divider" />
-                                </li>
-                              );
-                            })
+                          ? listNode.map((item) => (
+                            <li key={item}>
+                              <a
+                                className="dropdown-item"
+                                href="#foo"
+                                onClick={() => handleFilter(item)}
+                              >
+                                {item}
+                                {filter.includes(item) ? (
+                                  <i className="ml-2 fas fa-check text-primary" />
+                                ) : (
+                                  ''
+                                )}
+                              </a>
+                              <hr className="dropdown-divider" />
+                            </li>
+                          ))
                           : null}
                       </ul>
                     </div>
@@ -163,10 +165,10 @@ function DetectorDebug(props) {
                 {listDetectors ? (
                   listDetectors
                     .slice(listDetectors.length - 25, listDetectors.length)
-                    .map((item, index) => {
-                      if (filter.includes(item.nodeAddress) || !filter.length)
+                    .map((item) => {
+                      if (filter.includes(item.nodeAddress) || !filter.length) {
                         return (
-                          <tr key={index}>
+                          <tr key={item.id}>
                             <td>{item.packetNumber}</td>
                             <td>{item.location}</td>
                             <td>{item.batteryLevel}</td>
@@ -174,18 +176,20 @@ function DetectorDebug(props) {
                             <td>
                               <button
                                 className={`btn-status ${
-                                  item.state ? "btn-danger" : "btn-success"
+                                  item.state ? 'btn-danger' : 'btn-success'
                                 }`}
+                                type="button"
                               >
-                                {item.state ? "Busy" : "Free"}
+                                {item.state ? 'Busy' : 'Free'}
                               </button>
                             </td>
                             <td>{item.communicationLevel}</td>
                             <td>{item.time}</td>
-                            <td>{parseInt(item.idNode)}</td>
+                            <td>{parseInt(item.idNode, 10)}</td>
                           </tr>
                         );
-                      else return null;
+                      }
+                      return null;
                     })
                 ) : (
                   <Spinner

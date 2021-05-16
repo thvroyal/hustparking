@@ -1,10 +1,10 @@
-import React from "react";
-import { withRouter } from "react-router";
-import VerifyForm from "../layouts/Auth/VerifyForm";
+import React from 'react';
+import { withRouter } from 'react-router';
+import VerifyForm from '../layouts/Auth/VerifyForm';
 
 function Verify() {
   return (
-    <div className="bg-gradient-primary" style={{ height: "100vh" }}>
+    <div className="bg-gradient-primary" style={{ height: '100vh' }}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-xl-5 col-lg-6 col-md-9">

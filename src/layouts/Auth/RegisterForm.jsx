@@ -1,42 +1,42 @@
-import React, { useState } from "react";
-import { Formik, Form } from "formik";
-import { TextField } from "../../components/TextField";
-import { RadioField } from "../../components/RadioField";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
-import * as Yup from "yup";
-import Axios from "axios";
-import { Spinner } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
+import * as Yup from 'yup';
+import Axios from 'axios';
+import { Spinner } from 'react-bootstrap';
+import RadioField from '../../components/RadioField';
+import TextField from '../../components/TextField';
 
 const RegisterForm = () => {
   const [isSuccess, handleIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const validate = Yup.object({
-    address: Yup.string().required("Address is required"),
-    email: Yup.string().required("Email is required"),
+    address: Yup.string().required('Address is required'),
+    email: Yup.string().required('Email is required'),
     password: Yup.string()
-      .min(2, "Password must be at least 2 charaters")
-      .required("Password is required"),
+      .min(2, 'Password must be at least 2 charaters')
+      .required('Password is required'),
     rePassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Password must match")
-      .required("Confirm password is required"),
-    equipment: Yup.string().required("Equipment is required"),
-    idNumber: Yup.string().required("ID Number is required"),
+      .oneOf([Yup.ref('password'), null], 'Password must match')
+      .required('Confirm password is required'),
+    equipment: Yup.string().required('Equipment is required'),
+    idNumber: Yup.string().required('ID Number is required'),
   });
   return (
     <Formik
       initialValues={{
-        address: "",
-        birth: "",
-        email: "",
-        image: "",
-        equipment: "",
-        idNumber: "",
-        password: "",
-        phone: "",
-        rePassword: "",
-        sex: "",
+        address: '',
+        birth: '',
+        email: '',
+        image: '',
+        equipment: '',
+        idNumber: '',
+        password: '',
+        phone: '',
+        rePassword: '',
+        sex: '',
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
@@ -44,12 +44,12 @@ const RegisterForm = () => {
         try {
           const response = await Axios.post(
             `${process.env.REACT_APP_BASE_URL}/api/public/register`,
-            values
+            values,
           );
           setLoading(false);
-          if (response.data.message === "success") {
+          if (response.data.message === 'success') {
             handleIsSuccess(true);
-            setTimeout(function () {
+            setTimeout(() => {
               history.push(`/verify?email=${values.email}`);
             }, 1000);
           }
@@ -59,7 +59,7 @@ const RegisterForm = () => {
         }
       }}
     >
-      {(formik) => (
+      {() => (
         <div>
           <Form className="user">
             {isSuccess ? (
@@ -80,7 +80,7 @@ const RegisterForm = () => {
               placeholder="Your birth"
             />
             <div className="mt-3 float-left mb-3">
-              <p style={{ textAlign: "left" }}>Gender</p>
+              <p style={{ textAlign: 'left' }}>Gender</p>
               <RadioField label="Female" name="sex" value="F" />
               <RadioField label="Male" name="sex" value="M" />
               <RadioField label="Other" name="sex" value="O" />
@@ -134,7 +134,8 @@ const RegisterForm = () => {
                   size="sm"
                   className="mr-3"
                 />
-              )}{" "}
+              )}
+              {' '}
               Register
             </button>
           </Form>

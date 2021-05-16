@@ -1,5 +1,5 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function PageNotFound() {
   const history = useHistory();
@@ -13,7 +13,7 @@ export default function PageNotFound() {
             <div className="mb-4 lead">
               The page you are looking for was not found or not restricted.
             </div>
-            <button className="btn btn-primary" onClick={handleBack}>
+            <button className="btn btn-primary" onClick={handleBack} type="button">
               &#10229; Go Back
             </button>
           </div>

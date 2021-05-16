@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import { withRouter } from "react-router";
-import CardField from "../../components/CardField";
-import { useDispatch, useSelector } from "react-redux";
-import { getField } from "../../apis/fieldApi";
-import { Spinner } from "react-bootstrap";
-import { getGateway } from "../../apis/GatewayApi";
+import React, { useEffect } from 'react';
+import { withRouter } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
+import CardField from '../../components/CardField';
+import { getField } from '../../apis/fieldApi';
+import { getGateway } from '../../apis/GatewayApi';
 
-function Fields(props) {
+function Fields() {
   const dispatch = useDispatch();
   const listField = useSelector((state) => state.field.data);
   const listGW = useSelector((state) => state.gateway.data);
 
   function searchGW(id) {
     if (listGW) return listGW.filter((gateway) => gateway.fieldId === id);
-    else return [];
+    return [];
   }
 
   useEffect(() => {
@@ -21,14 +21,14 @@ function Fields(props) {
     dispatch(getGateway());
   }, [dispatch]);
 
-  //10s Reload
+  // 10s Reload
   return (
     <>
       <h1 className="h3 mb-5 text-gray-800">Fields</h1>
       <div className="row">
         {listField ? (
-          listField.map((item, index) => (
-            <div className="col-xl-3 col-md-6 mb-4" key={index}>
+          listField.map((item) => (
+            <div className="col-xl-3 col-md-6 mb-4" key={item.id}>
               <CardField
                 name={item.name}
                 id={item.id}

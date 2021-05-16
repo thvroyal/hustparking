@@ -22,3 +22,9 @@
 .parking {
   border-left: 7px solid $green;
 }
+
+.table-contract {
+  tbody > tr :nth-child(2n + 1) {
+    font-weight: bold;
+  }
+}

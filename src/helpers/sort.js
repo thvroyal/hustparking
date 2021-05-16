@@ -1,15 +1,15 @@
-export const sortBy = (function () {
-  let toString = Object.prototype.toString,
-    // default parser function
-    parse = function (x) {
-      return x;
-    },
+const sortBy = (function () {
+  const { toString } = Object.prototype;
+  // default parser function
+  const parse = function (x) {
+    return x;
+  };
     // gets the item to be sorted
-    getItem = function (x) {
-      let isObject = x != null && typeof x === "object";
-      let isProp = isObject && this.prop in x;
-      return this.parser(isProp ? x[this.prop] : x);
-    };
+  const getItem = function (x) {
+    const isObject = x != null && typeof x === 'object';
+    const isProp = isObject && this.prop in x;
+    return this.parser(isProp ? x[this.prop] : x);
+  };
 
   /**
    * Sorts an array of elements.
@@ -23,15 +23,20 @@ export const sortBy = (function () {
    *
    * @guide https://stackoverflow.com/questions/10123953/how-to-sort-an-object-array-by-date-property/21715473#21715473
    */
-  return function sortby(array, cfg) {
+  return function sortby(array, cfgParam) {
+    let cfg = cfgParam;
     if (!(array instanceof Array && array.length)) return [];
-    if (toString.call(cfg) !== "[object Object]") cfg = {};
-    if (typeof cfg.parser !== "function") cfg.parser = parse;
-    cfg.desc = !!cfg.desc ? -1 : 1;
-    return array.sort(function (a, b) {
+    if (toString.call(cfg) !== '[object Object]') cfg = {};
+    if (typeof cfg.parser !== 'function') cfg.parser = parse;
+    cfg.desc = cfg.desc ? -1 : 1;
+    return array.sort((aPrs, bPrs) => {
+      let a = aPrs;
+      let b = bPrs;
       a = getItem.call(cfg, a);
       b = getItem.call(cfg, b);
       return cfg.desc * (a < b ? -1 : +(a > b));
     });
   };
-})();
+}());
+
+export default sortBy;

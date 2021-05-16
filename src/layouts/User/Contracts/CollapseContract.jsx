@@ -1,10 +1,11 @@
-import React from "react";
-import { Accordion, Card } from "react-bootstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Accordion, Card, Table } from 'react-bootstrap';
 
 function CollapseContract(props) {
   function formatString(str) {
-    if (str) return str.split("+")[0].split("T").join(" ").split(".")[0];
-    else return "N/A";
+    if (str) return str.split('+')[0].split('T').join(' ').split('.')[0];
+    return 'N/A';
   }
   const { type, contract, field } = props;
   return (
@@ -27,7 +28,7 @@ function CollapseContract(props) {
               </div>
             </div>
             {/* Show booking time */}
-            {type === "booking" && (
+            {type === 'booking' && (
               <>
                 <div>
                   <div className="text-uppercase small">Book in time</div>
@@ -44,7 +45,7 @@ function CollapseContract(props) {
               </>
             )}
             {/* Show parking time */}
-            {type === "parking" && (
+            {type === 'parking' && (
               <>
                 <div>
                   <div className="text-uppercase small">Car in time</div>
@@ -61,7 +62,7 @@ function CollapseContract(props) {
               </>
             )}
             {/* Show leaved time */}
-            {type === "leaved" && (
+            {type === 'leaved' && (
               <>
                 <div>
                   <div className="text-uppercase small">Car in time</div>
@@ -80,7 +81,107 @@ function CollapseContract(props) {
           </div>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
-          <Card.Body>Hello! I'm the body</Card.Body>
+          <Card.Body>
+            <div className="d-flex justify-content-around">
+              <div style={{ width: '50%' }} className="table-contract">
+                <Table responsive>
+                  <tbody>
+                    <tr>
+                      <td>ID Contract</td>
+                      <td>{contract.id}</td>
+                    </tr>
+                    <tr>
+                      <td>Field Name </td>
+                      <td>{field[0].name}</td>
+                    </tr>
+                    <tr>
+                      <td>Car Number</td>
+                      <td>{contract.carNumber}</td>
+                    </tr>
+                    <tr>
+                      <td>Status</td>
+                      <td>
+                        <button
+                          className={`btn-status ${
+                            contract.status === 'V'
+                              ? 'btn-warning'
+                              : contract.status === 'Y'
+                                ? 'btn-success'
+                                : 'btn-danger'
+                          }`}
+                          disabled
+                          type="button"
+                        >
+                          {contract.status === 'V'
+                            ? 'Booking'
+                            : contract.status === 'Y'
+                              ? 'Parking'
+                              : 'Leaved'}
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Time In Book </td>
+                      <td>{formatString(contract.timeInBook)}</td>
+                    </tr>
+                    <tr>
+                      <td>Time Out Book </td>
+                      <td>{formatString(contract.timeOutBook)}</td>
+                    </tr>
+                    <tr>
+                      <td>Time Car In </td>
+                      <td>{formatString(contract.timeCarIn)}</td>
+                    </tr>
+                    <tr>
+                      <td>Time Car Out </td>
+                      <td>{formatString(contract.timeCarOut)}</td>
+                    </tr>
+                    <tr>
+                      <td>Cost</td>
+                      <td>{contract.cost}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+              <div>
+                <button
+                  className="btn btn-primary px-4"
+                  disabled={contract.timeCarIn}
+                  type="button"
+                >
+                  <i className="fas fa-hourglass-start mr-2" />
+                  Extend Booking
+                </button>
+                <br />
+
+                <button
+                  className="btn btn-danger px-4 mt-3"
+                  disabled={contract.timeCarIn}
+                  type="button"
+                >
+                  <i className="fas fa-ban mr-2" />
+                  Cancel Booking
+                </button>
+                <hr />
+                <button
+                  className="btn btn-outline-success px-4 mr-3"
+                  disabled={contract.timeCarIn}
+                  type="button"
+                >
+                  <i className="fas fa-sign-in-alt mr-2" />
+                  Car In
+                </button>
+                <button
+                  className="btn btn-outline-danger px-4"
+                  disabled={contract.timeCarOut}
+                  type="button"
+                >
+                  <i className="fas fa-sign-out-alt mr-2" />
+                  Car Out
+                </button>
+              </div>
+            </div>
+          </Card.Body>
         </Accordion.Collapse>
       </Card>
     </Accordion>
@@ -88,3 +189,9 @@ function CollapseContract(props) {
 }
 
 export default CollapseContract;
+
+CollapseContract.propTypes = {
+  type: PropTypes.oneOf(['booking', 'parking', 'leaved']).isRequired,
+  contract: PropTypes.arrayOf(PropTypes.object).isRequired,
+  field: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
