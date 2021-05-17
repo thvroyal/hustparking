@@ -192,6 +192,18 @@ export default CollapseContract;
 
 CollapseContract.propTypes = {
   type: PropTypes.oneOf(['booking', 'parking', 'leaved']).isRequired,
-  contract: PropTypes.arrayOf(PropTypes.object).isRequired,
+  contract: PropTypes.shape({
+    carNumber: PropTypes.string,
+    cost: PropTypes.string,
+    dtCreate: PropTypes.string,
+    fieldId: PropTypes.number,
+    id: PropTypes.number,
+    status: PropTypes.string,
+    timeCarIn: PropTypes.string,
+    timeCarOut: PropTypes.string,
+    timeInBook: PropTypes.string,
+    timeOutBook: PropTypes.string,
+    userId: PropTypes.number,
+  }).isRequired,
   field: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -42,7 +42,7 @@ function App() {
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
-          <AuthenticatedRoute restrict={[1, 2]} path="/home">
+          <AuthenticatedRoute restrict={[1]} path="/home">
             <Home />
           </AuthenticatedRoute>
           <Route component={PageNotFound} />

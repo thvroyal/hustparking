@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,13 +7,25 @@ import { ClearTokenBackend } from '../../apis/auth';
 function HeaderMain() {
   const dispatch = useDispatch();
   const [show, toggleShow] = useState(false);
-
+  const refDropdown = useRef();
+  function clickOutside(event) {
+    if (refDropdown && !refDropdown.current.contains(event.target)) {
+      toggleShow(false);
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('mousedown', clickOutside);
+    return () => {
+      document.removeEventListener('mousedown', clickOutside);
+    };
+  }, []);
   function handleShow() {
     toggleShow(!show);
   }
   function handleLogOut() {
     dispatch(ClearTokenBackend());
   }
+
   return (
     <header className="p-3 mb-3 border-bottom">
       <div className="container">
@@ -48,7 +60,7 @@ function HeaderMain() {
             />
           </form> */}
 
-          <div className="dropdown text-end">
+          <div className="dropdown text-end" ref={refDropdown}>
             <a
               href="#foo"
               className={`d-block link-dark text-decoration-none dropdown-toggle ${
@@ -83,7 +95,7 @@ function HeaderMain() {
               data-popper-placement="bottom-end"
             >
               <li>
-                <Link className="nav-link dropdown-item" to="/home/profile">
+                <Link className="nav-link dropdown-item" to="/home/profile?tab=profile">
                   Profile
                 </Link>
               </li>

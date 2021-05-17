@@ -4,30 +4,31 @@ import { Link } from 'react-router-dom';
 
 const path = [
   {
-    title: 'Profile User',
-    path: '/home/profile',
+    title: 'Profile',
+    query: 'profile',
   },
   {
     title: 'Edit Profile',
-    path: '/home/edit_profile',
+    query: 'edit',
   },
   {
     title: 'Security',
-    path: '/home/security',
+    query: 'security',
   },
 ];
 function Navbar() {
   const location = useLocation();
+  const queryActive = location.search.split('=')[1];
   return (
     <>
       <nav className="nav nav-borders">
         {path.map((p) => (
           <Link
             className={`nav-link ${
-              location.search === p.path ? 'active ml-0' : ''
+              queryActive === p.query ? 'active' : ''
             }`}
-            to={p.path}
-            key={p.path}
+            to={`${location.pathname}?tab=${p.query}`}
+            key={p.query}
           >
             {p.title}
           </Link>

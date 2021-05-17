@@ -13,7 +13,7 @@ export const SignIn = (data) => async (dispatch) => {
     dispatch(setLoading(false));
     if (response.data.message === 'fail') dispatch(handleError(response.data.data));
     else {
-      localStorage.setItem('AccessToken', response.data.data.token);
+      localStorage.setItem('AccessToken', response.data.data.token ?? response.data.data);
       if (response.data.message === 'user') {
         dispatch(setRole(1));
       } else if (response.data.message === 'admin') {

@@ -25,7 +25,7 @@ const Sidebar = React.memo(() => {
       >
         <Link
           className="sidebar-brand d-flex align-items-center justify-content-center"
-          to="/"
+          to="/dashboard"
         >
           <div className="sidebar-brand-icon rotate-n-15">
             <i className="fas fa-laugh-wink" />

@@ -23,6 +23,8 @@
         "no-param-reassign":[2,{"ignorePropertyModificationsFor":["state"]}],
         "no-restricted-syntax":"off",
         "no-nested-ternary":"off",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "no-console":"off",
+        "func-names":"off"
     }
 }
