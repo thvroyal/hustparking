@@ -5,6 +5,7 @@ const initState = {
   isAuthenticated: false,
   error: null,
   loading: false,
+  info: {},
 };
 
 const auth = createSlice({
@@ -27,11 +28,14 @@ const auth = createSlice({
       state.isAuthenticated = false;
       state.error = action.payload;
     },
+    setInfo: (state, action) => {
+      state.info = action.payload;
+    },
   },
 });
 
 const { reducer, actions } = auth;
 export const {
-  setLoading, setRole, logOut, handleError,
+  setLoading, setRole, logOut, handleError, setInfo,
 } = actions;
 export default reducer;

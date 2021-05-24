@@ -21,7 +21,6 @@ function querystring(name, url = window.location.href) {
 
 function whereDirect(redirect, role, target) {
   const regexAdmin = new RegExp('(/dashboard)(.+)?', 'i');
-  console.log(regexAdmin.test(redirect));
   if (role === 2) {
     if (redirect === '' || redirect === null || !regexAdmin.test(redirect)) {
       return '/dashboard';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ErrorMessage, useField } from 'formik';
 
-export default function TextField({ label, ...props }) {
+export default function TextField({ label, showLabel, ...props }) {
   const [field, meta] = useField(props);
   const errorStyle = {
     fontSize: '.8rem',
@@ -11,8 +11,8 @@ export default function TextField({ label, ...props }) {
     textAlign: 'left',
   };
   return (
-    <div>
-      <label htmlFor={field.name} />
+    <div className={showLabel && 'mb-3'}>
+      <label htmlFor={field.name} className="text-uppercase text-primary small ml-3">{showLabel ? label : ''}</label>
       <input
         className={`form-control form-control-user ${
           meta.touched && meta.error && 'is-invalid'
@@ -28,4 +28,8 @@ export default function TextField({ label, ...props }) {
 
 TextField.propTypes = {
   label: PropTypes.string.isRequired,
+  showLabel: PropTypes.bool,
+};
+TextField.defaultProps = {
+  showLabel: false,
 };

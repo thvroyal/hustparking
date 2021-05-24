@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  handleError, setRole, logOut, setLoading,
+  handleError, setRole, logOut, setLoading, setInfo,
 } from '../store/authSlice';
 
 export const SignIn = (data) => async (dispatch) => {
@@ -16,6 +16,7 @@ export const SignIn = (data) => async (dispatch) => {
       localStorage.setItem('AccessToken', response.data.data.token ?? response.data.data);
       if (response.data.message === 'user') {
         dispatch(setRole(1));
+        dispatch(setInfo(response.data.data.user));
       } else if (response.data.message === 'admin') {
         dispatch(setRole(2));
       }
@@ -62,5 +63,25 @@ export const verifyToken = () => async (dispatch) => {
   } catch (error) {
     dispatch(setLoading(false));
     console.log(error);
+  }
+};
+
+export const getInfo = () => async (dispatch) => {
+  // dispatch(setLoading(true));
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: `${process.env.REACT_APP_BASE_URL}/api/us/info`,
+      headers: {
+        token: localStorage.getItem('AccessToken'),
+      },
+    });
+    if (response.data.message === 'success' && response.data.data) {
+      dispatch(setInfo(response.data.data));
+    }
+    // dispatch(setLoading(false));
+  } catch (error) {
+    // dispatch(setLoading(false));
+    console.error(error);
   }
 };
