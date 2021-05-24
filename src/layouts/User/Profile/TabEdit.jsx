@@ -1,16 +1,21 @@
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Spinner } from 'react-bootstrap';
 import Axios from 'axios';
 import TextField from '../../../components/TextField';
 import RadioField from '../../../components/RadioField';
+import { getInfo } from '../../../apis/auth';
 
 function TabEdit() {
   const { info } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [isSuccess, handleIsSuccess] = useState(-1);
+  useEffect(() => {
+    dispatch(getInfo());
+  }, [dispatch]);
   const validate = Yup.object({
 
   });

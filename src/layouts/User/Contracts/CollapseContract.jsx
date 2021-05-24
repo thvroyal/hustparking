@@ -1,13 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Accordion, Card, Table } from 'react-bootstrap';
+import {
+  Accordion, Card, Table, Spinner,
+} from 'react-bootstrap';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { getListContract } from '../../../apis/contractUserApi';
+import { getFieldUser } from '../../../apis/fieldApi';
 
 function CollapseContract(props) {
+  const { type, contract, field } = props;
+  const dispatch = useDispatch();
+  const [loadingCancel, setloadingCancel] = useState(false);
   function formatString(str) {
     if (str) return str.split('+')[0].split('T').join(' ').split('.')[0];
     return 'N/A';
   }
-  const { type, contract, field } = props;
+  async function cancelBooking() {
+    const data = { ...contract, status: 'C' };
+    setloadingCancel(true);
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_BASE_URL}/api/us/update_contract`,
+        headers: {
+          token: localStorage.AccessToken,
+        },
+        data,
+      });
+      setloadingCancel(false);
+      if (response.data.message === 'success') {
+        dispatch(getListContract());
+        dispatch(getFieldUser());
+      }
+    } catch (error) {
+      setloadingCancel(false);
+      console.error(error);
+    }
+  }
   return (
     <Accordion>
       <Card>
@@ -145,21 +175,20 @@ function CollapseContract(props) {
               </div>
               <div>
                 <button
-                  className="btn btn-primary px-4"
-                  disabled={contract.timeCarIn}
-                  type="button"
-                >
-                  <i className="fas fa-hourglass-start mr-2" />
-                  Extend Booking
-                </button>
-                <br />
-
-                <button
                   className="btn btn-danger px-4 mt-3"
                   disabled={contract.timeCarIn}
                   type="button"
+                  onClick={cancelBooking}
                 >
-                  <i className="fas fa-ban mr-2" />
+                  {loadingCancel && (
+                  <Spinner
+                    animation="border"
+                    color="primary"
+                    size="sm"
+                    className="mr-2"
+                  />
+                  )}
+                  {!loadingCancel && <i className="fas fa-ban mr-2" />}
                   Cancel Booking
                 </button>
                 <hr />
