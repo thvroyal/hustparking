@@ -12,6 +12,8 @@ function CollapseContract(props) {
   const { type, contract, field } = props;
   const dispatch = useDispatch();
   const [loadingCancel, setloadingCancel] = useState(false);
+  const [loadingCarIn, setloadingCarIn] = useState(false);
+  const [loadingCarOut, setloadingCarOut] = useState(false);
   function formatString(str) {
     if (str) return str.split('+')[0].split('T').join(' ').split('.')[0];
     return 'N/A';
@@ -35,6 +37,45 @@ function CollapseContract(props) {
       }
     } catch (error) {
       setloadingCancel(false);
+      console.error(error);
+    }
+  }
+  function convertNum(d) {
+    if (parseInt(d, 10) < 10) return `0${parseInt(d, 10)}`;
+    return d;
+  }
+  function formatDateNow() {
+    const timeNow = new Date();
+    const timeNowArray = timeNow.toLocaleString('vi-VN').split(', ');
+    const date = timeNowArray[1].split('/');
+    const time = timeNowArray[0].split(':');
+    const dateFormatted = `${date[2]}-${convertNum(date[1])}-${convertNum(date[0])} ${convertNum(time[0])}:${convertNum(time[1])}:00`;
+    return dateFormatted;
+  }
+  async function updateTime(t) {
+    const data = {
+      contractId: contract.id,
+      timeCarIn: t === 'in' ? formatDateNow() : '',
+      timeCarOut: t === 'out' ? formatDateNow() : '',
+    };
+    if (t === 'in') setloadingCarIn(true); else setloadingCarOut(true);
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_BASE_URL}/api/us/update_time`,
+        headers: {
+          token: localStorage.AccessToken,
+        },
+        data,
+      });
+      if (t === 'in') setloadingCarIn(true); else setloadingCarOut(false);
+
+      if (response.data.message === 'success') {
+        dispatch(getListContract());
+        dispatch(getFieldUser());
+      }
+    } catch (error) {
+      if (t === 'in') setloadingCarIn(true); else setloadingCarOut(false);
       console.error(error);
     }
   }
@@ -168,7 +209,10 @@ function CollapseContract(props) {
                     </tr>
                     <tr>
                       <td>Cost</td>
-                      <td>{contract.cost}</td>
+                      <td>
+                        {parseFloat(contract.cost).toFixed(2)}
+                        <sup> đ</sup>
+                      </td>
                     </tr>
                   </tbody>
                 </Table>
@@ -196,16 +240,34 @@ function CollapseContract(props) {
                   className="btn btn-outline-success px-4 mr-3"
                   disabled={contract.timeCarIn}
                   type="button"
+                  onClick={() => updateTime('in')}
                 >
-                  <i className="fas fa-sign-in-alt mr-2" />
+                  {loadingCarIn && (
+                  <Spinner
+                    animation="border"
+                    color="primary"
+                    size="sm"
+                    className="mr-2"
+                  />
+                  )}
+                  {!loadingCarIn && <i className="fas fa-sign-in-alt mr-2" />}
                   Car In
                 </button>
                 <button
                   className="btn btn-outline-danger px-4"
                   disabled={contract.timeCarOut}
                   type="button"
+                  onClick={() => updateTime('out')}
                 >
-                  <i className="fas fa-sign-out-alt mr-2" />
+                  {loadingCarOut && (
+                  <Spinner
+                    animation="border"
+                    color="primary"
+                    size="sm"
+                    className="mr-2"
+                  />
+                  )}
+                  {!loadingCarOut && <i className="fas fa-sign-out-alt mr-2" />}
                   Car Out
                 </button>
               </div>
