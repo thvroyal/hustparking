@@ -1,12 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleLogin from 'react-google-login';
 import { Spinner } from 'react-bootstrap';
-import { SignIn } from '../../apis/auth';
+import { SignIn, SignInSocial } from '../../apis/auth';
 import TextField from '../../components/TextField';
 
 const LoginForm = () => {
@@ -22,21 +21,7 @@ const LoginForm = () => {
 
   const handleLogin = async (googleData) => {
     console.log('success', googleData);
-    try {
-      const res = await axios(
-        `${process.env.REACT_APP_BASE_URL}/api/login-google`,
-        {
-          method: 'GET',
-          headers: {
-            token: googleData.tokenObj.access_token,
-          },
-        },
-      );
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-      // }
-    }
+    dispatch(SignInSocial(googleData.accessToken));
   };
   const handleErrorGoogle = async (googleData) => {
     console.log('error', googleData);

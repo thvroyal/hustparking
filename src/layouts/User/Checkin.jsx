@@ -38,45 +38,47 @@ function Checkin() {
     return dateFormatted;
   }
   async function checkIn() {
-    setLoading(true);
-    const timeNow = formatDateNow();
-    const data = {
-      equipment: info.equipment ?? '',
-      fieldId: selectRef.current.value,
-      timeCarIn: timeNow,
-    };
-    try {
-      const response = await Axios({
-        method: 'POST',
-        url: `${process.env.REACT_APP_BASE_URL}/api/us/parking`,
-        headers: {
-          token: localStorage.AccessToken,
-        },
-        data,
-      });
-      setLoading(false);
-      if (response.data.message === 'success') {
-        setShow([1, timeNow]);
-      } else {
+    if (selectRef.current.value !== -1) {
+      setLoading(true);
+      const timeNow = formatDateNow();
+      const data = {
+        equipment: info.equipment ?? '',
+        fieldId: selectRef.current.value,
+        timeCarIn: timeNow,
+      };
+      try {
+        const response = await Axios({
+          method: 'POST',
+          url: `${process.env.REACT_APP_BASE_URL}/api/us/parking`,
+          headers: {
+            token: localStorage.AccessToken,
+          },
+          data,
+        });
+        setLoading(false);
+        if (response.data.message === 'success') {
+          setShow([1, timeNow]);
+        } else {
+          setShow([0, null]);
+        }
+      } catch (error) {
+        setLoading(false);
         setShow([0, null]);
+        console.error(error);
       }
-    } catch (error) {
-      setLoading(false);
-      setShow([0, null]);
-      console.error(error);
     }
   }
   return (
     <>
       <div className="input-group user input-group-lg mt-5 mb-3">
         <select className="custom-select" id="fieldList" ref={selectRef}>
-          <option selected disabled>What field do you want to park?</option>
+          <option value={-1} defaultChecked>What field do you want to park?</option>
           {listField && listField.map((f) => (
             <option value={f.id} key={f.id}>{f.name}</option>
           ))}
         </select>
         <div className="input-group-append">
-          <button className="btn btn-success btn-lg" type="button" disabled={loading} onClick={checkIn}>
+          <button className="btn btn-outline-primary btn-lg" type="button" disabled={loading} onClick={checkIn}>
             {' '}
             {loading && (
               <Spinner

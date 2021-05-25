@@ -26,6 +26,32 @@ export const SignIn = (data) => async (dispatch) => {
     dispatch(handleError('Something Wrong'));
   }
 };
+export const SignInSocial = (token) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const response = await axios({
+      url: `${process.env.REACT_APP_BASE_URL}/api/login-google/access-token`,
+      params: {
+        token,
+      },
+      method: 'get',
+    });
+    dispatch(setLoading(false));
+    if (response.data.message === 'fail') dispatch(handleError(response.data.data));
+    else {
+      localStorage.setItem('AccessToken', response.data.data.token ?? response.data.data);
+      if (response.data.message === 'user') {
+        dispatch(setRole(1));
+        dispatch(setInfo(response.data.data.user));
+      } else if (response.data.message === 'admin') {
+        dispatch(setRole(2));
+      }
+    }
+  } catch (error) {
+    dispatch(setLoading(false));
+    dispatch(handleError('Something Wrong'));
+  }
+};
 
 export const ClearTokenBackend = () => (dispatch) => {
   const token = localStorage.getItem('AccessToken');
