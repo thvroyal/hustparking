@@ -18,7 +18,7 @@ function TabProfile() {
         {/*  Avatar card */}
         <div className="flex-center flex-column">
           <div className="position-relative">
-            <img className="rounded-circle mb-4" src={info.image ? info.image : 'https://picsum.photos/300/300/'} alt="Avatar" width="200" />
+            <img className="rounded-circle mb-4" src={info.image ? info.image : `https://i.pravatar.cc/350?u=${info.id}`} alt="Avatar" width="200" />
           </div>
           <h3 className="text-dark">User Name</h3>
           <p>🚗 🚕 🚙</p>

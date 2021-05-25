@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ClearTokenBackend } from '../../apis/auth';
 
 function HeaderMain() {
   const dispatch = useDispatch();
   const [show, toggleShow] = useState(false);
+  const { info } = useSelector((state) => state.auth);
   const refDropdown = useRef();
   function clickOutside(event) {
     if (refDropdown && !refDropdown.current.contains(event.target)) {
@@ -72,8 +73,8 @@ function HeaderMain() {
               onClick={handleShow}
             >
               <img
-                src="https://github.com/mdo.png"
-                alt="mdo"
+                src={info.image ? info.image : `https://i.pravatar.cc/100?u=${info.id}`}
+                alt="avatar"
                 width="32"
                 height="32"
                 className="rounded-circle"
