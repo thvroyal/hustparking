@@ -8,6 +8,7 @@ import BookingForm from '../layouts/User/BookingForm';
 import Contracts from './User/Contracts';
 import HeaderMain from '../layouts/Header/HeaderMain';
 import Profile from './User/Profile';
+import Checkin from '../layouts/User/Checkin';
 
 function Home() {
   const { url } = useRouteMatch();
@@ -17,6 +18,7 @@ function Home() {
       <div className="container">
         <Switch>
           <AuthenticatedRoute restrict={[1]} path={`${url}`} exact>
+            <Checkin />
             <BookingForm />
           </AuthenticatedRoute>
           <AuthenticatedRoute restrict={[1]} path={`${url}/contracts`} exact>

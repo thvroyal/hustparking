@@ -11,7 +11,7 @@ export default function TextField({ label, showLabel, ...props }) {
     textAlign: 'left',
   };
   return (
-    <div className={showLabel && 'mb-3'}>
+    <div className={showLabel ? 'mb-3' : ''}>
       <label htmlFor={field.name} className="text-uppercase text-primary small ml-3">{showLabel ? label : ''}</label>
       <input
         className={`form-control form-control-user ${

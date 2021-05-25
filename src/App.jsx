@@ -10,6 +10,7 @@ import UnauthenticatedRoute from './components/Routes/UnauthenticatedRoute';
 import Verify from './pages/Verify';
 import PageNotFound from './pages/404';
 import { verifyToken } from './apis/auth';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function App() {
           </UnauthenticatedRoute>
           <UnauthenticatedRoute target="/login" path="/verify">
             <Verify />
+          </UnauthenticatedRoute>
+          <UnauthenticatedRoute target="/login" path="/forgot-password">
+            <ForgotPassword />
           </UnauthenticatedRoute>
           <Route exact path="/">
             <Redirect to="/home" />

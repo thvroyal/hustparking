@@ -72,6 +72,9 @@ const LoginForm = () => {
               type="password"
               placeholder="Password"
             />
+            <Link className="small float-right my-2 mr-2" to="/forgot-password">
+              Forgot password ?
+            </Link>
             <button
               type="submit"
               className="btn btn-primary btn-user btn-block mt-4"
@@ -115,6 +118,7 @@ const LoginForm = () => {
             <Link className="small" to="/register">
               Create an Account!
             </Link>
+
           </div>
         </div>
       )}

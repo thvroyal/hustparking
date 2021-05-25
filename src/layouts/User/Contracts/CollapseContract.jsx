@@ -40,6 +40,9 @@ function CollapseContract(props) {
       console.error(error);
     }
   }
+  function limitString(str, limit) {
+    if (str.length > limit) return `${str.slice(0, limit)}...`; return str;
+  }
   function convertNum(d) {
     if (parseInt(d, 10) < 10) return `0${parseInt(d, 10)}`;
     return d;
@@ -80,7 +83,7 @@ function CollapseContract(props) {
     }
   }
   return (
-    <Accordion>
+    <Accordion className="mb-2">
       <Card>
         <Accordion.Toggle
           as={Card.Header}
@@ -89,8 +92,8 @@ function CollapseContract(props) {
         >
           <div className=" d-flex justify-content-between align-items-center">
             <div>
-              <div className="font-weight-bold h3 mb-0">{field[0].name}</div>
-              <div className="small text-uppercase">{field[0].address}</div>
+              <div className="font-weight-bold h3 mb-0">{limitString(field[0].name, 25)}</div>
+              <div className="small text-uppercase">{limitString(field[0].address, 47)}</div>
             </div>
             <div>
               <div className="text-uppercase small">Car number</div>
@@ -164,6 +167,10 @@ function CollapseContract(props) {
                     <tr>
                       <td>Field Name </td>
                       <td>{field[0].name}</td>
+                    </tr>
+                    <tr>
+                      <td>Field Address </td>
+                      <td>{field[0].address}</td>
                     </tr>
                     <tr>
                       <td>Car Number</td>
