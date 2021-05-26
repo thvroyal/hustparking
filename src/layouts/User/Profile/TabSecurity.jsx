@@ -16,8 +16,17 @@ function TabSecurity() {
     dispatch(getInfo());
   }, [dispatch]);
   const [isSuccess, handleIsSuccess] = useState(-1);
+  const validateNoPass = Yup.object({
+    oldPassword: Yup.string(), // : Yup.string().required('Old password is required'),
+    password: Yup.string()
+      .min(2, 'Password must be at least 2 charaters')
+      .required('New password is required'),
+    rePassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Password must match')
+      .required('Confirm password is required'),
+  });
   const validate = Yup.object({
-    oldPassword: info.password ? Yup.string() : Yup.string().required('Old password is required'),
+    oldPassword: Yup.string().required('Old password is required'),
     password: Yup.string()
       .min(2, 'Password must be at least 2 charaters')
       .required('New password is required'),
@@ -40,7 +49,7 @@ function TabSecurity() {
                   password: '',
                   rePassword: '',
                 }}
-                validationSchema={validate}
+                validationSchema={info.password ? validate : validateNoPass}
                 onSubmit={async (values) => {
                   setLoading(true);
                   try {
