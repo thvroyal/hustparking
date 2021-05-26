@@ -77,7 +77,7 @@ function TabEdit() {
                     },
                   });
                   setLoading(false);
-                  if (response.data.message === 'success') handleIsSuccess(1);
+                  if (response.data.message === 'success' && response.data.data) handleIsSuccess(1);
                   else handleIsSuccess(0);
                 } catch (error) {
                   setLoading(false);

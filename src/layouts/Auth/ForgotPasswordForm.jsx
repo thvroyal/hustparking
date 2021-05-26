@@ -21,10 +21,14 @@ const ForgotPasswordForm = () => {
       email,
     };
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/public/reset_pass`,
-        data,
-      );
+      const response = await axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_BASE_URL}/api/public/reset_pass`,
+        data: data.email,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       setLoadingSend(false);
       if (response.data.message === 'success') {
         history.push(`forgot-password/${data.email}`);
