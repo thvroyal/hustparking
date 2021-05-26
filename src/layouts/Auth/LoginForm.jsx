@@ -20,7 +20,6 @@ const LoginForm = () => {
   });
 
   const handleLogin = async (googleData) => {
-    console.log('success', googleData);
     dispatch(SignInSocial(googleData.accessToken));
   };
   const handleErrorGoogle = async (googleData) => {

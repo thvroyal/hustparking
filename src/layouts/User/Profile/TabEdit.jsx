@@ -17,7 +17,7 @@ function TabEdit() {
     dispatch(getInfo());
   }, [dispatch]);
   const validate = Yup.object({
-
+    // sex: Yup.string().required('Gender is required'),
   });
   function formatString(str) {
     if (str) return str.split('+')[0].split('T')[0];
@@ -42,7 +42,7 @@ function TabEdit() {
               <i className="fas fa-pen small" />
 
             </button>
-            <img className="rounded-circle mb-4" src={info.image ? info.image : 'https://picsum.photos/300/300/'} alt="Avatar" width="200" />
+            <img className="rounded-circle mb-4" src={info.image ? info.image : `https://i.pravatar.cc/350?u=${info.id}`} alt="Avatar" width="200" />
           </div>
           <h3 className="text-dark">User Name</h3>
           <p>🚗 🚕 🚙</p>
@@ -86,21 +86,21 @@ function TabEdit() {
                 }
               }}
             >
-              {() => (
+              {({ values }) => (
                 <>
                   <Form className="user">
-                    <TextField showLabel label="phone" name="phone" type="tel" placeHolder="Update your phone" />
+                    <TextField showLabel label="phone" name="phone" type="tel" placeholder="Update your phone" />
                     <TextField showLabel label="email" name="email" type="mail" placeholder="Update your email" />
-                    <TextField showLabel label="date of birth" name="birth" type="date" placeHolder="Update your birthday" />
+                    <TextField showLabel label="date of birth" name="birth" type="date" placeholder="Update your birthday" />
                     <div className="float-left mb-3 ml-3 w-100">
                       <p style={{ textAlign: 'left' }} className="text-uppercase text-primary small">Gender</p>
-                      <RadioField label="Female" name="sex" value="F" checked={info.sex === 'F'} />
-                      <RadioField label="Male" name="sex" value="M" checked={info.sex === 'M'} />
-                      <RadioField label="Other" name="sex" value="O" checked={info.sex === 'O'} />
+                      <RadioField label="Female" name="sex" value="F" checked={values.sex === 'F'} />
+                      <RadioField label="Male" name="sex" value="M" checked={values.sex === 'M'} />
+                      <RadioField label="Other" name="sex" value="O" checked={values.sex === 'O'} />
                     </div>
-                    <TextField showLabel label="address" name="address" type="text" placeHolder="Update your address" />
-                    <TextField showLabel label="equipment" name="equipment" type="text" placeHolder="Update your equipment" />
-                    <TextField showLabel label="ID number" name="idNumber" type="text" placeHolder="Update your ID number" />
+                    <TextField showLabel label="address" name="address" type="text" placeholder="Update your address" />
+                    <TextField showLabel label="equipment" name="equipment" type="text" placeholder="Update your equipment" />
+                    <TextField showLabel label="ID number" name="idNumber" type="text" placeholder="Update your ID number" />
                     <button
                       type="submit"
                       className="btn btn-primary btn-user btn-block mt-3"
