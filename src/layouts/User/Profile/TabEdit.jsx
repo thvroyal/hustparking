@@ -89,8 +89,8 @@ function TabEdit() {
               {({ values }) => (
                 <>
                   <Form className="user">
+                    <TextField showLabel label="email" name="email" type="mail" placeholder="Update your email" disabled />
                     <TextField showLabel label="phone" name="phone" type="tel" placeholder="Update your phone" />
-                    <TextField showLabel label="email" name="email" type="mail" placeholder="Update your email" />
                     <TextField showLabel label="date of birth" name="birth" type="date" placeholder="Update your birthday" />
                     <div className="float-left mb-3 ml-3 w-100">
                       <p style={{ textAlign: 'left' }} className="text-uppercase text-primary small">Gender</p>
