@@ -25,6 +25,7 @@
         "no-nested-ternary":"off",
         "import/prefer-default-export": "off",
         "no-console":"off",
-        "func-names":"off"
+        "func-names":"off",
+        "linebreak-style":"off"
     }
 }
