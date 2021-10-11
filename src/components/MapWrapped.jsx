@@ -5,7 +5,7 @@ import {
   GoogleMap,
   Polygon,
 } from 'react-google-maps';
-import * as parkingMapData from '../apis/mapApi.json';
+import { mapC9 } from '../apis/mapApi';
 import mapStyle from './mapStyle';
 
 function Map() {
@@ -44,7 +44,7 @@ function Map() {
       defaultCenter={{ lat: 21.00553019004566, lng: 105.84252910689219 }}
       defaultOptions={{ styles: mapStyle }}
     >
-      {parkingMapData.features.map((park) => {
+      {mapC9.features.map((park) => {
         if (park.geometry.type === 'Polygon') {
           const paths = park.geometry.coordinates[0].map((point) => {
             const p = {
