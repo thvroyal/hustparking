@@ -13,15 +13,14 @@ const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const validate = Yup.object({
-    email: Yup.string()
+    email: Yup.string()  
       .email('Must be a valid email such as user123@gmail.com')
       .required('Email is required'),
     phone: Yup.number()
       .min(9, 'Not is phone number')
-      .required('Phone number is type of number'),
+      .required('Phone number is required'),
     address: Yup.string()
-      .min(15, 'That is wrong, for example 18 Trương Định, Hai Bà Trưng, Hà Nội')
-      .required('Address must be apartments number; street, district and city name'),
+      .required('Address is required'),
     equipment: Yup.string().required('You have not entry in this equipment'),
     idNumber: Yup.string().required('You have not entry ID number'),
     password: Yup.string()
