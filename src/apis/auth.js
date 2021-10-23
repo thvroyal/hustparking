@@ -19,6 +19,8 @@ export const SignIn = (data) => async (dispatch) => {
         dispatch(setInfo(response.data.data.user));
       } else if (response.data.message === 'admin') {
         dispatch(setRole(2));
+      } else if (response.data.message === 'manager') {
+        dispatch(setRole(3));
       }
     }
   } catch (error) {
@@ -45,6 +47,8 @@ export const SignInSocial = (token) => async (dispatch) => {
         dispatch(setInfo(response.data.data.user));
       } else if (response.data.message === 'admin') {
         dispatch(setRole(2));
+      } else if (response.data.message === 'manager') {
+        dispatch(setRole(3));
       }
     }
   } catch (error) {
@@ -85,6 +89,7 @@ export const verifyToken = () => async (dispatch) => {
     if (response.data.message === 'success' && response.data.data) {
       if (response.data.data === 'admin') dispatch(setRole(2));
       else if (response.data.data === 'user') dispatch(setRole(1));
+      else if (response.data.data === 'manager') dispatch(setRole(3));
     }
   } catch (error) {
     dispatch(setLoading(false));
