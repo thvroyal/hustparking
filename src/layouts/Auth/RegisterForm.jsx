@@ -13,7 +13,7 @@ const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const validate = Yup.object({
-    email: Yup.string()  
+    email: Yup.string()
       .email('Must be a valid email such as user123@gmail.com')
       .required('Email is required'),
     phone: Yup.number()

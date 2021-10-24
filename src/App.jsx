@@ -32,9 +32,9 @@ function App() {
           <UnauthenticatedRoute target="/login" path="/live-map">
             <LiveMap />
           </UnauthenticatedRoute>
-          {/* <UnauthenticatedRoute target="/" path={"/dashboard"}>
-          <Dashboard />
-        </UnauthenticatedRoute> */}
+          {/* <UnauthenticatedRoute target="/" path="/dashboard">
+            <Dashboard />
+          </UnauthenticatedRoute> */}
           <UnauthenticatedRoute target="/home" path="/login">
             <Login />
           </UnauthenticatedRoute>
