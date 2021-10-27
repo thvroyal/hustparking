@@ -13,22 +13,16 @@ const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const validate = Yup.object({
-    email: Yup.string()
-      .email('Must be a valid email such as user123@gmail.com')
-      .required('Email is required'),
-    phone: Yup.number()
-      .min(9, 'Not is phone number')
-      .required('Phone number is required'),
-    address: Yup.string()
-      .required('Address is required'),
-    equipment: Yup.string().required('You have not entry in this equipment'),
-    idNumber: Yup.string().required('You have not entry ID number'),
+    address: Yup.string().required('Address is required'),
+    email: Yup.string().required('Email is required'),
     password: Yup.string()
-      .min(6, 'Password must be at least 6 charaters')
-      .required('You have not entry the password'),
+      .min(2, 'Password must be at least 2 charaters')
+      .required('Password is required'),
     rePassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Password is not match, please try again')
-      .required('You have not entry the confirm password'),
+      .oneOf([Yup.ref('password'), null], 'Password must match')
+      .required('Confirm password is required'),
+    equipment: Yup.string().required('Equipment is required'),
+    idNumber: Yup.string().required('ID Number is required'),
   });
   return (
     <Formik

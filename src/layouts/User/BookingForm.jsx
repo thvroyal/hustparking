@@ -16,6 +16,7 @@ function BookingForm() {
   // success: type = 1 , err: type = 0
   const timeInRef = useRef();
   const timeOutRef = useRef();
+  const carNumberRef = useRef();
 
   useEffect(() => {
     dispatch(getFieldUser());
@@ -57,6 +58,7 @@ function BookingForm() {
       fieldId: fieldSelected,
       timeInBook: `${timeInRef.current.value.split('T').join(' ')}:00`,
       timeOutBook: `${timeOutRef.current.value.split('T').join(' ')}:00`,
+      carNumber: carNumberRef.current.value,
     };
     // validate time : timeInBook > time OutBook && timeInBook  < timeNow + 30p
     if (getTime(data.timeInBook) >= getTime(data.timeOutBook)) {
@@ -145,6 +147,14 @@ function BookingForm() {
         {/* Pick time */}
         <hr className="mt-3" />
         <div className="mt-3">
+          Car Number
+          <input
+            className="form-control form-control mt-2 mb-3"
+            type="text"
+            required
+            ref={carNumberRef}
+            placeholder="Enter your car number"
+          />
           <div className="row">
             <div className="col">
               Time In

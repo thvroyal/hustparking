@@ -17,7 +17,6 @@ import DetectorDebug from '../layouts/Dashboard/Debug/DetectorDebug';
 import DetectorInfo from '../layouts/Dashboard/DetectorInfo';
 import Image1 from '../layouts/Dashboard/Image1';
 import Image2 from '../layouts/Dashboard/Image2';
-import CreateManager from '../layouts/Dashboard/CreateManager';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -100,11 +99,6 @@ function Dashboard() {
                 exact
                 path={`${match.url}/image2`}
                 render={(props) => <Image2 {...props} />}
-              />
-              <Route
-                exact
-                path={`${match.url}/new-manager`}
-                render={(props) => <CreateManager {...props} />}
               />
             </Switch>
           </div>
