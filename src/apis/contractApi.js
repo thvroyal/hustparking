@@ -4,14 +4,16 @@ import {
   loadingContract,
   successContract,
 } from '../store/admin/contractSlice';
+import store from '../store';
 
 // eslint-disable-next-line import/prefer-default-export
 export function getContract(idUser) {
   return async (dispatch) => {
+    const { auth } = store.getState();
     dispatch(loadingContract);
     try {
       const response = await axios({
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/contract/find_all`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/contract/find_all`,
         method: 'GET',
         headers: {
           token: localStorage.AccessToken,

@@ -4,12 +4,14 @@ import {
   successListUsers,
   failedListUsers,
 } from '../store/admin/UsersSlice';
+import store from '../store';
 
 // eslint-disable-next-line import/prefer-default-export
 export const fetchListUser = () => (dispatch) => {
+  const { auth } = store.getState();
   dispatch(loadingListUsers(true));
   axios({
-    url: `${process.env.REACT_APP_BASE_URL}/api/ad/user/find_all`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/user/find_all`,
     method: 'get',
     headers: {
       token: localStorage.getItem('AccessToken'),

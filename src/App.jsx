@@ -24,7 +24,7 @@ function App() {
       {!loadingVerifyToken && (
         <Switch>
           <AuthenticatedRoute
-            restrict={[2]} // only admin can access dashboard
+            restrict={[2, 3]} // only admin can access dashboard
             path="/dashboard"
           >
             <Dashboard />

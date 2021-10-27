@@ -6,6 +6,7 @@ const initState = {
   error: null,
   loading: false,
   info: {},
+  alias: 'public',
 };
 
 const auth = createSlice({
@@ -19,6 +20,19 @@ const auth = createSlice({
       state.role = action.payload;
       state.isAuthenticated = true;
       state.error = null;
+      switch (action.payload) {
+        case 1:
+          state.alias = 'us';
+          break;
+        case 2:
+          state.alias = 'ad';
+          break;
+        case 3:
+          state.alias = 'mn';
+          break;
+        default:
+          state.alias = 'public';
+      }
     },
     logOut: (state) => {
       state.role = 0;
@@ -36,6 +50,6 @@ const auth = createSlice({
 
 const { reducer, actions } = auth;
 export const {
-  setLoading, setRole, logOut, handleError, setInfo,
+  setLoading, setRole, logOut, handleError, setInfo, setAlias,
 } = actions;
 export default reducer;

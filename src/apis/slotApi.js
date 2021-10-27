@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { failedSlot, loadingSlot, successSlot } from '../store/admin/SlotSlice';
+import store from '../store';
 
 export const getSlotOfField = (fieldId) => (dispatch) => {
+  const { auth } = store.getState();
   dispatch(loadingSlot);
   axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/api/ad/slot/find_all`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/slot/find_all`,
     headers: {
       token: localStorage.getItem('AccessToken'),
       'Content-Type': 'application/json',
@@ -31,10 +33,11 @@ export const getSlotOfField = (fieldId) => (dispatch) => {
 };
 
 export const postSlot = (data) => (dispatch) => {
+  const { auth } = store.getState();
   dispatch(loadingSlot);
   axios({
     method: 'POST',
-    url: `${process.env.REACT_APP_BASE_URL}/api/ad/slot/create_and_update`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/slot/create_and_update`,
     data: JSON.stringify(data),
     headers: {
       token: localStorage.getItem('AccessToken'),
@@ -51,10 +54,11 @@ export const postSlot = (data) => (dispatch) => {
 };
 
 export const deleteSlot = (id) => (dispatch) => {
+  const { auth } = store.getState();
   dispatch(loadingSlot);
   axios({
     method: 'DELETE',
-    url: `${process.env.REACT_APP_BASE_URL}/api/ad/slot/delete/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/slot/delete/${id}`,
   })
     .then(() => {
       dispatch(loadingSlot(false));

@@ -7,7 +7,7 @@ export default function AuthenticatedRoute({ children, restrict, ...rest }) {
   const { pathname, search } = useLocation();
   const { isAuthenticated, role } = useSelector((state) => state.auth);
   if (isAuthenticated && !restrict.includes(role)) {
-    // console.log("Not Restrict");
+    // console.log('Not Restrict');
     // dispatch(ClearTokenBackend());
     return <Redirect to="/404" />;
   } return (

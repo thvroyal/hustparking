@@ -6,12 +6,14 @@ import {
   loadingDetector,
   successDetector,
 } from '../store/admin/detectorSlice';
+import store from '../store';
 
 export const getDetectors = (id) => (dispatch) => {
+  const { auth } = store.getState();
   dispatch(loadingDetector);
   axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/api/ad/detector/find_all`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/detector/find_all`,
     headers: {
       token: localStorage.getItem('AccessToken'),
       'Content-Type': 'application/json',

@@ -4,13 +4,15 @@ import {
   loadingDetectorById,
   successDetectorById,
 } from '../store/admin/detectorByIdSlice';
+import store from '../store';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getDetectorById = (id) => (dispatch) => {
+  const { auth } = store.getState();
   dispatch(loadingDetectorById);
   axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/api/ad/detector/find_by_id/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/detector/find_by_id/${id}`,
     headers: {
       token: localStorage.getItem('AccessToken'),
       'Content-Type': 'application/json',
