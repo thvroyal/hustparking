@@ -4,9 +4,11 @@ import SetFieldManager from './SetFieldManager';
 
 function NewManager() {
   const [status, setStatus] = useState(0);
+  const [managerId, setManagerId] = useState(null);
 
-  const handleSuccess = () => {
+  const handleSuccess = (id) => {
     setStatus(1);
+    setManagerId(id);
   };
 
   return (
@@ -21,7 +23,8 @@ function NewManager() {
           <div className="card shadow mb-4">
             <div className="card-body p-5">
               {
-                status ? <SetFieldManager /> : <NewManagerForm onSuccess={handleSuccess} />
+                status ? <SetFieldManager managerId={managerId} />
+                  : <NewManagerForm onSuccess={handleSuccess} />
               }
             </div>
           </div>
