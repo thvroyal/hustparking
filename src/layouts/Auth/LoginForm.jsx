@@ -15,7 +15,7 @@ const LoginForm = () => {
   const validate = Yup.object({
     email: Yup.string().required('Email is required'),
     password: Yup.string()
-      .min(2, 'Password must be at least 2 charaters')
+      .min(2, 'Password must be at least 2 characters')
       .required('Password is required'),
   });
 
