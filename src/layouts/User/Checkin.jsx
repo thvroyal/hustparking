@@ -34,7 +34,7 @@ function Checkin() {
     const timeNowArray = timeNow.toLocaleString('vi-VN').split(', ');
     const date = timeNowArray[1].split('/');
     const time = timeNowArray[0].split(':');
-    const dateFormatted = `${date[2]}-${convertNum(date[1])}-${convertNum(date[0])}T${convertNum(time[0])}:${convertNum(time[1])}`;
+    const dateFormatted = `${date[2]}-${convertNum(date[1])}-${convertNum(date[0])}T${convertNum(time[0])}:${convertNum(time[1])}:00`;
     return dateFormatted;
   }
   async function checkIn() {
