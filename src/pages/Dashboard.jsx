@@ -18,6 +18,7 @@ import DetectorInfo from '../layouts/Dashboard/DetectorInfo';
 import Image1 from '../layouts/Dashboard/Image1';
 import Image2 from '../layouts/Dashboard/Image2';
 import CreateManager from '../layouts/Dashboard/CreateManager';
+import Analysis from '../layouts/Dashboard/Analysis';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -105,6 +106,11 @@ function Dashboard() {
                 exact
                 path={`${match.url}/new-manager`}
                 render={(props) => <CreateManager {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/analysis`}
+                render={(props) => <Analysis {...props} />}
               />
             </Switch>
           </div>

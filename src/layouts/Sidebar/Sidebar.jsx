@@ -56,6 +56,18 @@ const Sidebar = React.memo(() => {
             <span>Dashboard</span>
           </Link>
         </li>
+        <li
+          className={`nav-item ${current === '/dashboard/analysis' ? 'active' : null}`}
+        >
+          <Link
+            to="/dashboard/analysis"
+            className="nav-link"
+            onClick={() => updateCurrentUrl('/dashboard/analysis')}
+          >
+            <i className="fas fa-chart-bar" />
+            <span>Analysis</span>
+          </Link>
+        </li>
 
         <hr className="sidebar-divider" />
         <div className="sidebar-heading">Manager</div>
