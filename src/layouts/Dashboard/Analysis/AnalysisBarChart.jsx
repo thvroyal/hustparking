@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
-import { string, instanceOf } from 'prop-types';
+import {
+  string, instanceOf, bool, func, number,
+} from 'prop-types';
 import moment from 'moment';
 import { Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -42,17 +44,20 @@ const typeFormat = {
 };
 
 function AnalysisBarChart({
-  field, since, until, unit, type,
+  field, since, until, unit, type, onLoading, loading, refreshData,
 }) {
   const [chartData, setChartData] = useState({});
-  const [loading, setLoading] = useState(false);
   const { alias } = useSelector((state) => state.auth);
+
+  const handleLoadingData = (state) => {
+    onLoading(state);
+  };
 
   const getData = async (query) => {
     const sinceMil = (new Date(query.since)).getTime();
     const untilMil = (new Date(query.until)).getTime();
 
-    setLoading(true);
+    handleLoadingData(true);
 
     try {
       const response = await axios({
@@ -69,7 +74,7 @@ function AnalysisBarChart({
 
         if (data) {
           data.forEach((eachData) => {
-            yData.push(eachData[type]);
+            yData.push(type === 'freq' ? eachData[type] / eachData.totalSlot : eachData[type]);
             xData.push(moment(eachData.time).format(format[unit]));
           });
         }
@@ -85,10 +90,10 @@ function AnalysisBarChart({
           ],
         });
       }
-      setLoading(false);
+      handleLoadingData(false);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      handleLoadingData(false);
     }
   };
 
@@ -96,7 +101,7 @@ function AnalysisBarChart({
     getData({
       field, since, until, unit,
     });
-  }, [field, since, until, unit, type]);
+  }, [refreshData]);
   return (
     <div
       className="position-relative"
@@ -124,6 +129,9 @@ AnalysisBarChart.propTypes = {
   until: instanceOf(Date).isRequired,
   unit: string.isRequired,
   type: string.isRequired,
+  loading: bool.isRequired,
+  onLoading: func.isRequired,
+  refreshData: number.isRequired,
 };
 
 export default React.memo(AnalysisBarChart);

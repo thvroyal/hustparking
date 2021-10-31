@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
+import { Spinner } from 'react-bootstrap';
 import { getField } from '../../../apis/fieldApi';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -13,10 +14,11 @@ function Analysis() {
   const [activeUnit, setActiveUnit] = useState(UNIT_OPTIONS[0]);
   const [activeType, setActiveType] = useState('freq');
   const [activeField, setActiveField] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  const [refreshData, setRefreshData] = useState(0);
   const selectTypeRef = useRef();
   const selectFieldRef = useRef();
 
@@ -34,6 +36,7 @@ function Analysis() {
   const onChangeFieldType = () => {
     setActiveField(selectFieldRef.current.value);
   };
+
   return (
     <>
       <div className="card shadow mb-4">
@@ -99,6 +102,17 @@ function Analysis() {
                   </label>
                 ))}
               </div>
+              <button className="btn btn-primary btn-sm" type="button" onClick={() => setRefreshData(refreshData + 1)} disabled={loading}>
+                {loading && (
+                <Spinner
+                  animation="border"
+                  variant="light"
+                  className="mr-2"
+                  size="sm"
+                />
+                )}
+                Refresh
+              </button>
             </div>
           </div>
           {
@@ -109,6 +123,9 @@ function Analysis() {
               until={endDate}
               unit={activeUnit}
               type={activeType}
+              loading={loading}
+              onLoading={setLoading}
+              refreshData={refreshData}
             />
             )
 }
