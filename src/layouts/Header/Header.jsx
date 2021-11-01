@@ -6,7 +6,7 @@ import { ClearTokenBackend } from '../../apis/auth';
 function Header() {
   const dispatch = useDispatch();
   const refDropdown = useRef();
-  const { info } = useSelector((state) => state.auth);
+  const { info, role } = useSelector((state) => state.auth);
   const [show, toggleShow] = useState(false);
   function clickOutside(event) {
     if (refDropdown && !refDropdown.current.contains(event.target)) {
@@ -77,15 +77,25 @@ function Header() {
               }
           data-popper-placement="bottom-end"
         >
+          {role === 2 && (
           <li>
             <Link className="nav-link dropdown-item" to="/dashboard/new-manager">
               New manager
             </Link>
           </li>
+          )}
+          {role === 3 && (
+          <li>
+            <Link className="nav-link dropdown-item" to="/dashboard/profile?tab=profile">
+              Profile
+            </Link>
+          </li>
+          )}
 
           <li>
             <hr className="dropdown-divider" />
           </li>
+
           <li>
             <a
               className="nav-link dropdown-item"

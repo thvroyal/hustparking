@@ -74,7 +74,15 @@ function AnalysisBarChart({
 
         if (data) {
           data.forEach((eachData) => {
-            yData.push(type === 'freq' ? eachData[type] / eachData.totalSlot : eachData[type]);
+            let yValue;
+            if (type === 'freq') {
+              if (query.unit === 'day') {
+                yValue = eachData[type] / (24 * eachData.totalSlot);
+              } else {
+                yValue = eachData[type] / eachData.totalSlot;
+              }
+            } else yValue = eachData[type];
+            yData.push(yValue);
             xData.push(moment(eachData.time).format(format[unit]));
           });
         }
