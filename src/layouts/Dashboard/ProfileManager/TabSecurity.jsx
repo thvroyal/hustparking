@@ -19,7 +19,7 @@ function TabSecurity() {
   const validateNoPass = Yup.object({
     oldPassword: Yup.string(), // : Yup.string().required('Old password is required'),
     password: Yup.string()
-      .min(2, 'Password must be at least 2 charaters')
+      .min(2, 'Password must be at least 2 characters')
       .required('New password is required'),
     rePassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Password must match')
@@ -28,7 +28,7 @@ function TabSecurity() {
   const validate = Yup.object({
     oldPassword: Yup.string().required('Old password is required'),
     password: Yup.string()
-      .min(2, 'Password must be at least 2 charaters')
+      .min(2, 'Password must be at least 2 characters')
       .required('New password is required'),
     rePassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Password must match')
@@ -55,7 +55,7 @@ function TabSecurity() {
                   try {
                     const response = await Axios({
                       method: 'POST',
-                      url: `${process.env.REACT_APP_BASE_URL}/api/us/changePass`,
+                      url: `${process.env.REACT_APP_BASE_URL}/api/mn/changePass`,
                       data: values,
                       headers: {
                         token: localStorage.AccessToken,
@@ -74,7 +74,7 @@ function TabSecurity() {
                 {() => (
                   <>
                     <Form className="user">
-                      {info.password && <TextField showLabel label="Old password" name="oldPassword" type="password" placeholder="Enter your old password" />}
+                      <TextField showLabel label="Old password" name="oldPassword" type="password" placeholder="Enter your old password" />
                       <TextField showLabel label="New password" name="password" type="password" placeHolder="Enter your new password" />
                       <TextField showLabel label="Confirm password" name="rePassword" type="password" placeHolder="Enter password again" />
                       <button

@@ -96,6 +96,23 @@ const Sidebar = React.memo(() => {
         </li>
         )}
 
+        { role === 2 && (
+        <li
+          className={`nav-item ${
+            current === '/dashboard/managers' ? 'active' : null
+          }`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/managers"
+            onClick={() => updateCurrentUrl('/dashboard/managers')}
+          >
+            <i className="fas fa-users-cog" />
+            <span>List Manager</span>
+          </Link>
+        </li>
+        )}
+
         <li
           className={`nav-item ${
             current === '/dashboard/contract' ? 'active' : null

@@ -20,6 +20,7 @@ import Image2 from '../layouts/Dashboard/Image2';
 import CreateManager from '../layouts/Dashboard/CreateManager';
 import Analysis from '../layouts/Dashboard/Analysis';
 import ProfileManager from '../layouts/Dashboard/ProfileManager';
+import Managers from '../layouts/Dashboard/Managers';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -115,6 +116,11 @@ function Dashboard() {
                 exact
                 path={`${match.url}/profile`}
                 render={(props) => <ProfileManager {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/managers`}
+                render={(props) => <Managers {...props} />}
               />
             </Switch>
           </div>
