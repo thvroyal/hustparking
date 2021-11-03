@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setAd, setUser, setMn } from '../helpers/constants';
 import {
   handleError, setRole, logOut, setLoading, setInfo,
 } from '../store/authSlice';
@@ -16,12 +17,12 @@ export const SignIn = (data) => async (dispatch) => {
     else {
       localStorage.setItem('AccessToken', response.data.data.token ?? response.data.data);
       if (response.data.message === 'user') {
-        dispatch(setRole(1));
+        dispatch(setRole(setUser));
         dispatch(setInfo(response.data.data.user));
       } else if (response.data.message === 'admin') {
-        dispatch(setRole(2));
+        dispatch(setRole(setAd));
       } else if (response.data.message === 'manager') {
-        dispatch(setRole(3));
+        dispatch(setRole(setMn));
       }
     }
   } catch (error) {
@@ -44,12 +45,12 @@ export const SignInSocial = (token) => async (dispatch) => {
     else {
       localStorage.setItem('AccessToken', response.data.data.token ?? response.data.data);
       if (response.data.message === 'user') {
-        dispatch(setRole(1));
+        dispatch(setRole(setUser));
         dispatch(setInfo(response.data.data.user));
       } else if (response.data.message === 'admin') {
-        dispatch(setRole(2));
+        dispatch(setRole(setAd));
       } else if (response.data.message === 'manager') {
-        dispatch(setRole(3));
+        dispatch(setRole(setMn));
       }
     }
   } catch (error) {
@@ -88,9 +89,9 @@ export const verifyToken = () => async (dispatch) => {
     });
     dispatch(setLoading(false));
     if (response.data.message === 'success' && response.data.data) {
-      if (response.data.data === 'admin') dispatch(setRole(2));
-      else if (response.data.data === 'user') dispatch(setRole(1));
-      else if (response.data.data === 'manager') dispatch(setRole(3));
+      if (response.data.data === 'admin') dispatch(setRole(setAd));
+      else if (response.data.data === 'user') dispatch(setRole(setUser));
+      else if (response.data.data === 'manager') dispatch(setRole(setMn));
     }
   } catch (error) {
     dispatch(setLoading(false));
