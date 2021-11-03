@@ -8,7 +8,6 @@ import {
 
 export const getField = () => (dispatch) => {
   const { auth } = store.getState();
-  console.log(auth);
   dispatch(loadingField);
   axios({
     url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/field/find_all`,

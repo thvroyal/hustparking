@@ -20,7 +20,7 @@ import Image2 from '../layouts/Dashboard/Image2';
 import CreateManager from '../layouts/Dashboard/CreateManager';
 import Analysis from '../layouts/Dashboard/Analysis';
 import ProfileManager from '../layouts/Dashboard/ProfileManager';
-import Managers from '../layouts/Dashboard/Managers';
+import Managers from '../layouts/Dashboard/ListManager';
 
 function Dashboard() {
   const match = useRouteMatch();

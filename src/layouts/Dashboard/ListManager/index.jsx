@@ -4,16 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { Link } from 'react-router-dom';
-import ImgAva from '../../assets/img/profile-1.png';
-import { getListManager } from '../../apis/managerFieldApi';
+import ImgAva from '../../../assets/img/profile-1.png';
+import { getListManager } from '../../../apis/managerFieldApi';
+import UpdateField from './UpdateField';
 
 function Managers() {
   const dispatch = useDispatch();
   const listManager = useSelector((state) => state.listManager.data);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedMn, setSelectedMn] = useState(null);
   useEffect(() => {
     dispatch(getListManager());
   }, [dispatch]);
+
+  const onClickUpdate = (id) => {
+    setSelectedMn(id);
+    setOpenModal(true);
+  };
 
   const handleDeleteManager = async (idManager) => {
     setIsDeleting(true);
@@ -41,7 +49,7 @@ function Managers() {
     <>
       <h1 className="h3 mb-2 text-gray-800">List Manager</h1>
       <div className="table-responsive mt-4">
-        {listManager ? (
+        {listManager && (
           <table
             className="list-user"
             id="dataTable"
@@ -76,7 +84,7 @@ function Managers() {
                   <td>{mn.equipment}</td>
                   <td>{mn.lastTimeAccess}</td>
                   <td>
-                    <button className="btn btn-sm btn-outline-primary mr-2" type="button">Update Fields</button>
+                    <button className="btn btn-sm btn-outline-primary mr-2" type="button" onClick={() => onClickUpdate(mn.id)}>Update Fields</button>
                     <button
                       className="btn btn-sm btn-outline-danger"
                       type="button"
@@ -90,8 +98,16 @@ function Managers() {
               ))}
             </tbody>
           </table>
-        ) : (
-          <div className="text-center w-100 h3 mt-5">No data</div>
+        )}
+        {!listManager
+          && <div className="text-center w-100 h3 mt-5">No data</div>}
+        {openModal
+        && (
+        <UpdateField
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          selected={selectedMn}
+        />
         )}
       </div>
     </>
