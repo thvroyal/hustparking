@@ -1,13 +1,19 @@
-import { bool, func, number } from 'prop-types';
-import React, { useState } from 'react';
+import {
+  bool, func, number,
+} from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
 function SwitchToggle({
-  onTrue, onFalse, scale, toggled,
+  onChecked, onUnchecked, scale, toggled,
 }) {
   const [isToggled, setIsToggled] = useState(toggled);
-  const onToggle = () => {
+  useEffect(() => {
+    setIsToggled(toggled);
+  }, [toggled]);
+
+  const onToggle = async () => {
     setIsToggled(!isToggled);
-    if (!isToggled) onTrue(); else onFalse();
+    if (!isToggled) await onChecked(); else await onUnchecked();
   };
   return (
     <label className="toggle-switch" style={{ transform: `scale(${scale})` }}>
@@ -17,8 +23,8 @@ function SwitchToggle({
   );
 }
 SwitchToggle.propTypes = {
-  onTrue: func.isRequired,
-  onFalse: func.isRequired,
+  onChecked: func.isRequired,
+  onUnchecked: func.isRequired,
   scale: number,
   toggled: bool,
 };
