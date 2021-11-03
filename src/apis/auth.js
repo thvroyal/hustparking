@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   handleError, setRole, logOut, setLoading, setInfo,
 } from '../store/authSlice';
+import store from '../store/index';
 
 export const SignIn = (data) => async (dispatch) => {
   dispatch(setLoading(true));
@@ -98,11 +99,12 @@ export const verifyToken = () => async (dispatch) => {
 };
 
 export const getInfo = () => async (dispatch) => {
+  const { auth } = store.getState();
   // dispatch(setLoading(true));
   try {
     const response = await axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_BASE_URL}/api/us/info`,
+      url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/info`,
       headers: {
         token: localStorage.getItem('AccessToken'),
       },

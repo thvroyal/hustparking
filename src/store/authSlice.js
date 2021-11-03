@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initState = {
-  role: 0, // 0 is guest, 1 is user, 2 is admin
+  role: 0, // 0 is guest, 1 is user, 2 is admin, 3 is manager
   isAuthenticated: false,
   error: null,
   loading: false,

@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const Sidebar = React.memo(() => {
   const [toggle, handleToggle] = useState(false);
   const [current, setUrl] = useState(useLocation().pathname);
+  const { role } = useSelector((state) => state.auth);
 
   function handleToggleButton() {
     handleToggle(!toggle);
@@ -34,16 +36,6 @@ const Sidebar = React.memo(() => {
         </Link>
 
         <hr className="sidebar-divider my-0" />
-        <li className={`nav-item ${current === '/' ? 'active' : null}`}>
-          <Link
-            to="/"
-            className="nav-link"
-            onClick={() => updateCurrentUrl('/')}
-          >
-            <i className="fas fa-fw fa-home" />
-            <span>Home</span>
-          </Link>
-        </li>
         <li
           className={`nav-item ${current === '/dashboard' ? 'active' : null}`}
         >
@@ -54,6 +46,18 @@ const Sidebar = React.memo(() => {
           >
             <i className="fas fa-fw fa-car" />
             <span>Dashboard</span>
+          </Link>
+        </li>
+        <li
+          className={`nav-item ${current === '/dashboard/analysis' ? 'active' : null}`}
+        >
+          <Link
+            to="/dashboard/analysis"
+            className="nav-link"
+            onClick={() => updateCurrentUrl('/dashboard/analysis')}
+          >
+            <i className="fas fa-chart-bar" />
+            <span>Analysis</span>
           </Link>
         </li>
 
@@ -75,6 +79,7 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
+        { role === 2 && (
         <li
           className={`nav-item ${
             current === '/dashboard/users' ? 'active' : null
@@ -89,6 +94,24 @@ const Sidebar = React.memo(() => {
             <span>List User</span>
           </Link>
         </li>
+        )}
+
+        { role === 2 && (
+        <li
+          className={`nav-item ${
+            current === '/dashboard/managers' ? 'active' : null
+          }`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/managers"
+            onClick={() => updateCurrentUrl('/dashboard/managers')}
+          >
+            <i className="fas fa-users-cog" />
+            <span>List Manager</span>
+          </Link>
+        </li>
+        )}
 
         <li
           className={`nav-item ${
