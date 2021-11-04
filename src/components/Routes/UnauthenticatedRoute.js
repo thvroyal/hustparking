@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router';
 import { useSelector } from 'react-redux';
-import { setUser, setAd, setMn } from '../../helpers/constants';
+import { SET_USER, SET_AD, SET_MN } from '../../helpers/constants';
 
 function querystring(name, url = window.location.href) {
   const namee = name.replace(/[[]]/g, '\\$&');
@@ -22,12 +22,12 @@ function querystring(name, url = window.location.href) {
 
 function whereDirect(redirect, role, target) {
   const regexAdmin = new RegExp('(/dashboard)(.+)?', 'i');
-  if (role === setAd || role === setMn) {
+  if (role === SET_AD || role === SET_MN) {
     if (redirect === '' || redirect === null || !regexAdmin.test(redirect)) {
       return '/dashboard';
     } return redirect;
   }
-  if (role === setUser) {
+  if (role === SET_USER) {
     if (redirect === '' || redirect === null || regexAdmin.test(redirect)) {
       return '/home';
     } return redirect;

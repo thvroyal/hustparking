@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { setAd, setUser, setMn } from '../helpers/constants';
+import { SET_USER, SET_AD, SET_MN } from '../helpers/constants';
+
 const initState = {
   role: 0, // 0 is guest, 1 is user, 2 is admin, 3 is manager
   isAuthenticated: false,
@@ -21,13 +22,13 @@ const auth = createSlice({
       state.isAuthenticated = true;
       state.error = null;
       switch (action.payload) {
-        case setUser:
+        case SET_USER:
           state.alias = 'us';
           break;
-        case setAd:
+        case SET_AD:
           state.alias = 'ad';
           break;
-        case setMn:
+        case SET_MN:
           state.alias = 'mn';
           break;
         default:

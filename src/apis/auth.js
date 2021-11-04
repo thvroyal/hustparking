@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setAd, setUser, setMn } from '../helpers/constants';
+import { SET_USER, SET_AD, SET_MN } from '../helpers/constants';
 import {
   handleError, setRole, logOut, setLoading, setInfo,
 } from '../store/authSlice';
@@ -17,12 +17,12 @@ export const SignIn = (data) => async (dispatch) => {
     else {
       localStorage.setItem('AccessToken', response.data.data.token ?? response.data.data);
       if (response.data.message === 'user') {
-        dispatch(setRole(setUser));
+        dispatch(setRole(SET_USER));
         dispatch(setInfo(response.data.data.user));
       } else if (response.data.message === 'admin') {
-        dispatch(setRole(setAd));
+        dispatch(setRole(SET_AD));
       } else if (response.data.message === 'manager') {
-        dispatch(setRole(setMn));
+        dispatch(setRole(SET_MN));
       }
     }
   } catch (error) {
@@ -45,12 +45,12 @@ export const SignInSocial = (token) => async (dispatch) => {
     else {
       localStorage.setItem('AccessToken', response.data.data.token ?? response.data.data);
       if (response.data.message === 'user') {
-        dispatch(setRole(setUser));
+        dispatch(setRole(SET_USER));
         dispatch(setInfo(response.data.data.user));
       } else if (response.data.message === 'admin') {
-        dispatch(setRole(setAd));
+        dispatch(setRole(SET_AD));
       } else if (response.data.message === 'manager') {
-        dispatch(setRole(setMn));
+        dispatch(setRole(SET_MN));
       }
     }
   } catch (error) {
@@ -89,9 +89,9 @@ export const verifyToken = () => async (dispatch) => {
     });
     dispatch(setLoading(false));
     if (response.data.message === 'success' && response.data.data) {
-      if (response.data.data === 'admin') dispatch(setRole(setAd));
-      else if (response.data.data === 'user') dispatch(setRole(setUser));
-      else if (response.data.data === 'manager') dispatch(setRole(setMn));
+      if (response.data.data === 'admin') dispatch(setRole(SET_AD));
+      else if (response.data.data === 'user') dispatch(setRole(SET_USER));
+      else if (response.data.data === 'manager') dispatch(setRole(SET_MN));
     }
   } catch (error) {
     dispatch(setLoading(false));

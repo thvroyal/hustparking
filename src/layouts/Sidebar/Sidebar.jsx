@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { setAd } from '../../helpers/constants';
+import { SET_AD } from '../../helpers/constants';
 
 const Sidebar = React.memo(() => {
   const [toggle, handleToggle] = useState(false);
@@ -80,7 +80,7 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
-        { role === setAd && (
+        { role === SET_AD && (
         <li
           className={`nav-item ${
             current === '/dashboard/users' ? 'active' : null
@@ -97,7 +97,7 @@ const Sidebar = React.memo(() => {
         </li>
         )}
 
-        { role === setAd && (
+        { role === SET_AD && (
         <li
           className={`nav-item ${
             current === '/dashboard/managers' ? 'active' : null
