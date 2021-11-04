@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SET_USER, SET_AD, SET_MN } from '../helpers/constants';
+import { SET_GUEST, SET_USER, SET_AD, SET_MN } from '../helpers/constants';
 
 const initState = {
-  role: 0, // 0 is guest, 1 is user, 2 is admin, 3 is manager
+  role: SET_GUEST, // 0 is guest, 1 is user, 2 is admin, 3 is manager
   isAuthenticated: false,
   error: null,
   loading: false,
@@ -36,7 +36,7 @@ const auth = createSlice({
       }
     },
     logOut: (state) => {
-      state.role = 0;
+      state.role = SET_GUEST;
       state.isAuthenticated = false;
     },
     handleError: (state, action) => {
