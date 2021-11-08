@@ -114,6 +114,23 @@ const Sidebar = React.memo(() => {
         </li>
         )}
 
+        { role === SET_AD && (
+        <li
+          className={`nav-item ${
+            current === '/dashboard/tags' ? 'active' : null
+          }`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/tags"
+            onClick={() => updateCurrentUrl('/dashboard/tags')}
+          >
+            <i className="fas fa-users-cog" />
+            <span>Tags</span>
+          </Link>
+        </li>
+        )}
+
         <li
           className={`nav-item ${
             current === '/dashboard/contract' ? 'active' : null
