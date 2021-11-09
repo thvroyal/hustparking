@@ -8,7 +8,7 @@ import { getTag } from '../../apis/tagsApi';
 function Tags() {
   const dispatch = useDispatch();
   // state.Tag nhưng do Tag đang bị trống
-  const tagsList = useSelector((state) => state.tag.data);
+  const tagsList = useSelector((state) => state.listTag.data);
   console.log(tagsList);
 
   useEffect(

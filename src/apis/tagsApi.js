@@ -24,8 +24,8 @@ export function getTag() {
         // console.log(data);
         const dataProcessed = data.map((tag) => {
           const dataPr = {
-            id: tag.id,
-            userId: tag.userId,
+            id: tag.newsId,
+            tagId: tag.tagId,
           };
           return dataPr;
         });
