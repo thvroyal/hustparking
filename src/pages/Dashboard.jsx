@@ -21,6 +21,7 @@ import CreateManager from '../layouts/Dashboard/CreateManager';
 import Analysis from '../layouts/Dashboard/Analysis';
 import ProfileManager from '../layouts/Dashboard/ProfileManager';
 import Managers from '../layouts/Dashboard/ListManager';
+import Tags from '../layouts/Dashboard/Tags';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -121,6 +122,11 @@ function Dashboard() {
                 exact
                 path={`${match.url}/managers`}
                 render={(props) => <Managers {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/tags`}
+                render={(props) => <Tags {...props} />}
               />
             </Switch>
           </div>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import { SET_AD } from '../../helpers/constants';
 
 const Sidebar = React.memo(() => {
   const [toggle, handleToggle] = useState(false);
@@ -79,7 +80,7 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
-        { role === 2 && (
+        { role === SET_AD && (
         <li
           className={`nav-item ${
             current === '/dashboard/users' ? 'active' : null
@@ -96,7 +97,7 @@ const Sidebar = React.memo(() => {
         </li>
         )}
 
-        { role === 2 && (
+        { role === SET_AD && (
         <li
           className={`nav-item ${
             current === '/dashboard/managers' ? 'active' : null
@@ -109,6 +110,23 @@ const Sidebar = React.memo(() => {
           >
             <i className="fas fa-users-cog" />
             <span>List Manager</span>
+          </Link>
+        </li>
+        )}
+
+        { role === SET_AD && (
+        <li
+          className={`nav-item ${
+            current === '/dashboard/tags' ? 'active' : null
+          }`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/tags"
+            onClick={() => updateCurrentUrl('/dashboard/tags')}
+          >
+            <i className="fas fa-users-cog" />
+            <span>Tags</span>
           </Link>
         </li>
         )}
