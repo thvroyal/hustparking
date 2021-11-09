@@ -19,7 +19,6 @@ const UpdateField = ({ onClose, open, selected }) => {
   const handleToggle = (id) => {
     if (fields) {
       if (fields.includes(id)) {
-        console.log(true);
         return true;
       }
     }
@@ -41,7 +40,6 @@ const UpdateField = ({ onClose, open, selected }) => {
           if (d.managerId === selected) return d.fieldId;
           return -1;
         });
-        console.log(fieldOfManagerId);
         setFields(fieldOfManagerId);
       }
     } catch (error) {
@@ -59,7 +57,7 @@ const UpdateField = ({ onClose, open, selected }) => {
           {allFields && allFields.map((field) => (
             <UpdateFieldRow
               title={field.name}
-              toggled={handleToggle(field.id) || true}
+              toggled={handleToggle(field.id)}
               fieldId={field.id}
               managerId={selected}
               key={field.id}
