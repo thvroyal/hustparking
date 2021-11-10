@@ -17,7 +17,7 @@ function TabEdit() {
     dispatch(getInfo());
   }, [dispatch]);
   const validate = Yup.object({
-    // sex: Yup.string().required('Gender is required'),
+    sex: Yup.string().required('Gender is required'),
   });
   function formatString(str) {
     if (str) return str.split('+')[0].split('T')[0];
@@ -76,8 +76,11 @@ function TabEdit() {
                     },
                   });
                   setLoading(false);
-                  if (response.data.message === 'success' && response.data.data) handleIsSuccess(1);
-                  else handleIsSuccess(0);
+                  if (response.data.message === 'success' && response.data.data) {
+                    handleIsSuccess(1);
+                  } else {
+                    handleIsSuccess(0);
+                  }
                 } catch (error) {
                   setLoading(false);
                   handleIsSuccess(0);
