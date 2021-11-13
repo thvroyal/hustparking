@@ -59,14 +59,9 @@ function DetectorDebug() {
   //   }
   return (
     <>
-      {/* // <!-- Page Heading --> */}
-      <h1 className="h3 mb-2 text-gray-800">Debug</h1>
-      <p className="mb-4">Checking Realtime. . . </p>
-
       {/* // <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
-        <div className="card-header py-3 d-flex justify-content-between align-items-center">
-          <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
+        <div className="card-header py-3 d-flex justify-content-between align-items-center flex-row-reverse">
           {listDetectors ? (
             <ExportExcel dataSet={listDetectors} name={`Detector-${nowDate()}`}>
               <button className="btn-action p-2" type="button">

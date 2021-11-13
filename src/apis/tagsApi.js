@@ -11,7 +11,7 @@ export function getTag() {
     dispatch(loadingTag);
     try {
       const response = await axios({
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/all-news-tag`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
         method: 'GET',
         headers: {
           token: localStorage.AccessToken,
@@ -19,17 +19,7 @@ export function getTag() {
       });
       if (response.data.message === 'success') {
         const { data } = response.data;
-        // console.log(data, idUser);
-        // if (idUser !== 'all') { data = data.filter((x) => x.userId === parseInt(idUser, 10)); }
-        // console.log(data);
-        const dataProcessed = data.map((tag) => {
-          const dataPr = {
-            id: tag.newsId,
-            tagId: tag.tagId,
-          };
-          return dataPr;
-        });
-        dispatch(successTag(dataProcessed));
+        dispatch(successTag(data));
       } else {
         dispatch(failTag(response.data.message));
       }
@@ -38,4 +28,16 @@ export function getTag() {
       console.log(error);
     }
   };
+}
+
+export function registerTag() {
+
+}
+
+export function updateTag() {
+
+}
+
+export function deleteTag() {
+
 }

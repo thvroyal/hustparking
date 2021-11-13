@@ -7,9 +7,7 @@ import { getTag } from '../../apis/tagsApi';
 
 function Tags() {
   const dispatch = useDispatch();
-  // state.Tag nhưng do Tag đang bị trống
   const tagsList = useSelector((state) => state.listTag.data);
-  console.log(tagsList);
 
   useEffect(
     () => {
@@ -33,7 +31,7 @@ function Tags() {
             <table className="table mb-0">
               <thead>
                 <tr>
-                  <th scope="col">ID</th>
+                  <th scope="col">User ID</th>
                   <th scope="col">Tags ID</th>
                 </tr>
               </thead>
@@ -41,7 +39,7 @@ function Tags() {
                 {tagsList ? (
                   tagsList.map((tag) => (
                     <tr key={tag.id}>
-                      <td>{tag.id}</td>
+                      <td>{tag.userId}</td>
                       <td>{tag.tagId}</td>
                     </tr>
                   ))
