@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -57,6 +58,7 @@ function App() {
           <Route component={PageNotFound} />
         </Switch>
       )}
+      <ToastContainer />
     </div>
   );
 }

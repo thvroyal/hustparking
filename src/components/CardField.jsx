@@ -86,7 +86,7 @@ export default React.memo(CardField);
 
 CardField.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   data: PropTypes.arrayOf(PropTypes.number),
   GW: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { getSlotOfField } from '../../apis/slotApi';
 import { getField } from '../../apis/fieldApi';
 import { sortSlot } from '../../store/admin/SlotSlice';
+import ModalCreateSlot from '../../components/Modal/ModalCreateSlot';
 
 function Slot() {
   const match = useLocation();
@@ -15,8 +16,10 @@ function Slot() {
   // get list slot from store redux
   const listSlot = useSelector((state) => state.slot.data);
   const field = useSelector((state) => state.field.data);
+
   const [showNull, setShowNull] = useState(false);
   const [descLastUpdated, invertLastUpdated] = useState(null);
+  const [isOpenModalCreateSlot, setOpenModalCreateSlot] = useState(false);
   // get fieldName from list field by ID
   let fieldName;
   if (field) { fieldName = field.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
@@ -24,13 +27,6 @@ function Slot() {
     dispatch(getSlotOfField(fieldId));
     dispatch(getField());
   }, [dispatch, fieldId]);
-
-  //   // Fix later-------------------------------
-  //   function deleteDetector(id) {
-  //     dispatch(deleteDetectors(id));
-  //   }
-
-  // Fix later----------------------------
 
   function changeFilterShowNull() {
     setShowNull(!showNull);
@@ -55,24 +51,11 @@ function Slot() {
 
   return (
     <>
-      {/* // <!-- Page Heading --> */}
       <h1 className="h3 mb-4 text-gray-800 text-capitalize">{`Field ${fieldName}`}</h1>
-
-      {/* // <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
           <h6 className="m-0 font-weight-bold text-primary">Database</h6>
-          {/* <button
-            className="btn-action p-2"
-            onClick={() => handleTypeModal(-1)}
-          >
-            <h6 className="m-0 font-weight-bold text-primary text-right">
-              <i className="fa fa-plus-square" /> Create
-            </h6>
-          </button>
-          {isShowing && typeModal === -1 ? (
-            <ModalDetector isShowing={isShowing} hide={toggle} />
-          ) : null} */}
+          <button className="btn btn-outline-primary" type="button" onClick={() => setOpenModalCreateSlot(true)}>Create Field</button>
         </div>
         <div className="card-body">
           <div className="table-responsive table-hover">
@@ -221,6 +204,12 @@ function Slot() {
           </div>
         </div>
       </div>
+      <ModalCreateSlot
+        onClose={() => setOpenModalCreateSlot(false)}
+        open={isOpenModalCreateSlot}
+        fieldName={fieldName}
+        fieldId={fieldId}
+      />
     </>
   );
 }
