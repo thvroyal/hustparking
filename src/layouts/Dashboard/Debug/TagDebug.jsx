@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTagPackage } from '../../../apis/packageTagApi';
-// import ExportExcel from '../../../utils/ExportExcel';
+import ExportExcel from '../../../utils/ExportExcel';
 
 function TagDebug() {
   const dispatch = useDispatch();
@@ -45,15 +45,15 @@ function TagDebug() {
   // function clearFilter() {
   //   mapFilter([]);
   // }
-  // function nowDate() {
-  //   let today = new Date();
-  //   const dd = String(today.getDate()).padStart(2, '0');
-  //   const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-  //   const yyyy = today.getFullYear();
+  function nowDate() {
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = today.getFullYear();
 
-  //   today = mm + dd + yyyy;
-  //   return today;
-  // }
+    today = mm + dd + yyyy;
+    return today;
+  }
   //   function getData() {
   //     dispatch(getPacket());
   //   }
@@ -63,7 +63,7 @@ function TagDebug() {
       {/* // <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center flex-row-reverse">
-          {/* {listTags ? (
+          {listTags ? (
             <ExportExcel dataSet={listTags} name={`Tag-${nowDate()}`}>
               <button className="btn-action p-2" type="button">
                 <h6 className="m-0 font-weight-bold text-primary text-right">
@@ -73,7 +73,7 @@ function TagDebug() {
                 </h6>
               </button>
             </ExportExcel>
-          ) : null} */}
+          ) : null}
         </div>
         <div className="card-body">
           <div className="table-responsive table-hover">

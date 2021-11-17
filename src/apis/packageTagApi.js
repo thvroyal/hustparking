@@ -7,7 +7,7 @@ import {
 import store from '../store';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getTagPackage = () => async (dispatch) => {
+export const getTagPackage = () => (dispatch) => {
   const { auth } = store.getState();
   dispatch(loadingPackageTag);
   axios({

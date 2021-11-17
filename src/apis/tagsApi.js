@@ -30,14 +30,54 @@ export function getTag() {
   };
 }
 
-export function registerTag() {
+export const registerTag = (data) => (dispatch) => {
+  dispatch(loadingTag);
+  axios({
+    method: 'POST',
+    url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
+    data: JSON.stringify(data),
+    headers: {
+      token: localStorage.getItem('AccessToken'),
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-}
+export const updateTag = (data) => (dispatch) => {
+  dispatch(loadingTag);
+  axios({
+    method: 'PUT',
+    url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
+    data: JSON.stringify(data),
+    headers: {
+      token: localStorage.getItem('AccessToken'),
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-export function updateTag() {
-
-}
-
-export function deleteTag() {
-
-}
+export const deleteTag = (id) => (dispatch) => {
+  dispatch(loadingTag);
+  axios({
+    method: 'DELETE',
+    url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags?id=${id}`,
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

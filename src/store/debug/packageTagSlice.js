@@ -10,14 +10,14 @@ const packetTag = createSlice({
   name: 'packetTag',
   initialState: initState,
   reducers: {
-    loadingPackage: (state, action) => {
+    loadingPackageTag: (state, action) => {
       state.loading = action.payload || true;
     },
-    successPackage: (state, action) => {
+    successPackageTag: (state, action) => {
       state.data = action.payload;
       state.loading = false;
     },
-    failedPackage: (state, action) => {
+    failedPackageTag: (state, action) => {
       state.err = action.payload;
       state.loading = false;
     },
