@@ -180,13 +180,13 @@ const Sidebar = React.memo(() => {
         <div className="sidebar-heading">Debug</div>
         <li
           className={`nav-item ${
-            current === '/dashboard/debug-detector' ? 'active' : null
+            current === '/dashboard/debug?tab=detector' ? 'active' : null
           }`}
         >
           <Link
             className="nav-link"
-            to="/dashboard/debug-detector"
-            onClick={() => updateCurrentUrl('/dashboard/debug-detector')}
+            to="/dashboard/debug?tab=detector"
+            onClick={() => updateCurrentUrl('/dashboard/debug?tab=detector')}
           >
             <i className="fas fa-fw fa-bug" />
             <span>Debug</span>

@@ -11,7 +11,7 @@ export function getTag() {
     dispatch(loadingTag);
     try {
       const response = await axios({
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/all-news-tag`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
         method: 'GET',
         headers: {
           token: localStorage.AccessToken,
@@ -19,17 +19,7 @@ export function getTag() {
       });
       if (response.data.message === 'success') {
         const { data } = response.data;
-        // console.log(data, idUser);
-        // if (idUser !== 'all') { data = data.filter((x) => x.userId === parseInt(idUser, 10)); }
-        // console.log(data);
-        const dataProcessed = data.map((tag) => {
-          const dataPr = {
-            id: tag.newsId,
-            tagId: tag.tagId,
-          };
-          return dataPr;
-        });
-        dispatch(successTag(dataProcessed));
+        dispatch(successTag(data));
       } else {
         dispatch(failTag(response.data.message));
       }
@@ -39,3 +29,55 @@ export function getTag() {
     }
   };
 }
+
+export const registerTag = (data) => (dispatch) => {
+  dispatch(loadingTag);
+  axios({
+    method: 'POST',
+    url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
+    data: JSON.stringify(data),
+    headers: {
+      token: localStorage.getItem('AccessToken'),
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const updateTag = (data) => (dispatch) => {
+  dispatch(loadingTag);
+  axios({
+    method: 'PUT',
+    url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
+    data: JSON.stringify(data),
+    headers: {
+      token: localStorage.getItem('AccessToken'),
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const deleteTag = (id) => (dispatch) => {
+  dispatch(loadingTag);
+  axios({
+    method: 'DELETE',
+    url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags?id=${id}`,
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
