@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Pie } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'reactstrap';
+import ModalDeleteField from './Modal/ModalField/ModalDeleteField';
+import ModalCreateGW from './Modal/ModalGW/ModalCreateGW';
+import ModalOption from './Modal/ModalGW/ModalOption';
 
 function CardField(props) {
   const {
@@ -19,6 +22,10 @@ function CardField(props) {
   };
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [isOpenModalDelete, setOpenModalDelete] = useState(false);
+  const [isOpenModalCreateGW, setOpenModalCreateGW] = useState(false);
+  const [isOpenModalOption, setOpenModalOption] = useState(false);
+  const [idGW, setIdGW] = useState(0);
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
@@ -41,36 +48,43 @@ function CardField(props) {
             </Link>
             {(GW && GW.length)
               ? GW.map((item, index) => (
-                <Link
-                  to={`/dashboard/gateway/${item.id}`}
-                  className="btn-link"
-                  key={item.id}
+                <div
+                  className="badge badge-primary font-weight-normal mr-1"
+                  id={`tooltip${index}`}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.ctrlKey) {
+                      setOpenModalCreateGW(true);
+                    }
+                  }}
+                  onClick={() => {
+                    setIdGW(item.id);
+                    setOpenModalOption(true);
+                  }}
                 >
-                  <div
-                    className="badge badge-primary font-weight-normal mr-1"
-                    id={`tooltip${index}`}
-                  >
-                    {`GW${item.id}`}
+                  {`GW${item.id}`}
 
-                  </div>
-                  <Tooltip
-                    placement="bottom"
-                    isOpen={tooltipOpen}
-                    target={`tooltip${index}`}
-                    toggle={toggle}
-                  >
-                    Click to show all detectors
-                  </Tooltip>
-                </Link>
+                </div>
               ))
               : (
                 <>
-                  <div
-                    className="badge badge-primary font-weight-normal mr-1"
-                    id="tooltip-create-GW"
-                  >
-                    <i className="fas fa-plus" />
+                  <div>
+                    <div
+                      className="badge badge-primary font-weight-normal mr-1"
+                      id="tooltip-create-GW"
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.ctrlKey) {
+                          setOpenModalCreateGW(true);
+                        }
+                      }}
+                      onClick={() => setOpenModalCreateGW(true)}
+                    >
+                      <i className="fas fa-plus" />
 
+                    </div>
                   </div>
                   <Tooltip
                     placement="bottom"
@@ -95,7 +109,28 @@ function CardField(props) {
             </div>
           </div>
         </div>
+        <button
+          type="button"
+          className="btn btn-danger float-right mt-4"
+          onClick={() => setOpenModalDelete(true)}
+        >
+          <i className="fas fa-times" style={{ fontSize: '10px' }} />
+        </button>
       </div>
+      <ModalOption
+        onClose={() => setOpenModalOption(false)}
+        open={isOpenModalOption}
+        idGW={idGW}
+      />
+      <ModalCreateGW
+        onClose={() => setOpenModalCreateGW(false)}
+        open={isOpenModalCreateGW}
+      />
+      <ModalDeleteField
+        onClose={() => setOpenModalDelete(false)}
+        open={isOpenModalDelete}
+        id={id}
+      />
     </div>
   );
 }

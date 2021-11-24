@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import { getSlotOfField } from '../../apis/slotApi';
 import { getField } from '../../apis/fieldApi';
 import { sortSlot } from '../../store/admin/SlotSlice';
-import ModalCreateSlot from '../../components/Modal/ModalCreateSlot';
+import ModalCreateSlot from '../../components/Modal/ModalSlot/ModalCreateSlot';
+import ModalDeleteSlot from '../../components/Modal/ModalSlot/ModalDeleteSlot';
 
 function Slot() {
   const match = useLocation();
@@ -20,6 +21,8 @@ function Slot() {
   const [showNull, setShowNull] = useState(false);
   const [descLastUpdated, invertLastUpdated] = useState(null);
   const [isOpenModalCreateSlot, setOpenModalCreateSlot] = useState(false);
+  const [isOpenModalDelete, setOpenModalDelete] = useState(false);
+  const [id, setId] = useState(0);
   // get fieldName from list field by ID
   let fieldName;
   if (field) { fieldName = field.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
@@ -76,9 +79,7 @@ function Slot() {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>Status</div>
                       <i
-                        className={`fa ${
-                          !showNull ? 'fa-eye' : 'fa-eye-slash'
-                        } small`}
+                        className={`fa ${!showNull ? 'fa-eye' : 'fa-eye-slash'} small`}
                         onClick={changeFilterShowNull}
                         aria-hidden="true"
                       />
@@ -90,18 +91,17 @@ function Slot() {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>Last Update</div>
                       <i
-                        className={`fa ${
-                          descLastUpdated === null
-                            ? 'fa-sort'
-                            : !descLastUpdated
-                              ? 'fa-sort-down'
-                              : 'fa-sort-up'
-                        }`}
+                        className={`fa ${descLastUpdated === null
+                          ? 'fa-sort'
+                          : !descLastUpdated
+                            ? 'fa-sort-down'
+                            : 'fa-sort-up'}`}
                         onClick={handleSortLastUpdated}
                         aria-hidden="true"
                       />
                     </div>
                   </th>
+                  <th>Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -134,13 +134,11 @@ function Slot() {
 
                         <td>
                           <button
-                            className={`btn-status ${
-                              item.statusDetector
-                                ? 'btn-danger'
-                                : item.statusDetector === null
-                                  ? 'btn-white'
-                                  : 'btn-success'
-                            }`}
+                            className={`btn-status ${item.statusDetector
+                              ? 'btn-danger'
+                              : item.statusDetector === null
+                                ? 'btn-white'
+                                : 'btn-success'}`}
                             type="button"
                           >
                             {item.statusDetector
@@ -152,13 +150,11 @@ function Slot() {
                         </td>
                         <td>
                           <button
-                            className={`btn-status ${
-                              item.statusCam
-                                ? 'btn-danger'
-                                : item.statusCam === null
-                                  ? 'btn-white'
-                                  : 'btn-success'
-                            }`}
+                            className={`btn-status ${item.statusCam
+                              ? 'btn-danger'
+                              : item.statusCam === null
+                                ? 'btn-white'
+                                : 'btn-success'}`}
                             type="button"
                           >
                             {item.statusCam
@@ -170,13 +166,11 @@ function Slot() {
                         </td>
                         <td>
                           <button
-                            className={`btn-status ${
-                              statusAnd
-                                ? 'btn-danger'
-                                : statusAnd === null
-                                  ? 'btn-white'
-                                  : 'btn-success'
-                            }`}
+                            className={`btn-status ${statusAnd
+                              ? 'btn-danger'
+                              : statusAnd === null
+                                ? 'btn-white'
+                                : 'btn-success'}`}
                             type="button"
                           >
                             {statusAnd
@@ -189,6 +183,20 @@ function Slot() {
                         <td>{item.lastTimeCam || 'No Data'}</td>
                         <td>{item.lastTimeDetector || 'No Data'}</td>
                         <td>{item.lastTimeUpdate || 'No Data'}</td>
+                        <td>
+                          <div className="d-flex align-item-center">
+                            <button
+                              type="button"
+                              className="btn btn-danger ml-1"
+                              onClick={() => {
+                                setId(item.id);
+                                setOpenModalDelete(true);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
                       </tr>
                     );
                   })
@@ -209,6 +217,12 @@ function Slot() {
         open={isOpenModalCreateSlot}
         fieldName={fieldName}
         fieldId={fieldId}
+      />
+      <ModalDeleteSlot
+        onClose={() => setOpenModalDelete(false)}
+        open={isOpenModalDelete}
+        fieldId={fieldId}
+        id={id}
       />
     </>
   );

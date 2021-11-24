@@ -6,7 +6,7 @@ import {
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import SwitchToggle from '../SwitchToggle';
+import SwitchToggle from '../../SwitchToggle';
 
 const ModalCreateSlot = ({
   onClose, open, fieldName, fieldId,

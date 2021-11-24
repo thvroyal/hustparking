@@ -102,10 +102,11 @@ function TagDebug() {
                   listTags
                     .slice(listTags.length - 25, listTags.length)
                     .map((item) => (
-                      <tr key={item.newId}>
-                        <td>{item.newId}</td>
+                      <tr key={item.newsId}>
+                        <td>{item.newsId}</td>
                         <td>{item.sign}</td>
                         <td>{item.seq}</td>
+                        <td>{item.mty}</td>
                         <td>{item.tagId}</td>
                         <td>{item.lat}</td>
                         <td>{item.log}</td>

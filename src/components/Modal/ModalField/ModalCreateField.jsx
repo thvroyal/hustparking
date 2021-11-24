@@ -6,8 +6,8 @@ import { func, bool } from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
-import TextField from '../TextField';
-import { getField } from '../../apis/fieldApi';
+import TextField from '../../TextField';
+import { getField } from '../../../apis/fieldApi';
 
 const ModalCreateField = ({
   onClose, open,
@@ -110,12 +110,12 @@ const ModalCreateField = ({
                   disabled={isLoading}
                 >
                   {isLoading && (
-                  <Spinner
-                    animation="border"
-                    color="primary"
-                    size="sm"
-                    className="mr-3"
-                  />
+                    <Spinner
+                      animation="border"
+                      color="primary"
+                      size="sm"
+                      className="mr-3"
+                    />
                   )}
                   Create new field
                 </button>

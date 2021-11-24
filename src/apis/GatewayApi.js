@@ -25,3 +25,22 @@ export const getGateway = () => (dispatch) => {
       dispatch(failedGateway(err));
     });
 };
+
+export const deleteGateway = (id) => (dispatch) => {
+  const { auth } = store.getState();
+  dispatch(loadingGateway);
+  axios({
+    method: 'DELETE',
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/gateway/delete/${id}`,
+    headers: {
+      token: localStorage.getItem('AccessToken'),
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => {
+      dispatch(successGateway(res.data.data));
+    })
+    .catch((err) => {
+      dispatch(failedGateway(err));
+    });
+};

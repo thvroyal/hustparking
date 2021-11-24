@@ -6,7 +6,7 @@ import CardField from '../../components/CardField';
 import { getField } from '../../apis/fieldApi';
 import { getGateway } from '../../apis/GatewayApi';
 import { SET_AD } from '../../helpers/constants';
-import ModalCreateField from '../../components/Modal/ModalCreateField';
+import ModalCreateField from '../../components/Modal/ModalField/ModalCreateField';
 
 function Fields() {
   const dispatch = useDispatch();
