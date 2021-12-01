@@ -4,13 +4,15 @@ import {
   func, bool, string,
 } from 'prop-types';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import SwitchToggle from '../../SwitchToggle';
+import { getSlotOfField } from '../../../apis/slotApi';
 
 const ModalCreateSlot = ({
   onClose, open, fieldName, fieldId,
 }) => {
+  const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
   const [statusCam, setStatusCam] = useState(false);
   const [statusDetector, setStatusDetector] = useState(false);
@@ -40,6 +42,7 @@ const ModalCreateSlot = ({
         },
         data: JSON.stringify(data),
       });
+      dispatch(getSlotOfField(fieldId));
 
       setLoading(false);
       if (response.data.message === 'success') {

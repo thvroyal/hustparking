@@ -50,10 +50,11 @@ const ModalCreateDetector = ({
               addressDetector: '',
               gatewayId: 0,
               slotId: 0,
+              id: 0,
             }}
             validationSchema={validateFieldCreate}
             onSubmit={async (values) => {
-              const data = { ...values, lastTimeSetup: timeSetup, id: 0 };
+              const data = { ...values, lastTimeSetup: timeSetup };
               console.log(data.lastTimeSetup);
               try {
                 setLoading(true);
@@ -90,6 +91,7 @@ const ModalCreateDetector = ({
                   <TextField label="address Detector" name="addressDetector" type="text" placeholder="Enter address detector" showLabel />
                   <TextField label="gateway Id" name="gatewayId" type="number" placeholder="Enter gateway id" showLabel />
                   <TextField label="slot Id" name="slotId" type="number" placeholder="Create slot id" showLabel />
+                  <TextField label="id" name="id" type="number" placeholder="Create id" showLabel />
                   <button
                     type="submit"
                     className="btn btn-primary mt-4"

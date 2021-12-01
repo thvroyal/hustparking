@@ -58,7 +58,7 @@ function Slot() {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
           <h6 className="m-0 font-weight-bold text-primary">Database</h6>
-          <button className="btn btn-outline-primary" type="button" onClick={() => setOpenModalCreateSlot(true)}>Create Field</button>
+          <button className="btn btn-outline-primary" type="button" onClick={() => setOpenModalCreateSlot(true)}>Create Slot</button>
         </div>
         <div className="card-body">
           <div className="table-responsive table-hover">
