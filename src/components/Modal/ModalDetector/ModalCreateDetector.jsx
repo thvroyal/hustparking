@@ -5,7 +5,7 @@ import { Modal, Spinner } from 'react-bootstrap';
 import { func, bool, number } from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import TextField from '../../TextField';
 import { getDetectors } from '../../../apis/detectorsApi';
@@ -13,6 +13,7 @@ import { getDetectors } from '../../../apis/detectorsApi';
 const ModalCreateDetector = ({
   onClose, open, checkField, idGW,
 }) => {
+  const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
   const [timeSetup, setTimeSetup] = useState('');
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const ModalCreateDetector = ({
                 setLoading(true);
                 const response = await axios({
                   method: 'POST',
-                  url: `${process.env.REACT_APP_BASE_URL}/api/ad/detector`,
+                  url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/detector`,
                   headers: {
                     token: localStorage.getItem('AccessToken'),
                     'Content-Type': 'application/json',

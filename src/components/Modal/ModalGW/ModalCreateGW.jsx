@@ -5,7 +5,7 @@ import { Modal, Spinner } from 'react-bootstrap';
 import { func, bool } from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextField from '../../TextField';
 import { getGateway } from '../../../apis/GatewayApi';
 
@@ -13,6 +13,7 @@ const ModalCreateGW = ({
   onClose, open,
 }) => {
   const [isLoading, setLoading] = useState(false);
+  const { alias } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const validateField = Yup.object({
     addressGateway: Yup.string().required('Address is required'),
@@ -41,7 +42,7 @@ const ModalCreateGW = ({
               setLoading(true);
               const response = await axios({
                 method: 'POST',
-                url: `${process.env.REACT_APP_BASE_URL}/api/ad/gateway/create_and_update`,
+                url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/gateway/create_and_update`,
                 headers: {
                   token: localStorage.getItem('AccessToken'),
                   'Content-Type': 'application/json',

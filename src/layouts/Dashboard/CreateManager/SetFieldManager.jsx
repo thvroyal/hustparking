@@ -24,7 +24,7 @@ const SetFieldManager = ({ managerId }) => {
         }}
         onSubmit={async (values) => {
           const data = {
-            fieldId: values.selected[0],
+            fieldId: [...values.selected],
             managerId,
             id: 0,
           };
@@ -52,9 +52,9 @@ const SetFieldManager = ({ managerId }) => {
             <Form>
               <div role="group" aria-labelledby="checkbox-group">
                 {
-                listField && listField.map((field) => (
-                  <CheckboxField label={field.name} name="selected" value={field.id} key={field.name} />
-                ))
+                  listField && listField.map((field) => (
+                    <CheckboxField label={field.name} name="selected" value={field.id} key={field.name} />
+                  ))
                 }
               </div>
               <button
@@ -65,7 +65,7 @@ const SetFieldManager = ({ managerId }) => {
               </button>
             </Form>
           )
-      }
+        }
 
       </Formik>
       <Toast

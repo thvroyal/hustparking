@@ -8,6 +8,7 @@ import { getField } from '../../apis/fieldApi';
 import { sortSlot } from '../../store/admin/SlotSlice';
 import ModalCreateSlot from '../../components/Modal/ModalSlot/ModalCreateSlot';
 import ModalDeleteSlot from '../../components/Modal/ModalSlot/ModalDeleteSlot';
+import ModalUpdateSlot from '../../components/Modal/ModalSlot/ModalUpdateSlot';
 
 function Slot() {
   const match = useLocation();
@@ -21,6 +22,7 @@ function Slot() {
   const [showNull, setShowNull] = useState(false);
   const [descLastUpdated, invertLastUpdated] = useState(null);
   const [isOpenModalCreateSlot, setOpenModalCreateSlot] = useState(false);
+  const [isOpenModalUpdateSlot, setOpenModalUpdateSlot] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
   const [id, setId] = useState(0);
   // get fieldName from list field by ID
@@ -187,7 +189,17 @@ function Slot() {
                           <div className="d-flex align-item-center">
                             <button
                               type="button"
-                              className="btn btn-danger ml-1"
+                              className="btn btn-info ml-1"
+                              onClick={() => {
+                                setId(item.id);
+                                setOpenModalUpdateSlot(true);
+                              }}
+                            >
+                              Update
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-danger mr-1"
                               onClick={() => {
                                 setId(item.id);
                                 setOpenModalDelete(true);
@@ -215,6 +227,12 @@ function Slot() {
       <ModalCreateSlot
         onClose={() => setOpenModalCreateSlot(false)}
         open={isOpenModalCreateSlot}
+        fieldName={fieldName}
+        fieldId={fieldId}
+      />
+      <ModalUpdateSlot
+        onClose={() => setOpenModalUpdateSlot(false)}
+        open={isOpenModalUpdateSlot}
         fieldName={fieldName}
         fieldId={fieldId}
       />

@@ -6,7 +6,7 @@ import {
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getGateway } from '../../../apis/GatewayApi';
 
 const ModalOption = ({
@@ -16,6 +16,7 @@ const ModalOption = ({
     onClose();
   };
   const dispatch = useDispatch();
+  const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
 
   const handleClick = async () => {
@@ -23,7 +24,7 @@ const ModalOption = ({
       setLoading(true);
       const response = await axios({
         method: 'DELETE',
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/gateway/delete/${idGW}`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/gateway/delete/${idGW}`,
         headers: {
           token: localStorage.getItem('AccessToken'),
           'Content-Type': 'application/json',

@@ -5,12 +5,13 @@ import {
 } from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getField } from '../../../apis/fieldApi';
 
 const ModalDeleteField = ({
   onClose, open, id,
 }) => {
+  const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ const ModalDeleteField = ({
       setLoading(true);
       const response = await axios({
         method: 'DELETE',
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/field/delete/${id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/field/delete/${id}`,
         headers: {
           token: localStorage.getItem('AccessToken'),
           'Content-Type': 'application/json',

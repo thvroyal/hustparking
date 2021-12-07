@@ -54,6 +54,7 @@ function Tags() {
                 <tr>
                   <th scope="col">User ID</th>
                   <th scope="col">Tags ID</th>
+                  <th scope="col">Tag email</th>
                   <th scope="col">Edit</th>
                 </tr>
               </thead>
@@ -61,8 +62,9 @@ function Tags() {
                 {tagsList ? (
                   tagsList.map((tag) => (
                     <tr key={tag.id}>
-                      <td>{tag.userId}</td>
+                      <td>{tag.user?.userId}</td>
                       <td>{tag.tagId}</td>
+                      <td>{tag.user?.email}</td>
                       <td>
                         <div className="d-flex justify-content-center">
                           <div>
