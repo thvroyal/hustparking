@@ -5,13 +5,14 @@ import {
 } from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getTag } from '../../../apis/tagsApi';
 
 const ModalTag = ({
   onClose, open, checkField,
 }) => {
   const dispatch = useDispatch();
+  const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [userId, setUserId] = useState(0);
@@ -35,7 +36,7 @@ const ModalTag = ({
       setLoading(true);
       const response = await axios({
         method: 'POST',
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/tags`,
         headers: {
           token: localStorage.getItem('AccessToken'),
           'Content-Type': 'application/json',
@@ -47,14 +48,14 @@ const ModalTag = ({
       setLoading(false);
       if (response.data.message === 'success') {
         console.log(response.data.data);
-        toast.success('Created new slot', {
+        toast.success('Created new tag', {
           position: toast.POSITION.TOP_RIGHT,
           onOpen: handleClose,
         });
       }
     } catch (error) {
       setLoading(false);
-      toast.error('Can\'t create new slot for this field');
+      toast.error('Can\'t create new tag for this field');
       console.log(error);
     }
   };
@@ -69,7 +70,7 @@ const ModalTag = ({
       setLoading(true);
       const response = await axios({
         method: 'PUT',
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/tags`,
         headers: {
           token: localStorage.getItem('AccessToken'),
           'Content-Type': 'application/json',
@@ -81,14 +82,14 @@ const ModalTag = ({
       setLoading(false);
       if (response.data.message === 'success') {
         console.log(response.data.data);
-        toast.success('Created new slot', {
+        toast.success('Updated new tag', {
           position: toast.POSITION.TOP_RIGHT,
           onOpen: handleClose,
         });
       }
     } catch (error) {
       setLoading(false);
-      toast.error('Can\'t create new slot for this field');
+      toast.error('Can\'t update new tag for this field');
       console.log(error);
     }
   };

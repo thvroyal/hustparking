@@ -61,8 +61,8 @@ function Tags() {
               <tbody>
                 {tagsList ? (
                   tagsList.map((tag) => (
-                    <tr key={tag.id}>
-                      <td>{tag.user?.userId}</td>
+                    <tr key={tag.tagId}>
+                      <td>{tag.user?.id}</td>
                       <td>{tag.tagId}</td>
                       <td>{tag.user?.email}</td>
                       <td>

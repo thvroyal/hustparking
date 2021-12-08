@@ -5,7 +5,7 @@ import {
 } from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getTag } from '../../../apis/tagsApi';
 
 const ModalDelete = ({
@@ -13,6 +13,7 @@ const ModalDelete = ({
 }) => {
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { alias } = useSelector((state) => state.auth);
 
   const handleClose = () => {
     onClose();
@@ -23,7 +24,7 @@ const ModalDelete = ({
       setLoading(true);
       const response = await axios({
         method: 'DELETE',
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/tags?id=${id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/tags?id=${id}`,
         headers: {
           token: localStorage.getItem('AccessToken'),
           'Content-Type': 'application/json',

@@ -21,9 +21,7 @@ const Sidebar = React.memo(() => {
   return (
     <>
       <ul
-        className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${
-          toggle ? 'toggled' : ''
-        }`}
+        className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${toggle ? 'toggled' : ''}`}
         id="accordionSidebar"
       >
         <Link
@@ -66,9 +64,7 @@ const Sidebar = React.memo(() => {
         <div className="sidebar-heading">Manager</div>
 
         <li
-          className={`nav-item ${
-            current === '/dashboard/fields' ? 'active' : null
-          }`}
+          className={`nav-item ${current === '/dashboard/fields' ? 'active' : null}`}
         >
           <Link
             className="nav-link"
@@ -80,61 +76,53 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
-        { role === SET_AD && (
-        <li
-          className={`nav-item ${
-            current === '/dashboard/users' ? 'active' : null
-          }`}
-        >
-          <Link
-            className="nav-link"
-            to="/dashboard/users"
-            onClick={() => updateCurrentUrl('/dashboard/users')}
+        {role === SET_AD && (
+          <li
+            className={`nav-item ${current === '/dashboard/users' ? 'active' : null}`}
           >
-            <i className="fas fa-fw fa-user" />
-            <span>List User</span>
-          </Link>
-        </li>
+            <Link
+              className="nav-link"
+              to="/dashboard/users"
+              onClick={() => updateCurrentUrl('/dashboard/users')}
+            >
+              <i className="fas fa-fw fa-user" />
+              <span>List User</span>
+            </Link>
+          </li>
         )}
 
-        { role === SET_AD && (
-        <li
-          className={`nav-item ${
-            current === '/dashboard/managers' ? 'active' : null
-          }`}
-        >
-          <Link
-            className="nav-link"
-            to="/dashboard/managers"
-            onClick={() => updateCurrentUrl('/dashboard/managers')}
+        {role === SET_AD && (
+          <li
+            className={`nav-item ${current === '/dashboard/managers' ? 'active' : null}`}
           >
-            <i className="fas fa-users-cog" />
-            <span>List Manager</span>
-          </Link>
-        </li>
+            <Link
+              className="nav-link"
+              to="/dashboard/managers"
+              onClick={() => updateCurrentUrl('/dashboard/managers')}
+            >
+              <i className="fas fa-users-cog" />
+              <span>List Manager</span>
+            </Link>
+          </li>
         )}
 
-        { role === SET_AD && (
-        <li
-          className={`nav-item ${
-            current === '/dashboard/tags' ? 'active' : null
-          }`}
-        >
-          <Link
-            className="nav-link"
-            to="/dashboard/tags"
-            onClick={() => updateCurrentUrl('/dashboard/tags')}
+        {true && (
+          <li
+            className={`nav-item ${current === '/dashboard/tags' ? 'active' : null}`}
           >
-            <i className="fas fa-users-cog" />
-            <span>Tags</span>
-          </Link>
-        </li>
+            <Link
+              className="nav-link"
+              to="/dashboard/tags"
+              onClick={() => updateCurrentUrl('/dashboard/tags')}
+            >
+              <i className="fas fa-users-cog" />
+              <span>Tags</span>
+            </Link>
+          </li>
         )}
 
         <li
-          className={`nav-item ${
-            current === '/dashboard/contract' ? 'active' : null
-          }`}
+          className={`nav-item ${current === '/dashboard/contract' ? 'active' : null}`}
         >
           <Link
             className="nav-link"
@@ -147,9 +135,7 @@ const Sidebar = React.memo(() => {
         </li>
 
         <li
-          className={`nav-item ${
-            current === '/dashboard/image1' ? 'active' : null
-          }`}
+          className={`nav-item ${current === '/dashboard/image1' ? 'active' : null}`}
         >
           <Link
             className="nav-link"
@@ -162,9 +148,7 @@ const Sidebar = React.memo(() => {
         </li>
 
         <li
-          className={`nav-item ${
-            current === '/dashboard/image2' ? 'active' : null
-          }`}
+          className={`nav-item ${current === '/dashboard/image2' ? 'active' : null}`}
         >
           <Link
             className="nav-link"
@@ -179,9 +163,7 @@ const Sidebar = React.memo(() => {
         <hr className="sidebar-divider" />
         <div className="sidebar-heading">Debug</div>
         <li
-          className={`nav-item ${
-            current === '/dashboard/debug?tab=detector' ? 'active' : null
-          }`}
+          className={`nav-item ${current === '/dashboard/debug?tab=detector' ? 'active' : null}`}
         >
           <Link
             className="nav-link"
