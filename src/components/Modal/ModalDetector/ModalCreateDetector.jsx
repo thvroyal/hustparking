@@ -89,7 +89,7 @@ const ModalCreateDetector = ({
               console.log(values);
               return (
                 <Form className="user">
-                  <TextField label="address Detector" name="addressDetector" type="text" placeholder="Enter address detector" showLabel />
+                  <TextField label="address Detector" name="addressDetector" type="text" placeholder="Enter address detector such as a.b.c.d" showLabel />
                   <TextField label="slot Id" name="slotId" type="number" placeholder="Create slot id" showLabel />
                   <TextField label="id" name="id" type="number" placeholder="Create id" showLabel />
                   <button
@@ -154,7 +154,7 @@ const ModalCreateDetector = ({
               console.log(values);
               return (
                 <Form className="user">
-                  <TextField label="address Detector" name="addressDetector" type="text" placeholder="Enter address detector" showLabel />
+                  <TextField label="address Detector" name="addressDetector" type="text" placeholder="Enter address detector such as a.b.c.d" showLabel />
                   <TextField label="slot Id" name="slotId" type="number" placeholder="Create slot id" showLabel />
                   <button
                     type="submit"

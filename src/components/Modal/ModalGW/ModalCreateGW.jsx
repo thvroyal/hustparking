@@ -71,7 +71,7 @@ const ModalCreateGW = ({
             console.log(errors);
             return (
               <Form className="user">
-                <TextField label="address Gateway" name="addressGateway" type="text" placeholder="Enter address field" showLabel />
+                <TextField label="address Gateway" name="addressGateway" type="text" placeholder="Enter address field such as a.b.c.d" showLabel />
                 <button
                   type="submit"
                   className="btn btn-primary mt-4"
