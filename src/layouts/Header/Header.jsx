@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ClearTokenBackend } from '../../apis/auth';
-import { SET_AD, SET_MN } from '../../helpers/constants';
+import { SET_MN } from '../../helpers/constants';
 
 function Header() {
   const dispatch = useDispatch();
@@ -47,9 +47,7 @@ function Header() {
       >
         <a
           href="#foo"
-          className={`d-block link-dark text-decoration-none dropdown-toggle ${
-            show ? 'show' : ''
-          }`}
+          className={`d-block link-dark text-decoration-none dropdown-toggle ${show ? 'show' : ''}`}
           id="dropdownUser1"
           data-bs-toggle="dropdown"
           aria-expanded="false"
@@ -67,30 +65,23 @@ function Header() {
           className={`dropdown-menu text-small ${show ? 'show' : ''}`}
           aria-labelledby="dropdownUser1"
           style={
-                show
-                  ? {
-                    position: 'absolute',
-                    inset: '0px auto auto 0px',
-                    margin: '0px',
-                    transform: 'translate(-109px, 34px)',
-                  }
-                  : {}
+            show
+              ? {
+                position: 'absolute',
+                inset: '0px auto auto 0px',
+                margin: '0px',
+                transform: 'translate(-109px, 34px)',
               }
+              : {}
+          }
           data-popper-placement="bottom-end"
         >
-          {role === SET_AD && (
-          <li>
-            <Link className="nav-link dropdown-item" to="/dashboard/new-manager">
-              New manager
-            </Link>
-          </li>
-          )}
           {role === SET_MN && (
-          <li>
-            <Link className="nav-link dropdown-item" to="/dashboard/profile?tab=profile">
-              Profile
-            </Link>
-          </li>
+            <li>
+              <Link className="nav-link dropdown-item" to="/dashboard/profile?tab=profile">
+                Profile
+              </Link>
+            </li>
           )}
 
           <li>

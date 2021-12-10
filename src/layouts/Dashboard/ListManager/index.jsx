@@ -11,6 +11,7 @@ import ModalDeleteMn from '../../../components/Modal/ModalDeleteMn';
 function Managers() {
   const dispatch = useDispatch();
   const listManager = useSelector((state) => state.listManager.data);
+
   // const [isDeleting, setIsDeleting] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openModelDelete, setOpenModalDelete] = useState(false);
@@ -39,6 +40,11 @@ function Managers() {
   return (
     <>
       <h1 className="h3 mb-2 text-gray-800">List Manager</h1>
+      <div>
+        <Link className="nav-link" to="/dashboard/new-manager">
+          <button type="button" className="btn btn-primary float-right">Create Manager</button>
+        </Link>
+      </div>
       <div className="table-responsive mt-4">
         {listManager && (
           <table
