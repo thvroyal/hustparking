@@ -15,8 +15,8 @@ function DashboardHome() {
                 width: '50%',
               }}
             />
-            <h5 className="font-weight-bold text-primary">Dashboard Page Admin</h5>
-            <p>You can create, edit, delete anything here.</p>
+            <h5 className="font-weight-bold text-primary">HUST- PARKING MANAGEMENT SYSTEM</h5>
+            <p>Sponsor by VINIF2019-DA16</p>
             <button className="btn btn-primary btn-lg" type="button">Get Start</button>
           </div>
         </div>

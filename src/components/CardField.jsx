@@ -31,6 +31,14 @@ function CardField(props) {
 
   return (
     <div className="card border-left-primary shadow h-100 py-2 card-field">
+      <button
+        type="button"
+        className="btn btn-danger"
+        style={{ width: '10%', transform: 'translateX(825%)' }}
+        onClick={() => setOpenModalDelete(true)}
+      >
+        <i className="fas fa-times" style={{ fontSize: '10px' }} />
+      </button>
       <div className="card-body">
         <div className="row no-gutters align-items-center">
           <div className="col mr-2">
@@ -109,13 +117,6 @@ function CardField(props) {
             </div>
           </div>
         </div>
-        <button
-          type="button"
-          className="btn btn-danger float-right mt-4"
-          onClick={() => setOpenModalDelete(true)}
-        >
-          <i className="fas fa-times" style={{ fontSize: '10px' }} />
-        </button>
       </div>
       <ModalOption
         onClose={() => setOpenModalOption(false)}
@@ -125,6 +126,7 @@ function CardField(props) {
       <ModalCreateGW
         onClose={() => setOpenModalCreateGW(false)}
         open={isOpenModalCreateGW}
+        id={id}
       />
       <ModalDeleteField
         onClose={() => setOpenModalDelete(false)}

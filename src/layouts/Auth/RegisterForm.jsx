@@ -31,7 +31,7 @@ const RegisterForm = () => {
         email: '',
         image: '',
         equipment: '',
-        idNumber: '',
+        idNumber: 0,
         password: '',
         phone: '',
         rePassword: '',

@@ -1,16 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { func, bool, number } from 'prop-types';
+import {
+  func,
+  bool,
+  number,
+  string,
+} from 'prop-types';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getField } from '../../../apis/fieldApi';
 import UpdateFieldRow from './UpdateFieldRow';
 
-const UpdateField = ({ onClose, open, selected }) => {
+const UpdateField = ({
+  onClose, open, selected, listField, listFieldSelected,
+}) => {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
   const [fields, setFields] = useState([]);
   const allFields = useSelector((state) => state.field.data);
+
+  const addFieldForManager = async () => {
+    const data = {
+      fieldId: listFieldSelected,
+      managerId: selected,
+    };
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_BASE_URL}/api/ad/managerField/create_and_update`,
+        data: JSON.stringify(data),
+        headers: {
+          token: localStorage.getItem('AccessToken'),
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.data.message !== 'success') {
+        console.log('fail');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleClose = () => {
     onClose();
@@ -61,10 +91,12 @@ const UpdateField = ({ onClose, open, selected }) => {
               fieldId={field.id}
               managerId={selected}
               key={field.id}
+              listField={listField}
             />
           ))}
         </ul>
         {isLoading && <span>Loading</span>}
+        <button type="button" className="btn btn-primary float-right" onClick={addFieldForManager}>Save</button>
       </Modal.Body>
     </Modal>
   );
@@ -74,5 +106,7 @@ UpdateField.propTypes = {
   onClose: func.isRequired,
   open: bool.isRequired,
   selected: number.isRequired,
+  listField: func.isRequired,
+  listFieldSelected: string.isRequired,
 };
 export default React.memo(UpdateField);

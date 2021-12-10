@@ -86,14 +86,6 @@ const ModalCreateField = ({
               <Form className="user">
                 <TextField label="field name" name="name" type="text" placeholder="Enter field name" showLabel />
                 <TextField label="address" name="address" type="text" placeholder="Enter address field" showLabel />
-                <div className="form-row">
-                  <div className="col-md-6">
-                    <TextField label="longitude" name="longitude" type="text" placeholder="e.g: 21.0369823" showLabel />
-                  </div>
-                  <div className="col-md-6">
-                    <TextField label="latitude" name="latitude" type="text" placeholder="e.g: 105.7752916" showLabel />
-                  </div>
-                </div>
                 <TextField label="image" name="image" type="text" placeholder="e.g: https://url.com/image.png" showLabel />
                 <TextField label="open status" name="openstatus" type="text" placeholder="0 is close, 1 is open" showLabel />
                 <div className="form-row">
@@ -103,6 +95,15 @@ const ModalCreateField = ({
                   <div className="col-md-6">
                     <TextField label="space" name="space" type="number" placeholder="e.g: 30" showLabel />
                   </div>
+                </div>
+                <div className="form-row">
+                  <div className="col-md-4">
+                    <TextField label="longitude" name="longitude" type="text" placeholder="e.g: 21.0369823" showLabel />
+                  </div>
+                  <div className="col-md-4">
+                    <TextField label="latitude" name="latitude" type="text" placeholder="e.g: 105.7752916" showLabel />
+                  </div>
+                  <button type="button" className="btn btn-info col-md-4" style={{ height: '48px', transform: 'translateY(32px)' }}>Get place</button>
                 </div>
                 <TextField label="details" name="details" type="text" placeholder="Enter details here" showLabel />
                 <button

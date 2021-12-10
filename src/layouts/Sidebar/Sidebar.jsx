@@ -47,21 +47,25 @@ const Sidebar = React.memo(() => {
             <span>Dashboard</span>
           </Link>
         </li>
-        <li
-          className={`nav-item ${current === '/dashboard/analysis' ? 'active' : null}`}
-        >
-          <Link
-            to="/dashboard/analysis"
-            className="nav-link"
-            onClick={() => updateCurrentUrl('/dashboard/analysis')}
-          >
-            <i className="fas fa-chart-bar" />
-            <span>Analysis</span>
-          </Link>
-        </li>
 
         <hr className="sidebar-divider" />
-        <div className="sidebar-heading">Manager</div>
+        {/* <div className="h3 text-center text-white">MANAGEMENT</div> */}
+        <div className="sidebar-heading">MANAGEMENT</div>
+
+        {role === SET_AD && (
+          <li
+            className={`nav-item ${current === '/dashboard/managers' ? 'active' : null}`}
+          >
+            <Link
+              className="nav-link"
+              to="/dashboard/managers"
+              onClick={() => updateCurrentUrl('/dashboard/managers')}
+            >
+              <i className="fas fa-users-cog" />
+              <span>Manager</span>
+            </Link>
+          </li>
+        )}
 
         <li
           className={`nav-item ${current === '/dashboard/fields' ? 'active' : null}`}
@@ -76,6 +80,20 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
+        <li
+          className={`nav-item ${current === '/dashboard/analysis' ? 'active' : null}`}
+        >
+          <Link
+            to="/dashboard/analysis"
+            className="nav-link"
+            onClick={() => updateCurrentUrl('/dashboard/analysis')}
+          >
+            <i className="fas fa-chart-bar" />
+            <span>Analysis</span>
+          </Link>
+        </li>
+        <hr className="sidebar-divider" />
+
         {role === SET_AD && (
           <li
             className={`nav-item ${current === '/dashboard/users' ? 'active' : null}`}
@@ -86,22 +104,7 @@ const Sidebar = React.memo(() => {
               onClick={() => updateCurrentUrl('/dashboard/users')}
             >
               <i className="fas fa-fw fa-user" />
-              <span>List User</span>
-            </Link>
-          </li>
-        )}
-
-        {role === SET_AD && (
-          <li
-            className={`nav-item ${current === '/dashboard/managers' ? 'active' : null}`}
-          >
-            <Link
-              className="nav-link"
-              to="/dashboard/managers"
-              onClick={() => updateCurrentUrl('/dashboard/managers')}
-            >
-              <i className="fas fa-users-cog" />
-              <span>List Manager</span>
+              <span>Users</span>
             </Link>
           </li>
         )}
@@ -130,9 +133,25 @@ const Sidebar = React.memo(() => {
             onClick={() => updateCurrentUrl('/dashboard/contract')}
           >
             <i className="fas fa-fw fa-file-contract" />
-            <span>Contract</span>
+            <span>Contracts</span>
           </Link>
         </li>
+
+        <hr className="sidebar-divider" />
+        <div className="sidebar-heading">Debug</div>
+        <li
+          className={`nav-item ${current === '/dashboard/debug?tab=detector' ? 'active' : null}`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/debug?tab=detector"
+            onClick={() => updateCurrentUrl('/dashboard/debug?tab=detector')}
+          >
+            <i className="fas fa-fw fa-bug" />
+            <span>Debug</span>
+          </Link>
+        </li>
+        <hr className="sidebar-divider" />
 
         <li
           className={`nav-item ${current === '/dashboard/image1' ? 'active' : null}`}
@@ -157,21 +176,6 @@ const Sidebar = React.memo(() => {
           >
             <i className="fas fa-fw fa-image" />
             <span>Image 2</span>
-          </Link>
-        </li>
-
-        <hr className="sidebar-divider" />
-        <div className="sidebar-heading">Debug</div>
-        <li
-          className={`nav-item ${current === '/dashboard/debug?tab=detector' ? 'active' : null}`}
-        >
-          <Link
-            className="nav-link"
-            to="/dashboard/debug?tab=detector"
-            onClick={() => updateCurrentUrl('/dashboard/debug?tab=detector')}
-          >
-            <i className="fas fa-fw fa-bug" />
-            <span>Debug</span>
           </Link>
         </li>
 
