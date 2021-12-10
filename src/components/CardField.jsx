@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Pie } from 'react-chartjs-2';
-import { Link } from 'react-router-dom';
 import { Tooltip } from 'reactstrap';
 import ModalDeleteField from './Modal/ModalField/ModalDeleteField';
 import ModalCreateGW from './Modal/ModalGW/ModalCreateGW';
@@ -31,33 +30,35 @@ function CardField(props) {
 
   return (
     <div className="card border-left-primary shadow h-100 py-2 card-field">
-      <button
-        type="button"
-        className="btn btn-danger"
-        style={{ width: '10%', transform: 'translateX(825%)' }}
-        onClick={() => setOpenModalDelete(true)}
-      >
-        <i className="fas fa-times" style={{ fontSize: '10px' }} />
-      </button>
       <div className="card-body">
         <div className="row no-gutters align-items-center">
           <div className="col mr-2">
-            <Link to={`/dashboard/fields/${id}`} className="card-link">
+            <div
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.ctrlKey) {
+                  setOpenModalCreateGW(true);
+                }
+              }}
+              onClick={() => setOpenModalDelete(true)}
+            >
               <div
                 className="text-xs font-weight-bold text-primary text-uppercase mb-1"
               >
                 {`Field ${id}`}
               </div>
               <div
-                className="h5 mb-0 text-gray-800 font-weight-bold text-uppercase"
+                className="h6 mb-0 text-gray-800 font-weight-bold text-uppercase"
               >
                 {name}
               </div>
-            </Link>
+            </div>
+
             {(GW && GW.length)
               ? GW.map((item, index) => (
                 <div
-                  className="badge badge-primary font-weight-normal mr-1"
+                  className="h1 badge badge-primary font-weight-normal mr-1"
                   id={`tooltip${index}`}
                   role="button"
                   tabIndex={0}

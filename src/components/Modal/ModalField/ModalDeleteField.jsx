@@ -4,6 +4,7 @@ import {
   func, bool, string,
 } from 'prop-types';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { getField } from '../../../apis/fieldApi';
@@ -50,13 +51,15 @@ const ModalDeleteField = ({
   return (
     <Modal show={open} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Do you want to delete?</Modal.Title>
+        <Modal.Title>What do you want to do?</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form>
           <div className="form-group row align-items-center d-flex justify-content-around">
-            <button className="btn btn-info" type="button" onClick={handleClose} disabled={isLoading}>Back</button>
             <button className="btn btn-danger" type="button" onClick={handleClick} disabled={isLoading}>Delete</button>
+            <Link to={`/dashboard/fields/${id}`} className="card-link">
+              <button type="button" className="btn btn-primary">Go to list slot</button>
+            </Link>
           </div>
         </form>
       </Modal.Body>
