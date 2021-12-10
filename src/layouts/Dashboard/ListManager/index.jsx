@@ -18,11 +18,21 @@ function Managers() {
   const [idMn, setIdMn] = useState(null);
   const [selectedMn, setSelectedMn] = useState(null);
   const [listFieldSelected, setListFieldSelected] = useState([]);
+  console.log(listFieldSelected);
 
-  const listField = (filedId) => {
-    setListFieldSelected([...listFieldSelected, filedId]);
-    if (listFieldSelected.includes(filedId)) listFieldSelected.pop(filedId);
+  // filter list start
+  const listFieldFilter = (fieldID) => {
+    console.log(listFieldSelected);
+    if (listFieldSelected.includes(fieldID)) {
+      const filter = listFieldSelected.filter((item) => item !== fieldID);
+      return setListFieldSelected([...filter]);
+    }
+    return setListFieldSelected([...listFieldSelected, fieldID]);
   };
+
+  const listField = (fieldIdx) => setListFieldSelected(() => listFieldFilter(fieldIdx));
+  // filter list end
+
   useEffect(() => {
     dispatch(getListManager());
   }, [dispatch]);

@@ -4,7 +4,7 @@ import {
   func,
   bool,
   number,
-  string,
+  arrayOf,
 } from 'prop-types';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -107,6 +107,6 @@ UpdateField.propTypes = {
   open: bool.isRequired,
   selected: number.isRequired,
   listField: func.isRequired,
-  listFieldSelected: string.isRequired,
+  listFieldSelected: arrayOf.isRequired,
 };
 export default React.memo(UpdateField);

@@ -15,7 +15,10 @@ function UpdateFieldRow({
       <span className="w-75">{title}</span>
       <SwitchToggle
         onChecked={() => listField(fieldId)}
-        onUnchecked={() => console.log('toggle False')}
+        onUnchecked={() => {
+          console.log('toggle False');
+          listField(fieldId);
+        }}
         scale={0.75}
         toggled={toggled}
       />
