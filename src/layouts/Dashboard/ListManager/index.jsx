@@ -51,7 +51,7 @@ function Managers() {
     <>
       <h1 className="h3 mb-2 text-gray-800">List Manager</h1>
       <div>
-        <Link className="nav-link" to="/dashboard/new-manager">
+        <Link to="/dashboard/new-manager">
           <button type="button" className="btn btn-primary float-right">Create Manager</button>
         </Link>
       </div>
@@ -68,7 +68,6 @@ function Managers() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Address</th>
-                <th>Equipment</th>
                 <th>Last Time Access</th>
                 <th>Actions</th>
               </tr>
@@ -88,10 +87,9 @@ function Managers() {
                   </td>
                   <td>{mn.email}</td>
                   <td>{mn.address}</td>
-                  <td>{mn.equipment}</td>
                   <td>{mn.lastTimeAccess}</td>
                   <td>
-                    <button className="btn btn-sm btn-outline-primary mr-2" type="button" onClick={() => onClickUpdate(mn.id)}>Update Fields</button>
+                    <button className="btn btn-sm btn-outline-primary mr-2" type="button" onClick={() => onClickUpdate(mn.id)}>Set and update fields</button>
                     <button
                       className="btn btn-sm btn-outline-danger"
                       type="button"

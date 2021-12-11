@@ -6,6 +6,7 @@ import {
   number,
   arrayOf,
 } from 'prop-types';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getField } from '../../../apis/fieldApi';
@@ -18,6 +19,10 @@ const UpdateField = ({
   const [isLoading, setLoading] = useState(false);
   const [fields, setFields] = useState([]);
   const allFields = useSelector((state) => state.field.data);
+
+  const handleClose = () => {
+    onClose();
+  };
 
   const addFieldForManager = async () => {
     const data = {
@@ -34,16 +39,16 @@ const UpdateField = ({
           'Content-Type': 'application/json',
         },
       });
-      if (response.data.message !== 'success') {
-        console.log('fail');
+      if (response.data.message === 'success') {
+        toast.success('Success', {
+          position: toast.POSITION.TOP_RIGHT,
+          onOpen: handleClose,
+        });
       }
     } catch (error) {
+      toast.error('Can\'t create or update for this field');
       console.log(error);
     }
-  };
-
-  const handleClose = () => {
-    onClose();
   };
 
   const handleToggle = (id) => {

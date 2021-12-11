@@ -57,7 +57,7 @@ function TabEdit() {
             <Formik
               initialValues={{
                 phone: info.phone,
-                email: info.email,
+                image: '',
                 address: info.address,
                 birth: formatString(info.birth),
                 sex: info.sex,
@@ -66,12 +66,13 @@ function TabEdit() {
               }}
               validationSchema={validate}
               onSubmit={async (values) => {
+                const convertStringToNumber = Number(values.idNumber);
                 setLoading(true);
                 try {
                   const response = await Axios({
                     method: 'post',
                     url: `${process.env.REACT_APP_BASE_URL}/api/us/update_info`,
-                    data: values,
+                    data: { ...values, idNumber: convertStringToNumber },
                     headers: {
                       token: localStorage.AccessToken,
                     },
@@ -89,7 +90,6 @@ function TabEdit() {
               {({ values }) => (
                 <>
                   <Form className="user">
-                    <TextField showLabel label="email" name="email" type="mail" placeholder="Update your email" disabled />
                     <TextField showLabel label="phone" name="phone" type="tel" placeholder="Update your phone" />
                     <TextField showLabel label="date of birth" name="birth" type="date" placeholder="Update your birthday" />
                     <div className="float-left mb-3 ml-3 w-100">
@@ -98,6 +98,7 @@ function TabEdit() {
                       <RadioField label="Male" name="sex" value="M" checked={values.sex === 'M'} />
                       <RadioField label="Other" name="sex" value="O" checked={values.sex === 'O'} />
                     </div>
+                    <TextField showLabel label="image" name="image" type="text" placeholder="Update your image" />
                     <TextField showLabel label="address" name="address" type="text" placeholder="Update your address" />
                     <TextField showLabel label="equipment" name="equipment" type="text" placeholder="Update your equipment" />
                     <TextField showLabel label="ID number" name="idNumber" type="text" placeholder="Update your ID number" />
@@ -107,26 +108,26 @@ function TabEdit() {
                       disabled={loading}
                     >
                       {loading && (
-                      <Spinner
-                        animation="border"
-                        color="primary"
-                        size="sm"
-                        className="mr-3"
-                      />
+                        <Spinner
+                          animation="border"
+                          color="primary"
+                          size="sm"
+                          className="mr-3"
+                        />
                       )}
                       {' '}
                       Update
                     </button>
                   </Form>
                   {isSuccess === 1 && (
-                  <div className="alert alert-success mt-3" role="alert">
-                    Update information success!
-                  </div>
+                    <div className="alert alert-success mt-3" role="alert">
+                      Update information success!
+                    </div>
                   )}
                   {isSuccess === 0 && (
-                  <div className="alert alert-danger mt-3" role="alert">
-                    Update information fail!
-                  </div>
+                    <div className="alert alert-danger mt-3" role="alert">
+                      Update information fail!
+                    </div>
                   )}
                 </>
               )}

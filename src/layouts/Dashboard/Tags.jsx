@@ -54,7 +54,7 @@ function Tags() {
                 <tr>
                   <th scope="col">User ID</th>
                   <th scope="col">Tags ID</th>
-                  <th scope="col">Tag email</th>
+                  <th scope="col">User email</th>
                   <th scope="col">Edit</th>
                 </tr>
               </thead>

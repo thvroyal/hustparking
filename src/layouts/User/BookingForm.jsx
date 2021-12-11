@@ -35,15 +35,7 @@ function BookingForm() {
     const timeNowArray = timeNowString.split(', ');
     const date = timeNowArray[1].split('/');
     const time = timeNowArray[0].split(':');
-    const dateFormatted = `${date[2]
-    }-${
-      convertNum(date[1])
-    }-${
-      convertNum(date[0])
-    }T${
-      convertNum(time[0])
-    }:${
-      convertNum(time[1])}`;
+    const dateFormatted = `${date[2]}-${convertNum(date[1])}-${convertNum(date[0])}T${convertNum(time[0])}:${convertNum(time[1])}`;
     setTimeNow(dateFormatted);
     // console.log(dateFormatted);
   }
@@ -57,7 +49,7 @@ function BookingForm() {
       fieldId: fieldSelected,
       timeInBook: `${timeInRef.current.value.split('T').join(' ')}:00`,
       timeOutBook: `${timeOutRef.current.value.split('T').join(' ')}:00`,
-      carNumber: 'null',
+      carNumber: 'string',
     };
     // validate time : timeInBook > time OutBook && timeInBook  < timeNow + 30p
     if (getTime(data.timeInBook) >= getTime(data.timeOutBook)) {
@@ -123,11 +115,8 @@ function BookingForm() {
                   >
                     <button
                       type="button"
-                      className={`btn ${
-                        field.id === fieldSelected
-                          ? 'btn-dark'
-                          : 'btn-outline-dark'
-                      }`}
+                      className={`btn ${field.id === fieldSelected
+                        ? 'btn-dark' : 'btn-outline-dark'}`}
                       style={{
                         width: '-webkit-fill-available',
                       }}
@@ -191,9 +180,7 @@ function BookingForm() {
         </div>
         {mess.type != null && (
           <div
-            className={`alert mt-3 ${
-              mess.type ? 'alert-success' : 'alert-danger'
-            }`}
+            className={`alert mt-3 ${mess.type ? 'alert-success' : 'alert-danger'}`}
             role="alert"
           >
             {mess.content}

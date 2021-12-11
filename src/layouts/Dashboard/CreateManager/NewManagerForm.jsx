@@ -54,12 +54,12 @@ const NewManagerForm = ({ onSuccess }) => {
               className="btn btn-primary btn-user btn-block mt-5"
             >
               {loading && (
-              <Spinner
-                animation="border"
-                color="primary"
-                size="sm"
-                className="mr-3"
-              />
+                <Spinner
+                  animation="border"
+                  color="primary"
+                  size="sm"
+                  className="mr-3"
+                />
               )}
               Create manager
             </button>
