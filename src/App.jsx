@@ -13,6 +13,7 @@ import PageNotFound from './pages/404';
 import { verifyToken } from './apis/auth';
 import ForgotPassword from './pages/ForgotPassword';
 import GGMapSearch from './pages/GGMapSearch';
+import VideoCaptureParking from './pages/VideoCaptureParking';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </UnauthenticatedRoute>
           <UnauthenticatedRoute target="/login" path="/map-search">
             <GGMapSearch />
+          </UnauthenticatedRoute>
+          <UnauthenticatedRoute target="/login" path="/video-capture-parking">
+            <VideoCaptureParking />
           </UnauthenticatedRoute>
           {/* <UnauthenticatedRoute target="/" path="/dashboard">
             <Dashboard />
