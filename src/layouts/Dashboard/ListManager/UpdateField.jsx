@@ -4,7 +4,6 @@ import {
   func,
   bool,
   number,
-  arrayOf,
 } from 'prop-types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -13,16 +12,26 @@ import { getField } from '../../../apis/fieldApi';
 import UpdateFieldRow from './UpdateFieldRow';
 
 const UpdateField = ({
-  onClose, open, selected, listField, listFieldSelected,
+  onClose, open, selected,
 }) => {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
-  const [fields, setFields] = useState([]);
   const allFields = useSelector((state) => state.field.data);
+  const [listFieldSelected, setListFieldSelected] = useState([]);
 
   const handleClose = () => {
     onClose();
   };
+
+  const listFieldFilter = (fieldID) => {
+    if (listFieldSelected.includes(fieldID)) {
+      const filter = listFieldSelected.filter((item) => item !== fieldID);
+      return setListFieldSelected([...filter]);
+    }
+    return setListFieldSelected([...listFieldSelected, fieldID]);
+  };
+
+  const listField = (fieldIdx) => setListFieldSelected(() => listFieldFilter(fieldIdx));
 
   const addFieldForManager = async () => {
     const data = {
@@ -52,8 +61,8 @@ const UpdateField = ({
   };
 
   const handleToggle = (id) => {
-    if (fields) {
-      if (fields.includes(id)) {
+    if (listFieldSelected) {
+      if (listFieldSelected.includes(id)) {
         return true;
       }
     }
@@ -75,7 +84,8 @@ const UpdateField = ({
           if (d.managerId === selected) return d.fieldId;
           return -1;
         });
-        setFields(fieldOfManagerId);
+        const filterField = fieldOfManagerId.filter((i) => i > 0);
+        setListFieldSelected(filterField);
       }
     } catch (error) {
       console.log(error);
@@ -111,7 +121,8 @@ UpdateField.propTypes = {
   onClose: func.isRequired,
   open: bool.isRequired,
   selected: number.isRequired,
-  listField: func.isRequired,
-  listFieldSelected: arrayOf.isRequired,
+  // listField: func.isRequired,
+  // listFieldSelected: arrayOf.isRequired,
+  // setListFieldSelected: func.isRequired,
 };
 export default React.memo(UpdateField);

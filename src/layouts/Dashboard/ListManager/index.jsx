@@ -17,20 +17,8 @@ function Managers() {
   const [openModelDelete, setOpenModalDelete] = useState(false);
   const [idMn, setIdMn] = useState(null);
   const [selectedMn, setSelectedMn] = useState(null);
-  const [listFieldSelected, setListFieldSelected] = useState([]);
-  console.log(listFieldSelected);
 
   // filter list start
-  const listFieldFilter = (fieldID) => {
-    console.log(listFieldSelected);
-    if (listFieldSelected.includes(fieldID)) {
-      const filter = listFieldSelected.filter((item) => item !== fieldID);
-      return setListFieldSelected([...filter]);
-    }
-    return setListFieldSelected([...listFieldSelected, fieldID]);
-  };
-
-  const listField = (fieldIdx) => setListFieldSelected(() => listFieldFilter(fieldIdx));
   // filter list end
 
   useEffect(() => {
@@ -89,7 +77,7 @@ function Managers() {
                   <td>{mn.address}</td>
                   <td>{mn.lastTimeAccess}</td>
                   <td>
-                    <button className="btn btn-sm btn-outline-primary mr-2" type="button" onClick={() => onClickUpdate(mn.id)}>Set and update fields</button>
+                    <button className="btn btn-sm btn-outline-primary mr-2" type="button" onClick={() => onClickUpdate(mn.id)}>Update fields</button>
                     <button
                       className="btn btn-sm btn-outline-danger"
                       type="button"
@@ -113,8 +101,6 @@ function Managers() {
                 open={openModal}
                 onClose={() => setOpenModal(false)}
                 selected={selectedMn}
-                listField={listField}
-                listFieldSelected={listFieldSelected}
               />
             </>
           )}
