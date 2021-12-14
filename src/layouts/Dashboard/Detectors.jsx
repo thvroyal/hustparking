@@ -15,16 +15,11 @@ const Detectors = React.memo(() => {
   const [isOpenModalDetector, setOpenModalDetector] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
   const [checkField, setCheckField] = useState(false);
+  const [addrDetector, setAddrDetector] = useState('');
   const [id, setId] = useState(0);
 
   const creatDetector = () => {
     setCheckField(false);
-    console.log(checkField);
-    setOpenModalDetector(true);
-  };
-  const updateDetector = () => {
-    setCheckField(true);
-    console.log(checkField);
     setOpenModalDetector(true);
   };
 
@@ -87,7 +82,17 @@ const Detectors = React.memo(() => {
                       <td>{item.communication_level}</td>
                       <td>
                         <div className="d-flex justify-content-around align-item-center">
-                          <button type="button" className="btn btn-info mr-1" onClick={updateDetector}>Update</button>
+                          <button
+                            type="button"
+                            className="btn btn-info mr-1"
+                            onClick={() => {
+                              setCheckField(true);
+                              setAddrDetector(item.addressDetector);
+                              setOpenModalDetector(true);
+                            }}
+                          >
+                            Update
+                          </button>
                           <button
                             type="button"
                             className="btn btn-danger ml-1"
@@ -119,6 +124,8 @@ const Detectors = React.memo(() => {
         open={isOpenModalDetector}
         checkField={checkField}
         idGW={idGW}
+        id={id}
+        addrDetector={addrDetector}
       />
       <ModalDeleteDetector
         onClose={() => setOpenModalDelete(false)}

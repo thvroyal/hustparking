@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Modal, Spinner } from 'react-bootstrap';
-import { func, bool, number } from 'prop-types';
+import {
+  func,
+  bool,
+  number,
+  string,
+} from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,12 +16,13 @@ import TextField from '../../TextField';
 import { getDetectors } from '../../../apis/detectorsApi';
 
 const ModalCreateDetector = ({
-  onClose, open, checkField, idGW,
+  onClose, open, checkField, idGW, addrDetector,
 }) => {
   const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
   const [timeSetup, setTimeSetup] = useState('');
   const dispatch = useDispatch();
+
   const validateFieldCreate = Yup.object({
     addressDetector: Yup.string().required('Address is required'),
     gatewayId: Yup.number(),
@@ -42,7 +48,7 @@ const ModalCreateDetector = ({
   return (
     <Modal show={open} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Create New Detector</Modal.Title>
+        <Modal.Title>{!checkField ? 'Create New Detector' : 'Update Detector'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!checkField ? (
@@ -51,7 +57,6 @@ const ModalCreateDetector = ({
               addressDetector: '',
               gatewayId: idGW,
               slotId: 0,
-              id: 0,
             }}
             validationSchema={validateFieldCreate}
             onSubmit={async (values) => {
@@ -115,7 +120,7 @@ const ModalCreateDetector = ({
         ) : (
           <Formik
             initialValues={{
-              addressDetector: '',
+              addressDetector: addrDetector,
               gatewayId: idGW,
               slotId: 0,
             }}
@@ -186,7 +191,7 @@ ModalCreateDetector.propTypes = {
   open: bool.isRequired,
   checkField: bool.isRequired,
   idGW: number.isRequired,
-  // id: number.isRequired,
+  addrDetector: string.isRequired,
 };
 
 export default React.memo(ModalCreateDetector);

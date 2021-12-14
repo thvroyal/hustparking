@@ -49,7 +49,7 @@ function BookingForm() {
       fieldId: fieldSelected,
       timeInBook: `${timeInRef.current.value.split('T').join(' ')}:00`,
       timeOutBook: `${timeOutRef.current.value.split('T').join(' ')}:00`,
-      carNumber: 'string',
+      carNumber: '',
     };
     // validate time : timeInBook > time OutBook && timeInBook  < timeNow + 30p
     if (getTime(data.timeInBook) >= getTime(data.timeOutBook)) {
