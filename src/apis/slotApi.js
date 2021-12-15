@@ -7,17 +7,17 @@ export const getSlotOfField = (fieldId) => (dispatch) => {
   dispatch(loadingSlot);
   axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/slot/find_all?quantity=20`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/slot/find_all?field=${fieldId}`,
     headers: {
       token: localStorage.getItem('AccessToken'),
       'Content-Type': 'application/json',
     },
   })
     .then((res) => {
-      let slotInField = res.data.data.filter(
-        (item) => item.fieldId === parseInt(fieldId, 10),
-      );
-      slotInField = slotInField.map((item) => {
+      // let slotInField = res.data.data.filter(
+      //   (item) => item.fieldId === parseInt(fieldId, 10),
+      // );
+      const slotInField = res.data.data.map((item) => {
         const dCam = new Date(item.lastTimeCam).getTime();
         const dDetector = new Date(item.lastTimeDetector).getTime();
         if (dCam > dDetector) item.lastTimeUpdate = item.lastTimeCam;
@@ -37,17 +37,14 @@ export const getQuantitySlotOfField = (fieldId, quantity) => (dispatch) => {
   dispatch(loadingSlot);
   axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/slot/find_all?quantity=${quantity}`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/slot/find_all?field=${fieldId}&quantity=${quantity}`,
     headers: {
       token: localStorage.getItem('AccessToken'),
       'Content-Type': 'application/json',
     },
   })
     .then((res) => {
-      let slotInField = res.data.data.filter(
-        (item) => item.fieldId === parseInt(fieldId, 10),
-      );
-      slotInField = slotInField.map((item) => {
+      const slotInField = res.data.data.map((item) => {
         const dCam = new Date(item.lastTimeCam).getTime();
         const dDetector = new Date(item.lastTimeDetector).getTime();
         if (dCam > dDetector) item.lastTimeUpdate = item.lastTimeCam;

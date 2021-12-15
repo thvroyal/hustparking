@@ -3,9 +3,10 @@ import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import { getSlotOfField } from '../../apis/slotApi';
+import { getSlotOfField, getQuantitySlotOfField } from '../../apis/slotApi';
 import { getField } from '../../apis/fieldApi';
 import { sortSlot } from '../../store/admin/SlotSlice';
+import { LIST_FILTER } from '../../helpers/constants';
 import ModalCreateSlot from '../../components/Modal/ModalSlot/ModalCreateSlot';
 import ModalDeleteSlot from '../../components/Modal/ModalSlot/ModalDeleteSlot';
 import ModalUpdateSlot from '../../components/Modal/ModalSlot/ModalUpdateSlot';
@@ -29,13 +30,28 @@ function Slot() {
   let fieldName;
   if (field) { fieldName = field.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
   useEffect(() => {
-    dispatch(getSlotOfField(fieldId));
+    dispatch(getQuantitySlotOfField(fieldId, 20));
     dispatch(getField());
   }, [dispatch, fieldId]);
 
   function changeFilterShowNull() {
     setShowNull(!showNull);
   }
+
+  const [toggleSlot, setToggleSlot] = useState(false);
+  const handleFilterContractShow = () => {
+    setToggleSlot(!toggleSlot);
+  };
+
+  const [toggleSetView, setToggleSetView] = useState(false);
+  const handleFilterViewShow = () => {
+    setToggleSetView(!toggleSetView);
+  };
+
+  const showAll = () => {
+    dispatch(getSlotOfField(fieldId));
+    dispatch(getField());
+  };
 
   // handle Sort Type
   function handleSortLastUpdated() {
@@ -57,10 +73,133 @@ function Slot() {
   return (
     <>
       <h1 className="h3 mb-4 text-gray-800 text-capitalize">{`Field ${fieldName}`}</h1>
+      <h4>There are two options to view slots</h4>
+      <ol>
+        <li>Show minimun</li>
+        <li>Show all</li>
+      </ol>
+      <h6>
+        The fixed mode is show minimun, if you want to change, you can click
+        <spam className="text-primary ml-1 font-weight-bold">Database</spam>
+      </h6>
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
-          <h6 className="m-0 font-weight-bold text-primary">Database</h6>
-          <button className="btn btn-outline-primary" type="button" onClick={() => setOpenModalCreateSlot(true)}>Create Slot</button>
+          <div style={{ transform: 'translate(5px, 7px)' }}>
+            <div style={{ position: 'relative' }}>
+              <div
+                className="m-0 font-weight-bold text-primary"
+                onClick={handleFilterViewShow}
+                style={{ cursor: 'pointer' }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.ctrlKey) {
+                    return -1;
+                  }
+                  return 1;
+                }}
+              >
+                Database
+              </div>
+            </div>
+            <div className="dropdown text-end position-absolute">
+              <ul
+                className={`dropdown-menu text-small ${toggleSetView ? 'show' : ''}`}
+                aria-labelledby="dropdownUser1"
+                style={
+                  toggleSetView
+                    ? {
+                      position: 'absolute',
+                      inset: '0px auto auto 0px',
+                      margin: '0px',
+                      transform: 'translate(0px, 3px)',
+                      overflow: 'auto',
+                    }
+                    : {}
+                }
+              >
+                <li>
+                  <a
+                    className="dropdown-item text-small text-end text-danger"
+                    href="#foo"
+                    onClick={showAll}
+                  >
+                    Show minimun
+                  </a>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item text-small text-end text-danger"
+                    href="#foo"
+                    onClick={showAll}
+                  >
+                    Show all
+                  </a>
+                  <hr className="dropdown-divider" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="d-flex justify-content-between align-iten-center">
+            <button className="btn btn-outline-primary" type="button" onClick={() => setOpenModalCreateSlot(true)}>Create Slot</button>
+            <div style={{ transform: 'translate(5px, 7px)' }}>
+              <div style={{ position: 'relative' }}>
+                <span style={{ marginRight: '10px' }}>Filter</span>
+                {' '}
+                <i
+                  className="fas fa-filter text-primary"
+                  onClick={handleFilterContractShow}
+                  style={{ cursor: 'pointer' }}
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="dropdown text-end position-absolute">
+                <ul
+                  className={`dropdown-menu text-small ${toggleSlot ? 'show' : ''}`}
+                  aria-labelledby="dropdownUser1"
+                  style={
+                    toggleSlot
+                      ? {
+                        position: 'absolute',
+                        inset: '0px auto auto 0px',
+                        margin: '0px',
+                        transform: 'translate(-90px, 3px)',
+                        overflow: 'auto',
+                      }
+                      : {}
+                  }
+                >
+                  <li>
+                    <a
+                      className="dropdown-item text-small text-end text-danger"
+                      href="#foo"
+                      onClick={showAll}
+                    >
+                      Show all
+                    </a>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  {LIST_FILTER
+                    ? LIST_FILTER.map((item) => (
+                      <li key={item}>
+                        <a
+                          className="dropdown-item"
+                          href="#foo"
+                          onClick={() => {
+                            dispatch(getQuantitySlotOfField(fieldId, item));
+                          }}
+                        >
+                          {item}
+                        </a>
+                        <hr className="dropdown-divider" />
+                      </li>
+                    ))
+                    : null}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="card-body">
           <div className="table-responsive table-hover">
