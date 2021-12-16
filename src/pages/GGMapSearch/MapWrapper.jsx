@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from 'react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -10,49 +11,28 @@ import {
   Marker,
   InfoWindow,
 } from 'react-google-maps';
-import axios from 'axios';
-import * as parksData from './parking.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFieldUser } from '../../apis/fieldApi';
 
-function Map() {
-  let url = 'http://web.sparking.online:5525/api/public/field/find_all';
-  
-  useEffect(() => {
-    axios.get(url)
-      .then(response => {
-        setData(response.data.data);
-      }).catch(error => {
-        console.log(error);
-      })
-    
-    const listener = e => {
-      if (e.key === "Escape") {
-        setSelectedPark(null);
-      }
-    };
-    window.addEventListener("keydown", listener);
-
-    return () => {
-      window.removeEventListener("keydown", listener);
-    };
-  }, []);
-};
-  
-const GoogleMapExample = withGoogleMap(
-  ({ direction, parkInfo, onClickMarker }) => (
+function GoogleMapMarkers({ direction, parksData }) {
+  const [parkInfo, setParkInfo] = useState(null);
+  return (
     <div>
       <GoogleMap
         defaultCenter={{ lat: 21.0294498, lng: 105.8544441 }}
         defaultZoom={13}
       >
         <DirectionsRenderer directions={direction} />
-        {parksData.data.map((park) => (
+        {parksData && parksData.map((park) => (
           <Marker
             key={park.id}
             position={{
               lat: parseFloat(park.latitude),
               lng: parseFloat(park.longitude),
             }}
-            onClick={() => onClickMarker(park)}
+            onClick={() => {
+              setParkInfo(park);
+            }}
           />
         ))}
         {parkInfo && (
@@ -61,28 +41,34 @@ const GoogleMapExample = withGoogleMap(
               lat: parseFloat(parkInfo.latitude),
               lng: parseFloat(parkInfo.longitude),
             }}
-            onCloseClick={() => onClickMarker(null)}
+            onCloseClick={() => setParkInfo(null)}
           >
-            <div>Park Details</div>
+            <div>
+              <div>{parkInfo.name}</div>
+              <div>{`Status: ${parkInfo.busySlot}/${parkInfo.totalSlot}`}</div>
+            </div>
           </InfoWindow>
         )}
       </GoogleMap>
     </div>
-  ),
-);
+  );
+}
+
+const GoogleMapExample = withGoogleMap(GoogleMapMarkers);
 
 const MapWrapper = () => {
+  const dispatch = useDispatch();
   const [direction, setDirection] = useState(null);
-  const [parkInfo, setParkInfo] = useState(null);
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
-  const [pointOrigin, setpointOrigin] = useState('');
+  const [pointOrigin, setPointOrigin] = useState('');
   const [pointDestination, setPointDestination] = useState('');
   const [distance, setDistance] = useState(null);
+  const listFields = useSelector((state) => state.field.data);
 
-  const onClickMarker = (park) => {
-    setParkInfo(park);
-  };
+  useEffect(() => {
+    dispatch(getFieldUser());
+  }, [dispatch]);
 
   const handleSelectOrigin = async (_origin) => {
     try {
@@ -140,7 +126,7 @@ const MapWrapper = () => {
       <div className="position-absolute d-flex flex-column justify-content-center m-2" style={{ zIndex: 1000, width: '30%' }}>
         <PlacesAutocomplete
           value={pointOrigin}
-          onChange={setpointOrigin}
+          onChange={setPointOrigin}
           onSelect={handleSelectOrigin}
           key="origin-point"
         >
@@ -220,8 +206,7 @@ const MapWrapper = () => {
           }
           mapElement={<div style={{ height: '100%' }} />}
           direction={direction}
-          parkInfo={parkInfo}
-          onClickMarker={onClickMarker}
+          parksData={listFields}
         />
       </div>
     </div>
