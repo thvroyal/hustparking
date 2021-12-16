@@ -10,8 +10,33 @@ import {
   Marker,
   InfoWindow,
 } from 'react-google-maps';
+import axios from 'axios';
 import * as parksData from './parking.json';
 
+function Map() {
+  let url = 'http://web.sparking.online:5525/api/public/field/find_all';
+  
+  useEffect(() => {
+    axios.get(url)
+      .then(response => {
+        setData(response.data.data);
+      }).catch(error => {
+        console.log(error);
+      })
+    
+    const listener = e => {
+      if (e.key === "Escape") {
+        setSelectedPark(null);
+      }
+    };
+    window.addEventListener("keydown", listener);
+
+    return () => {
+      window.removeEventListener("keydown", listener);
+    };
+  }, []);
+};
+  
 const GoogleMapExample = withGoogleMap(
   ({ direction, parkInfo, onClickMarker }) => (
     <div>
@@ -112,7 +137,7 @@ const MapWrapper = () => {
 
   return (
     <div>
-      <div className="position-absolute d-flex justify-content-center" style={{ zIndex: 1000, width: '100%' }}>
+      <div className="position-absolute d-flex flex-column justify-content-center m-2" style={{ zIndex: 1000, width: '30%' }}>
         <PlacesAutocomplete
           value={pointOrigin}
           onChange={setpointOrigin}
@@ -129,7 +154,7 @@ const MapWrapper = () => {
               <input
                 {...getInputProps({
                   placeholder: 'Search Origin ...',
-                  className: 'form-control',
+                  className: 'form-control rounded border border-3 border-light shadow-sm p-2 mb-3 mt-2 bg-white',
                 })}
               />
               <div className="autocomplete-dropdown-container">
@@ -160,11 +185,11 @@ const MapWrapper = () => {
             getSuggestionItemProps,
             loading,
           }) => (
-            <div>
+            <div className="input-group">
               <input
                 {...getInputProps({
                   placeholder: 'Search Destination',
-                  className: 'location-search-input',
+                  className: 'form-control location-search-input rounded border border-3 border-light shadow-sm p-2 mb-3 bg-white',
                 })}
               />
               <div className="autocomplete-dropdown-container">
@@ -183,7 +208,7 @@ const MapWrapper = () => {
             </div>
           )}
         </PlacesAutocomplete>
-        <button type="button" onClick={onSearch}>
+        <button className="btn btn-primary" type="button" style={{ width: '20%' }} onClick={onSearch}>
           Search
         </button>
         <p>{`Distance: ${Math.round(distance) / 1000} km`}</p>
