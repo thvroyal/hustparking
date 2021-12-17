@@ -47,7 +47,7 @@ const ModalCreateField = ({
             name: '',
             openstatus: '',
             price: 0,
-            space: 0,
+            space: 30,
           }}
           validationSchema={validateField}
           onSubmit={async (values) => {

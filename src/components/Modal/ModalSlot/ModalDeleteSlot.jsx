@@ -6,7 +6,7 @@ import {
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSlotOfField } from '../../../apis/slotApi';
+import { getSlotOfFieldViewMin } from '../../../apis/slotApi';
 
 const ModalDeleteSlot = ({
   onClose, open, id, fieldId,
@@ -14,7 +14,6 @@ const ModalDeleteSlot = ({
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { alias } = useSelector((state) => state.auth);
-
   const handleClose = () => {
     onClose();
   };
@@ -24,13 +23,13 @@ const ModalDeleteSlot = ({
       setLoading(true);
       const response = await axios({
         method: 'DELETE',
-        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/slot/delete/${id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/slots/${id}`,
         headers: {
           token: localStorage.getItem('AccessToken'),
           'Content-Type': 'application/json',
         },
       });
-      dispatch(getSlotOfField(fieldId));
+      dispatch(getSlotOfFieldViewMin(fieldId));
 
       setLoading(false);
       if (response.data.message === 'success') {

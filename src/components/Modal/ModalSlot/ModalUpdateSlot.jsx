@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import {
-  func, bool, string,
+  func, bool, string, number,
 } from 'prop-types';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import SwitchToggle from '../../SwitchToggle';
-import { getSlotOfField } from '../../../apis/slotApi';
+import { getSlotOfFieldViewMin } from '../../../apis/slotApi';
 
 const ModalUpdateSlot = ({
-  onClose, open, fieldName, fieldId,
+  onClose, open, fieldName, fieldId, id, cam, detector,
 }) => {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
@@ -28,21 +28,21 @@ const ModalUpdateSlot = ({
       statusCam,
       statusDetector,
       fieldId,
-      id: 0,
+      id,
     };
 
     try {
       setLoading(true);
       const response = await axios({
-        method: 'POST',
-        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/slot/create_and_update`,
+        method: 'PUT',
+        url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/slots`,
         headers: {
           token: localStorage.getItem('AccessToken'),
           'Content-Type': 'application/json',
         },
         data: JSON.stringify(data),
       });
-      dispatch(getSlotOfField(fieldId));
+      dispatch(getSlotOfFieldViewMin(fieldId));
 
       setLoading(false);
       if (response.data.message === 'success') {
@@ -62,7 +62,7 @@ const ModalUpdateSlot = ({
   return (
     <Modal show={open} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Create New Slot</Modal.Title>
+        <Modal.Title>Update Slot</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="form-group row align-items-center">
@@ -72,12 +72,25 @@ const ModalUpdateSlot = ({
           </div>
         </div>
         <div className="form-group row align-items-center">
+          <label htmlFor="fieldId" className="col-sm-4 col-form-label">Field ID</label>
+          <div className="col-sm-8">
+            <input type="text" readOnly className="form-control-plaintext" id="fieldId" value={fieldId} />
+          </div>
+        </div>
+        <div className="form-group row align-items-center">
+          <label htmlFor="id" className="col-sm-4 col-form-label">Slot ID</label>
+          <div className="col-sm-8">
+            <input type="text" readOnly className="form-control-plaintext" id="id" value={id} />
+          </div>
+        </div>
+        <div className="form-group row align-items-center">
           <label htmlFor={`field-${fieldId}`} className="col-sm-4 col-form-label">Status Camera</label>
           <div className="col-sm-8">
             <SwitchToggle
               onChecked={() => setStatusCam(true)}
               onUnchecked={() => setStatusCam(false)}
               scale={0.7}
+              toggled={cam}
             />
           </div>
         </div>
@@ -88,6 +101,7 @@ const ModalUpdateSlot = ({
               onChecked={() => setStatusDetector(true)}
               onUnchecked={() => setStatusDetector(false)}
               scale={0.7}
+              toggled={detector}
             />
           </div>
         </div>
@@ -102,6 +116,9 @@ ModalUpdateSlot.propTypes = {
   open: bool.isRequired,
   fieldName: string,
   fieldId: string.isRequired,
+  id: number.isRequired,
+  cam: bool.isRequired,
+  detector: bool.isRequired,
 };
 
 ModalUpdateSlot.defaultProps = {

@@ -3,7 +3,12 @@ import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import { getSlotOfField, getQuantitySlotOfField } from '../../apis/slotApi';
+import {
+  getSlotOfField,
+  getQuantitySlotOfField,
+  getSlotOfFieldViewMin,
+  getQuantitySlotOfFieldViewMin,
+} from '../../apis/slotApi';
 import { getField } from '../../apis/fieldApi';
 import { sortSlot } from '../../store/admin/SlotSlice';
 import { LIST_FILTER } from '../../helpers/constants';
@@ -26,11 +31,12 @@ function Slot() {
   const [isOpenModalUpdateSlot, setOpenModalUpdateSlot] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
   const [id, setId] = useState(0);
+  const [view, setView] = useState(false);
   // get fieldName from list field by ID
   let fieldName;
   if (field) { fieldName = field.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
   useEffect(() => {
-    dispatch(getQuantitySlotOfField(fieldId, 20));
+    dispatch(getQuantitySlotOfFieldViewMin(fieldId, 20));
     dispatch(getField());
   }, [dispatch, fieldId]);
 
@@ -49,8 +55,31 @@ function Slot() {
   };
 
   const showAll = () => {
-    dispatch(getSlotOfField(fieldId));
-    dispatch(getField());
+    if (view) dispatch(getSlotOfField(fieldId));
+    else dispatch(getSlotOfFieldViewMin(fieldId));
+  };
+
+  const viewMinimun = () => {
+    setView(false);
+    dispatch(getQuantitySlotOfFieldViewMin(fieldId, 20));
+  };
+
+  const viewAll = () => {
+    setView(true);
+    dispatch(getQuantitySlotOfField(fieldId, 20));
+  };
+  const [cam, setCam] = useState(false);
+  const [detector, setDetector] = useState(false);
+  const handleUpdateBtn = (statusCam, statusDetector) => {
+    setCam(statusCam);
+    setDetector(statusDetector);
+  };
+
+  const handleShow = (item) => {
+    if (view) dispatch(getQuantitySlotOfField(fieldId, item));
+    else {
+      dispatch(getQuantitySlotOfFieldViewMin(fieldId, item));
+    }
   };
 
   // handle Sort Type
@@ -122,7 +151,7 @@ function Slot() {
                   <a
                     className="dropdown-item text-small text-end text-danger"
                     href="#foo"
-                    onClick={showAll}
+                    onClick={viewMinimun}
                   >
                     Show minimun
                   </a>
@@ -132,7 +161,7 @@ function Slot() {
                   <a
                     className="dropdown-item text-small text-end text-danger"
                     href="#foo"
-                    onClick={showAll}
+                    onClick={viewAll}
                   >
                     Show all
                   </a>
@@ -186,9 +215,7 @@ function Slot() {
                         <a
                           className="dropdown-item"
                           href="#foo"
-                          onClick={() => {
-                            dispatch(getQuantitySlotOfField(fieldId, item));
-                          }}
+                          onClick={() => handleShow(item)}
                         >
                           {item}
                         </a>
@@ -212,36 +239,46 @@ function Slot() {
               <thead>
                 <tr>
                   <th>Slot ID</th>
-                  <th>Address Detector</th>
-                  <th>Address Gateway</th>
+                  {view ? (
+                    <>
+                      <th>Address Detector</th>
+                      <th>Address Gateway</th>
+                    </>
+                  ) : null}
                   <th>Status Detector</th>
                   <th>Status Cam</th>
-                  <th>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>Status</div>
-                      <i
-                        className={`fa ${!showNull ? 'fa-eye' : 'fa-eye-slash'} small`}
-                        onClick={changeFilterShowNull}
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </th>
-                  <th>Last Time Cam</th>
-                  <th>Last Time Detector</th>
-                  <th>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>Last Update</div>
-                      <i
-                        className={`fa ${descLastUpdated === null
-                          ? 'fa-sort'
-                          : !descLastUpdated
-                            ? 'fa-sort-down'
-                            : 'fa-sort-up'}`}
-                        onClick={handleSortLastUpdated}
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </th>
+                  {view ? (
+                    <th>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div>Status</div>
+                        <i
+                          className={`fa ${!showNull ? 'fa-eye' : 'fa-eye-slash'} small`}
+                          onClick={changeFilterShowNull}
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </th>
+                  ) : null}
+                  {view ? (
+                    <>
+                      <th>Last Time Cam</th>
+                      <th>Last Time Detector</th>
+                      <th>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div>Last Update</div>
+                          <i
+                            className={`fa ${descLastUpdated === null
+                              ? 'fa-sort'
+                              : !descLastUpdated
+                                ? 'fa-sort-down'
+                                : 'fa-sort-up'}`}
+                            onClick={handleSortLastUpdated}
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </th>
+                    </>
+                  ) : null}
                   <th>Edit</th>
                 </tr>
               </thead>
@@ -258,20 +295,24 @@ function Slot() {
                     if (statusAnd === null && showNull) return null;
                     return (
                       <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>
-                          {item.addressDetector ? (
-                            <Link
-                              to={`/dashboard/detector/${item.detectorId}`}
-                              className="card-link"
-                            >
-                              {item.addressDetector}
-                            </Link>
-                          ) : (
-                            'No Address'
-                          )}
-                        </td>
-                        <td>{item.addressGateway || 'No Address'}</td>
+                        <td>{(item.id) % (fieldId * 1000)}</td>
+                        {view ? (
+                          <>
+                            <td>
+                              {item.addressDetector ? (
+                                <Link
+                                  to={`/dashboard/detector/${item.detectorId}`}
+                                  className="card-link"
+                                >
+                                  {item.addressDetector}
+                                </Link>
+                              ) : (
+                                'No Address'
+                              )}
+                            </td>
+                            <td>{item.addressGateway || 'No Address'}</td>
+                          </>
+                        ) : null}
 
                         <td>
                           <button
@@ -305,25 +346,29 @@ function Slot() {
                                 : 'Free'}
                           </button>
                         </td>
-                        <td>
-                          <button
-                            className={`btn-status ${statusAnd
-                              ? 'btn-danger'
-                              : statusAnd === null
-                                ? 'btn-white'
-                                : 'btn-success'}`}
-                            type="button"
-                          >
-                            {statusAnd
-                              ? 'Busy'
-                              : statusAnd === null
-                                ? 'Null'
-                                : 'Free'}
-                          </button>
-                        </td>
-                        <td>{item.lastTimeCam || 'No Data'}</td>
-                        <td>{item.lastTimeDetector || 'No Data'}</td>
-                        <td>{item.lastTimeUpdate || 'No Data'}</td>
+                        {view ? (
+                          <>
+                            <td>
+                              <button
+                                className={`btn-status ${statusAnd
+                                  ? 'btn-danger'
+                                  : statusAnd === null
+                                    ? 'btn-white'
+                                    : 'btn-success'}`}
+                                type="button"
+                              >
+                                {statusAnd
+                                  ? 'Busy'
+                                  : statusAnd === null
+                                    ? 'Null'
+                                    : 'Free'}
+                              </button>
+                            </td>
+                            <td>{item.lastTimeCam || 'No Data'}</td>
+                            <td>{item.lastTimeDetector || 'No Data'}</td>
+                            <td>{item.lastTimeUpdate || 'No Data'}</td>
+                          </>
+                        ) : null}
                         <td>
                           <div className="d-flex align-item-center">
                             <button
@@ -331,6 +376,7 @@ function Slot() {
                               className="btn btn-info ml-1"
                               onClick={() => {
                                 setId(item.id);
+                                handleUpdateBtn(item.statusCam, item.statusDetector);
                                 setOpenModalUpdateSlot(true);
                               }}
                             >
@@ -374,6 +420,10 @@ function Slot() {
         open={isOpenModalUpdateSlot}
         fieldName={fieldName}
         fieldId={fieldId}
+        id={id % (fieldId * 1000)}
+        cam={cam}
+        detector={detector}
+
       />
       <ModalDeleteSlot
         onClose={() => setOpenModalDelete(false)}

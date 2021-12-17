@@ -6,16 +6,14 @@ import {
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import SwitchToggle from '../../SwitchToggle';
-import { getSlotOfField } from '../../../apis/slotApi';
+import { getSlotOfFieldViewMin } from '../../../apis/slotApi';
 
 const ModalCreateSlot = ({
   onClose, open, fieldName, fieldId,
 }) => {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
-  const [statusCam, setStatusCam] = useState(false);
-  const [statusDetector, setStatusDetector] = useState(false);
+  const [slotId, setSlotId] = useState();
 
   const { alias } = useSelector((state) => state.auth);
 
@@ -23,12 +21,12 @@ const ModalCreateSlot = ({
     onClose();
   };
 
+  const handleCreateSlotId = (e) => setSlotId(Number(e.target.value));
+
   const handleClick = async () => {
     const data = {
-      statusCam,
-      statusDetector,
       fieldId,
-      id: 0,
+      id: slotId,
     };
 
     try {
@@ -42,7 +40,7 @@ const ModalCreateSlot = ({
         },
         data: JSON.stringify(data),
       });
-      dispatch(getSlotOfField(fieldId));
+      dispatch(getSlotOfFieldViewMin(fieldId));
 
       setLoading(false);
       if (response.data.message === 'success') {
@@ -72,23 +70,15 @@ const ModalCreateSlot = ({
           </div>
         </div>
         <div className="form-group row align-items-center">
-          <label htmlFor={`field-${fieldId}`} className="col-sm-4 col-form-label">Status Camera</label>
+          <label htmlFor="fieldId" className="col-sm-4 col-form-label">Field ID</label>
           <div className="col-sm-8">
-            <SwitchToggle
-              onChecked={() => setStatusCam(true)}
-              onUnchecked={() => setStatusCam(false)}
-              scale={0.7}
-            />
+            <input type="text" readOnly className="form-control-plaintext" id="fieldId" value={fieldId} />
           </div>
         </div>
         <div className="form-group row align-items-center">
-          <label htmlFor={`field-${fieldId}`} className="col-sm-4 col-form-label">Status Detector</label>
+          <label htmlFor="id" className="col-sm-4 col-form-label">SLot ID</label>
           <div className="col-sm-8">
-            <SwitchToggle
-              onChecked={() => setStatusDetector(true)}
-              onUnchecked={() => setStatusDetector(false)}
-              scale={0.7}
-            />
+            <input type="text" className="form-control-plaintext" id="id" placeholder="Create slot id" onChange={handleCreateSlotId} />
           </div>
         </div>
         <button className="btn btn-primary float-right" type="button" onClick={handleClick} disabled={isLoading}>Create</button>
