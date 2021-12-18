@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getGateway } from '../../../apis/GatewayApi';
 
 const ModalOption = ({
-  onClose, open, idGW,
+  onClose, open, idGW, id,
 }) => {
   const handleClose = () => {
     onClose();
@@ -64,7 +64,7 @@ const ModalOption = ({
               Delete
             </button>
             <Link
-              to={`/dashboard/gateway/${idGW}`}
+              to={`/dashboard/field/${id}/gateway/${idGW}`}
               className="btn-link"
               key={idGW}
             >
@@ -84,6 +84,8 @@ ModalOption.propTypes = {
   onClose: func.isRequired,
   open: bool.isRequired,
   idGW: string.isRequired,
+  id: string.isRequired,
+
 };
 
 export default React.memo(ModalOption);

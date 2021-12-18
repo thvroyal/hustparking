@@ -9,9 +9,12 @@ import ModalDeleteDetector from '../../components/Modal/ModalDetector/ModalDelet
 
 const Detectors = React.memo(() => {
   const match = useLocation();
-  const idGW = match.pathname.split('/')[3];
+  const idField = match.pathname.split('/')[3];
+  const idGW = match.pathname.split('/')[5];
+  console.log(match, idGW);
   const dispatch = useDispatch();
   const listDetectors = useSelector((state) => state.detector.data);
+  console.log(listDetectors);
   const [isOpenModalDetector, setOpenModalDetector] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
   const [checkField, setCheckField] = useState(false);
@@ -74,7 +77,7 @@ const Detectors = React.memo(() => {
                           {item.addressDetector}
                         </Link>
                       </td>
-                      <td>{item.slotId}</td>
+                      <td>{Number(item.slotId) - Number(idField) * 1000}</td>
                       <td>{item.gatewayId}</td>
                       <td>{item.lastTimeUpdate}</td>
                       <td>{item.lastTimeSetup}</td>
@@ -125,6 +128,7 @@ const Detectors = React.memo(() => {
         checkField={checkField}
         idGW={idGW}
         id={id}
+        idField={idField}
         addrDetector={addrDetector}
       />
       <ModalDeleteDetector

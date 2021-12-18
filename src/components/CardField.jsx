@@ -123,6 +123,7 @@ function CardField(props) {
         onClose={() => setOpenModalOption(false)}
         open={isOpenModalOption}
         idGW={idGW}
+        id={id}
       />
       <ModalCreateGW
         onClose={() => setOpenModalCreateGW(false)}

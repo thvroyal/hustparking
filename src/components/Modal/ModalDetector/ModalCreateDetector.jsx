@@ -14,14 +14,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import TextField from '../../TextField';
 import { getDetectors } from '../../../apis/detectorsApi';
+// import { set } from 'immer/dist/internal';
 
 const ModalCreateDetector = ({
-  onClose, open, checkField, idGW, addrDetector,
+  onClose, open, checkField, idGW, addrDetector, idField,
 }) => {
   const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
   const [timeSetup, setTimeSetup] = useState('');
   const dispatch = useDispatch();
+  console.log(idField);
 
   const validateFieldCreate = Yup.object({
     addressDetector: Yup.string().required('Address is required'),
@@ -39,6 +41,7 @@ const ModalCreateDetector = ({
   const handleClose = () => {
     onClose();
   };
+
   const lastTimeSetup = () => {
     const timeUpdate = moment().format();
     console.log(timeUpdate);
@@ -60,7 +63,11 @@ const ModalCreateDetector = ({
             }}
             validationSchema={validateFieldCreate}
             onSubmit={async (values) => {
-              const data = { ...values, lastTimeSetup: timeSetup };
+              const data = {
+                ...values,
+                slotId: Number(values.slotId) + Number(idField) * 1000,
+                lastTimeSetup: timeSetup,
+              };
               console.log(data.lastTimeSetup);
               try {
                 setLoading(true);
@@ -95,7 +102,7 @@ const ModalCreateDetector = ({
               return (
                 <Form className="user">
                   <TextField label="address Detector" name="addressDetector" type="text" placeholder="Enter address detector such as a.b.c.d" showLabel />
-                  <TextField label="slot Id" name="slotId" type="number" placeholder="Create slot id" showLabel />
+                  <TextField label="slot id" name="slotId" type="text" placeholer="Create id slot" showLabel />
                   <TextField label="id" name="id" type="number" placeholder="Create id same the gateway's node code" showLabel />
                   <button
                     type="submit"
@@ -126,7 +133,11 @@ const ModalCreateDetector = ({
             }}
             validationSchema={validateFieldUpdate}
             onSubmit={async (values) => {
-              const data = { ...values, lastTimeUpdate: timeSetup };
+              const data = {
+                ...values,
+                slotId: Number(values.slotId) + Number(idField) * 1000,
+                lastTimeUpdate: timeSetup,
+              };
               try {
                 setLoading(true);
                 const response = await axios({
@@ -160,7 +171,7 @@ const ModalCreateDetector = ({
               return (
                 <Form className="user">
                   <TextField label="address Detector" name="addressDetector" type="text" placeholder="Enter address detector such as a.b.c.d" showLabel />
-                  <TextField label="slot Id" name="slotId" type="number" placeholder="Create slot id" showLabel />
+                  <TextField label="slot id" name="slotId" type="text" placeholer="Create id slot" showLabel />
                   <button
                     type="submit"
                     className="btn btn-primary mt-4"
@@ -192,6 +203,7 @@ ModalCreateDetector.propTypes = {
   checkField: bool.isRequired,
   idGW: number.isRequired,
   addrDetector: string.isRequired,
+  idField: string.isRequired,
 };
 
 export default React.memo(ModalCreateDetector);

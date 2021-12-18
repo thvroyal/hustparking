@@ -61,7 +61,7 @@ function Dashboard() {
               />
               <Route
                 exact
-                path={`${match.url}/gateway/:idDetector`}
+                path={`${match.url}/field/:idField/gateway/:idDetector`}
                 render={(props) => <Detectors {...props} />}
               />
 
