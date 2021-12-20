@@ -87,6 +87,7 @@ const ModalUpdateGW = ({
             return (
               <Form className="user">
                 <TextField label="address Gateway" name="addressGateway" type="text" placeholder="Enter address field such as a.b.c.d" showLabel />
+                <TextField label="field id" name="fieldId" type="text" placeholder="Enter field id" showLabel />
                 <button
                   type="submit"
                   className="btn btn-primary mt-4"
