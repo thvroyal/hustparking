@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { getField } from '../../../apis/fieldApi';
+import ModalUpdateField from './ModalUpdateField';
 
 const ModalDeleteField = ({
   onClose, open, id,
 }) => {
   const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
+  const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -57,12 +59,24 @@ const ModalDeleteField = ({
         <form>
           <div className="form-group row align-items-center d-flex justify-content-around">
             <button className="btn btn-danger" type="button" onClick={handleClick} disabled={isLoading}>Delete</button>
+            <button
+              className="btn btn-info"
+              type="button"
+              onClick={() => setOpenModalUpdate(true)}
+            >
+              Update Field
+            </button>
             <Link to={`/dashboard/fields/${id}`} className="card-link">
               <button type="button" className="btn btn-primary">Go to list slot</button>
             </Link>
           </div>
         </form>
       </Modal.Body>
+      <ModalUpdateField
+        onClose={() => setOpenModalUpdate(false)}
+        open={openModalUpdate}
+        id={id}
+      />
     </Modal>
   );
 };

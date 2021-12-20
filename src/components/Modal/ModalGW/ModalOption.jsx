@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGateway } from '../../../apis/GatewayApi';
+import ModalUpdateGW from './ModalUpdateGW';
 
 const ModalOption = ({
   onClose, open, idGW, id,
@@ -18,6 +19,7 @@ const ModalOption = ({
   const dispatch = useDispatch();
   const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
+  const [openModalUpdateGW, setOpenModalUpdateGW] = useState(false);
 
   const handleClick = async () => {
     try {
@@ -63,12 +65,19 @@ const ModalOption = ({
             >
               Delete
             </button>
+            <button
+              className="btn btn-info"
+              type="button"
+              onClick={() => setOpenModalUpdateGW(true)}
+            >
+              Update Gateway
+            </button>
             <Link
               to={`/dashboard/field/${id}/gateway/${idGW}`}
               className="btn-link"
               key={idGW}
             >
-              <button className="btn btn-info" type="button" disabled={isLoading}>
+              <button className="btn btn-primary" type="button" disabled={isLoading}>
                 Go to all detector
                 <i className="fas fa-long-arrow-alt-right ml-2" />
               </button>
@@ -76,6 +85,12 @@ const ModalOption = ({
           </div>
         </form>
       </Modal.Body>
+      <ModalUpdateGW
+        onClose={() => setOpenModalUpdateGW(false)}
+        open={openModalUpdateGW}
+        id={id}
+        idGW={idGW}
+      />
     </Modal>
   );
 };
