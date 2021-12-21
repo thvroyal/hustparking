@@ -9,6 +9,7 @@ import store from './store/index';
 
 import './assets/scss/sb-admin-2.scss';
 import './assets/fonts/awesome/css/awesomefont.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 require('dotenv').config();
 

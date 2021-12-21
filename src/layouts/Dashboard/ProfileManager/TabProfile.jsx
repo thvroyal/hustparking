@@ -55,10 +55,6 @@ function TabProfile() {
               <h5 className="text-dark">{info.address}</h5>
             </div>
             <div id="info" className="mb-4">
-              <p className="small text-uppercase mb-0 text-primary ">equipment</p>
-              <h5 className="text-dark">{info.equipment}</h5>
-            </div>
-            <div id="info" className="mb-4">
               <p className="small text-uppercase mb-0 text-primary">id number</p>
               <h5 className="text-dark">{info.idNumber}</h5>
             </div>

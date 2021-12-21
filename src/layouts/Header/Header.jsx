@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ClearTokenBackend } from '../../apis/auth';
+import { SET_AD, SET_MN } from '../../helpers/constants';
 
 function Header() {
   const dispatch = useDispatch();
@@ -77,14 +78,14 @@ function Header() {
               }
           data-popper-placement="bottom-end"
         >
-          {role === 2 && (
+          {role === SET_AD && (
           <li>
             <Link className="nav-link dropdown-item" to="/dashboard/new-manager">
               New manager
             </Link>
           </li>
           )}
-          {role === 3 && (
+          {role === SET_MN && (
           <li>
             <Link className="nav-link dropdown-item" to="/dashboard/profile?tab=profile">
               Profile

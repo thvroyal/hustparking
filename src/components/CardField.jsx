@@ -39,7 +39,7 @@ function CardField(props) {
                 {name}
               </div>
             </Link>
-            {GW
+            {(GW && GW.length)
               ? GW.map((item, index) => (
                 <Link
                   to={`/dashboard/gateway/${item.id}`}
@@ -63,7 +63,25 @@ function CardField(props) {
                   </Tooltip>
                 </Link>
               ))
-              : null}
+              : (
+                <>
+                  <div
+                    className="badge badge-primary font-weight-normal mr-1"
+                    id="tooltip-create-GW"
+                  >
+                    <i className="fas fa-plus" />
+
+                  </div>
+                  <Tooltip
+                    placement="bottom"
+                    isOpen={tooltipOpen}
+                    target="tooltip-create-GW"
+                    toggle={toggle}
+                  >
+                    Create new gateway
+                  </Tooltip>
+                </>
+              )}
           </div>
           <div className="col-2">
             <div className="d-flex flex-column align-items-center">
@@ -73,7 +91,7 @@ function CardField(props) {
                 width={58}
                 height={58}
               />
-              <div className="badge badge-primary font-weight-normal mr-1 mt-2">{`${data[1]}/${data[2]}`}</div>
+              {data[2] ? <div className="badge badge-primary font-weight-normal mr-1 mt-2">{`${data[1]}/${data[2]}`}</div> : null}
             </div>
           </div>
         </div>
@@ -86,7 +104,7 @@ export default React.memo(CardField);
 
 CardField.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   data: PropTypes.arrayOf(PropTypes.number),
   GW: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

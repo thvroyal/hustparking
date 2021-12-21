@@ -17,7 +17,7 @@ function TabEdit() {
     dispatch(getInfo());
   }, [dispatch]);
   const validate = Yup.object({
-    // sex: Yup.string().required('Gender is required'),
+    sex: Yup.string().required('Gender is required'),
   });
   function formatString(str) {
     if (str) return str.split('+')[0].split('T')[0];
@@ -60,7 +60,6 @@ function TabEdit() {
                 address: info.address,
                 birth: formatString(info.birth),
                 sex: info.sex,
-                equipment: info.equipment,
                 idNumber: info.idNumber,
               }}
               validationSchema={validate}
@@ -77,8 +76,11 @@ function TabEdit() {
                     },
                   });
                   setLoading(false);
-                  if (response.data.message === 'success' && response.data.data) handleIsSuccess(1);
-                  else handleIsSuccess(0);
+                  if (response.data.message === 'success' && response.data.data) {
+                    handleIsSuccess(1);
+                  } else {
+                    handleIsSuccess(0);
+                  }
                 } catch (error) {
                   setLoading(false);
                   handleIsSuccess(0);
@@ -98,7 +100,6 @@ function TabEdit() {
                       <RadioField label="Other" name="sex" value="O" checked={values.sex === 'O'} />
                     </div>
                     <TextField showLabel label="address" name="address" type="text" placeholder="Update your address" />
-                    <TextField showLabel label="equipment" name="equipment" type="text" placeholder="Update your equipment" />
                     <TextField showLabel label="ID number" name="idNumber" type="number" placeholder="Update your ID number" />
                     <button
                       type="submit"

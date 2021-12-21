@@ -13,6 +13,8 @@ import contractReducer from './admin/contractSlice';
 import utilsReducer from './utilsSlice';
 import listContractReducer from './user/listContractSlice';
 import listManagerReducer from './admin/managersSlice';
+import listTagReducer from './admin/tagsSlice';
+import packageTagReducer from './debug/packageTagSlice';
 
 const rootReducer = {
   detector: detectorReducer,
@@ -29,6 +31,8 @@ const rootReducer = {
   utils: utilsReducer,
   listContract: listContractReducer,
   listManager: listManagerReducer,
+  listTag: listTagReducer,
+  packageTag: packageTagReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

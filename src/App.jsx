@@ -12,6 +12,7 @@ import Verify from './pages/Verify';
 import PageNotFound from './pages/404';
 import { verifyToken } from './apis/auth';
 import ForgotPassword from './pages/ForgotPassword';
+import GGMapSearch from './pages/GGMapSearch';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,13 +25,16 @@ function App() {
       {!loadingVerifyToken && (
         <Switch>
           <AuthenticatedRoute
-            restrict={[2, 3]} // only admin can access dashboard
+            restrict={[2]} // only admin can access dashboard
             path="/dashboard"
           >
             <Dashboard />
           </AuthenticatedRoute>
           <UnauthenticatedRoute target="/login" path="/live-map">
             <LiveMap />
+          </UnauthenticatedRoute>
+          <UnauthenticatedRoute target="/login" path="/map-search">
+            <GGMapSearch />
           </UnauthenticatedRoute>
           {/* <UnauthenticatedRoute target="/" path="/dashboard">
             <Dashboard />

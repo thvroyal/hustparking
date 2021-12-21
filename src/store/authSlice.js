@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  SET_GUEST,
+  SET_USER,
+  SET_AD,
+  SET_MN,
+} from '../helpers/constants';
 
 const initState = {
-  role: 0, // 0 is guest, 1 is user, 2 is admin, 3 is manager
+  role: SET_GUEST, // 0 is guest, 1 is user, 2 is admin, 3 is manager
   isAuthenticated: false,
   error: null,
   loading: false,
@@ -21,13 +27,13 @@ const auth = createSlice({
       state.isAuthenticated = true;
       state.error = null;
       switch (action.payload) {
-        case 1:
+        case SET_USER:
           state.alias = 'us';
           break;
-        case 2:
+        case SET_AD:
           state.alias = 'ad';
           break;
-        case 3:
+        case SET_MN:
           state.alias = 'mn';
           break;
         default:
@@ -35,7 +41,7 @@ const auth = createSlice({
       }
     },
     logOut: (state) => {
-      state.role = 0;
+      state.role = SET_GUEST;
       state.isAuthenticated = false;
     },
     handleError: (state, action) => {

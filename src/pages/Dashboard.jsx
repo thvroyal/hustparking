@@ -13,7 +13,7 @@ import Contract from '../layouts/Dashboard/Contract';
 import Fields from '../layouts/Dashboard/Fields';
 import Slot from '../layouts/Dashboard/Slot';
 import Gateway from '../layouts/Dashboard/Gateway';
-import DetectorDebug from '../layouts/Dashboard/Debug/DetectorDebug';
+// import DetectorDebug from '../layouts/Dashboard/Debug/DetectorDebug';
 import DetectorInfo from '../layouts/Dashboard/DetectorInfo';
 import Image1 from '../layouts/Dashboard/Image1';
 import Image2 from '../layouts/Dashboard/Image2';
@@ -21,6 +21,8 @@ import CreateManager from '../layouts/Dashboard/CreateManager';
 import Analysis from '../layouts/Dashboard/Analysis';
 import ProfileManager from '../layouts/Dashboard/ProfileManager';
 import Managers from '../layouts/Dashboard/ListManager';
+import Tags from '../layouts/Dashboard/Tags';
+import Debug from '../layouts/Dashboard/Debug';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -80,11 +82,11 @@ function Dashboard() {
                 render={(props) => <Contract {...props} />}
               />
 
-              <Route
+              {/* <Route
                 exact
                 path={`${match.url}/debug-detector`}
                 render={(props) => <DetectorDebug {...props} />}
-              />
+              /> */}
 
               <Route
                 exact
@@ -121,6 +123,16 @@ function Dashboard() {
                 exact
                 path={`${match.url}/managers`}
                 render={(props) => <Managers {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/tags`}
+                render={(props) => <Tags {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/debug`}
+                render={(props) => <Debug {...props} />}
               />
             </Switch>
           </div>

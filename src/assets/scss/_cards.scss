@@ -41,4 +41,8 @@
     transform: scale(1.05);
   }
 }
+.card-border-dash {
+  border: dashed 2px $gray-500;
+  background-color: $gray-200;
+}
 
