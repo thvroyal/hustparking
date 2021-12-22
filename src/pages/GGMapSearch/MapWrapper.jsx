@@ -33,6 +33,10 @@ function GoogleMapMarkers({ direction, parksData }) {
             onClick={() => {
               setParkInfo(park);
             }}
+            icon={{
+              url: '/parkingslot.jpg',
+              scaledSize: new window.google.maps.Size(45, 45),
+            }}
           />
         ))}
         {parkInfo && (
@@ -174,7 +178,7 @@ const MapWrapper = () => {
             <div className="input-group">
               <input
                 {...getInputProps({
-                  placeholder: 'Search Destination',
+                  placeholder: 'Search Destination ...',
                   className: 'form-control location-search-input rounded border border-3 border-light shadow-sm p-2 mb-3 bg-white',
                 })}
               />

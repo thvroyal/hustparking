@@ -7,7 +7,7 @@ export default function TextField({ label, showLabel, ...props }) {
   const errorStyle = {
     fontSize: '.8rem',
     color: 'red',
-    padding: '10px 0px 0px 10px', 
+    padding: '10px 0px 0px 10px',
     textAlign: 'left',
   };
   return (
