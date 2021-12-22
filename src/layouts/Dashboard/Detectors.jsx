@@ -43,7 +43,7 @@ const Detectors = React.memo(() => {
             <button type="button" className="btn btn-outline-primary" onClick={creatDetector}>Create Detector</button>
           </div>
         </div>
-        <div className="card-body">
+        <div className="card-body" style={{ backgroundColor: '#f8f9fc' }}>
           <div className="table-responsive table-hover">
             <table
               className="list-user"
