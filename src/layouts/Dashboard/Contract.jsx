@@ -96,7 +96,7 @@ function Contract() {
         <div className="card-body p-0">
           {/* // <!-- Billing history table--> */}
           <div className="table-responsive table-billing-history table-hover">
-            <table className="table mb-0">
+            <table className="list-user">
               <thead>
                 <tr>
                   <th scope="col">Transaction ID</th>

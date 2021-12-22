@@ -150,7 +150,7 @@ function DetectorDebug() {
         <div className="card-body">
           <div className="table-responsive table-hover">
             <table
-              className="table table-bordered"
+              className="list-user"
               id="dataTable"
               width="100%"
               cellSpacing="0"

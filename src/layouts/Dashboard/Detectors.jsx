@@ -40,13 +40,13 @@ const Detectors = React.memo(() => {
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
           <h6 className="m-0 font-weight-bold text-primary">Database Detectors</h6>
           <div>
-            <button type="button" className="btn btn-primary" onClick={creatDetector}>Create Detector</button>
+            <button type="button" className="btn btn-outline-primary" onClick={creatDetector}>Create Detector</button>
           </div>
         </div>
         <div className="card-body">
           <div className="table-responsive table-hover">
             <table
-              className="table table-bordered"
+              className="list-user"
               id="dataTable"
               width="100%"
               cellSpacing="0"
@@ -87,7 +87,7 @@ const Detectors = React.memo(() => {
                         <div className="d-flex justify-content-around align-item-center">
                           <button
                             type="button"
-                            className="btn btn-info mr-1"
+                            className="btn btn-outline-info mr-1"
                             onClick={() => {
                               setCheckField(true);
                               setAddrDetector(item.addressDetector);
@@ -98,7 +98,7 @@ const Detectors = React.memo(() => {
                           </button>
                           <button
                             type="button"
-                            className="btn btn-danger ml-1"
+                            className="btn btn-outline-danger ml-1"
                             onClick={() => {
                               setId(item.id);
                               setOpenModalDelete(true);

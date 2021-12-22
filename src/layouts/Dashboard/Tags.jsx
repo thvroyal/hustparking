@@ -43,13 +43,13 @@ function Tags() {
             </h6>
           </div>
           <div>
-            <button type="button" className="btn btn-primary" onClick={register}>Register</button>
+            <button type="button" className="btn btn-outline-primary" onClick={register}>Register</button>
           </div>
         </div>
         <div className="card-body p-0">
           {/* // <!-- Billing history table--> */}
           <div className="table-responsive table-billing-history table-hover text-center">
-            <table className="table mb-0">
+            <table className="list-user">
               <thead>
                 <tr>
                   <th scope="col">User ID</th>
@@ -68,12 +68,12 @@ function Tags() {
                       <td>
                         <div className="d-flex justify-content-center">
                           <div>
-                            <button type="button" className="btn btn-info mr-1" onClick={update}>Update</button>
+                            <button type="button" className="btn btn-outline-info mr-1" onClick={update}>Update</button>
                           </div>
                           <div>
                             <button
                               type="button"
-                              className="btn btn-danger ml-1"
+                              className="btn btn-outline-danger ml-1"
                               onClick={() => {
                                 setId(tag.tagId);
                                 setOpenModalDelete(true);

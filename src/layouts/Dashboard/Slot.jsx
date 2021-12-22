@@ -228,10 +228,10 @@ function Slot() {
             </div>
           </div>
         </div>
-        <div className="card-body">
+        <div className="card-body" style={{ backgroundColor: '#f8f9fc' }}>
           <div className="table-responsive table-hover">
             <table
-              className="table table-bordered"
+              className="list-user"
               id="dataTable"
               width="100%"
               cellSpacing="0"
@@ -373,7 +373,7 @@ function Slot() {
                           <div className="d-flex align-item-center">
                             <button
                               type="button"
-                              className="btn btn-info ml-1"
+                              className="btn btn-outline-info mr-1"
                               onClick={() => {
                                 setId(item.id);
                                 handleUpdateBtn(item.statusCam, item.statusDetector);
@@ -384,7 +384,7 @@ function Slot() {
                             </button>
                             <button
                               type="button"
-                              className="btn btn-danger mr-1"
+                              className="btn btn-outline-danger ml-1"
                               onClick={() => {
                                 setId(item.id);
                                 setOpenModalDelete(true);
