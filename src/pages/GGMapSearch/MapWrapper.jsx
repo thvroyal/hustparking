@@ -95,10 +95,8 @@ const MapWrapper = () => {
       console.log('Error', error);
     }
   };
-
   const drawDirections = () => {
     const directionsService = new window.google.maps.DirectionsService();
-
     directionsService.route(
       {
         origin,
@@ -116,15 +114,64 @@ const MapWrapper = () => {
           );
         } else {
           console.error(`error fetching directions ${result}`);
+          console.log(destination);
         }
       },
     );
   };
-
+  const onFilter = () => {
+    const directionsService = new window.google.maps.DirectionsService();
+    let i = 0;
+    let mindistance = 10000000000;
+    let dis;
+    let spot;
+    const point1 = { lat: 21.0058954, lng: 105.8415656 };
+    const point2 = { lat: 21.0046105, lng: 105.8444669 };
+    const point3 = { lat: 20.96489, lng: 105.7893622 };
+    const point4 = { lat: 21.0475963, lng: 105.8059548 };
+    const point5 = { lat: 21.0125263, lng: 105.8455568 };
+    const point6 = { lat: 21.0089182, lng: 105.8200985 };
+    const point7 = { lat: 21.0369823, lng: 105.7752916 };
+    const point8 = { lat: 21.042621, lng: 105.8209603 };
+    const point9 = { lat: 105, lng: 21 };
+    const allpoint = [point1, point2, point3, point4, point5, point6, point7, point8, point9];
+    for (i = 0; i < allpoint.length; i += 1) {
+      dis = window.google.maps.geometry.spherical.computeDistanceBetween(
+        destination,
+        allpoint[i],
+      );
+      if (dis < mindistance) {
+        mindistance = dis;
+        spot = i;
+      }
+    }
+    const { lat, lng } = allpoint[spot];
+    setDestination({ lat, lng });
+    directionsService.route(
+      {
+        origin,
+        destination,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          setDirection(result);
+          setDistance(
+            window.google.maps.geometry.spherical.computeDistanceBetween(
+              origin,
+              destination,
+            ),
+          );
+        } else {
+          console.error(`error fetching directions ${result}`);
+          console.log(destination);
+        }
+      },
+    );
+  };
   const onSearch = () => {
     drawDirections();
   };
-
   return (
     <div>
       <div className="position-absolute d-flex flex-column justify-content-center m-2" style={{ zIndex: 1000, width: '30%' }}>
@@ -200,6 +247,9 @@ const MapWrapper = () => {
         </PlacesAutocomplete>
         <button className="btn btn-primary" type="button" style={{ width: '20%' }} onClick={onSearch}>
           Search
+        </button>
+        <button className="btn btn-primary" type="button" style={{ width: '20%' }} onClick={onFilter}>
+          Filter
         </button>
         <p>{`Distance: ${Math.round(distance) / 1000} km`}</p>
       </div>
