@@ -13,15 +13,54 @@ import {
 } from 'react-google-maps';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFieldUser } from '../../apis/fieldApi';
+import ModalSavePoint from './ModalSavePoint';
 
 function GoogleMapMarkers({ direction, parksData }) {
   const [parkInfo, setParkInfo] = useState(null);
+  const [isMarkerShow, setIsMarkerShow] = useState(false);
+  const [positionMarkerWhenClick, setPositionMarkerWhenClick] = useState(null);
+  const onMapClick = (e) => {
+    const positionMarker = {
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    };
+    if (positionMarker === positionMarkerWhenClick) {
+      setPositionMarkerWhenClick(null);
+      setIsMarkerShow(false);
+    } else {
+      setPositionMarkerWhenClick(positionMarker);
+      setIsMarkerShow(true);
+    }
+  };
+  const closeModalPoint = () => {
+    setPositionMarkerWhenClick(null);
+    setIsMarkerShow(false);
+  };
+
   return (
     <div>
       <GoogleMap
         defaultCenter={{ lat: 21.0294498, lng: 105.8544441 }}
         defaultZoom={13}
+        onClick={(e) => onMapClick(e)}
       >
+        { isMarkerShow
+        && (
+          <Marker
+            position={positionMarkerWhenClick}
+            icon={
+              {
+                url: '/parkingslot.jpg',
+                scaledSize: new window.google.maps.Size(30, 30),
+              }
+            }
+          />
+        )}
+        <ModalSavePoint
+          open={isMarkerShow}
+          onClose={closeModalPoint}
+          currentPoint={positionMarkerWhenClick}
+        />
         <DirectionsRenderer directions={direction} />
         {parksData && parksData.map((park) => (
           <Marker
@@ -35,7 +74,7 @@ function GoogleMapMarkers({ direction, parksData }) {
             }}
             icon={{
               url: '/parkingslot.jpg',
-              scaledSize: new window.google.maps.Size(45, 45),
+              scaledSize: new window.google.maps.Size(30, 30),
             }}
           />
         ))}
@@ -72,6 +111,30 @@ const MapWrapper = () => {
 
   useEffect(() => {
     dispatch(getFieldUser());
+
+    if (navigator.geolocation) {
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then((result) => {
+          if (result.state === 'granted') {
+            console.log(result.state);
+            // If granted then you can directly call your function here
+          } else if (result.state === 'prompt') {
+            console.log(result.state);
+          } else if (result.state === 'denied') {
+            // If denied then you have to show instructions to enable location
+          }
+          result.onchange = function () {
+            console.log(result.state);
+          };
+        });
+    } else {
+      console.log('Loi me no roi!');
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(`Position is : ${position.coords.latitude},${position.coords.longitude}`);
+      setOrigin({ lat: position.coords.latitude, lng: position.coords.longitude });
+    });
   }, [dispatch]);
 
   const handleSelectOrigin = async (_origin) => {
@@ -121,32 +184,25 @@ const MapWrapper = () => {
   };
   const onFilter = () => {
     const directionsService = new window.google.maps.DirectionsService();
-    let i = 0;
-    let mindistance = 10000000000;
-    let dis;
-    let spot;
-    const point1 = { lat: 21.0058954, lng: 105.8415656 };
-    const point2 = { lat: 21.0046105, lng: 105.8444669 };
-    const point3 = { lat: 20.96489, lng: 105.7893622 };
-    const point4 = { lat: 21.0475963, lng: 105.8059548 };
-    const point5 = { lat: 21.0125263, lng: 105.8455568 };
-    const point6 = { lat: 21.0089182, lng: 105.8200985 };
-    const point7 = { lat: 21.0369823, lng: 105.7752916 };
-    const point8 = { lat: 21.042621, lng: 105.8209603 };
-    const point9 = { lat: 105, lng: 21 };
-    const allpoint = [point1, point2, point3, point4, point5, point6, point7, point8, point9];
-    for (i = 0; i < allpoint.length; i += 1) {
-      dis = window.google.maps.geometry.spherical.computeDistanceBetween(
-        destination,
-        allpoint[i],
+    let minDistance;
+    let minPoint;
+    // TODO: filter cac bai do trong ban kinh x (km)
+    for (let i = 0; i < listFields.length; i += 1) {
+      const { latitude, longitude } = listFields[i];
+      const currentPoint = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+      const calDistance = window.google.maps.geometry.spherical.computeDistanceBetween(
+        origin,
+        currentPoint,
       );
-      if (dis < mindistance) {
-        mindistance = dis;
-        spot = i;
+      if (minDistance === undefined) {
+        minDistance = calDistance;
+        minPoint = { ...currentPoint };
+      } else if (calDistance < minDistance) {
+        minDistance = calDistance;
+        minPoint = { ...currentPoint };
       }
     }
-    const { lat, lng } = allpoint[spot];
-    setDestination({ lat, lng });
+    setDestination(minPoint);
     directionsService.route(
       {
         origin,
@@ -169,6 +225,7 @@ const MapWrapper = () => {
       },
     );
   };
+
   const onSearch = () => {
     drawDirections();
   };
