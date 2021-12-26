@@ -97,7 +97,7 @@ const ModalTag = ({
   return (
     <Modal show={open} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Create New Tag</Modal.Title>
+        <Modal.Title>{checkField ? 'Create New Tag' : 'Update Tag'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form>

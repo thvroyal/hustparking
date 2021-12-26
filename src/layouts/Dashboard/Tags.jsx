@@ -46,7 +46,7 @@ function Tags() {
             <button type="button" className="btn btn-outline-primary" onClick={register}>Register</button>
           </div>
         </div>
-        <div className="card-body p-0">
+        <div className="card-body p-0" style={{ backgroundColor: '#f8f9fc' }}>
           {/* // <!-- Billing history table--> */}
           <div className="table-responsive table-billing-history table-hover text-center">
             <table className="list-user">

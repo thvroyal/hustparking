@@ -93,7 +93,7 @@ function Contract() {
           </div>
 
         </div>
-        <div className="card-body p-0">
+        <div className="card-body p-0" style={{ backgroundColor: '#f8f9fc' }}>
           {/* // <!-- Billing history table--> */}
           <div className="table-responsive table-billing-history table-hover">
             <table className="list-user">

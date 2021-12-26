@@ -135,7 +135,7 @@ function TagDebug() {
             </>
           ) : null}
         </div>
-        <div className="card-body">
+        <div className="card-body" style={{ backgroundColor: '#f8f9fc' }}>
           <div className="table-responsive table-hover">
             <table
               className="list-user"
