@@ -85,8 +85,18 @@ function Slot() {
               <thead>
                 <tr>
                   <th>Slot ID</th>
+<<<<<<< Updated upstream
                   <th>Address Detector</th>
                   <th>Address Gateway</th>
+=======
+                  <th>Car Number</th>
+                  {view ? (
+                    <>
+                      <th>Address Detector</th>
+                      <th>Address Gateway</th>
+                    </>
+                  ) : null}
+>>>>>>> Stashed changes
                   <th>Status Detector</th>
                   <th>Status Cam</th>
                   <th>
@@ -134,6 +144,7 @@ function Slot() {
                     if (statusAnd === null && showNull) return null;
                     return (
                       <tr key={item.id}>
+<<<<<<< Updated upstream
                         <td>{item.id}</td>
                         <td>
                           {item.addressDetector ? (
@@ -148,6 +159,27 @@ function Slot() {
                           )}
                         </td>
                         <td>{item.addressGateway || 'No Address'}</td>
+=======
+                        <td>{(item.id) % (fieldId * 1000)}</td>
+                        <td>{item.carNumber}</td>
+                        {view ? (
+                          <>
+                            <td>
+                              {item.addressDetector ? (
+                                <Link
+                                  to={`/dashboard/detector/${item.detectorId}`}
+                                  className="card-link"
+                                >
+                                  {item.addressDetector}
+                                </Link>
+                              ) : (
+                                'No Address'
+                              )}
+                            </td>
+                            <td>{item.addressGateway || 'No Address'}</td>
+                          </>
+                        ) : null}
+>>>>>>> Stashed changes
 
                         <td>
                           <button

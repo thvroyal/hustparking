@@ -158,6 +158,7 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
+<<<<<<< Updated upstream
         <hr className="sidebar-divider" />
         <div className="sidebar-heading">Debug</div>
         <li
@@ -172,6 +173,18 @@ const Sidebar = React.memo(() => {
           >
             <i className="fas fa-fw fa-bug" />
             <span>Debug</span>
+=======
+        <li
+          className={`nav-item ${current === '/dashboard/showImage' ? 'active' : null}`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/showImage"
+            onClick={() => updateCurrentUrl('/dashboard/showImage')}
+          >
+            <i className="fas fa-fw fa-image" />
+            <span>Show Image</span>
+>>>>>>> Stashed changes
           </Link>
         </li>
 

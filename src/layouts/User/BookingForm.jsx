@@ -45,7 +45,7 @@ function BookingForm() {
     }:${
       convertNum(time[1])}`;
     setTimeNow(dateFormatted);
-    // console.log(dateFormatted);
+    console.log(dateFormatted);
   }
   // return the time value in miliseconds, if no params return now time
   function getTime(string = '') {

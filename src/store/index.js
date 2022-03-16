@@ -13,6 +13,12 @@ import contractReducer from './admin/contractSlice';
 import utilsReducer from './utilsSlice';
 import listContractReducer from './user/listContractSlice';
 import listManagerReducer from './admin/managersSlice';
+<<<<<<< Updated upstream
+=======
+import listTagReducer from './admin/tagsSlice';
+import packageTagReducer from './debug/packageTagSlice';
+import notifyReducer from './notifySlice';
+>>>>>>> Stashed changes
 
 const rootReducer = {
   detector: detectorReducer,
@@ -29,6 +35,12 @@ const rootReducer = {
   utils: utilsReducer,
   listContract: listContractReducer,
   listManager: listManagerReducer,
+<<<<<<< Updated upstream
+=======
+  listTag: listTagReducer,
+  packageTag: packageTagReducer,
+  notify: notifyReducer,
+>>>>>>> Stashed changes
 };
 const store = configureStore({
   reducer: rootReducer,

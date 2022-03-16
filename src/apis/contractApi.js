@@ -21,9 +21,7 @@ export function getContract(idUser) {
       });
       if (response.data.message === 'success') {
         let { data } = response.data;
-        // console.log(data, idUser);
         if (idUser !== 'all') { data = data.filter((x) => x.userId === parseInt(idUser, 10)); }
-        // console.log(data);
         const dataProcessed = data.map((ctr) => {
           const tCarIn = new Date(ctr.timeCarIn).getTime();
           const tCarOut = new Date(ctr.timeCarOut).getTime();

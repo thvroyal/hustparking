@@ -17,10 +17,17 @@ import DetectorDebug from '../layouts/Dashboard/Debug/DetectorDebug';
 import DetectorInfo from '../layouts/Dashboard/DetectorInfo';
 import Image1 from '../layouts/Dashboard/Image1';
 import Image2 from '../layouts/Dashboard/Image2';
+import Maps2D from '../layouts/Dashboard/2D_maps';
 import CreateManager from '../layouts/Dashboard/CreateManager';
 import Analysis from '../layouts/Dashboard/Analysis';
 import ProfileManager from '../layouts/Dashboard/ProfileManager';
 import Managers from '../layouts/Dashboard/ListManager';
+<<<<<<< Updated upstream
+=======
+import Tags from '../layouts/Dashboard/Tags';
+import Debug from '../layouts/Dashboard/Debug';
+import ShowImage from '../layouts/Dashboard/ShowImage';
+>>>>>>> Stashed changes
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -104,6 +111,11 @@ function Dashboard() {
               />
               <Route
                 exact
+                path={`${match.url}/fields/:idSlot/2d_maps`}
+                render={(props) => <Maps2D {...props} />}
+              />
+              <Route
+                exact
                 path={`${match.url}/new-manager`}
                 render={(props) => <CreateManager {...props} />}
               />
@@ -122,6 +134,24 @@ function Dashboard() {
                 path={`${match.url}/managers`}
                 render={(props) => <Managers {...props} />}
               />
+<<<<<<< Updated upstream
+=======
+              <Route
+                exact
+                path={`${match.url}/tags`}
+                render={(props) => <Tags {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/debug`}
+                render={(props) => <Debug {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/showImage`}
+                render={(props) => <ShowImage {...props} />}
+              />
+>>>>>>> Stashed changes
             </Switch>
           </div>
         </div>

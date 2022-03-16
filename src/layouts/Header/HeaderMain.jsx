@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ClearTokenBackend } from '../../apis/auth';
@@ -51,6 +50,11 @@ function HeaderMain() {
                 Dashboard
               </Link>
             </li>
+            <li>
+              <Link to="/home/maps_2d" className="nav-link px-2 link-dark">
+                Maps 2D
+              </Link>
+            </li>
           </ul>
 
           {/* <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -64,9 +68,7 @@ function HeaderMain() {
           <div className="dropdown text-end" ref={refDropdown}>
             <a
               href="#foo"
-              className={`d-block link-dark text-decoration-none dropdown-toggle ${
-                show ? 'show' : ''
-              }`}
+              className={`d-block link-dark text-decoration-none dropdown-toggle ${show ? 'show' : ''}`}
               id="dropdownUser1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
