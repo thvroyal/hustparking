@@ -239,6 +239,10 @@ function Slot() {
               <thead>
                 <tr>
                   <th>Slot ID</th>
+
+                  <th>Address Detector</th>
+                  <th>Address Gateway</th>
+                  <th>Car Number</th>
                   {view ? (
                     <>
                       <th>Address Detector</th>
@@ -296,6 +300,22 @@ function Slot() {
                     return (
                       <tr key={item.id}>
                         <td>{(item.id) % (fieldId * 1000)}</td>
+                        <td>{item.id}</td>
+                        <td>
+                          {item.addressDetector ? (
+                            <Link
+                              to={`/dashboard/detector/${item.detectorId}`}
+                              className="card-link"
+                            >
+                              {item.addressDetector}
+                            </Link>
+                          ) : (
+                            'No Address'
+                          )}
+                        </td>
+                        <td>{item.addressGateway || 'No Address'}</td>
+                        <td>{(item.id) % (fieldId * 1000)}</td>
+                        <td>{item.carNumber}</td>
                         {view ? (
                           <>
                             <td>
@@ -313,7 +333,6 @@ function Slot() {
                             <td>{item.addressGateway || 'No Address'}</td>
                           </>
                         ) : null}
-
                         <td>
                           <button
                             className={`btn-status ${item.statusDetector

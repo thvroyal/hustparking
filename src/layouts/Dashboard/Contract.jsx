@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter, useParams } from 'react-router';
 import { getContract, getQuantityContract } from '../../apis/contractApi';
 import { LIST_FILTER } from '../../helpers/constants';
+import CarBannerImg from '../../assets/img/2D_thư_viện_D35.drawio.png';
 
 function Contract() {
   const dispatch = useDispatch();
@@ -105,7 +106,9 @@ function Contract() {
                   <th scope="col">Car Number</th>
                   <th scope="col">Booking In</th>
                   <th scope="col">Booking Out</th>
+                  <th scope="col">Image Car In</th>
                   <th scope="col">Time Car In</th>
+                  <th scope="col">Image Car Out</th>
                   <th scope="col">Time Car Out</th>
                   <th scope="col">Status</th>
                 </tr>
@@ -120,7 +123,37 @@ function Contract() {
                       <td>{ctr.carNumber}</td>
                       <td>{ctr.timeInBook}</td>
                       <td>{ctr.timeOutBook}</td>
+                      <td>
+                        {ctr.status === 'Booking' ? ''
+                          : (
+                            <img
+                              className="image"
+                              style={{
+                                width: '100px',
+                                height: '50px',
+                                cursor: 'pointer',
+                              }}
+                              src={CarBannerImg}
+                              alt=""
+                            />
+                          )}
+                      </td>
                       <td>{ctr.timeCarIn}</td>
+                      <td>
+                        {ctr.status === 'Parking' || ctr.status === 'Booking' ? ''
+                          : (
+                            <img
+                              className="image"
+                              style={{
+                                width: '100px',
+                                height: '50px',
+                                cursor: 'pointer',
+                              }}
+                              src={CarBannerImg}
+                              alt=""
+                            />
+                          )}
+                      </td>
                       <td>{ctr.timeCarOut}</td>
                       <td>
                         <span

@@ -17,12 +17,14 @@ import Gateway from '../layouts/Dashboard/Gateway';
 import DetectorInfo from '../layouts/Dashboard/DetectorInfo';
 import Image1 from '../layouts/Dashboard/Image1';
 import Image2 from '../layouts/Dashboard/Image2';
+import Maps2D from '../layouts/Dashboard/2D_maps';
 import CreateManager from '../layouts/Dashboard/CreateManager';
 import Analysis from '../layouts/Dashboard/Analysis';
 import ProfileManager from '../layouts/Dashboard/ProfileManager';
 import Managers from '../layouts/Dashboard/ListManager';
 import Tags from '../layouts/Dashboard/Tags';
 import Debug from '../layouts/Dashboard/Debug';
+import ShowImage from '../layouts/Dashboard/ShowImage';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -106,6 +108,11 @@ function Dashboard() {
               />
               <Route
                 exact
+                path={`${match.url}/fields/:idSlot/2d_maps`}
+                render={(props) => <Maps2D {...props} />}
+              />
+              <Route
+                exact
                 path={`${match.url}/new-manager`}
                 render={(props) => <CreateManager {...props} />}
               />
@@ -133,6 +140,11 @@ function Dashboard() {
                 exact
                 path={`${match.url}/debug`}
                 render={(props) => <Debug {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/showImage`}
+                render={(props) => <ShowImage {...props} />}
               />
             </Switch>
           </div>

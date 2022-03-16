@@ -37,7 +37,7 @@ function BookingForm() {
     const time = timeNowArray[0].split(':');
     const dateFormatted = `${date[2]}-${convertNum(date[1])}-${convertNum(date[0])}T${convertNum(time[0])}:${convertNum(time[1])}`;
     setTimeNow(dateFormatted);
-    // console.log(dateFormatted);
+    console.log(dateFormatted);
   }
   // return the time value in miliseconds, if no params return now time
   function getTime(string = '') {

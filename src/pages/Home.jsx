@@ -1,14 +1,13 @@
 import React from 'react';
-
 import { Switch, useRouteMatch } from 'react-router';
-
 import AuthenticatedRoute from '../components/Routes/AuthenticatedRoute';
 import Footer from '../layouts/Footer/Footer';
-import BookingForm from '../layouts/User/BookingForm';
-import Contracts from './User/Contracts';
 import HeaderMain from '../layouts/Header/HeaderMain';
-import Profile from './User/Profile';
+import BookingForm from '../layouts/User/BookingForm';
 import Checkin from '../layouts/User/Checkin';
+import Contracts from './User/Contracts';
+import Profile from './User/Profile';
+import Maps2D from '../layouts/Dashboard/2D_maps';
 
 function Home() {
   const { url } = useRouteMatch();
@@ -26,6 +25,9 @@ function Home() {
           </AuthenticatedRoute>
           <AuthenticatedRoute restrict={[1]} path={`${url}/profile`} exact>
             <Profile />
+          </AuthenticatedRoute>
+          <AuthenticatedRoute restrict={[1]} path={`${url}/maps_2d`} exact>
+            <Maps2D />
           </AuthenticatedRoute>
         </Switch>
       </div>

@@ -15,6 +15,7 @@ import listContractReducer from './user/listContractSlice';
 import listManagerReducer from './admin/managersSlice';
 import listTagReducer from './admin/tagsSlice';
 import packageTagReducer from './debug/packageTagSlice';
+import notifyReducer from './notifySlice';
 
 const rootReducer = {
   detector: detectorReducer,
@@ -33,6 +34,7 @@ const rootReducer = {
   listManager: listManagerReducer,
   listTag: listTagReducer,
   packageTag: packageTagReducer,
+  notify: notifyReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

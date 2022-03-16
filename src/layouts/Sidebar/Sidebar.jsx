@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, withRouter } from 'react-router';
@@ -20,6 +19,7 @@ const Sidebar = React.memo(() => {
 
   return (
     <>
+      {/* ${true ? 'toggled' : ''} */}
       <ul
         className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${toggle ? 'toggled' : ''}`}
         id="accordionSidebar"
@@ -179,10 +179,24 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
+        <li
+          className={`nav-item ${current === '/dashboard/showImage' ? 'active' : null}`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/showImage"
+            onClick={() => updateCurrentUrl('/dashboard/showImage')}
+          >
+            <i className="fas fa-fw fa-image" />
+            <span>Show Image</span>
+          </Link>
+        </li>
+
         <hr className="sidebar-divider d-none d-md-block" />
 
         <div className="text-center d-none d-md-inline">
           <button
+            aria-label="hello"
             className="rounded-circle border-0"
             id="sidebarToggle"
             onClick={handleToggleButton}

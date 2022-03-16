@@ -69,6 +69,9 @@ const ModalDeleteField = ({
             <Link to={`/dashboard/fields/${id}`} className="card-link">
               <button type="button" className="btn btn-primary">Go to list slot</button>
             </Link>
+            <Link to={`/dashboard/fields/${id}/2d_maps`} className="card-link">
+              <button type="button" className="btn btn-warning">Go to 2D maps</button>
+            </Link>
           </div>
         </form>
       </Modal.Body>
