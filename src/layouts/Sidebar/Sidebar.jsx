@@ -19,7 +19,6 @@ const Sidebar = React.memo(() => {
 
   return (
     <>
-      {/* ${true ? 'toggled' : ''} */}
       <ul
         className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${toggle ? 'toggled' : ''}`}
         id="accordionSidebar"
@@ -196,7 +195,7 @@ const Sidebar = React.memo(() => {
 
         <div className="text-center d-none d-md-inline">
           <button
-            aria-label="hello"
+            aria-label="sidebar"
             className="rounded-circle border-0"
             id="sidebarToggle"
             onClick={handleToggleButton}

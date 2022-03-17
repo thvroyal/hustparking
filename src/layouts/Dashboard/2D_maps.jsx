@@ -5,7 +5,7 @@ import { getSlotOfFieldViewMin } from '../../apis/slotApi';
 import CarBannerImg from '../../assets/img/2D_thư_viện_D35.drawio.png';
 import SlotFiled from '../../components/SlotField';
 
-function Maps2D() {
+const Maps2D = React.memo(() => {
   const match = useLocation();
   const fieldId = match.pathname.split('/')[3];
   const listSlots = useSelector((state) => state.slot.data);
@@ -38,20 +38,27 @@ function Maps2D() {
               />
             </div>
             <div
-              className="card-body text-center p-2 border border-primary rounded"
+              className="card-body text-center p-2 rounded shadow-lg"
               style={{
                 width: '100%',
                 height: '500px',
                 overflow: 'scroll',
               }}
             >
-              <h2>Parking slot notify</h2>
+              <h2 className="card-header">Parking slot notify</h2>
               <hr />
-              {listNotify ? (
-                listNotify.slice(listNotify.length - 16, listNotify.length).map((item) => (
-                  <li>{item}</li>
-                ))
-              ) : ''}
+              <div className="list-group">
+                {listNotify ? (
+                  listNotify.slice(listNotify.length - 16, listNotify.length).map((item) => (
+                    <button type="button" className="list-group-item list-group-item-action text-left">
+                      {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
+                        : item.status === 'N' ? (<i className="text-info fas fa-info-circle mr-2" />)
+                          : (<i className="text-primary fas fa-check-circle mr-2" />)}
+                      {item.info}
+                    </button>
+                  ))
+                ) : ''}
+              </div>
             </div>
           </div>
           {listSlots ? (
@@ -87,6 +94,6 @@ function Maps2D() {
       </div>
     </>
   );
-}
+});
 
 export default Maps2D;

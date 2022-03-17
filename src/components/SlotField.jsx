@@ -12,7 +12,7 @@ export default function SlotFiled({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let data;
+    let data = {};
 
     if (listSlots.statusCam) setStateSlot(true);
     if (id >= 13 && id <= 16) {
@@ -20,19 +20,31 @@ export default function SlotFiled({
       setCheck(true);
     }
     if (stateSlot === true && check === false) {
-      data = `Bạn đã đỗ xe tại ${id} có carNum: ${listSlots.carNumber}`;
+      data = {
+        info: `Bạn đã đỗ xe tại ${id} có carNum: ${listSlots.carNumber}`,
+        status: 'Y',
+      };
       dispatch(getInfo(data));
     }
     if (check === true && stateSlot === true) {
-      data = `Đang có xe biển số ${listSlots.carNumber} tại ô ${convertId} không được đỗ`;
+      data = {
+        info: `Đang có xe biển số ${listSlots.carNumber} tại ô ${convertId} không được đỗ`,
+        status: 'W',
+      };
       dispatch(getInfo(data));
     }
     if (check === true && stateSlot === false) {
-      data = `Bạn không đỗ xe tại ${convertId}`;
+      data = {
+        info: `Bạn không đỗ xe tại ${convertId}`,
+        status: 'W-N',
+      };
       dispatch(getInfo(data));
     }
     if (stateSlot === false && check === false) {
-      data = `Không có xe tại ${id}`;
+      data = {
+        info: `Không có xe tại ${id}`,
+        status: 'N',
+      };
       dispatch(getInfo(data));
     }
   }, [dispatch, id, listSlots]);
