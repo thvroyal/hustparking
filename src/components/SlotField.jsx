@@ -71,5 +71,4 @@ SlotFiled.propTypes = {
   className: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   listSlots: PropTypes.string.isRequired,
-  // LIST_SLOT: PropTypes.string.isRequired,
 };
