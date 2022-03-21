@@ -63,7 +63,7 @@ const Maps2D = React.memo(() => {
           </div>
           {listSlots ? (
             listSlots.map((item) => {
-              const changeId = parseInt(item.id, 10) - 65000;
+              const changeId = parseInt(item.id, 10) - parseInt(fieldId, 10) * 1000;
               let checkColorSlot = false;
               let checkIdSlotHori = false;
               let checkIdSlotNoParking = false;

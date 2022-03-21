@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import {
-  func, bool, string,
+  func, bool, string, number,
 } from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -66,7 +66,7 @@ const ModalDeleteSlot = ({
 ModalDeleteSlot.propTypes = {
   onClose: func.isRequired,
   open: bool.isRequired,
-  id: string.isRequired,
+  id: number.isRequired,
   fieldId: string.isRequired,
 };
 

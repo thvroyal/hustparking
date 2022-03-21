@@ -46,7 +46,6 @@ const ModalUpdateSlot = ({
 
       setLoading(false);
       if (response.data.message === 'success') {
-        console.log(response.data.data);
         toast.success('Updated new slot', {
           position: toast.POSITION.TOP_RIGHT,
           onOpen: handleClose,

@@ -25,6 +25,7 @@ import Managers from '../layouts/Dashboard/ListManager';
 import Tags from '../layouts/Dashboard/Tags';
 import Debug from '../layouts/Dashboard/Debug';
 import ShowImage from '../layouts/Dashboard/ShowImage';
+import AreaInfo from '../layouts/AreaInfo';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -84,11 +85,11 @@ function Dashboard() {
                 render={(props) => <Contract {...props} />}
               />
 
-              {/* <Route
+              <Route
                 exact
-                path={`${match.url}/debug-detector`}
-                render={(props) => <DetectorDebug {...props} />}
-              /> */}
+                path={`${match.url}/fields/:idSlot/area_info/:area`}
+                render={(props) => <AreaInfo {...props} />}
+              />
 
               <Route
                 exact

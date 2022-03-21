@@ -109,7 +109,7 @@ function Slot() {
       </ol>
       <h6>
         The fixed mode is show minimun, if you want to change, you can click
-        <spam className="text-primary ml-1 font-weight-bold">Database</spam>
+        <span className="text-primary ml-1 font-weight-bold">Database</span>
       </h6>
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">

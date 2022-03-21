@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import {
-  func, bool, string,
+  func, bool, number,
 } from 'prop-types';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -98,8 +98,8 @@ const ModalOption = ({
 ModalOption.propTypes = {
   onClose: func.isRequired,
   open: bool.isRequired,
-  idGW: string.isRequired,
-  id: string.isRequired,
+  idGW: number.isRequired,
+  id: number.isRequired,
 
 };
 

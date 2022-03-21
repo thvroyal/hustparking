@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Pie } from 'react-chartjs-2';
 import { Tooltip } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import ModalDeleteField from './Modal/ModalField/ModalDeleteField';
 import ModalCreateGW from './Modal/ModalGW/ModalCreateGW';
 import ModalOption from './Modal/ModalGW/ModalOption';
 
 function CardField(props) {
   const {
-    name, id, data, GW,
+    area, name, id, data, GW,
   } = props;
   const dataPie = {
     datasets: [
@@ -33,23 +34,29 @@ function CardField(props) {
       <div className="card-body">
         <div className="row no-gutters align-items-center">
           <div className="col mr-2">
-            <div
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.ctrlKey) {
-                  setOpenModalCreateGW(true);
-                }
-              }}
-              onClick={() => setOpenModalDelete(true)}
-            >
+            <div>
               <div
                 className="text-xs font-weight-bold text-primary text-uppercase mb-1"
               >
                 {`Field ${id}`}
+                {' '}
+                <Link
+                  to={`/dashboard/fields/${id}/area_info/${area}`}
+                  className="card-link"
+                >
+                  {`(${area})`}
+                </Link>
               </div>
               <div
                 className="h6 mb-0 text-gray-800 font-weight-bold text-uppercase"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.ctrlKey) {
+                    setOpenModalCreateGW(true);
+                  }
+                }}
+                onClick={() => setOpenModalDelete(true)}
               >
                 {name}
               </div>
@@ -58,6 +65,7 @@ function CardField(props) {
             {(GW && GW.length)
               ? GW.map((item, index) => (
                 <div
+                  key={item.id}
                   className="h1 badge badge-primary font-weight-normal mr-1"
                   id={`tooltip${index}`}
                   role="button"
@@ -142,6 +150,7 @@ function CardField(props) {
 export default React.memo(CardField);
 
 CardField.propTypes = {
+  area: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   data: PropTypes.arrayOf(PropTypes.number),

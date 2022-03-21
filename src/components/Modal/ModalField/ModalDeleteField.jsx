@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import {
-  func, bool, string,
+  func, bool, number,
 } from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -87,7 +87,7 @@ const ModalDeleteField = ({
 ModalDeleteField.propTypes = {
   onClose: func.isRequired,
   open: bool.isRequired,
-  id: string.isRequired,
+  id: number.isRequired,
 };
 
 export default React.memo(ModalDeleteField);
