@@ -16,6 +16,8 @@ import listManagerReducer from './admin/managersSlice';
 import listTagReducer from './admin/tagsSlice';
 import packageTagReducer from './debug/packageTagSlice';
 import notifyReducer from './notifySlice';
+import areaReducer from './admin/areaSlice';
+import districtReducer from './admin/districtSlice';
 
 const rootReducer = {
   detector: detectorReducer,
@@ -35,6 +37,8 @@ const rootReducer = {
   listTag: listTagReducer,
   packageTag: packageTagReducer,
   notify: notifyReducer,
+  area: areaReducer,
+  district: districtReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

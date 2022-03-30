@@ -99,7 +99,7 @@ const UpdateField = ({
       </Modal.Header>
       <Modal.Body>
         <ul className="list-group list-group-flush">
-          {allFields && allFields.map((field) => (
+          {allFields && allFields.listOfFields.map((field) => (
             <UpdateFieldRow
               title={field.name}
               toggled={handleToggle(field.id)}

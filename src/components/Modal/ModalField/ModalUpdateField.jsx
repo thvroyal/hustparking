@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { Modal, Spinner } from 'react-bootstrap';
-import { func, bool, number } from 'prop-types';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { Field, Form, Formik } from 'formik';
+import { bool, func, number } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import TextField from '../../TextField';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
+import { getArea } from '../../../apis/areaApi';
 import { getField } from '../../../apis/fieldApi';
+import TextField from '../../TextField';
 
 const ModalUpdateField = ({
   onClose, open, id,
@@ -16,12 +17,14 @@ const ModalUpdateField = ({
   const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
   const listField = useSelector((state) => state.field.data);
+  const listArea = useSelector((state) => state.area.data);
 
   useEffect(() => {
     dispatch(getField());
-  }, [dispatch, id]);
+    dispatch(getArea());
+  }, [dispatch]);
 
-  const fieldSelected = listField.map((item, index) => {
+  const fieldSelected = listField.listOfFields.map((item, index) => {
     if (item.id === id) {
       return index;
     }
@@ -38,6 +41,7 @@ const ModalUpdateField = ({
     openstatus: Yup.string()
       .required('Open status is required')
       .matches(/^[0-1]+$/, 'Only value 0 (close) or 1 (open)'),
+    idArea: Yup.number().required('Id area is required'),
     price: Yup.number().required('Price is required'),
   });
 
@@ -53,15 +57,16 @@ const ModalUpdateField = ({
       <Modal.Body>
         <Formik
           initialValues={{
-            address: listField[fieldSelectedFilter].address,
-            details: listField[fieldSelectedFilter].details,
-            image: listField[fieldSelectedFilter].image,
-            latitude: listField[fieldSelectedFilter].latitude,
-            longitude: listField[fieldSelectedFilter].longitude,
-            name: listField[fieldSelectedFilter].name,
-            openstatus: listField[fieldSelectedFilter].openstatus,
-            price: listField[fieldSelectedFilter].price,
-            space: listField[fieldSelectedFilter].space,
+            address: listField.listOfFields[fieldSelectedFilter].address,
+            details: listField.listOfFields[fieldSelectedFilter].details,
+            image: listField.listOfFields[fieldSelectedFilter].image,
+            latitude: listField.listOfFields[fieldSelectedFilter].latitude,
+            longitude: listField.listOfFields[fieldSelectedFilter].longitude,
+            name: listField.listOfFields[fieldSelectedFilter].name,
+            openstatus: listField.listOfFields[fieldSelectedFilter].openstatus,
+            idArea: listField.listOfFields[fieldSelectedFilter].area.id,
+            price: listField.listOfFields[fieldSelectedFilter].price,
+            space: listField.listOfFields[fieldSelectedFilter].space,
           }}
           validationSchema={validateField}
           onSubmit={async (values) => {
@@ -81,7 +86,7 @@ const ModalUpdateField = ({
               setLoading(false);
               if (response.data.message === 'success') {
                 const responseField = response.data.data;
-                toast.success(`Field ${responseField.name} is created`, {
+                toast.success(`Field ${responseField.name} is updated`, {
                   position: toast.POSITION.TOP_RIGHT,
                   onOpen: handleClose,
                 });
@@ -89,7 +94,7 @@ const ModalUpdateField = ({
               }
             } catch (error) {
               setLoading(false);
-              toast.error('Can\'t create new field. Please try again!');
+              toast.error('Can\'t update new field. Please try again!');
               console.log(error);
             }
           }}
@@ -102,6 +107,19 @@ const ModalUpdateField = ({
                 <TextField label="address" name="address" type="text" placeholder="Enter address field" showLabel />
                 <TextField label="image" name="image" type="text" placeholder="e.g: https://url.com/image.png" showLabel />
                 <TextField label="open status" name="openstatus" type="text" placeholder="0 is close, 1 is open" showLabel />
+                <Field
+                  as="select"
+                  className="custom-select"
+                  style={{
+                    borderRadius: '50px',
+                    height: '50px',
+                  }}
+                  name="idArea"
+                >
+                  {listArea && listArea.map((f) => (
+                    <option value={f.id} key={f.id}>{f.areaName}</option>
+                  ))}
+                </Field>
                 <div className="form-row">
                   <div className="col-md-6">
                     <TextField label="price" name="price" type="number" placeholder="e.g: 40000" showLabel />

@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { Modal, Spinner } from 'react-bootstrap';
-import { func, bool } from 'prop-types';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { Form, Formik, Field } from 'formik';
+import { bool, func } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import TextField from '../../TextField';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
+import { getArea } from '../../../apis/areaApi';
 import { getField } from '../../../apis/fieldApi';
+import TextField from '../../TextField';
 
 const ModalCreateField = ({
   onClose, open,
 }) => {
   const { alias } = useSelector((state) => state.auth);
+  const listArea = useSelector((state) => state.area.data);
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getArea());
+  }, [dispatch]);
+
+  // const onChangeValue = () => {
+  //   setValueOption(parseInt(selectAreaRef.current.value, 10));
+  //   console.log(valueOption);
+  // };
   const validateField = Yup.object({
     address: Yup.string().required('Address is required'),
     details: Yup.string(),
@@ -24,6 +35,7 @@ const ModalCreateField = ({
     openstatus: Yup.string()
       .required('Open status is required')
       .matches(/^[0-1]+$/, 'Only value 0 (close) or 1 (open)'),
+    idArea: Yup.number().required('Id area is required'),
     price: Yup.number().required('Price is required'),
   });
 
@@ -46,6 +58,7 @@ const ModalCreateField = ({
             longitude: '',
             name: '',
             openstatus: '',
+            idArea: 1,
             price: 0,
             space: 30,
           }}
@@ -88,6 +101,19 @@ const ModalCreateField = ({
                 <TextField label="address" name="address" type="text" placeholder="Enter address field" showLabel />
                 <TextField label="image" name="image" type="text" placeholder="e.g: https://url.com/image.png" showLabel />
                 <TextField label="open status" name="openstatus" type="text" placeholder="0 is close, 1 is open" showLabel />
+                <Field
+                  as="select"
+                  className="custom-select"
+                  style={{
+                    borderRadius: '50px',
+                    height: '50px',
+                  }}
+                  name="idArea"
+                >
+                  {listArea && listArea.map((f) => (
+                    <option value={f.id} key={f.id}>{f.areaName}</option>
+                  ))}
+                </Field>
                 <div className="form-row">
                   <div className="col-md-6">
                     <TextField label="price" name="price" type="number" placeholder="e.g: 40000" showLabel />

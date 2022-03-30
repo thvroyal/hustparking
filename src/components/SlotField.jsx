@@ -14,7 +14,7 @@ export default function SlotFiled({
   useEffect(() => {
     let data = {};
 
-    if (listSlots.statusCam) setStateSlot(true);
+    if (listSlots.statusCam === true || listSlots.carNumber !== null) setStateSlot(true);
     if (id >= 13 && id <= 16) {
       setConvertId(id * 10 - 80);
       setCheck(true);

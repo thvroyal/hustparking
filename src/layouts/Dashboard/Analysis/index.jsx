@@ -49,7 +49,7 @@ function Analysis() {
               <div className="input-group input-group-sm" style={{ width: 'fit-content' }}>
                 <select className="custom-select" ref={selectFieldRef} onChange={onChangeFieldType}>
                   <option value="">---Select field---</option>
-                  {listField && listField.map((field) => (
+                  {listField && listField.listOfFields.map((field) => (
                     <option value={field.id} key={field.id}>{field.name}</option>
                   ))}
                 </select>
@@ -104,12 +104,12 @@ function Analysis() {
               </div>
               <button className="btn btn-primary btn-sm" type="button" onClick={() => setRefreshData(refreshData + 1)} disabled={loading}>
                 {loading && (
-                <Spinner
-                  animation="border"
-                  variant="light"
-                  className="mr-2"
-                  size="sm"
-                />
+                  <Spinner
+                    animation="border"
+                    variant="light"
+                    className="mr-2"
+                    size="sm"
+                  />
                 )}
                 Refresh
               </button>
@@ -117,18 +117,18 @@ function Analysis() {
           </div>
           {
             activeField && (
-            <AnalysisBarChart
-              field={activeField}
-              since={startDate}
-              until={endDate}
-              unit={activeUnit}
-              type={activeType}
-              loading={loading}
-              onLoading={setLoading}
-              refreshData={refreshData}
-            />
+              <AnalysisBarChart
+                field={activeField}
+                since={startDate}
+                until={endDate}
+                unit={activeUnit}
+                type={activeType}
+                loading={loading}
+                onLoading={setLoading}
+                refreshData={refreshData}
+              />
             )
-}
+          }
         </div>
       </div>
     </>

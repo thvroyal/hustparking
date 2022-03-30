@@ -1,70 +1,74 @@
-import React, { useState, useEffect } from 'react';
+// import {  } from '@react-google-maps/api';
+import { string } from 'prop-types';
+import React, { useState } from 'react';
 import {
+  GoogleMap,
   withGoogleMap,
   withScriptjs,
-  GoogleMap,
-  Polygon,
+  InfoWindow, Marker,
 } from 'react-google-maps';
-import { mapC9 } from '../apis/mapApi';
 import mapStyle from './mapStyle';
 
-function Map() {
-  const [selectedPark, setSelectedPark] = useState(0);
+function Map({ listFields }) {
+  const [showPopup, setShowPopup] = useState(false);
 
-  useEffect(() => {
-    const listener = (e) => {
-      if (e.key === 'Escape') {
-        setSelectedPark(selectedPark + 1);
-      }
-    };
-    window.addEventListener('keydown', listener);
+  // const options = {
+  //   fillOpacity: 1,
+  //   strokeColor: 'black',
+  //   strokeOpacity: 1,
+  //   strokeWeight: 1,
+  //   clickable: false,
+  //   draggable: false,
+  //   editable: false,
+  //   geodesic: false,
+  //   zIndex: 1,
+  // };
 
-    return () => {
-      window.removeEventListener('keydown', listener);
-    };
-  }, []);
-
-  const options = function (fillColor) {
-    return {
-      fillColor,
-      fillOpacity: 1,
-      strokeColor: 'black',
-      strokeOpacity: 1,
-      strokeWeight: 1,
-      clickable: false,
-      draggable: false,
-      editable: false,
-      geodesic: false,
-      zIndex: 1,
-    };
-  };
+  // const options = { closeBoxURL: '', enableEventPropagation: true, visible: false };
   return (
     <GoogleMap
-      defaultZoom={21.5}
+      defaultZoom={18}
       defaultCenter={{ lat: 21.00553019004566, lng: 105.84252910689219 }}
       defaultOptions={{ styles: mapStyle }}
     >
-      {mapC9.features.map((park) => {
-        if (park.geometry.type === 'Polygon') {
-          const paths = park.geometry.coordinates[0].map((point) => {
-            const p = {
-              lat: point[1],
-              lng: point[0],
-            };
-            return p;
-          });
-          return (
-            <Polygon
-              path={paths}
-              options={options(park.properties.fillColor)}
-              key={park.properties.name}
-            />
-          );
-        } return null;
-      })}
+      {listFields ? (
+        listFields.listOfFields.map((item) => (
+          <>
+            <Marker
+              key={item.id}
+              onClick={() => setShowPopup(true)}
+              icon={{
+                scaledSize: new window.google.maps.Size(80, 80),
+              }}
+              position={{ lat: parseFloat(item.latitude), lng: parseFloat(item.longitude) }}
+            >
+              {showPopup ? (
+                <InfoWindow
+                  onCloseClick={() => setShowPopup(false)}
+                >
+                  <div
+                    style={{
+                      backgroundColor: 'blue',
+                      color: 'white',
+                      borderRadius: '1em',
+                      padding: '0.2em',
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                </InfoWindow>
+              ) : null}
+            </Marker>
+          </>
+        ))
+      ) : ''}
     </GoogleMap>
   );
 }
 
 const MapWrapped = withScriptjs(withGoogleMap(Map));
-export default MapWrapped;
+export default React.memo(MapWrapped);
+
+Map.propTypes = {
+  listFields: string.isRequired,
+};

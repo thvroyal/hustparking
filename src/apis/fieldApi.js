@@ -26,6 +26,26 @@ export const getField = () => (dispatch) => {
     });
 };
 
+export const getFieldByDistrict = (idDistrict) => (dispatch) => {
+  const { auth } = store.getState();
+  dispatch(loadingField);
+  axios({
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/field/find_all?district=${idDistrict}`,
+    method: 'GET',
+    headers: {
+      token: localStorage.getItem('AccessToken'),
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => {
+      dispatch(successField(res.data.data));
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(failedField(err));
+    });
+};
+
 export const getFieldUser = () => (dispatch) => {
   dispatch(loadingField);
   axios({

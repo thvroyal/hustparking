@@ -108,7 +108,7 @@ function BookingForm() {
           {!loadingField ? (
             <div id="listField" className="row">
               {fields
-                ? fields.map((field) => (
+                ? fields.listOfFields.map((field) => (
                   <div
                     className="col-md-2 d-flex justify-content-center mt-2"
                     key={field.id}

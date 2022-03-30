@@ -34,7 +34,7 @@ function Slot() {
   const [view, setView] = useState(false);
   // get fieldName from list field by ID
   let fieldName;
-  if (field) { fieldName = field.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
+  if (field) { fieldName = field.listOfFields.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
   useEffect(() => {
     dispatch(getQuantitySlotOfFieldViewMin(fieldId, 20));
     dispatch(getField());

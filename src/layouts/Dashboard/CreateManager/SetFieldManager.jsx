@@ -52,7 +52,7 @@ const SetFieldManager = ({ managerId }) => {
             <Form>
               <div role="group" aria-labelledby="checkbox-group">
                 {
-                  listField && listField.map((field) => (
+                  listField && listField.listOfFields.map((field) => (
                     <CheckboxField label={field.name} name="selected" value={field.id} key={field.name} />
                   ))
                 }
