@@ -1,8 +1,9 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import {
-  func, bool, string,
-} from 'prop-types';
+// import {
+//   func, bool, string, arrayOf,
+// } from 'prop-types';
+import PropTypes from 'prop-types';
 
 const ModalTableMap = ({ onClose, open, listFields }) => {
   const handleClose = () => {
@@ -62,7 +63,7 @@ const ModalTableMap = ({ onClose, open, listFields }) => {
 export default React.memo(ModalTableMap);
 
 ModalTableMap.propTypes = {
-  onClose: func.isRequired,
-  open: bool.isRequired,
-  listFields: string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  listFields: PropTypes.arrayOf.isRequired,
 };

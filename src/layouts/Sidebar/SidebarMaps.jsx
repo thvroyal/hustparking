@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import { bool } from 'prop-types';
+import React from 'react';
 import CarBannerImg from '../../assets/img/profile-1.png';
 
-function SidebarMaps() {
-  const [toggleSidebar, setToggleSidebar] = useState(false);
+function SidebarMaps({ toggle }) {
   return (
     <>
       <div
-        className="p-3 d-flex flex-column bg-light position-absolute"
-        style={{
-          width: '280px',
-          top: '5%',
-          height: '95%',
-        }}
+        className={`p-3 d-flex flex-column bg-light position-absolute sidenav ${toggle ? '' : 'toggleSidebar'}`}
       >
         <div>
           <div className="font-weight-bold" style={{ fontSize: '26px' }}>Smart Parking</div>
@@ -41,16 +36,13 @@ function SidebarMaps() {
           <li className="nav-item">Info</li>
         </ul>
         <hr />
-        <button
-          className="btn btn-primary"
-          onClick={() => setToggleSidebar(!toggleSidebar)}
-          type="button"
-        >
-          click
-        </button>
       </div>
     </>
   );
 }
 
 export default SidebarMaps;
+
+SidebarMaps.propTypes = {
+  toggle: bool.isRequired,
+};

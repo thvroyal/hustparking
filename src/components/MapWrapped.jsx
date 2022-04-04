@@ -11,24 +11,21 @@ import mapStyle from './mapStyle';
 
 function Map({ listFields }) {
   const [showPopup, setShowPopup] = useState(false);
+  console.log(showPopup);
+  const [latPosition, setLatPosition] = useState(21.00553019004566);
+  const [longPosition, setLongPosition] = useState(105.84252910689219);
 
-  // const options = {
-  //   fillOpacity: 1,
-  //   strokeColor: 'black',
-  //   strokeOpacity: 1,
-  //   strokeWeight: 1,
-  //   clickable: false,
-  //   draggable: false,
-  //   editable: false,
-  //   geodesic: false,
-  //   zIndex: 1,
-  // };
+  const focusMarker = (lat, long) => {
+    setShowPopup(true);
+    setLatPosition(lat);
+    setLongPosition(long);
+  };
 
   // const options = { closeBoxURL: '', enableEventPropagation: true, visible: false };
   return (
     <GoogleMap
       defaultZoom={18}
-      defaultCenter={{ lat: 21.00553019004566, lng: 105.84252910689219 }}
+      defaultCenter={{ lat: latPosition, lng: longPosition }}
       defaultOptions={{ styles: mapStyle }}
     >
       {listFields ? (
@@ -36,28 +33,36 @@ function Map({ listFields }) {
           <>
             <Marker
               key={item.id}
-              onClick={() => setShowPopup(true)}
+              onClick={() => focusMarker(parseFloat(item.latitude), parseFloat(item.longitude))}
               icon={{
                 scaledSize: new window.google.maps.Size(80, 80),
               }}
               position={{ lat: parseFloat(item.latitude), lng: parseFloat(item.longitude) }}
             >
-              {showPopup ? (
-                <InfoWindow
-                  onCloseClick={() => setShowPopup(false)}
-                >
-                  <div
-                    style={{
-                      backgroundColor: 'blue',
-                      color: 'white',
-                      borderRadius: '1em',
-                      padding: '0.2em',
-                    }}
-                  >
-                    {item.name}
-                  </div>
-                </InfoWindow>
-              ) : null}
+              <InfoWindow
+                onCloseClick
+              >
+                <div>
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="row">#</th>
+                        <th scope="row">First</th>
+                        <th scope="row">Last</th>
+                        <th scope="row">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="col">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </InfoWindow>
             </Marker>
           </>
         ))
