@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CarBannerImg from '../../assets/img/D5.jpg';
 
 function Image2() {
+  const [reloadImg, setReloadImg] = useState(CarBannerImg);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setReloadImg(CarBannerImg);
+      console.log('This will run every 10 min!');
+    }, 1200000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <div className="container-fluid">
@@ -11,7 +21,7 @@ function Image2() {
           </div>
           <div className="card-body text-center p-2">
             <img
-              src={CarBannerImg}
+              src={reloadImg}
               alt=""
               style={{
                 width: '100%',

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import CarBannerImg from '../../assets/img/D3.jpg';
 
 function Image1() {
-  const [reloadImg, setReloadImg] = useState();
+  const [reloadImg, setReloadImg] = useState(CarBannerImg);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setReloadImg(CarBannerImg);
-      console.log('This will run every second!');
-    }, 10000);
+      console.log('This will run every 10 min!');
+    }, 1200000);
     return () => clearInterval(interval);
   }, []);
 
