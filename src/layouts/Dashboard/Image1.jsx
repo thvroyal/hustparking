@@ -1,17 +1,28 @@
-import React from 'react';
-import CarBannerImg from '../../assets/img/C9.jpg';
+import React, { useEffect, useState } from 'react';
+import CarBannerImg from '../../assets/img/D3.jpg';
 
 function Image1() {
+  const [reloadImg, setReloadImg] = useState();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setReloadImg(CarBannerImg);
+      console.log('This will run every second!');
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <div className="container-fluid">
         <div className="card mb-3">
           <div className="card-header text-lg text-primary">
-            C9 Campus
+            D3 Campus
           </div>
           <div className="card-body text-center p-2">
             <img
-              src={CarBannerImg}
+              role="presentation"
+              src={reloadImg}
               alt=""
               style={{
                 width: '100%',

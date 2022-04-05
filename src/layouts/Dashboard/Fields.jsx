@@ -13,21 +13,20 @@ import ModalTableMap from '../../components/Modal/ModalTableMap';
 
 function Fields() {
   const dispatch = useDispatch();
-  const selectAreaRef = useRef();
+  // const selectAreaRef = useRef();
   const selectDistrictRef = useRef();
   const listField = useSelector((state) => state.field.data);
   const listGW = useSelector((state) => state.gateway.data);
-  const listArea = useSelector((state) => state.area.data);
+  // const listArea = useSelector((state) => state.area.data);
   const listDistrict = useSelector((state) => state.district.data);
   const { role } = useSelector((state) => state.auth);
   const [showTable, setShowTable] = useState(false);
   const [isOpenCreateField, setOpenCreateField] = useState(false);
-  const [listFilterArea, setListFilterArea] = useState([]);
+  // const [listFilterArea, setListFilterArea] = useState([]);
   // const [changeViewList, setChangeViewList] = useState(false);
   // const [listFilterFields, setListFilterFields] = useState([]);
   const [valueOptionDistrict, setValueOptionDistrict] = useState(null);
-  const [valueOptionArea, setValueOptionArea] = useState(0);
-  console.log(valueOptionArea);
+  // const [valueOptionArea, setValueOptionArea] = useState(0);
   function searchGW(id) {
     if (listGW) return listGW.filter((gateway) => gateway.fieldId === id);
     return [];
@@ -40,14 +39,14 @@ function Fields() {
     dispatch(getDistrict());
   }, [dispatch]);
 
-  const filterAreaByDistrict = () => {
-    console.log(valueOptionDistrict);
-    const listFilter = listArea.filter(
-      (item) => item.idDistrict === valueOptionDistrict,
-    );
-    console.log(listFilter);
-    setListFilterArea([...listFilter]);
-  };
+  // const filterAreaByDistrict = () => {
+  //   console.log(valueOptionDistrict);
+  //   const listFilter = listArea.filter(
+  //     (item) => item.idDistrict === valueOptionDistrict,
+  //   );
+  //   console.log(listFilter);
+  //   setListFilterArea([...listFilter]);
+  // };
 
   const getListFieldsByDistrict = (idDistrict) => {
     if (valueOptionDistrict === 'all') {
@@ -73,14 +72,12 @@ function Fields() {
 
   const onChangeValueDistrict = () => {
     console.log(selectDistrictRef.current.value);
-    setValueOptionDistrict(parseInt(selectDistrictRef.current.value, 10) + 1);
-    console.log(valueOptionDistrict);
-    filterAreaByDistrict(valueOptionDistrict);
+    setValueOptionDistrict(selectDistrictRef.current.value);
   };
 
-  const onChangeValueArea = () => {
-    setValueOptionArea(selectAreaRef.current.value);
-  };
+  // const onChangeValueArea = () => {
+  //   setValueOptionArea(selectAreaRef.current.value);
+  // };
 
   const drawCreateField = () => (
     <div
@@ -116,12 +113,13 @@ function Fields() {
                 <option value={district.id} key={district.id}>{district.district}</option>
               ))}
             </select>
-            <select className="custom-select" id="fieldList" ref={selectAreaRef} onChange={onChangeValueArea}>
+            {/* <select className="custom-select" id="fieldList"
+            ref={selectAreaRef} onChange={onChangeValueArea}>
               <option value="all" defaultChecked>What area do you want to view?</option>
               {listFilterArea && listFilterArea.map((area) => (
                 <option value={area.id} key={area.id}>{area.areaName}</option>
               ))}
-            </select>
+            </select> */}
             <div className="input-group-append">
               <button className="btn btn-outline-primary" type="button" onClick={() => getListFieldsByDistrict(valueOptionDistrict)}>
                 {' '}

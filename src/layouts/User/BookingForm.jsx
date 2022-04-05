@@ -45,10 +45,11 @@ function BookingForm() {
     return new Date(string).getTime();
   }
   async function handleBooking() {
+    console.log(timeInRef.current.value, timeOutRef.current.value);
     const data = {
       fieldId: fieldSelected,
-      timeInBook: `${timeInRef.current.value.split('T').join(' ')}:00`,
-      timeOutBook: `${timeOutRef.current.value.split('T').join(' ')}:00`,
+      timeInBook: `${timeInRef.current.value}:00.000Z`,
+      timeOutBook: `${timeOutRef.current.value}:00.000Z`,
       carNumber: '',
     };
     // validate time : timeInBook > time OutBook && timeInBook  < timeNow + 30p

@@ -1,5 +1,5 @@
 import React from 'react';
-import CarBannerImg from '../../assets/img/C9.jpg';
+import CarBannerImg from '../../assets/img/D5.jpg';
 
 function Image2() {
   return (
@@ -7,7 +7,7 @@ function Image2() {
       <div className="container-fluid">
         <div className="card mb-3">
           <div className="card-header text-lg text-primary">
-            C9 Campus 2
+            D5 Campus
           </div>
           <div className="card-body text-center p-2">
             <img
