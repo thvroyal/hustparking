@@ -178,19 +178,6 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
-        <li
-          className={`nav-item ${current === '/dashboard/showImage' ? 'active' : null}`}
-        >
-          <Link
-            className="nav-link"
-            to="/dashboard/showImage"
-            onClick={() => updateCurrentUrl('/dashboard/showImage')}
-          >
-            <i className="fas fa-fw fa-image" />
-            <span>Show Image</span>
-          </Link>
-        </li>
-
         <hr className="sidebar-divider d-none d-md-block" />
 
         <div className="text-center d-none d-md-inline">

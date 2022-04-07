@@ -24,7 +24,6 @@ import ProfileManager from '../layouts/Dashboard/ProfileManager';
 import Managers from '../layouts/Dashboard/ListManager';
 import Tags from '../layouts/Dashboard/Tags';
 import Debug from '../layouts/Dashboard/Debug';
-import ShowImage from '../layouts/Dashboard/ShowImage';
 import AreaInfo from '../layouts/Dashboard/AreaInfo';
 
 function Dashboard() {
@@ -141,11 +140,6 @@ function Dashboard() {
                 exact
                 path={`${match.url}/debug`}
                 render={(props) => <Debug {...props} />}
-              />
-              <Route
-                exact
-                path={`${match.url}/showImage`}
-                render={(props) => <ShowImage {...props} />}
               />
             </Switch>
           </div>
