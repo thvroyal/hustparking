@@ -23,10 +23,7 @@ const Sidebar = React.memo(() => {
         className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${toggle ? 'toggled' : ''}`}
         id="accordionSidebar"
       >
-        <Link
-          className="sidebar-brand d-flex align-items-center justify-content-center"
-          to="/dashboard"
-        >
+        <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
           <div className="sidebar-brand-icon rotate-n-15">
             <i className="fas fa-laugh-wink" />
           </div>
@@ -153,28 +150,15 @@ const Sidebar = React.memo(() => {
         <hr className="sidebar-divider" />
 
         <li
-          className={`nav-item ${current === '/dashboard/image1' ? 'active' : null}`}
+          className={`nav-item ${current === '/dashboard/imageView' ? 'active' : null}`}
         >
           <Link
             className="nav-link"
-            to="/dashboard/image1"
-            onClick={() => updateCurrentUrl('/dashboard/image1')}
+            to="/dashboard/imageView"
+            onClick={() => updateCurrentUrl('/dashboard/imageView')}
           >
             <i className="fas fa-fw fa-image" />
-            <span>Image 1</span>
-          </Link>
-        </li>
-
-        <li
-          className={`nav-item ${current === '/dashboard/image2' ? 'active' : null}`}
-        >
-          <Link
-            className="nav-link"
-            to="/dashboard/image2"
-            onClick={() => updateCurrentUrl('/dashboard/image2')}
-          >
-            <i className="fas fa-fw fa-image" />
-            <span>Image 2</span>
+            <span>Image View</span>
           </Link>
         </li>
 
