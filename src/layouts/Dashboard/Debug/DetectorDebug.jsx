@@ -4,18 +4,17 @@ import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPacket } from '../../../apis/packageApi';
 import ExportExcel from '../../../utils/ExportExcel';
+import { LIST_FILTER } from '../../../helpers/constants';
 
 function DetectorDebug() {
   const dispatch = useDispatch();
   const listDetectors = useSelector((state) => state.packet.data);
   const [listNode, setListFilter] = useState([]);
-  useEffect(() => {
+
+  const handlePackageDetector = (num = 20) => {
     if (listDetectors) {
       const tempArr = listNode ?? [];
-      const detector = listDetectors.slice(
-        listDetectors.length - 25,
-        listDetectors.length,
-      );
+      const detector = listDetectors.slice(listDetectors.length - num, listDetectors.length);
       for (const item in detector) {
         if (!tempArr.includes(detector[item].nodeAddress)) {
           tempArr.push(detector[item].nodeAddress);
@@ -23,7 +22,12 @@ function DetectorDebug() {
       }
       setListFilter(tempArr);
     }
+  };
+
+  useEffect(() => {
+    handlePackageDetector();
   }, [listDetectors]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getPacket());
@@ -45,6 +49,18 @@ function DetectorDebug() {
   function clearFilter() {
     mapFilter([]);
   }
+
+  // Filter packages
+  const [togglePackage, setTogglePackage] = useState(false);
+  const [numFilter, setNumFilter] = useState(20);
+  function handleFilterPackageShow() {
+    setTogglePackage(!togglePackage);
+  }
+  const showAll = () => {
+    setNumFilter(listDetectors.length);
+    handlePackageDetector(listDetectors.length);
+  };
+
   function nowDate() {
     let today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -61,23 +77,80 @@ function DetectorDebug() {
     <>
       {/* // <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
-        <div className="card-header py-3 d-flex justify-content-between align-items-center flex-row-reverse">
+        <div className="card-header py-3 d-flex align-items-center flex-row-reverse justify-content-between">
           {listDetectors ? (
-            <ExportExcel dataSet={listDetectors} name={`Detector-${nowDate()}`}>
-              <button className="btn-action p-2" type="button">
-                <h6 className="m-0 font-weight-bold text-primary text-right">
-                  <i className="fa fa-file-export" />
-                  {' '}
-                  Export Excel
-                </h6>
-              </button>
-            </ExportExcel>
+            <>
+              <div className="d-flex justify-content-between align-items-center">
+                <div style={{ position: 'relative', marginRight: '10px' }}>Filter</div>
+                {' '}
+                <i
+                  className="fas fa-filter text-primary"
+                  onClick={handleFilterPackageShow}
+                  style={{ cursor: 'pointer' }}
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="dropdown text-end position-absolute">
+                <ul
+                  className={`dropdown-menu text-small ${togglePackage ? 'show' : ''}`}
+                  aria-labelledby="dropdownUser1"
+                  style={
+                    togglePackage
+                      ? {
+                        position: 'absolute',
+                        inset: '0px auto auto 0px',
+                        margin: '0px',
+                        transform: 'translate(-150px, 13px)',
+                        overflow: 'auto',
+                      }
+                      : {}
+                  }
+                >
+                  <li>
+                    <a
+                      className="dropdown-item text-small text-end text-danger"
+                      href="#foo"
+                      onClick={showAll}
+                    >
+                      Show all
+                    </a>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  {LIST_FILTER
+                    ? LIST_FILTER.map((item) => (
+                      <li key={item}>
+                        <a
+                          className="dropdown-item"
+                          href="#foo"
+                          onClick={() => {
+                            setNumFilter(item);
+                            handlePackageDetector(item);
+                          }}
+                        >
+                          {item}
+                        </a>
+                        <hr className="dropdown-divider" />
+                      </li>
+                    ))
+                    : null}
+                </ul>
+              </div>
+              <ExportExcel dataSet={listDetectors} name={`Detector-${nowDate()}`}>
+                <button className="btn-action p-2" type="button">
+                  <h6 className="m-0 font-weight-bold text-primary text-right">
+                    <i className="fa fa-file-export" />
+                    {' '}
+                    Export Excel
+                  </h6>
+                </button>
+              </ExportExcel>
+            </>
           ) : null}
         </div>
-        <div className="card-body">
+        <div className="card-body" style={{ backgroundColor: '#f8f9fc' }}>
           <div className="table-responsive table-hover">
             <table
-              className="table table-bordered"
+              className="list-user"
               id="dataTable"
               width="100%"
               cellSpacing="0"
@@ -92,9 +165,7 @@ function DetectorDebug() {
                       <div>Node Address</div>
                       {' '}
                       <i
-                        className={`fas fa-filter ${
-                          toggle || filter.length ? 'text-primary' : ''
-                        }`}
+                        className={`fas fa-filter ${toggle || filter.length ? 'text-primary' : ''}`}
                         onClick={handleFilterShow}
                         style={{ cursor: 'pointer' }}
                         aria-hidden="true"
@@ -102,9 +173,7 @@ function DetectorDebug() {
                     </div>
                     <div className="dropdown text-end position-absolute">
                       <ul
-                        className={`dropdown-menu text-small ${
-                          toggle ? 'show' : ''
-                        }`}
+                        className={`dropdown-menu text-small ${toggle ? 'show' : ''}`}
                         aria-labelledby="dropdownUser1"
                         style={
                           toggle
@@ -159,7 +228,7 @@ function DetectorDebug() {
               <tbody>
                 {listDetectors ? (
                   listDetectors
-                    .slice(listDetectors.length - 25, listDetectors.length)
+                    .slice(listDetectors.length - numFilter, listDetectors.length)
                     .map((item) => {
                       if (filter.includes(item.nodeAddress) || !filter.length) {
                         return (
@@ -170,9 +239,7 @@ function DetectorDebug() {
                             <td>{item.nodeAddress}</td>
                             <td>
                               <button
-                                className={`btn-status ${
-                                  item.state ? 'btn-danger' : 'btn-success'
-                                }`}
+                                className={`btn-status ${item.state ? 'btn-danger' : 'btn-success'}`}
                                 type="button"
                               >
                                 {item.state ? 'Busy' : 'Free'}

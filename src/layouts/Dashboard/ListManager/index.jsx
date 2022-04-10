@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 import { Link } from 'react-router-dom';
 import ImgAva from '../../../assets/img/profile-1.png';
 import { getListManager } from '../../../apis/managerFieldApi';
 import UpdateField from './UpdateField';
+import ModalDeleteMn from '../../../components/Modal/ModalDeleteMn';
 
 function Managers() {
   const dispatch = useDispatch();
   const listManager = useSelector((state) => state.listManager.data);
-  const [isDeleting, setIsDeleting] = useState(false);
+
+  // const [isDeleting, setIsDeleting] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [openModelDelete, setOpenModalDelete] = useState(false);
+  const [idMn, setIdMn] = useState(null);
   const [selectedMn, setSelectedMn] = useState(null);
+
+  // filter list start
+  // filter list end
+
   useEffect(() => {
     dispatch(getListManager());
   }, [dispatch]);
@@ -23,31 +30,19 @@ function Managers() {
     setOpenModal(true);
   };
 
-  const handleDeleteManager = async (idManager) => {
-    setIsDeleting(true);
-    try {
-      const response = await axios({
-        method: 'DELETE',
-        url: `${process.env.REACT_APP_BASE_URL}/api/ad/manager/delete/${idManager}`,
-        headers: {
-          token: localStorage.getItem('AccessToken'),
-        },
-      });
-      setIsDeleting(false);
-      if (response.data.message === 'success') {
-        // neu xoa thanh cong thi se call api load lai state moi
-        dispatch(getListManager());
-        // TODO: add notification show delete success
-      }
-    } catch (error) {
-      setIsDeleting(false);
-      // TODO: add notification show delete success
-      console.log(error);
-    }
+  const onClickDelete = (id) => {
+    setIdMn(id);
+    setOpenModalDelete(true);
   };
+
   return (
     <>
       <h1 className="h3 mb-2 text-gray-800">List Manager</h1>
+      <div>
+        <Link to="/dashboard/new-manager">
+          <button type="button" className="btn btn-primary float-right">Create Manager</button>
+        </Link>
+      </div>
       <div className="table-responsive mt-4">
         {listManager && (
           <table
@@ -61,7 +56,6 @@ function Managers() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Address</th>
-                <th>Equipment</th>
                 <th>Last Time Access</th>
                 <th>Actions</th>
               </tr>
@@ -81,15 +75,14 @@ function Managers() {
                   </td>
                   <td>{mn.email}</td>
                   <td>{mn.address}</td>
-                  <td>{mn.equipment}</td>
                   <td>{mn.lastTimeAccess}</td>
                   <td>
-                    <button className="btn btn-sm btn-outline-primary mr-2" type="button" onClick={() => onClickUpdate(mn.id)}>Update Fields</button>
+                    <button className="btn btn-sm btn-outline-primary mr-2" type="button" onClick={() => onClickUpdate(mn.id)}>Update fields</button>
                     <button
                       className="btn btn-sm btn-outline-danger"
                       type="button"
-                      onClick={() => { handleDeleteManager(mn.id); }}
-                      disabled={isDeleting}
+                      onClick={() => onClickDelete(mn.id)}
+                    // disabled={isDeleting}
                     >
                       Delete
                     </button>
@@ -102,13 +95,23 @@ function Managers() {
         {!listManager
           && <div className="text-center w-100 h3 mt-5">No data</div>}
         {openModal
-        && (
-        <UpdateField
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-          selected={selectedMn}
-        />
-        )}
+          && (
+            <>
+              <UpdateField
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                selected={selectedMn}
+              />
+            </>
+          )}
+        {openModelDelete
+          && (
+            <ModalDeleteMn
+              open={openModelDelete}
+              onClose={() => setOpenModalDelete(false)}
+              idManager={idMn}
+            />
+          )}
       </div>
     </>
   );

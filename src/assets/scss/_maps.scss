@@ -1,0 +1,132 @@
+.box {
+    width: 37px;
+    height: 56px;
+    z-index: 1;
+    cursor: pointer;
+    position: absolute;
+}
+
+.box__library {
+    width: 56px;
+    height: 35px;
+    background-color: rgb(160, 153, 153);
+    color: black;
+}
+
+.box__color__D35 {
+    border: 4px solid green;
+}
+
+.box__color__library {
+    border: 4px solid blue;
+}
+
+.box__color__road1 {
+    border: 4px solid red;
+}
+
+.box__color__road2 {
+    border: 4px solid orange;
+}
+
+.box11_D35 {
+    transform: translate(239px, 514px);
+}
+
+.box12_D35 {
+    transform: translate(239px, 461px);
+}
+
+.box13_library {
+    transform: translate(389px, -346px);
+}
+
+.box14_library {
+    transform: translate(389px, -426px);
+}
+
+.box15_library {
+    transform: translate(444px, -416px);
+}
+
+.box16_library {
+    transform: translate(444px, -496px);
+}
+
+.box_road10 {
+    transform: translate(345px, 105px);
+}
+.box_road9 {
+    transform: translate(345px, 158px);
+}
+.box_road8 {
+    transform: translate(345px, 211px);
+}
+.box_road7 {
+    transform: translate(345px, 264px);
+}
+.box_road6 {
+    transform: translate(345px, 317px);
+    border-bottom: 4px solid rgba(255, 0, 0, 0.5);
+}
+.box_road5 {
+    transform: translate(345px, 370px);
+    border-top: 4px solid rgba(255, 165, 0, 0.5);
+}
+
+.box_road4 {
+    transform: translate(345px, 423px);
+}
+
+.box_road3 {
+    transform: translate(345px, 478px);
+}
+.box_road2 {
+    transform: translate(345px, 664px);
+}
+.box_road1 {
+    transform: translate(345px, 717px);
+}
+
+.hidden {
+    display: none;
+}
+
+.icon__car__ver {
+    transform: translate(4px, 0px);
+    font-size: 25px;
+}
+
+.icon__car__hori {
+    transform: translate(19px, -23px);
+}
+
+.icon__xmark {
+    font-size: 25px;
+    font-weight: bold;
+    transform: translate(28px, -32px);
+}
+
+.change__background__color {
+    background-color: pink;
+}
+
+// sidebar show image
+
+.box__image {
+    width: 100px;
+    height: 100px;
+}
+
+.box__info {
+    width: 200px;
+    height: 100px;
+}
+
+.image {
+    transition: 0.2s ease-in;
+}
+
+.image:hover {
+    transform: scale(3);
+}

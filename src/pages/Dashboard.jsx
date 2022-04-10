@@ -1,28 +1,28 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router';
-import Sidebar from '../layouts/Sidebar/Sidebar';
-import Header from '../layouts/Header/Header';
-
-import Footer from '../layouts/Footer/Footer';
-import Detectors from '../layouts/Dashboard/Detectors';
-import DashboardHome from '../layouts/Dashboard/DashboardHome';
-import Users from '../layouts/Dashboard/Users';
-import UserInfo from '../layouts/Dashboard/UserInfo';
+import Maps2D from '../layouts/Dashboard/2D_maps';
+import Analysis from '../layouts/Dashboard/Analysis';
+import AreaInfo from '../layouts/Dashboard/AreaInfo';
 import Contract from '../layouts/Dashboard/Contract';
-// import Invoice from "../layouts/Dashboard/Invoice";
-import Fields from '../layouts/Dashboard/Fields';
-import Slot from '../layouts/Dashboard/Slot';
-import Gateway from '../layouts/Dashboard/Gateway';
+import CreateManager from '../layouts/Dashboard/CreateManager';
+import DashboardHome from '../layouts/Dashboard/DashboardHome';
+import Debug from '../layouts/Dashboard/Debug';
 // import DetectorDebug from '../layouts/Dashboard/Debug/DetectorDebug';
 import DetectorInfo from '../layouts/Dashboard/DetectorInfo';
-import Image1 from '../layouts/Dashboard/Image1';
-import Image2 from '../layouts/Dashboard/Image2';
-import CreateManager from '../layouts/Dashboard/CreateManager';
-import Analysis from '../layouts/Dashboard/Analysis';
-import ProfileManager from '../layouts/Dashboard/ProfileManager';
+import Detectors from '../layouts/Dashboard/Detectors';
+// import Invoice from "../layouts/Dashboard/Invoice";
+import Fields from '../layouts/Dashboard/Fields';
+import Gateway from '../layouts/Dashboard/Gateway';
+import ImageView from '../layouts/Dashboard/ImageView';
 import Managers from '../layouts/Dashboard/ListManager';
+import ProfileManager from '../layouts/Dashboard/ProfileManager';
+import Slot from '../layouts/Dashboard/Slot';
 import Tags from '../layouts/Dashboard/Tags';
-import Debug from '../layouts/Dashboard/Debug';
+import UserInfo from '../layouts/Dashboard/UserInfo';
+import Users from '../layouts/Dashboard/Users';
+import Footer from '../layouts/Footer/Footer';
+import Header from '../layouts/Header/Header';
+import Sidebar from '../layouts/Sidebar/Sidebar';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -61,7 +61,7 @@ function Dashboard() {
               />
               <Route
                 exact
-                path={`${match.url}/gateway/:idDetector`}
+                path={`${match.url}/field/:idField/gateway/:idDetector`}
                 render={(props) => <Detectors {...props} />}
               />
 
@@ -82,11 +82,11 @@ function Dashboard() {
                 render={(props) => <Contract {...props} />}
               />
 
-              {/* <Route
+              <Route
                 exact
-                path={`${match.url}/debug-detector`}
-                render={(props) => <DetectorDebug {...props} />}
-              /> */}
+                path={`${match.url}/fields/:idSlot/area_info/:area`}
+                render={(props) => <AreaInfo {...props} />}
+              />
 
               <Route
                 exact
@@ -96,13 +96,13 @@ function Dashboard() {
 
               <Route
                 exact
-                path={`${match.url}/image1`}
-                render={(props) => <Image1 {...props} />}
+                path={`${match.url}/imageView`}
+                render={(props) => <ImageView {...props} />}
               />
               <Route
                 exact
-                path={`${match.url}/image2`}
-                render={(props) => <Image2 {...props} />}
+                path={`${match.url}/fields/:idSlot/2d_maps`}
+                render={(props) => <Maps2D {...props} />}
               />
               <Route
                 exact

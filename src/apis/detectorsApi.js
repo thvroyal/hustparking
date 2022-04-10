@@ -13,16 +13,14 @@ export const getDetectors = (id) => (dispatch) => {
   dispatch(loadingDetector);
   axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/detector/find_all`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/detector/find_all?gwid=${id}`,
     headers: {
       token: localStorage.getItem('AccessToken'),
       'Content-Type': 'application/json',
     },
   })
     .then((res) => {
-      const detectorOfGW = res.data.data.filter(
-        (item) => item.gatewayId === parseInt(id, 10),
-      );
+      const detectorOfGW = res.data.data;
       dispatch(successDetector(detectorOfGW));
     })
     .catch((err) => {

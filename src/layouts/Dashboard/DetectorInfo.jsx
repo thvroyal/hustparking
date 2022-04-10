@@ -23,20 +23,19 @@ function DetectorInfo() {
       <div className="card-body">
         <form>
           {/* // <!-- Form Group (username)--> */}
-          <div className="form-group">
-            <label className="small mb-1" htmlFor="detectorId">Detector ID</label>
-            <input
-              className="form-control"
-              id="detectorId"
-              type="text"
-              value={infoDetector.id}
-            />
-          </div>
-          {/* // <!-- Form Row--> */}
           <div className="form-row">
+            <div className="form-group col-md-6">
+              <label className="small mb-1" htmlFor="detectorId">Detector ID</label>
+              <input
+                className="form-control"
+                id="detectorId"
+                type="text"
+                value={infoDetector.id}
+              />
+            </div>
             {/* // <!-- Form Group (first name)--> */}
             <div className="form-group col-md-6">
-              <label className="small mb-1" htmlFor="addressDetector">Address Detector</label>
+              <label className="small mb-1" htmlFor="addressDetector">Detector Address</label>
               <input
                 className="form-control"
                 id="addressDetector"
@@ -45,15 +44,6 @@ function DetectorInfo() {
               />
             </div>
             {/* // <!-- Form Group (last name)--> */}
-            <div className="form-group col-md-6">
-              <label className="small mb-1" htmlFor="addressGateway">Address Gateway</label>
-              <input
-                className="form-control"
-                id="addressGateway"
-                type="text"
-                value={infoDetector.gatewayId}
-              />
-            </div>
           </div>
           {/* // <!-- Form Row        --> */}
           <div className="form-row">
@@ -65,17 +55,14 @@ function DetectorInfo() {
             {/* </div> */}
             {/* // <!-- Form Group (location)--> */}
             <div className="form-group col-md-6">
-              <label className="small mb-1" htmlFor="battery">Batery</label>
+              <label className="small mb-1" htmlFor="addressGateway">Gateway Id</label>
               <input
                 className="form-control"
-                id="battery"
+                id="addressGateway"
                 type="text"
-                value={infoDetector.batteryLevel}
+                value={infoDetector.gatewayId}
               />
             </div>
-          </div>
-          {/* // <!-- Form Group (email address)--> */}
-          <div className="form-row">
             <div className="form-group col-md-6">
               <label className="small mb-1" htmlFor="slotId">Slot Id</label>
               <input
@@ -83,6 +70,18 @@ function DetectorInfo() {
                 id="slotId"
                 type="email"
                 value={infoDetector.slotId}
+              />
+            </div>
+          </div>
+          {/* // <!-- Form Group (email address)--> */}
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label className="small mb-1" htmlFor="battery">Batery</label>
+              <input
+                className="form-control"
+                id="battery"
+                type="text"
+                value={infoDetector.batteryLevel}
               />
             </div>
             <div className="form-group col-md-6">

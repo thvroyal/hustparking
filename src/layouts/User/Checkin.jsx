@@ -19,7 +19,7 @@ function Checkin() {
   }, [dispatch]);
   function findField(id) {
     if (listField) {
-      const fieldMatch = listField.find((e) => e.id === parseInt(id, 10));
+      const fieldMatch = listField.listOfFields.find((e) => e.id === parseInt(id, 10));
       console.log(fieldMatch);
       if (fieldMatch && fieldMatch.name) return fieldMatch.name; return '';
     }
@@ -74,7 +74,7 @@ function Checkin() {
       <div className="input-group user input-group-lg mt-5 mb-3">
         <select className="custom-select" id="fieldList" ref={selectRef}>
           <option value={-1} defaultChecked>What field do you want to park?</option>
-          {listField && listField.map((f) => (
+          {listField && listField.listOfFields.map((f) => (
             <option value={f.id} key={f.id}>{f.name}</option>
           ))}
         </select>

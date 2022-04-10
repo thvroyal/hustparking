@@ -30,7 +30,7 @@ function Contracts() {
                 return (
                   <CollapseContract
                     contract={contract}
-                    field={listField.filter((f) => f.id === contract.fieldId)}
+                    field={listField.listOfFields.filter((f) => f.id === contract.fieldId)}
                     type="booking"
                     key={contract.id}
                   />
@@ -47,7 +47,7 @@ function Contracts() {
                 return (
                   <CollapseContract
                     contract={contract}
-                    field={listField.filter((f) => f.id === contract.fieldId)}
+                    field={listField.listOfFields.filter((f) => f.id === contract.fieldId)}
                     type="parking"
                     key={contract.id}
                   />
@@ -64,7 +64,7 @@ function Contracts() {
                 return (
                   <CollapseContract
                     contract={contract}
-                    field={listField.filter((f) => f.id === contract.fieldId)}
+                    field={listField.listOfFields.filter((f) => f.id === contract.fieldId)}
                     type="leaved"
                     key={contract.id}
                   />

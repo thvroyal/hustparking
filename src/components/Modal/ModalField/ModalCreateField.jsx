@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { Modal, Spinner } from 'react-bootstrap';
-import { func, bool } from 'prop-types';
 import axios from 'axios';
+import { Form, Formik, Field } from 'formik';
+import { bool, func } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Modal, Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import TextField from '../TextField';
-import { getField } from '../../apis/fieldApi';
+import * as Yup from 'yup';
+import { getArea } from '../../../apis/areaApi';
+import { getField } from '../../../apis/fieldApi';
+import TextField from '../../TextField';
 
 const ModalCreateField = ({
   onClose, open,
 }) => {
+  const { alias } = useSelector((state) => state.auth);
+  const listArea = useSelector((state) => state.area.data);
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getArea());
+  }, [dispatch]);
+
+  // const onChangeValue = () => {
+  //   setValueOption(parseInt(selectAreaRef.current.value, 10));
+  //   console.log(valueOption);
+  // };
   const validateField = Yup.object({
     address: Yup.string().required('Address is required'),
     details: Yup.string(),
@@ -23,6 +35,7 @@ const ModalCreateField = ({
     openstatus: Yup.string()
       .required('Open status is required')
       .matches(/^[0-1]+$/, 'Only value 0 (close) or 1 (open)'),
+    idArea: Yup.number().required('Id area is required'),
     price: Yup.number().required('Price is required'),
   });
 
@@ -45,8 +58,9 @@ const ModalCreateField = ({
             longitude: '',
             name: '',
             openstatus: '',
+            idArea: 1,
             price: 0,
-            space: 0,
+            space: 30,
           }}
           validationSchema={validateField}
           onSubmit={async (values) => {
@@ -55,7 +69,7 @@ const ModalCreateField = ({
               setLoading(true);
               const response = await axios({
                 method: 'POST',
-                url: `${process.env.REACT_APP_BASE_URL}/api/ad/field/create_and_update`,
+                url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/field/create_and_update`,
                 headers: {
                   token: localStorage.getItem('AccessToken'),
                   'Content-Type': 'application/json',
@@ -85,16 +99,21 @@ const ModalCreateField = ({
               <Form className="user">
                 <TextField label="field name" name="name" type="text" placeholder="Enter field name" showLabel />
                 <TextField label="address" name="address" type="text" placeholder="Enter address field" showLabel />
-                <div className="form-row">
-                  <div className="col-md-6">
-                    <TextField label="longitude" name="longitude" type="text" placeholder="e.g: 21.0369823" showLabel />
-                  </div>
-                  <div className="col-md-6">
-                    <TextField label="latitude" name="latitude" type="text" placeholder="e.g: 105.7752916" showLabel />
-                  </div>
-                </div>
                 <TextField label="image" name="image" type="text" placeholder="e.g: https://url.com/image.png" showLabel />
                 <TextField label="open status" name="openstatus" type="text" placeholder="0 is close, 1 is open" showLabel />
+                <Field
+                  as="select"
+                  className="custom-select"
+                  style={{
+                    borderRadius: '50px',
+                    height: '50px',
+                  }}
+                  name="idArea"
+                >
+                  {listArea && listArea.map((f) => (
+                    <option value={f.id} key={f.id}>{f.areaName}</option>
+                  ))}
+                </Field>
                 <div className="form-row">
                   <div className="col-md-6">
                     <TextField label="price" name="price" type="number" placeholder="e.g: 40000" showLabel />
@@ -103,6 +122,15 @@ const ModalCreateField = ({
                     <TextField label="space" name="space" type="number" placeholder="e.g: 30" showLabel />
                   </div>
                 </div>
+                <div className="form-row">
+                  <div className="col-md-4">
+                    <TextField label="longitude" name="longitude" type="text" placeholder="e.g: 21.0369823" showLabel />
+                  </div>
+                  <div className="col-md-4">
+                    <TextField label="latitude" name="latitude" type="text" placeholder="e.g: 105.7752916" showLabel />
+                  </div>
+                  <button type="button" className="btn btn-info col-md-4" style={{ height: '48px', transform: 'translateY(32px)' }}>Get place</button>
+                </div>
                 <TextField label="details" name="details" type="text" placeholder="Enter details here" showLabel />
                 <button
                   type="submit"
@@ -110,12 +138,12 @@ const ModalCreateField = ({
                   disabled={isLoading}
                 >
                   {isLoading && (
-                  <Spinner
-                    animation="border"
-                    color="primary"
-                    size="sm"
-                    className="mr-3"
-                  />
+                    <Spinner
+                      animation="border"
+                      color="primary"
+                      size="sm"
+                      className="mr-3"
+                    />
                   )}
                   Create new field
                 </button>
