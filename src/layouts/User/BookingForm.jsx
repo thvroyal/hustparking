@@ -45,7 +45,6 @@ function BookingForm() {
     return new Date(string).getTime();
   }
   async function handleBooking() {
-    console.log(timeInRef.current.value, timeOutRef.current.value);
     const data = {
       fieldId: fieldSelected,
       timeInBook: `${timeInRef.current.value}:00.000Z`,

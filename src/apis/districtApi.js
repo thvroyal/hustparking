@@ -4,12 +4,14 @@ import {
   successDistrict,
   failDistrict,
 } from '../store/admin/districtSlice';
+import store from '../store';
 
 export const getDistrict = () => (dispatch) => {
+  const { auth } = store.getState();
   dispatch(loadingDistrict);
   axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/api/ad/districts`,
+    url: `${process.env.REACT_APP_BASE_URL}/api/${auth.alias}/districts`,
     headers: {
       token: localStorage.getItem('AccessToken'),
       'Content-Type': 'application/json',
