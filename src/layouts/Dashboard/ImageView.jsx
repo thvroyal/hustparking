@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import CarBannerImgD3 from '../../assets/img/D3.jpg';
+import CarBannerImgD3Ori from '../../assets/img/D3_original.jpg';
 import CarBannerImgD5 from '../../assets/img/D5.jpg';
+import CarBannerImgD5Ori from '../../assets/img/D5_original.jpg';
 
 function ImageView() {
   const [reloadImgD5, setReloadImgD5] = useState(CarBannerImgD5);
   const [reloadImgD3, setReloadImgD3] = useState(CarBannerImgD3);
+  const [reloadImgD3Ori, setReloadImgD3Ori] = useState(CarBannerImgD3Ori);
+  const [reloadImgD5Ori, setReloadImgD5Ori] = useState(CarBannerImgD5Ori);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setReloadImgD3(CarBannerImgD3);
       setReloadImgD5(CarBannerImgD5);
-      console.log('This will run every 10 min!');
-    }, 1200000);
+      setReloadImgD3Ori(CarBannerImgD3Ori);
+      setReloadImgD5Ori(CarBannerImgD5Ori);
+      console.log('This will run every 30 seconds!');
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -25,9 +31,10 @@ function ImageView() {
           <div className="container">
             <div className="row">
               <div className="card-body text-center p-2 col-6">
+                <h3>D3 Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD3}
+                  src={reloadImgD3Ori}
                   alt=""
                   style={{
                     width: '100%',
@@ -35,6 +42,7 @@ function ImageView() {
                 />
               </div>
               <div className="card-body text-center p-2 col-6">
+                <h3>D3 Result</h3>
                 <img
                   role="presentation"
                   src={reloadImgD3}
@@ -47,9 +55,10 @@ function ImageView() {
             </div>
             <div className="row">
               <div className="card-body text-center p-2 col-6">
+                <h3>D5 Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD5}
+                  src={reloadImgD5Ori}
                   alt=""
                   style={{
                     width: '100%',
@@ -57,6 +66,7 @@ function ImageView() {
                 />
               </div>
               <div className="card-body text-center p-2 col-6">
+                <h3>D5 Result</h3>
                 <img
                   role="presentation"
                   src={reloadImgD5}
