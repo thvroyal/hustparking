@@ -1,91 +1,91 @@
 .box {
-    width: 37px;
-    height: 56px;
+    width: 46px;
+    height: 55px;
     z-index: 1;
     cursor: pointer;
     position: absolute;
 }
 
 .box__library {
-    width: 56px;
-    height: 35px;
+    width: 55px;
+    height: 45px;
     background-color: rgb(160, 153, 153);
     color: black;
 }
 
 .box__color__D35 {
-    border: 4px solid green;
+    border: 1px solid green;
 }
 
 .box__color__library {
-    border: 4px solid blue;
+    border: 1px solid #ccc;
 }
 
 .box__color__road1 {
-    border: 4px solid red;
+    border: 1px solid red;
 }
 
 .box__color__road2 {
-    border: 4px solid orange;
+    border: 1px solid orange;
 }
 
 .box11_D35 {
-    transform: translate(239px, 514px);
+    transform: translate(233px, 544px);
 }
 
 .box12_D35 {
-    transform: translate(239px, 461px);
+    transform: translate(233px, 490px);
 }
 
 .box13_library {
-    transform: translate(389px, -346px);
+    transform: translate(395px, -323px);
 }
 
 .box14_library {
-    transform: translate(389px, -426px);
+    transform: translate(395px, -423px);
 }
 
 .box15_library {
-    transform: translate(444px, -416px);
+    transform: translate(450px, -413px);
 }
 
 .box16_library {
-    transform: translate(444px, -496px);
+    transform: translate(450px, -513px);
 }
 
 .box_road10 {
-    transform: translate(345px, 105px);
+    transform: translate(341px, 129px);
 }
 .box_road9 {
-    transform: translate(345px, 158px);
+    transform: translate(341px, 182px);
 }
 .box_road8 {
-    transform: translate(345px, 211px);
+    transform: translate(341px, 234px);
 }
 .box_road7 {
-    transform: translate(345px, 264px);
+    transform: translate(341px, 289px);
 }
 .box_road6 {
-    transform: translate(345px, 317px);
+    transform: translate(341px, 344px);
     border-bottom: 4px solid rgba(255, 0, 0, 0.5);
 }
 .box_road5 {
-    transform: translate(345px, 370px);
+    transform: translate(341px, 397px);
     border-top: 4px solid rgba(255, 165, 0, 0.5);
 }
 
 .box_road4 {
-    transform: translate(345px, 423px);
+    transform: translate(341px, 452px);
 }
 
 .box_road3 {
-    transform: translate(345px, 478px);
+    transform: translate(341px, 507px);
 }
 .box_road2 {
-    transform: translate(345px, 664px);
+    transform: translate(341px, 748px);
 }
 .box_road1 {
-    transform: translate(345px, 717px);
+    transform: translate(341px, 802px);
 }
 
 .hidden {
@@ -93,18 +93,19 @@
 }
 
 .icon__car__ver {
-    transform: translate(4px, 0px);
-    font-size: 25px;
+    transform: translate(13px, 0px);
+    font-size: 28px;
 }
 
 .icon__car__hori {
-    transform: translate(19px, -23px);
+    transform: translate(15px, 10px);
+    font-size: 23px;
 }
 
 .icon__xmark {
-    font-size: 25px;
+    font-size: 30px;
     font-weight: bold;
-    transform: translate(28px, -32px);
+    transform: translate(18px, -7px);
 }
 
 .change__background__color {

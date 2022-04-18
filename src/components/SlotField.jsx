@@ -21,28 +21,29 @@ export default function SlotFiled({
     }
     if (stateSlot === true && check === false) {
       data = {
-        info: `Bạn đã đỗ xe tại ${id} có carNum: ${listSlots.carNumber}`,
+        info: `Slot ${id} - Car number ${listSlots.carNumber}`,
         status: 'Y',
       };
       dispatch(getInfo(data));
     }
     if (check === true && stateSlot === true) {
       data = {
-        info: `Đang có xe biển số ${listSlots.carNumber} tại ô ${convertId} không được đỗ`,
+        info: `Car number ${listSlots.carNumber} does not parking`,
         status: 'W',
       };
       dispatch(getInfo(data));
     }
+
     if (check === true && stateSlot === false) {
       data = {
-        info: `Bạn không đỗ xe tại ${convertId}`,
+        info: `Do not parking at slot ${convertId}`,
         status: 'W-N',
       };
       dispatch(getInfo(data));
     }
     if (stateSlot === false && check === false) {
       data = {
-        info: `Không có xe tại ${id}`,
+        info: `Slot ${id} has not car`,
         status: 'N',
       };
       dispatch(getInfo(data));
@@ -53,7 +54,9 @@ export default function SlotFiled({
       <div
         className={`${stateSlot && !check ? 'change__background__color' : ''} ${className}`}
       >
-        <div className="number__id">{convertId}</div>
+        {!check ? (
+          <div className="number__id">{convertId}</div>
+        ) : ''}
         {
           check ? (
             <div className={stateSlot ? 'icon__car__hori fas fa-car' : 'icon__xmark'}>x</div>

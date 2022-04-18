@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import { getSlotOfFieldViewMin } from '../../apis/slotApi';
 import CarBannerImg from '../../assets/img/2D_thư_viện_D35.drawio.png';
+// import CarBannerImgShow from '../../assets/img/D3.jpg';
 import SlotFiled from '../../components/SlotField';
 
 const Maps2D = React.memo(() => {
@@ -23,17 +25,22 @@ const Maps2D = React.memo(() => {
     <>
       <div className="container-fluid">
         <div className="card mb-3">
-          <div className="card-header text-lg text-primary">
-            D35-Library
+          <div className="card-header text-lg text-primary d-flex align-items-center justify-content-between">
+            <div>D35-Library</div>
+            <Link to="/dashboard/imageView">
+              <button type="button" className="btn btn-primary">View camera</button>
+            </Link>
           </div>
           <div className="d-flex align-items-center justify-content-between">
-            <div className="card-body text-left p-2">
+            <div
+              className="card-body text-left p-2 position-relative"
+            >
               <img
                 src={CarBannerImg}
                 alt=""
                 style={{
-                  width: '650px',
-                  position: 'relative',
+                  width: '550px',
+                  height: '900px',
                 }}
               />
             </div>
@@ -41,7 +48,7 @@ const Maps2D = React.memo(() => {
               className="card-body text-center p-2 rounded shadow-lg"
               style={{
                 width: '100%',
-                height: '500px',
+                height: '900px',
                 overflow: 'scroll',
               }}
             >
@@ -49,14 +56,16 @@ const Maps2D = React.memo(() => {
               <hr />
               <div className="list-group">
                 {listNotify ? (
-                  listNotify.slice(listNotify.length - 16, listNotify.length).map((item) => (
-                    <button type="button" className="list-group-item list-group-item-action text-left">
-                      {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
-                        : item.status === 'N' ? (<i className="text-info fas fa-info-circle mr-2" />)
-                          : (<i className="text-primary fas fa-check-circle mr-2" />)}
-                      {item.info}
-                    </button>
-                  ))
+                  listNotify
+                    .slice(listNotify.length - 16, listNotify.length)
+                    .map((item) => (
+                      <button type="button" className="list-group-item list-group-item-action text-left">
+                        {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
+                          : item.status === 'N' ? (<i className="text-info fas fa-info-circle mr-2" />)
+                            : (<i className="text-primary fas fa-check-circle mr-2" />)}
+                        {item.info}
+                      </button>
+                    ))
                 ) : ''}
               </div>
             </div>
