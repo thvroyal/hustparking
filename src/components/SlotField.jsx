@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getInfo } from '../store/notifySlice';
 
 export default function SlotFiled({
-  className, id, listSlots,
+  className, id, listSlots, fieldId,
 }) {
   const [check, setCheck] = useState(false);
   const [stateSlot, setStateSlot] = useState(false);
@@ -23,6 +23,7 @@ export default function SlotFiled({
       data = {
         info: `Slot ${id} - Car number ${listSlots.carNumber}`,
         status: 'Y',
+        id: parseInt(fieldId, 10),
       };
       dispatch(getInfo(data));
     }
@@ -30,6 +31,7 @@ export default function SlotFiled({
       data = {
         info: `Car number ${listSlots.carNumber} does not parking`,
         status: 'W',
+        id: parseInt(fieldId, 10),
       };
       dispatch(getInfo(data));
     }
@@ -38,6 +40,7 @@ export default function SlotFiled({
       data = {
         info: `Do not parking at slot ${convertId}`,
         status: 'W-N',
+        id: parseInt(fieldId, 10),
       };
       dispatch(getInfo(data));
     }
@@ -45,6 +48,7 @@ export default function SlotFiled({
       data = {
         info: `Slot ${id} has not car`,
         status: 'N',
+        id: parseInt(fieldId, 10),
       };
       dispatch(getInfo(data));
     }
@@ -74,4 +78,5 @@ SlotFiled.propTypes = {
   className: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   listSlots: PropTypes.string.isRequired,
+  fieldId: PropTypes.string.isRequired,
 };

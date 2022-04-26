@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getSlotOfFieldViewMin } from '../../apis/slotApi';
-import CarBannerImg from '../../assets/img/2D_thư_viện_D35.drawio.png';
+import CarBannerImg from '../../assets/img/C9_2D_maps.drawio.png';
 // import CarBannerImgShow from '../../assets/img/D3.jpg';
-import SlotFiled from '../../components/SlotField';
+import SlotFiledC9 from '../../components/SlotFiledC9';
 
 const Maps2D = () => {
   const match = useLocation();
   const fieldId = match.pathname.split('/')[3];
   const listSlots = useSelector((state) => state.slot.data);
-  const listNotify = useSelector((state) => state.notify.data);
-  console.log(listNotify);
+  const listNotifyC9 = useSelector((state) => state.notifyC9.data);
+  console.log(listNotifyC9);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,8 +27,8 @@ const Maps2D = () => {
       <div className="container-fluid">
         <div className="card mb-3">
           <div className="card-header text-lg text-primary d-flex align-items-center justify-content-between">
-            <div>D35-Library</div>
-            <Link to="/dashboard/imageView?tab=D35">
+            <div>C9 Campus</div>
+            <Link to="/dashboard/imageView?tab=C9">
               <button type="button" className="btn btn-primary">View camera</button>
             </Link>
           </div>
@@ -40,8 +40,8 @@ const Maps2D = () => {
                 src={CarBannerImg}
                 alt=""
                 style={{
-                  width: '550px',
-                  height: '900px',
+                  width: '700px',
+                  height: '700px',
                 }}
               />
             </div>
@@ -49,21 +49,20 @@ const Maps2D = () => {
               className="card-body text-center p-2 rounded shadow-lg"
               style={{
                 width: '100%',
-                height: '900px',
+                height: '700px',
                 overflow: 'scroll',
               }}
             >
               <h2 className="card-header">Parking slot notify</h2>
               <hr />
               <div className="list-group">
-                {listNotify ? (
-                  listNotify
-                    .slice(listNotify.length - 16, listNotify.length)
+                {listNotifyC9 ? (
+                  listNotifyC9
+                    .slice(listNotifyC9.length - 28, listNotifyC9.length)
                     .map((item) => (
                       <button type="button" className="list-group-item list-group-item-action text-left">
-                        {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
-                          : item.status === 'N' ? (<i className="text-info fas fa-info-circle mr-2" />)
-                            : (<i className="text-primary fas fa-check-circle mr-2" />)}
+                        {item.status === 'N-C9' ? (<i className="text-info fas fa-info-circle mr-2" />)
+                          : item.status === 'Y-C9' && (<i className="text-primary fas fa-check-circle mr-2" />)}
                         {item.info}
                       </button>
                     ))
@@ -74,25 +73,10 @@ const Maps2D = () => {
           {listSlots ? (
             listSlots.map((item) => {
               const changeId = parseInt(item.id, 10) - parseInt(fieldId, 10) * 1000;
-              let checkColorSlot = false;
-              let checkIdSlotHori = false;
-              let checkIdSlotNoParking = false;
-              if (changeId === 11 || changeId === 12) {
-                checkIdSlotHori = true;
-              }
-              if (changeId >= 13 && changeId <= 16) {
-                checkIdSlotNoParking = true;
-              }
-              if (changeId >= 1 && changeId <= 5) {
-                checkColorSlot = true;
-              }
               return (
                 <>
-                  <SlotFiled
-                    className={checkIdSlotHori ? `box box${changeId}_D35 box__color__D35`
-                      : checkIdSlotNoParking ? `box__library box${changeId}_library box__color__library`
-                        : checkColorSlot ? `box box_road${changeId} box__color__road2`
-                          : `box box_road${changeId} box__color__road1`}
+                  <SlotFiledC9
+                    className={`box_C9 box_${changeId}`}
                     id={changeId}
                     listSlots={item}
                     fieldId={fieldId}

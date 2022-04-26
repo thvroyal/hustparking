@@ -16,6 +16,7 @@ import listManagerReducer from './admin/managersSlice';
 import listTagReducer from './admin/tagsSlice';
 import packageTagReducer from './debug/packageTagSlice';
 import notifyReducer from './notifySlice';
+import notifyC9Reducer from './notifySliceC9';
 import areaReducer from './admin/areaSlice';
 import districtReducer from './admin/districtSlice';
 
@@ -37,6 +38,7 @@ const rootReducer = {
   listTag: listTagReducer,
   packageTag: packageTagReducer,
   notify: notifyReducer,
+  notifyC9: notifyC9Reducer,
   area: areaReducer,
   district: districtReducer,
 };

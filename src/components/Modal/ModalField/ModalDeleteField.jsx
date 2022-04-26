@@ -74,6 +74,11 @@ const ModalDeleteField = ({
                 <button type="button" className="btn btn-warning">Go to 2D maps</button>
               </Link>
             ) : ''}
+            {id === 70 ? (
+              <Link to={`/dashboard/fields/${id}/2d_maps_C9`} className="card-link">
+                <button type="button" className="btn btn-warning">Go to 2D maps</button>
+              </Link>
+            ) : ''}
           </div>
         </form>
       </Modal.Body>

@@ -150,14 +150,14 @@ const Sidebar = React.memo(() => {
         <hr className="sidebar-divider" />
 
         <li
-          className={`nav-item ${current === '/dashboard/imageView' ? 'active' : null}`}
+          className={`nav-item ${current === '/dashboard/imageView?tab=D35' ? 'active' : null}`}
         >
           <Link
             className="nav-link"
-            to="/dashboard/imageView"
-            onClick={() => updateCurrentUrl('/dashboard/imageView')}
+            to="/dashboard/imageView?tab=D35"
+            onClick={() => updateCurrentUrl('/dashboard/imageView?tab=D35')}
           >
-            <i className="fas fa-fw fa-image" />
+            <i className="fas fa-fw fa-bug" />
             <span>Image View</span>
           </Link>
         </li>

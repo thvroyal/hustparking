@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router';
 import Maps2D from '../layouts/Dashboard/2D_maps';
+import Maps2DC9 from '../layouts/Dashboard/2D_maps_C9';
 import Analysis from '../layouts/Dashboard/Analysis';
 import AreaInfo from '../layouts/Dashboard/AreaInfo';
 import Contract from '../layouts/Dashboard/Contract';
@@ -23,6 +24,8 @@ import Users from '../layouts/Dashboard/Users';
 import Footer from '../layouts/Footer/Footer';
 import Header from '../layouts/Header/Header';
 import Sidebar from '../layouts/Sidebar/Sidebar';
+import ImageViewD35 from '../layouts/Dashboard/ImageView/ImageViewD35';
+import ImageViewC9 from '../layouts/Dashboard/ImageView/ImageViewC9';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -106,6 +109,11 @@ function Dashboard() {
               />
               <Route
                 exact
+                path={`${match.url}/fields/:idSlot/2d_maps_C9`}
+                render={(props) => <Maps2DC9 {...props} />}
+              />
+              <Route
+                exact
                 path={`${match.url}/new-manager`}
                 render={(props) => <CreateManager {...props} />}
               />
@@ -133,6 +141,16 @@ function Dashboard() {
                 exact
                 path={`${match.url}/debug`}
                 render={(props) => <Debug {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/imageView?tab=D35`}
+                render={(props) => <ImageViewD35 {...props} />}
+              />
+              <Route
+                exact
+                path={`${match.url}/imageView?tab=C9`}
+                render={(props) => <ImageViewC9 {...props} />}
               />
             </Switch>
           </div>

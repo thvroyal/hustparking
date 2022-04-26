@@ -35,7 +35,7 @@ function Map({ listFields }) {
         }}
       >
         <div>
-          <Autocomplete>
+          <Autocomplete restrictions="vi">
             <input type="text" placeholder="Origin" />
           </Autocomplete>
         </div>
