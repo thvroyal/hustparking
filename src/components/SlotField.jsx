@@ -1,24 +1,16 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getInfo } from '../store/notifySlice';
 
 export default function SlotFiled({
-  className, id, listSlots, fieldId,
+  className, id, fieldId, stateSlot, check, listSlots,
 }) {
-  const [check, setCheck] = useState(false);
-  const [stateSlot, setStateSlot] = useState(false);
-  const [convertId, setConvertId] = useState(id);
   const dispatch = useDispatch();
 
   useEffect(() => {
     let data = {};
 
-    if (listSlots.statusCam === true || listSlots.carNumber !== null) setStateSlot(true);
-    if (id >= 13 && id <= 16) {
-      setConvertId(id * 10 - 80);
-      setCheck(true);
-    }
     if (stateSlot === true && check === false) {
       data = {
         info: `Slot ${id} - Car number ${listSlots.carNumber}`,
@@ -38,7 +30,7 @@ export default function SlotFiled({
 
     if (check === true && stateSlot === false) {
       data = {
-        info: `Do not parking at slot ${convertId}`,
+        info: `Do not parking at slot ${id}`,
         status: 'W-N',
         id: parseInt(fieldId, 10),
       };
@@ -52,14 +44,14 @@ export default function SlotFiled({
       };
       dispatch(getInfo(data));
     }
-  }, [dispatch, id, listSlots]);
+  }, [id, listSlots.statusCam]);
   return (
     <>
       <div
         className={`${stateSlot && !check ? 'change__background__color' : ''} ${className}`}
       >
         {!check ? (
-          <div className="number__id">{convertId}</div>
+          <div className="number__id">{id}</div>
         ) : ''}
         {
           check ? (
@@ -77,6 +69,8 @@ export default function SlotFiled({
 SlotFiled.propTypes = {
   className: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  listSlots: PropTypes.string.isRequired,
   fieldId: PropTypes.string.isRequired,
+  stateSlot: PropTypes.bool.isRequired,
+  check: PropTypes.bool.isRequired,
+  listSlots: PropTypes.arrayOf.isRequired,
 };

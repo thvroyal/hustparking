@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { getSlotOfFieldViewMin } from '../../apis/slotApi';
-import CarBannerImg from '../../assets/img/2D_thư_viện_D35.drawio.png';
+import CarBannerImg from '../../assets/img/2D_thư_viện_D35.drawio_not.png';
 // import CarBannerImgShow from '../../assets/img/D3.jpg';
 import SlotFiled from '../../components/SlotField';
 
@@ -12,7 +13,6 @@ const Maps2D = () => {
   const fieldId = match.pathname.split('/')[3];
   const listSlots = useSelector((state) => state.slot.data);
   const listNotify = useSelector((state) => state.notify.data);
-  console.log(listNotify);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,6 +54,7 @@ const Maps2D = () => {
               }}
             >
               <h2 className="card-header">Parking slot notify</h2>
+              <h4 className="text-center">{moment().format()}</h4>
               <hr />
               <div className="list-group">
                 {listNotify ? (
@@ -77,11 +78,15 @@ const Maps2D = () => {
               let checkColorSlot = false;
               let checkIdSlotHori = false;
               let checkIdSlotNoParking = false;
+              let stateSlot = false;
+              let check = false;
+              if (item.statusCam === true || item.carNumber) stateSlot = true;
               if (changeId === 11 || changeId === 12) {
                 checkIdSlotHori = true;
               }
               if (changeId >= 13 && changeId <= 16) {
                 checkIdSlotNoParking = true;
+                check = true;
               }
               if (changeId >= 1 && changeId <= 5) {
                 checkColorSlot = true;
@@ -96,6 +101,8 @@ const Maps2D = () => {
                     id={changeId}
                     listSlots={item}
                     fieldId={fieldId}
+                    stateSlot={stateSlot}
+                    check={check}
                   />
                 </>
               );

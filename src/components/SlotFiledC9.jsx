@@ -1,42 +1,40 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getInfoC9 } from '../store/notifySliceC9';
+import { getInfo } from '../store/notifySlice';
 
 export default function SlotFiledC9({
-  className, id, listSlots, fieldId,
+  className, id, listSlots, fieldId, stateSlot,
 }) {
-  const [stateSlotC9, setStateSlotC9] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     let data = {};
 
-    if (listSlots.statusCam === true || listSlots.carNumber !== null) setStateSlotC9(true);
-    if (stateSlotC9 === true) {
+    if (stateSlot === true) {
       data = {
         info: `Slot ${id} - Car number ${listSlots.carNumber}`,
         status: 'Y-C9',
         id: parseInt(fieldId, 10),
       };
-      dispatch(getInfoC9(data));
+      dispatch(getInfo(data));
     }
-    if (stateSlotC9 === false) {
+    if (stateSlot === false) {
       data = {
         info: `Slot ${id} has not car`,
         status: 'N-C9',
         id: parseInt(fieldId, 10),
       };
-      dispatch(getInfoC9(data));
+      dispatch(getInfo(data));
     }
-  }, [dispatch, id, listSlots]);
+  }, [id, listSlots.statusCam]);
   return (
     <>
       <div
-        className={`${stateSlotC9 ? 'change__background__color' : ''} ${className}`}
+        className={`${stateSlot ? 'change__background__color' : ''} ${className}`}
       >
         <div className="number__id">{id}</div>
-        <i className={`${stateSlotC9 ? '' : 'd-none'} icon__car__ver__C9 fas fa-car`} />
+        <i className={`${stateSlot ? '' : 'd-none'} icon__car__ver__C9 fas fa-car`} />
       </div>
     </>
   );
@@ -47,4 +45,5 @@ SlotFiledC9.propTypes = {
   id: PropTypes.number.isRequired,
   listSlots: PropTypes.string.isRequired,
   fieldId: PropTypes.string.isRequired,
+  stateSlot: PropTypes.bool.isRequired,
 };

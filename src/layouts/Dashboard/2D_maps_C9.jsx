@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { getSlotOfFieldViewMin } from '../../apis/slotApi';
-import CarBannerImg from '../../assets/img/C9_2D_maps.drawio.png';
+import CarBannerImg from '../../assets/img/C9_2D_maps.png';
 // import CarBannerImgShow from '../../assets/img/D3.jpg';
 import SlotFiledC9 from '../../components/SlotFiledC9';
 
@@ -11,8 +12,7 @@ const Maps2D = () => {
   const match = useLocation();
   const fieldId = match.pathname.split('/')[3];
   const listSlots = useSelector((state) => state.slot.data);
-  const listNotifyC9 = useSelector((state) => state.notifyC9.data);
-  console.log(listNotifyC9);
+  const listNotify = useSelector((state) => state.notify.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,11 +54,12 @@ const Maps2D = () => {
               }}
             >
               <h2 className="card-header">Parking slot notify</h2>
+              <h4 className="text-center">{moment().format()}</h4>
               <hr />
               <div className="list-group">
-                {listNotifyC9 ? (
-                  listNotifyC9
-                    .slice(listNotifyC9.length - 28, listNotifyC9.length)
+                {listNotify ? (
+                  listNotify
+                    .slice(listNotify.length - 29, listNotify.length)
                     .map((item) => (
                       <button type="button" className="list-group-item list-group-item-action text-left">
                         {item.status === 'N-C9' ? (<i className="text-info fas fa-info-circle mr-2" />)
@@ -73,6 +74,8 @@ const Maps2D = () => {
           {listSlots ? (
             listSlots.map((item) => {
               const changeId = parseInt(item.id, 10) - parseInt(fieldId, 10) * 1000;
+              let stateSlot = false;
+              if (item.statusCam === true || item.carNumber !== null) stateSlot = true;
               return (
                 <>
                   <SlotFiledC9
@@ -80,6 +83,7 @@ const Maps2D = () => {
                     id={changeId}
                     listSlots={item}
                     fieldId={fieldId}
+                    stateSlot={stateSlot}
                   />
                 </>
               );

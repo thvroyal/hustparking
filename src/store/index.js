@@ -1,24 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
+import areaReducer from './admin/areaSlice';
+import contractReducer from './admin/contractSlice';
+import detectorByIdReducer from './admin/detectorByIdSlice';
 import detectorReducer from './admin/detectorSlice';
+import districtReducer from './admin/districtSlice';
 import fieldReducer from './admin/fieldSlice';
-import slotReducer from './admin/SlotSlice';
 import gatewayFieldReducer from './admin/gatewayfieldSlice';
 import gatewayReducer from './admin/gatewaySlice';
-import packetReducer from './debug/packageSlice';
-import detectorByIdReducer from './admin/detectorByIdSlice';
-import slotByIdReducer from './admin/slotByIdSlice';
-import authReducer from './authSlice';
-import listUsersReducer from './admin/UsersSlice';
-import contractReducer from './admin/contractSlice';
-import utilsReducer from './utilsSlice';
-import listContractReducer from './user/listContractSlice';
 import listManagerReducer from './admin/managersSlice';
+import slotByIdReducer from './admin/slotByIdSlice';
+import slotReducer from './admin/SlotSlice';
 import listTagReducer from './admin/tagsSlice';
+import listUsersReducer from './admin/UsersSlice';
+import authReducer from './authSlice';
+import packetReducer from './debug/packageSlice';
 import packageTagReducer from './debug/packageTagSlice';
 import notifyReducer from './notifySlice';
-import notifyC9Reducer from './notifySliceC9';
-import areaReducer from './admin/areaSlice';
-import districtReducer from './admin/districtSlice';
+import listContractReducer from './user/listContractSlice';
+import utilsReducer from './utilsSlice';
 
 const rootReducer = {
   detector: detectorReducer,
@@ -38,7 +37,6 @@ const rootReducer = {
   listTag: listTagReducer,
   packageTag: packageTagReducer,
   notify: notifyReducer,
-  notifyC9: notifyC9Reducer,
   area: areaReducer,
   district: districtReducer,
 };
