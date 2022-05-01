@@ -3,7 +3,6 @@ import { Route, Switch, useRouteMatch } from 'react-router';
 import Maps2D from '../layouts/Dashboard/2D_maps';
 import Maps2DC9 from '../layouts/Dashboard/2D_maps_C9';
 import Analysis from '../layouts/Dashboard/Analysis';
-import AreaInfo from '../layouts/Dashboard/AreaInfo';
 import Contract from '../layouts/Dashboard/Contract';
 import CreateManager from '../layouts/Dashboard/CreateManager';
 import DashboardHome from '../layouts/Dashboard/DashboardHome';
@@ -15,6 +14,8 @@ import Detectors from '../layouts/Dashboard/Detectors';
 import Fields from '../layouts/Dashboard/Fields';
 import Gateway from '../layouts/Dashboard/Gateway';
 import ImageView from '../layouts/Dashboard/ImageView';
+import ImageViewC9 from '../layouts/Dashboard/ImageView/ImageViewC9';
+import ImageViewD35 from '../layouts/Dashboard/ImageView/ImageViewD35';
 import Managers from '../layouts/Dashboard/ListManager';
 import ProfileManager from '../layouts/Dashboard/ProfileManager';
 import Slot from '../layouts/Dashboard/Slot';
@@ -24,8 +25,6 @@ import Users from '../layouts/Dashboard/Users';
 import Footer from '../layouts/Footer/Footer';
 import Header from '../layouts/Header/Header';
 import Sidebar from '../layouts/Sidebar/Sidebar';
-import ImageViewD35 from '../layouts/Dashboard/ImageView/ImageViewD35';
-import ImageViewC9 from '../layouts/Dashboard/ImageView/ImageViewC9';
 
 function Dashboard() {
   const match = useRouteMatch();
@@ -83,12 +82,6 @@ function Dashboard() {
                 exact
                 path={`${match.url}/contract/:idUser`}
                 render={(props) => <Contract {...props} />}
-              />
-
-              <Route
-                exact
-                path={`${match.url}/fields/:idSlot/area_info/:area`}
-                render={(props) => <AreaInfo {...props} />}
               />
 
               <Route

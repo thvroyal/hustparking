@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Tooltip } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import ModalDeleteField from './Modal/ModalField/ModalDeleteField';
 import ModalCreateGW from './Modal/ModalGW/ModalCreateGW';
 import ModalOption from './Modal/ModalGW/ModalOption';
@@ -40,12 +39,7 @@ function CardField(props) {
               >
                 {`Field ${id}`}
                 {' '}
-                <Link
-                  to={`/dashboard/fields/${id}/area_info/${area}`}
-                  className="card-link"
-                >
-                  {`(${area})`}
-                </Link>
+                {`(${area})`}
               </div>
               <div
                 className="h6 mb-0 text-gray-800 font-weight-bold text-uppercase"
