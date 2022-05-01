@@ -56,10 +56,27 @@ const Maps2D = () => {
               <h2 className="card-header">Parking slot notify</h2>
               <h4 className="text-center">{moment().format()}</h4>
               <hr />
+              <h4 className="text-left text-primary">NOTIFY</h4>
               <div className="list-group">
                 {listNotify ? (
                   listNotify
-                    .slice(listNotify.length - 16, listNotify.length)
+                    .slice(listNotify.length - 16, listNotify.length - 4)
+                    .map((item) => (
+                      <button type="button" className="list-group-item list-group-item-action text-left">
+                        {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
+                          : item.status === 'N' ? (<i className="text-info fas fa-info-circle mr-2" />)
+                            : (<i className="text-primary fas fa-check-circle mr-2" />)}
+                        {item.info}
+                      </button>
+                    ))
+                ) : ''}
+              </div>
+              <hr />
+              <h4 className="text-left text-warning">WARNING</h4>
+              <div className="list-group">
+                {listNotify ? (
+                  listNotify
+                    .slice(listNotify.length - 4, listNotify.length)
                     .map((item) => (
                       <button type="button" className="list-group-item list-group-item-action text-left">
                         {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)

@@ -56,6 +56,7 @@ const Maps2D = () => {
               <h2 className="card-header">Parking slot notify</h2>
               <h4 className="text-center">{moment().format()}</h4>
               <hr />
+              <h4 className="text-left text-primary">NOTIFY</h4>
               <div className="list-group">
                 {listNotify ? (
                   listNotify
