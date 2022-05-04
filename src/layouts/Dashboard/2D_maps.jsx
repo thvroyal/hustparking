@@ -58,7 +58,7 @@ const Maps2D = () => {
                 <h4 className="text-center mt-2">{moment().format()}</h4>
               </h2>
               <hr />
-              <h4 className="text-left text-primary">NOTIFY</h4>
+              <h4 className="text-left text-primary">INFO OF PARKING</h4>
               <div className="list-group">
                 {listNotify ? (
                   listNotify
@@ -74,7 +74,7 @@ const Maps2D = () => {
                 ) : ''}
               </div>
               <hr />
-              <h4 className="text-left text-warning">WARNING</h4>
+              <h4 className="text-left text-warning">WARNING OF PARKING</h4>
               <div className="list-group">
                 {listNotify ? (
                   listNotify
