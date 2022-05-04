@@ -53,8 +53,10 @@ const Maps2D = () => {
                 overflow: 'scroll',
               }}
             >
-              <h2 className="card-header">Parking slot notify</h2>
-              <h4 className="text-center">{moment().format()}</h4>
+              <h2 className="card-header">
+                Parking slot notify
+                <h4 className="text-center mt-2">{moment().format()}</h4>
+              </h2>
               <hr />
               <h4 className="text-left text-primary">NOTIFY</h4>
               <div className="list-group">
