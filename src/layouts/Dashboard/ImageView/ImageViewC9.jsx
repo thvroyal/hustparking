@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import CarBannerImgD3 from '../../../assets/img/D3.jpg';
-import CarBannerImgD3Ori from '../../../assets/img/D3_original.jpg';
+import CarBannerImgC9Ori from '../../../assets/img/C9_original.jpg';
+import CarBannerImgC9 from '../../../assets/img/C9.jpg';
 
 function ImageViewC9() {
-  const [reloadImgD3, setReloadImgD3] = useState(CarBannerImgD3);
-  const [reloadImgD3Ori, setReloadImgD3Ori] = useState(CarBannerImgD3Ori);
+  const [reloadImgC9Ori, setReloadImgC9Ori] = useState(CarBannerImgC9Ori);
+  const [reloadImgC9, setReloadImgC9] = useState(CarBannerImgC9);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setReloadImgD3(CarBannerImgD3);
-      setReloadImgD3Ori(CarBannerImgD3Ori);
+      setReloadImgC9Ori(CarBannerImgC9Ori);
+      setReloadImgC9(CarBannerImgC9);
       console.log('This will run every 30 seconds!');
     }, 30000);
     return () => clearInterval(interval);
@@ -28,7 +28,7 @@ function ImageViewC9() {
                 <h3>D9 Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD3Ori}
+                  src={reloadImgC9Ori}
                   alt=""
                   style={{
                     width: '100%',
@@ -39,7 +39,7 @@ function ImageViewC9() {
                 <h3>D9 Result</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD3}
+                  src={reloadImgC9}
                   alt=""
                   style={{
                     width: '100%',
