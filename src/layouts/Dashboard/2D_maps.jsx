@@ -60,18 +60,26 @@ const Maps2D = () => {
               <hr />
               <h4 className="text-left text-primary">INFO OF PARKING</h4>
               <div className="list-group">
-                {listNotify ? (
-                  listNotify
-                    .slice(listNotify.length - 16, listNotify.length - 4)
-                    .map((item) => (
-                      <button type="button" className="list-group-item list-group-item-action text-left">
-                        {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
-                          : item.status === 'N' ? (<i className="text-info fas fa-info-circle mr-2" />)
-                            : (<i className="text-primary fas fa-check-circle mr-2" />)}
-                        {item.info}
-                      </button>
-                    ))
-                ) : ''}
+                <table className="table">
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">Thứ tự</th>
+                      <th scope="col">Biển số</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {listNotify ? (
+                      listNotify
+                        .slice(listNotify.length - 16, listNotify.length - 4)
+                        .map((item) => (
+                          <tr>
+                            <th scope="row">{item.id}</th>
+                            <td>{item.info}</td>
+                          </tr>
+                        ))
+                    ) : ''}
+                  </tbody>
+                </table>
               </div>
               <hr />
               <h4 className="text-left text-warning">WARNING OF PARKING</h4>
@@ -115,11 +123,10 @@ const Maps2D = () => {
                   <SlotFiled
                     className={checkIdSlotHori ? `box box${changeId}_D35 box__color__D35`
                       : checkIdSlotNoParking ? `box__library box${changeId}_library box__color__library`
-                        : checkColorSlot ? `box box_road${changeId} box__color__road2`
-                          : `box box_road${changeId} box__color__road1`}
+                        : checkColorSlot ? `box box_road${changeId} box__color__D35`
+                          : `box box_road${changeId} box__color__D35`}
                     id={changeId}
                     listSlots={item}
-                    fieldId={fieldId}
                     stateSlot={stateSlot}
                     check={check}
                   />

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getInfo } from '../store/notifySlice';
 
 export default function SlotFiled({
-  className, id, fieldId, stateSlot, check, listSlots,
+  className, id, stateSlot, check, listSlots,
 }) {
   const dispatch = useDispatch();
 
@@ -13,9 +13,9 @@ export default function SlotFiled({
 
     if (stateSlot === true && check === false) {
       data = {
-        info: `Slot ${id} - Car number ${listSlots.carNumber}`,
+        info: listSlots.carNumber,
         status: 'Y',
-        id: parseInt(fieldId, 10),
+        id,
       };
       dispatch(getInfo(data));
     }
@@ -23,7 +23,7 @@ export default function SlotFiled({
       data = {
         info: `Car number ${listSlots.carNumber} does not parking`,
         status: 'W',
-        id: parseInt(fieldId, 10),
+        id,
       };
       dispatch(getInfo(data));
     }
@@ -32,15 +32,15 @@ export default function SlotFiled({
       data = {
         info: `Do not parking at slot ${id}`,
         status: 'W-N',
-        id: parseInt(fieldId, 10),
+        id,
       };
       dispatch(getInfo(data));
     }
     if (stateSlot === false && check === false) {
       data = {
-        info: `Slot ${id} has not car`,
+        info: 'X',
         status: 'N',
-        id: parseInt(fieldId, 10),
+        id,
       };
       dispatch(getInfo(data));
     }
@@ -69,7 +69,7 @@ export default function SlotFiled({
 SlotFiled.propTypes = {
   className: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  fieldId: PropTypes.string.isRequired,
+  // fieldId: PropTypes.string.isRequired,
   stateSlot: PropTypes.bool.isRequired,
   check: PropTypes.bool.isRequired,
   listSlots: PropTypes.arrayOf.isRequired,

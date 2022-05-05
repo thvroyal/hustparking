@@ -60,17 +60,26 @@ const Maps2D = () => {
               <hr />
               <h4 className="text-left text-primary">INFO OF PARKING</h4>
               <div className="list-group">
-                {listNotify ? (
-                  listNotify
-                    .slice(listNotify.length - 29, listNotify.length)
-                    .map((item) => (
-                      <button type="button" className="list-group-item list-group-item-action text-left">
-                        {item.status === 'N-C9' ? (<i className="text-info fas fa-info-circle mr-2" />)
-                          : item.status === 'Y-C9' && (<i className="text-primary fas fa-check-circle mr-2" />)}
-                        {item.info}
-                      </button>
-                    ))
-                ) : ''}
+                <table className="table">
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">Thứ tự</th>
+                      <th scope="col">Biển số</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {listNotify ? (
+                      listNotify
+                        .slice(listNotify.length - 29, listNotify.length)
+                        .map((item) => (
+                          <tr>
+                            <th scope="row">{item.id}</th>
+                            <td>{item.info}</td>
+                          </tr>
+                        ))
+                    ) : ''}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -85,7 +94,6 @@ const Maps2D = () => {
                     className={`box_C9 box_${changeId}`}
                     id={changeId}
                     listSlots={item}
-                    fieldId={fieldId}
                     stateSlot={stateSlot}
                   />
                 </>

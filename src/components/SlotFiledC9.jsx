@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getInfo } from '../store/notifySlice';
 
 export default function SlotFiledC9({
-  className, id, listSlots, fieldId, stateSlot,
+  className, id, listSlots, stateSlot,
 }) {
   const dispatch = useDispatch();
 
@@ -13,17 +13,17 @@ export default function SlotFiledC9({
 
     if (stateSlot === true) {
       data = {
-        info: `Slot ${id} - Car number ${listSlots.carNumber}`,
+        info: listSlots.carNumber ? listSlots.carNumber : 'null',
         status: 'Y-C9',
-        id: parseInt(fieldId, 10),
+        id,
       };
       dispatch(getInfo(data));
     }
     if (stateSlot === false) {
       data = {
-        info: `Slot ${id} has not car`,
+        info: 'X',
         status: 'N-C9',
-        id: parseInt(fieldId, 10),
+        id,
       };
       dispatch(getInfo(data));
     }
@@ -44,6 +44,5 @@ SlotFiledC9.propTypes = {
   className: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   listSlots: PropTypes.string.isRequired,
-  fieldId: PropTypes.string.isRequired,
   stateSlot: PropTypes.bool.isRequired,
 };
