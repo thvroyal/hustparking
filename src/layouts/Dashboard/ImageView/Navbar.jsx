@@ -11,6 +11,10 @@ const path = [
     title: 'C9 Campus',
     query: 'C9',
   },
+  {
+    title: 'Trần Đại Nghĩa Campus',
+    query: 'TĐN',
+  },
 ];
 function Navbar() {
   const location = useLocation();

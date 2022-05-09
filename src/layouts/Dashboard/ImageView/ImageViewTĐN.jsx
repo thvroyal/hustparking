@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import CarBannerImgC9Ori from '../../../assets/img/C9_original.jpg';
-import CarBannerImgC9 from '../../../assets/img/C9.jpg';
+import CarBannerImgTĐNOri from '../../../assets/img/TDN_original.jpg';
+import CarBannerImgTĐN from '../../../assets/img/TDN.jpg';
 
-function ImageViewC9() {
-  const [reloadImgC9Ori, setReloadImgC9Ori] = useState();
-  const [reloadImgC9, setReloadImgC9] = useState();
+function ImageViewTĐN() {
+  const [reloadImgTĐNOri, setReloadImgTĐNOri] = useState();
+  const [reloadImgTĐN, setReloadImgTĐN] = useState();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setReloadImgC9Ori(CarBannerImgC9Ori);
-      setReloadImgC9(CarBannerImgC9);
-      console.log('This will run every 5 seconds!');
-    }, 2000);
+      setReloadImgTĐNOri(CarBannerImgTĐNOri);
+      setReloadImgTĐN(CarBannerImgTĐN);
+      console.log('This will run every 30 seconds!');
+    }, 15000);
     return () => clearInterval(interval);
   }, []);
 
@@ -20,15 +20,15 @@ function ImageViewC9() {
       <div className="container-fluid">
         <div className="card mb-3">
           <div className="card-header text-lg text-primary">
-            C9 Campus
+            Trần Đại Nghĩa Campus
           </div>
           <div className="container">
             <div className="row">
               <div className="card-body text-center p-2 col-6">
-                <h3>C9 Original</h3>
+                <h3>TĐN Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgC9Ori}
+                  src={reloadImgTĐNOri}
                   alt=""
                   style={{
                     width: '100%',
@@ -36,10 +36,10 @@ function ImageViewC9() {
                 />
               </div>
               <div className="card-body text-center p-2 col-6">
-                <h3>C9 Result</h3>
+                <h3>TĐN Result</h3>
                 <img
                   role="presentation"
-                  src={reloadImgC9}
+                  src={reloadImgTĐN}
                   alt=""
                   style={{
                     width: '100%',
@@ -54,4 +54,4 @@ function ImageViewC9() {
   );
 }
 
-export default ImageViewC9;
+export default ImageViewTĐN;

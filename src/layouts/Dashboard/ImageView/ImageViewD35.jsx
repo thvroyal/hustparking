@@ -5,10 +5,10 @@ import CarBannerImgD5 from '../../../assets/img/D5.jpg';
 import CarBannerImgD5Ori from '../../../assets/img/D5_original.jpg';
 
 function ImageViewD35() {
-  const [reloadImgD5, setReloadImgD5] = useState(CarBannerImgD5);
-  const [reloadImgD3, setReloadImgD3] = useState(CarBannerImgD3);
-  const [reloadImgD3Ori, setReloadImgD3Ori] = useState(CarBannerImgD3Ori);
-  const [reloadImgD5Ori, setReloadImgD5Ori] = useState(CarBannerImgD5Ori);
+  const [reloadImgD5, setReloadImgD5] = useState();
+  const [reloadImgD3, setReloadImgD3] = useState();
+  const [reloadImgD3Ori, setReloadImgD3Ori] = useState();
+  const [reloadImgD5Ori, setReloadImgD5Ori] = useState();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,8 +16,8 @@ function ImageViewD35() {
       setReloadImgD5(CarBannerImgD5);
       setReloadImgD3Ori(CarBannerImgD3Ori);
       setReloadImgD5Ori(CarBannerImgD5Ori);
-      console.log('This will run every 30 seconds!');
-    }, 30000);
+      console.log('This will run every 5 seconds!');
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 

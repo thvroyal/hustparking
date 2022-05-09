@@ -3,6 +3,7 @@ import { useLocation } from 'react-router';
 import Navbar from './Navbar';
 import ImageViewD35 from './ImageViewD35';
 import ImageViewC9 from './ImageViewC9';
+import ImageViewTĐN from './ImageViewTĐN';
 
 function ImageView() {
   const location = useLocation().search.split('=')[1]; // get tab name
@@ -13,6 +14,7 @@ function ImageView() {
       <Navbar />
       {location === 'D35' && <ImageViewD35 />}
       {location === 'C9' && <ImageViewC9 />}
+      {location === 'TĐN' && <ImageViewTĐN />}
     </>
   );
 }
