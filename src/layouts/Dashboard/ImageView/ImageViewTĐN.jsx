@@ -1,20 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import CarBannerImgTĐNOri from '../../../assets/img/TDN_original.jpg';
-import CarBannerImgTĐN from '../../../assets/img/TDN.jpg';
+import React from 'react';
 
 function ImageViewTĐN() {
-  const [reloadImgTĐNOri, setReloadImgTĐNOri] = useState();
-  const [reloadImgTĐN, setReloadImgTĐN] = useState();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setReloadImgTĐNOri(CarBannerImgTĐNOri);
-      setReloadImgTĐN(CarBannerImgTĐN);
-      console.log('This will run every 30 seconds!');
-    }, 15000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <div className="container-fluid">
@@ -25,10 +11,10 @@ function ImageViewTĐN() {
           <div className="container">
             <div className="row">
               <div className="card-body text-center p-2 col-6">
-                <h3>TĐN Original</h3>
+                <h3>Trần Đại Nghĩa Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgTĐNOri}
+                  src="http://42.114.119.40:5000/c9_original"
                   alt=""
                   style={{
                     width: '100%',
@@ -36,10 +22,10 @@ function ImageViewTĐN() {
                 />
               </div>
               <div className="card-body text-center p-2 col-6">
-                <h3>TĐN Result</h3>
+                <h3>Trần Đại Nghĩa Result</h3>
                 <img
                   role="presentation"
-                  src={reloadImgTĐN}
+                  src="http://42.114.119.40:5000/c9"
                   alt=""
                   style={{
                     width: '100%',

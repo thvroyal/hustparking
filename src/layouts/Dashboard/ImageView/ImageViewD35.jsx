@@ -1,26 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import CarBannerImgD3 from '../../../assets/img/D3.jpg';
-import CarBannerImgD3Ori from '../../../assets/img/D3_original.jpg';
-import CarBannerImgD5 from '../../../assets/img/D5.jpg';
-import CarBannerImgD5Ori from '../../../assets/img/D5_original.jpg';
+import React from 'react';
 
 function ImageViewD35() {
-  const [reloadImgD5, setReloadImgD5] = useState();
-  const [reloadImgD3, setReloadImgD3] = useState();
-  const [reloadImgD3Ori, setReloadImgD3Ori] = useState();
-  const [reloadImgD5Ori, setReloadImgD5Ori] = useState();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setReloadImgD3(CarBannerImgD3);
-      setReloadImgD5(CarBannerImgD5);
-      setReloadImgD3Ori(CarBannerImgD3Ori);
-      setReloadImgD5Ori(CarBannerImgD5Ori);
-      console.log('This will run every 5 seconds!');
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <div className="container-fluid">
@@ -34,7 +14,7 @@ function ImageViewD35() {
                 <h3>D3 Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD3Ori}
+                  src="http://42.114.119.40:5000/c9_original"
                   alt=""
                   style={{
                     width: '100%',
@@ -45,7 +25,7 @@ function ImageViewD35() {
                 <h3>D3 Result</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD3}
+                  src="http://42.114.119.40:5000/c9"
                   alt=""
                   style={{
                     width: '100%',
@@ -58,7 +38,7 @@ function ImageViewD35() {
                 <h3>D5 Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD5Ori}
+                  src="http://42.114.119.40:5000/c9_original"
                   alt=""
                   style={{
                     width: '100%',
@@ -69,7 +49,7 @@ function ImageViewD35() {
                 <h3>D5 Result</h3>
                 <img
                   role="presentation"
-                  src={reloadImgD5}
+                  src="http://42.114.119.40:5000/c9"
                   alt=""
                   style={{
                     width: '100%',

@@ -107,7 +107,7 @@ const Maps2D = () => {
               let checkIdSlotNoParking = false;
               let stateSlot = false;
               let check = false;
-              if (item.statusCam === true || item.carNumber) stateSlot = true;
+              if (item.statusCam === true || item.carNumber !== 'Null') stateSlot = true;
               if (changeId === 11 || changeId === 12) {
                 checkIdSlotHori = true;
               }

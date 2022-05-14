@@ -1,20 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import CarBannerImgC9Ori from '../../../assets/img/C9_original.jpg';
-import CarBannerImgC9 from '../../../assets/img/C9.jpg';
+import React from 'react';
 
 function ImageViewC9() {
-  const [reloadImgC9Ori, setReloadImgC9Ori] = useState();
-  const [reloadImgC9, setReloadImgC9] = useState();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setReloadImgC9Ori(CarBannerImgC9Ori);
-      setReloadImgC9(CarBannerImgC9);
-      console.log('This will run every 5 seconds!');
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <div className="container-fluid">
@@ -28,7 +14,7 @@ function ImageViewC9() {
                 <h3>C9 Original</h3>
                 <img
                   role="presentation"
-                  src={reloadImgC9Ori}
+                  src="http://42.114.119.40:5000/c9_original"
                   alt=""
                   style={{
                     width: '100%',
@@ -39,7 +25,7 @@ function ImageViewC9() {
                 <h3>C9 Result</h3>
                 <img
                   role="presentation"
-                  src={reloadImgC9}
+                  src="http://42.114.119.40:5000/c9"
                   alt=""
                   style={{
                     width: '100%',

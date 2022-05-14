@@ -13,7 +13,7 @@ export default function SlotFiled({
 
     if (stateSlot === true && check === false) {
       data = {
-        info: listSlots.carNumber,
+        info: listSlots.carNumber ? listSlots.carNumber : 'X',
         status: 'Y',
         id,
       };
