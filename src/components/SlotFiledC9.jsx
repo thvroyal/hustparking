@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getInfo } from '../store/notifySlice';
+import { getInfo, isLoading } from '../store/notifySlice';
 
 export default function SlotFiledC9({
   className, id, listSlots, stateSlot,
@@ -13,7 +13,7 @@ export default function SlotFiledC9({
 
     if (stateSlot === true) {
       data = {
-        info: listSlots.carNumber ? listSlots.carNumber : 'X',
+        info: listSlots.carNumber ? listSlots.carNumber : 'Null',
         status: 'Y-C9',
         id,
       };
@@ -27,7 +27,8 @@ export default function SlotFiledC9({
       };
       dispatch(getInfo(data));
     }
-  }, [id, listSlots.statusCam]);
+    dispatch(isLoading());
+  }, [dispatch, id, listSlots.statusCam]);
   return (
     <>
       <div

@@ -64,16 +64,24 @@ const Maps2D = () => {
                   <thead className="thead-light">
                     <tr>
                       <th scope="col">Thứ tự</th>
+                      <th scope="col">Trạng thái</th>
                       <th scope="col">Biển số</th>
                     </tr>
                   </thead>
                   <tbody>
                     {listNotify ? (
                       listNotify
-                        .slice(listNotify.length - 16, listNotify.length - 4)
+                        .slice(listNotify.length - 16, listNotify.length)
                         .map((item) => (
                           <tr>
                             <th scope="row">{item.id}</th>
+                            <th>
+                              {
+                                item.status === 'Y' || item.status === 'W'
+                                  ? ('Có xe')
+                                  : ('Không có xe')
+                              }
+                            </th>
                             <td>{item.info}</td>
                           </tr>
                         ))
@@ -82,21 +90,26 @@ const Maps2D = () => {
                 </table>
               </div>
               <hr />
-              <h4 className="text-left text-warning">WARNING OF PARKING</h4>
+              {/* <h4 className="text-left text-warning">WARNING OF PARKING</h4>
               <div className="list-group">
                 {listNotify ? (
                   listNotify
                     .slice(listNotify.length - 4, listNotify.length)
                     .map((item) => (
-                      <button type="button" className="list-group-item list-group-item-action text-left">
-                        {item.status === 'W' || item.status === 'W-N' ? (<i className={`${item.status === 'W-N' ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
-                          : item.status === 'N' ? (<i className="text-info fas fa-info-circle mr-2" />)
+                      <button
+                      type="button"
+                      className="list-group-item list-group-item-action text-left">
+                        {item.status === 'W' || item.status === 'W-N' ?
+                        (<i className={`${item.status === 'W-N'
+                        ? 'text-warning' : 'text-danger'} fas fa-exclamation-triangle mr-2`} />)
+                          : item.status === 'N'
+                          ? (<i className="text-info fas fa-info-circle mr-2" />)
                             : (<i className="text-primary fas fa-check-circle mr-2" />)}
                         {item.info}
                       </button>
                     ))
                 ) : ''}
-              </div>
+              </div> */}
             </div>
           </div>
           {listSlots ? (

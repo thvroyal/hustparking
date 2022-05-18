@@ -14,7 +14,7 @@ function ImageViewTĐN() {
                 <h3>Trần Đại Nghĩa Original</h3>
                 <img
                   role="presentation"
-                  src="http://42.114.119.40:5000/c9_original"
+                  src="http://113.22.128.249:5000/TDN_original"
                   alt=""
                   style={{
                     width: '100%',
@@ -25,7 +25,7 @@ function ImageViewTĐN() {
                 <h3>Trần Đại Nghĩa Result</h3>
                 <img
                   role="presentation"
-                  src="http://42.114.119.40:5000/c9"
+                  src="http://113.22.128.249:5000/TDN"
                   alt=""
                   style={{
                     width: '100%',

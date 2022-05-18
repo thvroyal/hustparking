@@ -121,9 +121,9 @@ function AnalysisBarChart({
     >
       {
         loading && (
-        <div className="position-absolute w-100 h-100 d-flex justify-content-center align-items-center" style={{ background: 'rgba(0,0,0,.1)' }}>
-          <Spinner animation="border" variant="primary" />
-        </div>
+          <div className="position-absolute w-100 h-100 d-flex justify-content-center align-items-center" style={{ background: 'rgba(0,0,0,.1)' }}>
+            <Spinner animation="border" variant="primary" />
+          </div>
         )
       }
       <Bar data={chartData} options={options} />
