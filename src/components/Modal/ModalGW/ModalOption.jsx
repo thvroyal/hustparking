@@ -60,7 +60,7 @@ const ModalOption = ({
             <button
               className="btn btn-danger"
               type="button"
-              onClick={handleClick}
+              onClick={() => handleClick()}
               disabled={isLoading}
             >
               Delete

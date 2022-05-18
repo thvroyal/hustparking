@@ -58,7 +58,7 @@ const ModalDeleteField = ({
       <Modal.Body>
         <form>
           <div className="form-group row align-items-center d-flex justify-content-around">
-            <button className="btn btn-danger" type="button" onClick={handleClick} disabled={isLoading}>Delete</button>
+            <button className="btn btn-danger" type="button" onClick={() => handleClick()} disabled={isLoading}>Delete</button>
             <button
               className="btn btn-info"
               type="button"

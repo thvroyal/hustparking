@@ -56,7 +56,7 @@ const ModalDeleteDetector = ({
         <form>
           <div className="form-group row align-items-center d-flex justify-content-around">
             <button className="btn btn-info" type="button" onClick={handleClose} disabled={isLoading}>Back</button>
-            <button className="btn btn-danger" type="button" onClick={handleClick} disabled={isLoading}>Delete</button>
+            <button className="btn btn-danger" type="button" onClick={() => handleClick()} disabled={isLoading}>Delete</button>
           </div>
         </form>
       </Modal.Body>

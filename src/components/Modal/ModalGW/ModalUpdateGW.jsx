@@ -47,7 +47,7 @@ const ModalUpdateGW = ({
       <Modal.Body>
         <Formik
           initialValues={{
-            addressGateway: gateway[gatewaySelectedFilter].address,
+            addressGateway: gateway[gatewaySelectedFilter].address ? gateway[gatewaySelectedFilter].address : '',
             fieldId: id,
           }}
           validationSchema={validateField}
