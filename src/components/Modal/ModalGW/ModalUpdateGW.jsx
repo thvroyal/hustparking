@@ -15,7 +15,6 @@ const ModalUpdateGW = ({
   const [isLoading, setLoading] = useState(false);
   const { alias } = useSelector((state) => state.auth);
   const gateway = useSelector((state) => state.gateway.data);
-  console.log(gateway);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +46,7 @@ const ModalUpdateGW = ({
       <Modal.Body>
         <Formik
           initialValues={{
-            addressGateway: gateway[gatewaySelectedFilter].address ? gateway[gatewaySelectedFilter].address : '',
+            addressGateway: gateway ? gateway[gatewaySelectedFilter].address : '',
             fieldId: id,
           }}
           validationSchema={validateField}
