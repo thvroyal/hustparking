@@ -13,17 +13,13 @@ export default function SlotFiledC9({
 
     if (stateSlot === true) {
       data = {
-        info: listSlots.carNumber ? listSlots.carNumber : 'Null',
-        status: 'Y-C9',
-        id,
+        ...listSlots,
       };
       dispatch(updateInfo(data));
     }
     if (stateSlot === false) {
       data = {
-        info: 'X',
-        status: 'N-C9',
-        id,
+        ...listSlots,
       };
       dispatch(updateInfo(data));
     }
