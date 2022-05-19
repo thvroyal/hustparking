@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { failedSlot, loadingSlot, successSlot } from '../store/admin/SlotSlice';
+import { setInfo } from '../store/notifySlice';
 import store from '../store';
 
 export const getSlotOfField = (fieldId) => (dispatch) => {
@@ -82,6 +83,7 @@ export const getSlotOfFieldViewMin = (fieldId) => (dispatch) => {
         return item;
       });
       dispatch(successSlot(slotInField));
+      dispatch(setInfo(res.data.data));
     })
     .catch((err) => {
       console.log(err);

@@ -2,21 +2,29 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initNotify = {
   data: [],
-  loading: false,
 };
 const notify = createSlice({
   name: 'notify',
   initialState: initNotify,
   reducers: {
-    isLoading: (state) => {
-      state.loading = true;
+    setInfo: (state, action) => {
+      state.data = action.payload;
     },
-    getInfo: (state, action) => {
-      state.data.push(action.payload);
+
+    updateInfo: (state, action) => {
+      const newState = state.data.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        }
+        return item;
+      });
+      state.data = [
+        ...newState,
+      ];
     },
   },
 });
 
 const { reducer, actions } = notify;
-export const { getInfo, isLoading } = actions;
+export const { updateInfo, setInfo } = actions;
 export default reducer;

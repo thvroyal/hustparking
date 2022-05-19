@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getInfo } from '../store/notifySlice';
+import { updateInfo } from '../store/notifySlice';
 
 export default function SlotFiled({
   className, id, stateSlot, check, listSlots,
@@ -13,36 +13,28 @@ export default function SlotFiled({
 
     if (stateSlot === true && check === false) {
       data = {
-        info: listSlots.carNumber ? listSlots.carNumber : 'Null',
-        status: 'Y',
-        id,
+        ...listSlots,
       };
-      dispatch(getInfo(data));
+      dispatch(updateInfo(data));
     }
     if (check === true && stateSlot === true) {
       data = {
-        info: `Car number ${listSlots.carNumber} does not parking`,
-        status: 'W',
-        id,
+        ...listSlots,
       };
-      dispatch(getInfo(data));
+      dispatch(updateInfo(data));
     }
 
     if (check === true && stateSlot === false) {
       data = {
-        info: `Do not parking at slot ${id}`,
-        status: 'W-N',
-        id,
+        ...listSlots,
       };
-      dispatch(getInfo(data));
+      dispatch(updateInfo(data));
     }
     if (stateSlot === false && check === false) {
       data = {
-        info: 'X',
-        status: 'N',
-        id,
+        ...listSlots,
       };
-      dispatch(getInfo(data));
+      dispatch(updateInfo(data));
     }
   }, [id, listSlots.statusCam]);
   return (

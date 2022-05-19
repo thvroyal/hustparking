@@ -64,25 +64,23 @@ const Maps2D = () => {
                   <thead className="thead-light">
                     <tr>
                       <th scope="col">Thứ tự</th>
-                      <th scope="col">Trạng thái</th>
                       <th scope="col">Biển số</th>
+                      <th scope="col">Trạng thái</th>
                     </tr>
                   </thead>
                   <tbody>
                     {listNotify ? (
                       listNotify
-                        .slice(listNotify.length - 16, listNotify.length)
                         .map((item) => (
                           <tr>
-                            <th scope="row">{item.id}</th>
-                            <th>
-                              {
-                                item.status === 'Y' || item.status === 'W'
-                                  ? ('Có xe')
-                                  : ('Không có xe')
-                              }
-                            </th>
-                            <td>{item.info}</td>
+                            <th scope="row">{parseInt(item.id, 10) - parseInt(fieldId, 10) * 1000}</th>
+                            <td>{item.carNumber === 'Null' ? 'X' : item.carNumber}</td>
+                            <td>
+                              {item.carNumber === 'Null' && item.statusCam === true
+                                ? 'Có xe nhưng không nhận được biển' : item.statusCam === false
+                                  ? 'Không có xe' : item.statusCam === true && item.carNumber !== 'Null'
+                                    ? 'Có xe' : ''}
+                            </td>
                           </tr>
                         ))
                     ) : ''}
