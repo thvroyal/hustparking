@@ -14,7 +14,7 @@ function ImageViewD35() {
                 <h3>D3 Original</h3>
                 <img
                   role="presentation"
-                  src="http://113.22.128.249:5000/c9_original"
+                  src="http://113.22.128.249:5000/D3_original"
                   alt=""
                   style={{
                     width: '100%',
@@ -25,7 +25,7 @@ function ImageViewD35() {
                 <h3>D3 Result</h3>
                 <img
                   role="presentation"
-                  src="http://113.22.128.249:5000/c9"
+                  src="http://113.22.128.249:5000/D3"
                   alt=""
                   style={{
                     width: '100%',
@@ -38,7 +38,7 @@ function ImageViewD35() {
                 <h3>D5 Original</h3>
                 <img
                   role="presentation"
-                  src="http://113.22.128.249:5000/c9_original"
+                  src="http://113.22.128.249:5000/D5_original"
                   alt=""
                   style={{
                     width: '100%',
@@ -49,7 +49,7 @@ function ImageViewD35() {
                 <h3>D5 Result</h3>
                 <img
                   role="presentation"
-                  src="http://113.22.128.249:5000/c9"
+                  src="http://113.22.128.249:5000/D5"
                   alt=""
                   style={{
                     width: '100%',
