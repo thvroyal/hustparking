@@ -14,9 +14,7 @@ export default function TextField({ label, showLabel, ...props }) {
     <div className={showLabel ? 'mb-3' : ''}>
       <label htmlFor={field.name} className="text-uppercase text-primary small ml-3">{showLabel ? label : ''}</label>
       <input
-        className={`form-control form-control-user ${
-          meta.touched && meta.error && 'is-invalid'
-        }`}
+        className={`form-control form-control-user ${meta.touched && meta.error && 'is-invalid'}`}
         {...field}
         {...props}
         autoComplete="off"

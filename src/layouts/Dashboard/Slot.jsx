@@ -35,10 +35,18 @@ function Slot() {
   // get fieldName from list field by ID
   let fieldName;
   if (field) { fieldName = field.listOfFields.filter((item) => item.id === parseInt(fieldId, 10))[0].name; } else fieldName = '';
+
   useEffect(() => {
     dispatch(getQuantitySlotOfFieldViewMin(fieldId, 20));
     dispatch(getField());
   }, [dispatch, fieldId]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(getQuantitySlotOfFieldViewMin(fieldId, 20));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   function changeFilterShowNull() {
     setShowNull(!showNull);

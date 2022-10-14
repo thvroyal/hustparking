@@ -16,7 +16,7 @@ function LiveMap() {
   useEffect(() => {
     dispatch(getField());
   }, [dispatch]);
-  const googleMapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`;
+  // const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&callback=initMap`;
   return (
     <div className="position-relative" style={{ height: '100vh', width: '100vw' }}>
       <header
@@ -58,7 +58,7 @@ function LiveMap() {
       >
         <MapWrapped
           listFields={listFields}
-          googleMapURL={googleMapURL}
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&libraries=geometry,places`}
           loadingElement={<div style={{ height: '100%' }} />}
           containerElement={<div style={{ height: '100%' }} />}
           mapElement={<div style={{ height: '100%' }} />}

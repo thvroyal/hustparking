@@ -5,9 +5,8 @@ import {
   GoogleMap,
   withGoogleMap,
   withScriptjs,
-  InfoWindow, Marker,
+  Marker,
 } from 'react-google-maps';
-import mapStyle from './mapStyle';
 
 function Map({ listFields }) {
   const [showPopup, setShowPopup] = useState(false);
@@ -16,11 +15,10 @@ function Map({ listFields }) {
   const [longPosition, setLongPosition] = useState(105.84252910689219);
 
   const focusMarker = (lat, long) => {
-    setShowPopup(true);
+    setShowPopup(!showPopup);
     setLatPosition(lat);
     setLongPosition(long);
   };
-
   // const options = { closeBoxURL: '', enableEventPropagation: true, visible: false };
   return (
     <>
@@ -52,7 +50,6 @@ function Map({ listFields }) {
       <GoogleMap
         defaultZoom={18}
         defaultCenter={{ lat: latPosition, lng: longPosition }}
-        defaultOptions={{ styles: mapStyle }}
       >
         {listFields ? (
           listFields.listOfFields.map((item) => (
@@ -64,32 +61,7 @@ function Map({ listFields }) {
                   scaledSize: new window.google.maps.Size(80, 80),
                 }}
                 position={{ lat: parseFloat(item.latitude), lng: parseFloat(item.longitude) }}
-              >
-                <InfoWindow
-                  onCloseClick
-                >
-                  <div>
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th scope="row">#</th>
-                          <th scope="row">First</th>
-                          <th scope="row">Last</th>
-                          <th scope="row">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="col">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </InfoWindow>
-              </Marker>
+              />
             </>
           ))
         ) : ''}
