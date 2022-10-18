@@ -39,6 +39,10 @@ button:focus {
   padding-right: $grid-gutter-width;
 }
 
+.container-fluid {
+  background-color: #ffffff;
+}
+
 // Scroll to top button
 .scroll-to-top {
   position: fixed;
@@ -81,4 +85,11 @@ button:focus {
 }
 .border-3 {
   border-width: 3px!important;
+}
+
+.bg-gradient {
+    background-image: url("../../assets/img/bg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

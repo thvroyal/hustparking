@@ -37,7 +37,7 @@ function Managers() {
 
   return (
     <>
-      <h1 className="h3 mb-2 text-gray-800">List Manager</h1>
+      <h1 className="h3 mb-2 text-gray-800 pt-2">List Manager</h1>
       <div>
         <Link to="/dashboard/new-manager">
           <button type="button" className="btn btn-primary float-right">Create Manager</button>

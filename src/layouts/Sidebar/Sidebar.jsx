@@ -20,7 +20,7 @@ const Sidebar = React.memo(() => {
   return (
     <>
       <ul
-        className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${toggle ? 'toggled' : ''}`}
+        className={`navbar-nav bg-gradient-sidebar sidebar sidebar-dark accordion ${toggle ? 'toggled' : ''}`}
         id="accordionSidebar"
       >
         <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">

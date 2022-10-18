@@ -9,7 +9,7 @@ function ImageView() {
   const location = useLocation().search.split('=')[1]; // get tab name
   return (
     <>
-      <h1 className="h3 mb-2 text-gray-800">Image View</h1>
+      <h1 className="h3 mb-2 text-gray-800 pt-2">Image View</h1>
       <p className="mb-4">Checking Realtime. . . </p>
       <Navbar />
       {location === 'D35' && <ImageViewD35 />}

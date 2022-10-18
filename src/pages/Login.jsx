@@ -4,7 +4,7 @@ import LoginForm from '../layouts/Auth/LoginForm';
 
 function Login() {
   return (
-    <div className="bg-gradient-primary" style={{ height: '100vh' }}>
+    <div className="bg-gradient" style={{ height: '100vh' }}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-xl-10 col-lg-12 col-md-9">

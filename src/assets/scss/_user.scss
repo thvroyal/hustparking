@@ -1,7 +1,7 @@
 .list-user {
   width: 100%;
   margin-bottom: $spacer;
-  color: $table-color;
+  color: #d5dbff;
   background-color: $table-bg; // Reset for nesting within parents with `background-color`.
   border-collapse: separate;
   border-spacing: 0 10px;
@@ -13,9 +13,11 @@
   }
 
   td {
-    background-color: $white;
+    background-image: linear-gradient(180deg, #5b83bc, 20%, #050a11 100%);
     padding: $table-cell-padding;
     font-weight: 500;
+    border-radius: 20px;
+    text-align: center;
 
     &.avatar {
       display: flex;

@@ -27,7 +27,7 @@ function Contract() {
 
   return (
     <>
-      <h1 className="h3 mb-2 text-gray-800 mb-4">Contracts</h1>
+      <h1 className="h3 mb-2 text-gray-800 mb-4 pt-2">Contracts</h1>
 
       <div className="card mb-4">
         <div className="card-header py-3 d-flex justify-content-between">

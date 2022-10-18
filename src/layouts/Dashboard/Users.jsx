@@ -25,7 +25,7 @@ function Users() {
   };
   return (
     <>
-      <h1 className="h3 mb-2 text-gray-800">List Users</h1>
+      <h1 className="h3 mb-2 text-gray-800 pt-2">List Users</h1>
       {/* <p className="mb-4">Update after 10 seconds.</p> */}
 
       <div className="table-responsive mt-4">
