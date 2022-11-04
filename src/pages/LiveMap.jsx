@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { getField } from '../apis/fieldApi';
 import MapWrapped from '../components/MapWrapped';
 import ModalTableMap from '../components/Modal/ModalTableMap';
-import SidebarMaps from '../layouts/Sidebar/SidebarMaps';
 
 function LiveMap() {
   console.log('update!');
@@ -18,7 +17,7 @@ function LiveMap() {
   }, [dispatch]);
   // const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&callback=initMap`;
   return (
-    <div className="position-relative" style={{ height: '100vh', width: '100vw' }}>
+    <div className="position-relative" style={{ height: '100vh', width: '100%' }}>
       <header
         className="bg-primary text-white"
         style={{ height: '5%' }}
@@ -44,8 +43,8 @@ function LiveMap() {
                   transform: 'translate(0px, 4px)',
                 }}
               >
-                <Link to="/" className="text-white">
-                  Login
+                <Link to="/home" className="text-white">
+                  Booking
                 </Link>
               </button>
             </div>
@@ -87,10 +86,6 @@ function LiveMap() {
       >
         {`${listFields ? listFields.listOfFields.length : ''} records`}
       </button>
-
-      <SidebarMaps
-        toggle={toggle}
-      />
 
       <ModalTableMap
         onClose={() => setShowTable(false)}

@@ -485,13 +485,13 @@
 
 .sidenav {
     height: 95%;
-    width: 280px;
+    width: 350px;
     z-index: 1;
     top: 5%;
     left: 0;
     transition: ease 0.5s;
     padding-top: 60px;
     &.toggleSidebar {
-        transform: translateX(-280px);
+        transform: translateX(-9999px);
     }
 }

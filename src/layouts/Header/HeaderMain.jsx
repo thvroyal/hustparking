@@ -51,8 +51,8 @@ function HeaderMain() {
               </Link>
             </li>
             <li>
-              <Link to="/home/maps_2d" className="nav-link px-2 link-dark">
-                Maps 2D
+              <Link to="/home/livemap" className="nav-link px-2 link-dark">
+                Google Map
               </Link>
             </li>
           </ul>

@@ -7,7 +7,7 @@ import BookingForm from '../layouts/User/BookingForm';
 import Checkin from '../layouts/User/Checkin';
 import Contracts from './User/Contracts';
 import Profile from './User/Profile';
-import Maps2D from '../layouts/Dashboard/2D_maps';
+import LiveMap from './LiveMap';
 
 function Home() {
   const { url } = useRouteMatch();
@@ -20,14 +20,14 @@ function Home() {
             <Checkin />
             <BookingForm />
           </AuthenticatedRoute>
+          <AuthenticatedRoute restrict={[1]} path={`${url}/livemap`} exact>
+            <LiveMap />
+          </AuthenticatedRoute>
           <AuthenticatedRoute restrict={[1]} path={`${url}/contracts`} exact>
             <Contracts />
           </AuthenticatedRoute>
           <AuthenticatedRoute restrict={[1]} path={`${url}/profile`} exact>
             <Profile />
-          </AuthenticatedRoute>
-          <AuthenticatedRoute restrict={[1]} path={`${url}/maps_2d`} exact>
-            <Maps2D />
           </AuthenticatedRoute>
         </Switch>
       </div>

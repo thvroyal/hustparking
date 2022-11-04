@@ -1,8 +1,10 @@
 import { bool } from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CarBannerImg from '../../assets/img/profile-1.png';
 
-function SidebarMaps({ toggle }) {
+// eslint-disable-next-line react/prop-types
+function SidebarMaps({ toggle, id, listFields }) {
   return (
     <>
       <div
@@ -24,17 +26,58 @@ function SidebarMaps({ toggle }) {
             </div>
             <div>
               <div>Smart Parking of HUST</div>
-              <div>Detail</div>
+              <div>Detail of parking</div>
             </div>
           </div>
         </div>
         <hr />
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">Page</li>
-          <li className="nav-item">Dashboard</li>
-          <li className="nav-item">Data</li>
-          <li className="nav-item">Info</li>
-        </ul>
+        {listFields ? (
+          // eslint-disable-next-line react/prop-types
+          listFields.listOfFields
+            // eslint-disable-next-line react/prop-types
+            .filter((item) => item.id === id)
+            .map((item) => (
+              <ul className="nav nav-pills flex-column mb-auto" key={item.id}>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>ID</div>
+                  <li className="nav-item">{item.id}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Name</div>
+                  <li className="nav-item">{item.name}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Status</div>
+                  <li className="nav-item">{item.openstatus}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Price</div>
+                  <li className="nav-item">{item.price}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Total book</div>
+                  <li className="nav-item">{item.totalBook}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Busy slot</div>
+                  <li className="nav-item">{item.busySlot}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Total slot</div>
+                  <li className="nav-item">{item.totalSlot}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Detail</div>
+                  <li className="nav-item text-break ml-5">{item.details ? item.details : 'Loading..............................................................'}</li>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <Link to="/home">
+                    <div style={{ cursor: 'pointer' }}>Đặt vé xe</div>
+                  </Link>
+                </div>
+              </ul>
+            ))
+        ) : ''}
         <hr />
       </div>
     </>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import { getFieldUser } from '../../apis/fieldApi';
 
 function BookingForm() {
@@ -179,10 +180,17 @@ function BookingForm() {
         </div>
         {mess.type != null && (
           <div
-            className={`alert mt-3 ${mess.type ? 'alert-success' : 'alert-danger'}`}
+            className={`d-flex justify-content-between align-items-center alert mt-3 ${mess.type ? 'alert-success' : 'alert-danger'}`}
             role="alert"
           >
-            {mess.content}
+            <div>
+              {mess.content}
+            </div>
+            <div>
+              <Link to="/home/livemap">
+                <i className="fas fa-map" />
+              </Link>
+            </div>
           </div>
         )}
       </div>

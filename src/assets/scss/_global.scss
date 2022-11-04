@@ -53,7 +53,7 @@ button:focus {
   height: 2.75rem;
   text-align: center;
   color: $white;
-  background: fade-out($gray-800, .5);
+  background: fade-out($gray-800, 0.5);
   line-height: 46px;
   &:focus,
   &:hover {
@@ -67,7 +67,7 @@ button:focus {
   }
 }
 
-.margin-sidebar{
+.margin-sidebar {
   margin-left: 14rem;
 }
 
@@ -78,18 +78,37 @@ button:focus {
 }
 
 .border-1 {
-  border-width: 1px!important;
+  border-width: 1px !important;
 }
 .border-2 {
-  border-width: 2px!important;
+  border-width: 2px !important;
 }
 .border-3 {
-  border-width: 3px!important;
+  border-width: 3px !important;
 }
 
 .bg-gradient {
-    background-image: url("../../assets/img/bg.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("../../assets/img/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes identifier {
+  0% {
+    right: -9999px;
+  }
+  50% {
+    right: 200px;
+  }
+  75% {
+    right: 100px;
+  }
+  100% {
+    right: 0px;
+  }
+}
+
+.animate-title {
+  animation: identifier 2s linear;
 }
