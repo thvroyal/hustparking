@@ -158,7 +158,7 @@ const Sidebar = React.memo(() => {
             onClick={() => updateCurrentUrl('/dashboard/imageView?tab=D35')}
           >
             <i className="fas fa-fw fa-bug" />
-            <span>Image View</span>
+            <span>Camera View</span>
           </Link>
         </li>
 

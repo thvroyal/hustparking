@@ -37,23 +37,23 @@ function CardField(props) {
               <div
                 className="text-xs font-weight-bold text-primary text-uppercase mb-1"
               >
-                {`Field ${id}`}
+                <div
+                  className="h6 mb-0 text-gray-800 font-weight-bold text-uppercase"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.ctrlKey) {
+                      setOpenModalCreateGW(true);
+                    }
+                  }}
+                  onClick={() => setOpenModalDelete(true)}
+                >
+                  {name}
+                </div>
                 {' '}
-                {`(${area})`}
+                {`${area}`}
               </div>
-              <div
-                className="h6 mb-0 text-gray-800 font-weight-bold text-uppercase"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.ctrlKey) {
-                    setOpenModalCreateGW(true);
-                  }
-                }}
-                onClick={() => setOpenModalDelete(true)}
-              >
-                {name}
-              </div>
+
             </div>
 
             {(GW && GW.length)
