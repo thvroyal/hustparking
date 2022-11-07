@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import {
-  func, bool, number,
-} from 'prop-types';
+import { func, bool, number } from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,9 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getField } from '../../../apis/fieldApi';
 import ModalUpdateField from './ModalUpdateField';
 
-const ModalDeleteField = ({
-  onClose, open, id,
-}) => {
+const ModalDeleteField = ({ onClose, open, id }) => {
   const { alias } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
@@ -58,7 +54,14 @@ const ModalDeleteField = ({
       <Modal.Body>
         <form>
           <div className="form-group row align-items-center d-flex justify-content-around">
-            <button className="btn btn-danger" type="button" onClick={() => handleClick()} disabled={isLoading}>Delete</button>
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={() => handleClick()}
+              disabled={isLoading}
+            >
+              Delete
+            </button>
             <button
               className="btn btn-info"
               type="button"
@@ -67,18 +70,48 @@ const ModalDeleteField = ({
               Update Field
             </button>
             <Link to={`/dashboard/fields/${id}`} className="card-link">
-              <button type="button" className="btn btn-primary">Go to list slot</button>
+              <button type="button" className="btn btn-primary">
+                Go to list slot
+              </button>
             </Link>
             {id === 65 ? (
-              <Link to={`/dashboard/fields/${id}/2d_maps`} className="card-link">
-                <button type="button" className="btn btn-warning">Go to 2D maps</button>
-              </Link>
-            ) : ''}
+              <>
+                <Link to="/dashboard/imageView?tab=D35">
+                  <button type="button" className="btn btn-success">
+                    View camera
+                  </button>
+                </Link>
+                <Link
+                  to={`/dashboard/fields/${id}/2d_maps`}
+                  className="card-link mt-1"
+                >
+                  <button type="button" className="btn btn-warning">
+                    Go to 2D maps
+                  </button>
+                </Link>
+              </>
+            ) : (
+              ''
+            )}
             {id === 70 ? (
-              <Link to={`/dashboard/fields/${id}/2d_maps_C9`} className="card-link">
-                <button type="button" className="btn btn-warning">Go to 2D maps</button>
-              </Link>
-            ) : ''}
+              <>
+                <Link to="/dashboard/imageView?tab=C9">
+                  <button type="button" className="btn btn-success">
+                    View camera
+                  </button>
+                </Link>
+                <Link
+                  to={`/dashboard/fields/${id}/2d_maps_C9`}
+                  className="card-link mt-1"
+                >
+                  <button type="button" className="btn btn-warning">
+                    Go to 2D maps
+                  </button>
+                </Link>
+              </>
+            ) : (
+              ''
+            )}
           </div>
         </form>
       </Modal.Body>

@@ -41,7 +41,7 @@ function Analysis() {
     <>
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between align-items-center">
-          <h6 className="m-0 font-weight-bold text-primary">Analysis Field</h6>
+          <h6 className="m-0 font-weight-bold text-primary">Data Analysis</h6>
         </div>
         <div className="card-body" style={{ maxHeight: '700px' }}>
           <div className="d-flex justify-content-between align-items-end mb-5">

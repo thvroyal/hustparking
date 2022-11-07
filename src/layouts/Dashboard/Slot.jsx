@@ -379,7 +379,7 @@ function Slot() {
                           </>
                         ) : null}
                         <td>
-                          <div className="d-flex align-item-center">
+                          <div className="d-flex align-item-center justify-content-center">
                             <button
                               type="button"
                               className="btn btn-outline-info mr-1"

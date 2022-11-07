@@ -5,8 +5,8 @@ import LoginForm from '../layouts/Auth/LoginForm';
 function Login() {
   return (
     <div className="bg-gradient" style={{ height: '100vh' }}>
-      <div className="container">
-        <div className="row justify-content-center">
+      <div className="container h-100">
+        <div className="row justify-content-center" style={{ transform: 'translateY(50%)' }}>
           <div className="col-xl-10 col-lg-12 col-md-9">
             <div className="card o-hidden border-0 shadow-lg my-5">
               <div className="card-body p-0">

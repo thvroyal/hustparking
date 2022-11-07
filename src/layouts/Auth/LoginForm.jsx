@@ -3,9 +3,8 @@ import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import GoogleLogin from 'react-google-login';
 import { Spinner } from 'react-bootstrap';
-import { SignIn, SignInSocial } from '../../apis/auth';
+import { SignIn } from '../../apis/auth';
 import TextField from '../../components/TextField';
 
 const LoginForm = () => {
@@ -19,12 +18,6 @@ const LoginForm = () => {
       .required('Password is required'),
   });
 
-  const handleLogin = async (googleData) => {
-    dispatch(SignInSocial(googleData.accessToken));
-  };
-  const handleErrorGoogle = async (googleData) => {
-    console.log('error', googleData);
-  };
   return (
     <Formik
       initialValues={{
@@ -75,26 +68,6 @@ const LoginForm = () => {
               {' '}
               Login
             </button>
-            <hr />
-            <GoogleLogin
-              clientId={process.env.REACT_APP_CLIENT_ID}
-              render={(renderProps) => (
-                <button
-                  className="btn btn-google btn-user btn-block"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  type="button"
-                >
-                  <i className="fab fa-google fa-fw" />
-                  {' '}
-                  Login with Google
-                </button>
-              )}
-              buttonText="Log in with Google"
-              onSuccess={handleLogin}
-              onFailure={handleErrorGoogle}
-              cookiePolicy="single_host_origin"
-            />
           </Form>
 
           <hr />

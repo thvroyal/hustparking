@@ -231,6 +231,14 @@ function DetectorDebug() {
                     .slice(listDetectors.length - numFilter, listDetectors.length)
                     .map((item) => {
                       if (filter.includes(item.nodeAddress) || !filter.length) {
+                        const convertTimeYear = item.time.slice(0, 4);
+                        const convertTimeMonth = item.time.slice(4, 6);
+                        const convertTimeDay = item.time.slice(6, 8);
+                        const convertTimeHours = item.time.slice(8, 10);
+                        const convertTimeMin = item.time.slice(11, 13);
+                        const convertTimeSecond = item.time.slice(12);
+                        console.log(item.time);
+                        const date = `${convertTimeHours}:${convertTimeMin}:${convertTimeSecond} ${convertTimeDay}:${convertTimeMonth}:${convertTimeYear}`;
                         return (
                           <tr key={item.id}>
                             <td>{item.packetNumber}</td>
@@ -246,7 +254,7 @@ function DetectorDebug() {
                               </button>
                             </td>
                             <td>{item.communicationLevel}</td>
-                            <td>{item.time}</td>
+                            <td>{date}</td>
                             <td>{parseInt(item.idNode, 10)}</td>
                           </tr>
                         );
