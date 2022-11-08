@@ -115,6 +115,7 @@ function HeaderMain() {
                 <a
                   className="nav-link dropdown-item"
                   href="#foo"
+                  id="testID"
                   onClick={handleLogOut}
                 >
                   Sign out

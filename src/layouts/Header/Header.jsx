@@ -91,6 +91,7 @@ function Header() {
           <li>
             <a
               className="nav-link dropdown-item"
+              id="testID"
               href="#foo"
               onClick={logOut}
             >
