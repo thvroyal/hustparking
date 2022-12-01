@@ -23,13 +23,10 @@ const ModalCreateDetector = ({
   const [isLoading, setLoading] = useState(false);
   const [timeSetup, setTimeSetup] = useState('');
   const dispatch = useDispatch();
-  console.log(idField);
 
   const validateFieldCreate = Yup.object({
     addressDetector: Yup.string().required('Address is required'),
     gatewayId: Yup.number(),
-    // id: Yup.number().required('Id is required'),
-    // lastTimeSetup: Yup.string().required('Time is required'),
     slotId: Yup.number(),
   });
   const validateFieldUpdate = Yup.object({

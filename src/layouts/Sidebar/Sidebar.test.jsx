@@ -19,7 +19,6 @@ test("render app", () => {
       </Router>
     </Provider>
   );
-  console.log(wrapper.debug())
     const link = wrapper.find("a").first()
     link.simulate("click")
     const link1 = wrapper.find("a").at(1)

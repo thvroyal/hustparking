@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Pie } from 'react-chartjs-2';
-import { Tooltip } from 'reactstrap';
+// import { Tooltip } from 'reactstrap';
 import ModalDeleteField from './Modal/ModalField/ModalDeleteField';
 import ModalCreateGW from './Modal/ModalGW/ModalCreateGW';
 import ModalOption from './Modal/ModalGW/ModalOption';
@@ -20,13 +20,13 @@ function CardField(props) {
     ],
   };
 
-  const [tooltipOpen, setTooltipOpen] = useState(false);
+  // const [tooltipOpen, setTooltipOpen] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
   const [isOpenModalCreateGW, setOpenModalCreateGW] = useState(false);
   const [isOpenModalOption, setOpenModalOption] = useState(false);
   const [idGW, setIdGW] = useState(0);
 
-  const toggle = () => setTooltipOpen(!tooltipOpen);
+  // const toggle = () => setTooltipOpen(!tooltipOpen);
 
   return (
     <div className="card border-left-primary shadow h-100 py-2 card-field">
@@ -83,7 +83,7 @@ function CardField(props) {
                   <div>
                     <div
                       className="badge badge-primary font-weight-normal mr-1"
-                      id="tooltip-create-GW"
+                      id="tooltipCreateGW"
                       role="button"
                       tabIndex={0}
                       onKeyDown={(e) => {
@@ -97,14 +97,14 @@ function CardField(props) {
 
                     </div>
                   </div>
-                  <Tooltip
+                  {/* <Tooltip
                     placement="bottom"
                     isOpen={tooltipOpen}
-                    target="tooltip-create-GW"
+                    target="tooltipCreateGW"
                     toggle={toggle}
                   >
                     Create new gateway
-                  </Tooltip>
+                  </Tooltip> */}
                 </>
               )}
           </div>
