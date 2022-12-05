@@ -1,7 +1,7 @@
 // css maps for D35
 .box {
-    width: 46px;
-    height: 55px;
+    width: 25px;
+    height: 45px;
     z-index: 1;
     cursor: pointer;
     position: absolute;
@@ -15,19 +15,20 @@
 }
 
 .box__color__D35 {
-    border: 1px solid green;
+    border: 1px solid red;
 }
 
 .box__color__library {
     border: 1px solid #ccc;
+    display: none;
 }
 
 .box11_D35 {
-    transform: translate(233px, 544px);
+    transform: translate(238px, 557px);
 }
 
 .box12_D35 {
-    transform: translate(233px, 490px);
+    transform: translate(238px, 510px);
 }
 
 .box13_library {
@@ -47,36 +48,36 @@
 }
 
 .box_road10 {
-    transform: translate(341px, 129px);
+    transform: translate(291px, 233px);
 }
 .box_road9 {
-    transform: translate(341px, 182px);
+    transform: translate(291px, 279px);
 }
 .box_road8 {
-    transform: translate(341px, 234px);
+    transform: translate(291px, 325px);
 }
 .box_road7 {
-    transform: translate(341px, 289px);
+    transform: translate(291px, 372px);
 }
 .box_road6 {
-    transform: translate(341px, 344px);
+    transform: translate(291px, 419px);
 }
 .box_road5 {
-    transform: translate(341px, 397px);
+    transform: translate(291px, 465px);
 }
 
 .box_road4 {
-    transform: translate(341px, 452px);
+    transform: translate(291px, 511px);
 }
 
 .box_road3 {
-    transform: translate(341px, 507px);
+    transform: translate(291px, 557px);
 }
 .box_road2 {
-    transform: translate(341px, 748px);
+    transform: translate(291px, 748px);
 }
 .box_road1 {
-    transform: translate(341px, 802px);
+    transform: translate(291px, 794px);
 }
 
 .hidden {
@@ -84,8 +85,8 @@
 }
 
 .icon__car__ver {
-    transform: translate(13px, 0px);
-    font-size: 28px;
+    transform: translate(4px, 0px);
+    font-size: 18px;
 }
 
 .icon__car__hori {
@@ -126,103 +127,108 @@
 // css for maps C9
 
 .box_C9 {
-    width: 33px;
-    height: 61px;
+    width: 32px;
+    height: 42px;
     z-index: 1;
     cursor: pointer;
     position: absolute;
+    border: 1px solid red;
+}
+
+.number__id {
+    color: red;
 }
 
 .box_1 {
-    transform: translate(68px, 123px);
+    transform: translate(73px, 306px);
 }
 .box_2 {
-    transform: translate(102px, 123px);
+    transform: translate(108px, 306px);
 }
 .box_3 {
-    transform: translate(165px, 123px);
+    transform: translate(185px, 306px);
 }
 .box_4 {
-    transform: translate(198px, 123px);
+    transform: translate(219px, 306px);
 }
 .box_5 {
-    transform: translate(271px, 123px);
+    transform: translate(302px, 306px);
 }
 .box_6 {
-    transform: translate(304px, 123px);
+    transform: translate(336px, 306px);
 }
 .box_7 {
-    transform: translate(337px, 123px);
+    transform: translate(370px, 306px);
 }
 .box_8 {
-    transform: translate(370px, 123px);
+    transform: translate(404px, 306px);
 }
 .box_9 {
-    transform: translate(403px, 123px);
+    transform: translate(437px, 306px);
 }
 .box_10 {
-    transform: translate(436px, 123px);
+    transform: translate(471px, 306px);
 }
 .box_11 {
-    transform: translate(506px, 123px);
+    transform: translate(585px, 306px);
 }
 .box_12 {
-    transform: translate(539px, 123px);
+    transform: translate(617px, 306px);
 }
 
 .box_13 {
-    transform: translate(271px, 273px);
+    transform: translate(302px, 392px);
 }
 .box_14 {
-    transform: translate(304px, 273px);
+    transform: translate(334px, 392px);
 }
 .box_15 {
-    transform: translate(337px, 273px);
+    transform: translate(367px, 392px);
 }
 .box_16 {
-    transform: translate(370px, 273px);
+    transform: translate(401px, 392px);
 }
 .box_17 {
-    transform: translate(403px, 273px);
+    transform: translate(435px, 392px);
 }
 .box_18 {
-    transform: translate(436px, 273px);
+    transform: translate(469px, 392px);
 }
 .box_19 {
-    transform: translate(259px, 335px);
+    transform: translate(282px, 433px);
 }
 .box_20 {
-    transform: translate(292px, 335px);
+    transform: translate(316px, 433px);
 }
 .box_21 {
-    transform: translate(325px, 335px);
+    transform: translate(350px, 433px);
 }
 .box_22 {
-    transform: translate(358px, 335px);
+    transform: translate(383px, 433px);
 }
 .box_23 {
-    transform: translate(391px, 335px);
+    transform: translate(416px, 433px);
 }
 .box_24 {
-    transform: translate(424px, 335px);
+    transform: translate(449px, 433px);
 }
 .box_25 {
-    transform: translate(457px, 335px);
+    transform: translate(483px, 433px);
 }
 .box_26 {
-    transform: translate(173px, 528px);
+    transform: translate(212px, 518px);
 }
 .box_27 {
-    transform: translate(206px, 528px);
+    transform: translate(246px, 518px);
 }
 .box_28 {
-    transform: translate(272px, 528px);
+    transform: translate(314px, 518px);
 }
 .box_29 {
-    transform: translate(305px, 528px);
+    transform: translate(348px, 518px);
 }
 
 .icon__car__ver__C9 {
-    transform: translate(6px, 0px);
-    font-size: 22px;
+    transform: translate(7px, -7px);
+    font-size: 17px;
 }

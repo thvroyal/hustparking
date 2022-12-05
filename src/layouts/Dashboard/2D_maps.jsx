@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { getSlotOfFieldViewMin } from '../../apis/slotApi';
-import CarBannerImg from '../../assets/img/2D_thư_viện_D35.drawio_not.png';
+import CarBannerImg from '../../assets/img/D35_2D.jpg';
 // import CarBannerImgShow from '../../assets/img/D3.jpg';
 import SlotFiled from '../../components/SlotField';
 
