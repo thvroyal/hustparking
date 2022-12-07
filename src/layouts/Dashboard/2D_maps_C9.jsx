@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { getSlotOfFieldViewMin } from '../../apis/slotApi';
 import CarBannerImg from '../../assets/img/C9_2D.jpg';
-// import CarBannerImgShow from '../../assets/img/D3.jpg';
+import Camera from '../../assets/img/camera.png';
 import SlotFiledC9 from '../../components/SlotFiledC9';
 
 const Maps2D = () => {
@@ -43,6 +43,11 @@ const Maps2D = () => {
                   width: '700px',
                   height: '700px',
                 }}
+              />
+              <img
+                className="position-absolute camera-css"
+                src={Camera}
+                alt=""
               />
             </div>
             <div
