@@ -97,7 +97,7 @@ const Maps2D = () => {
             listSlots.map((item) => {
               const changeId = parseInt(item.id, 10) - parseInt(fieldId, 10) * 1000;
               let stateSlot = false;
-              if (item.statusCam === true || item.carNumber !== null) stateSlot = true;
+              if (item.statusCam === true || item.carNumber !== 'null') stateSlot = true;
               return (
                 <>
                   <SlotFiledC9
