@@ -9,21 +9,21 @@ import { act } from "react-dom/test-utils";
 Enzyme.configure({ adapter: new Adapter() });
 
 const initData = {
-    onClose: jest.fn(),
-    open: true,
-    checkField: true,
-    idGW: 2,
-    addrDetector: "100.1.1.1",
-    idField: 65
-}
+  onClose: () => false,
+  open: true,
+  checkField: true,
+  idGW: 2,
+  addrDetector: "100.1.1.1",
+  idField: 65,
+};
 
 const initialState = {
   auth: {
     error: "string",
     loading: false,
     info: {
-        image: "string",
-    }
+      image: "string",
+    },
   },
   field: {
     data: {
@@ -42,14 +42,14 @@ const initialState = {
           name: "string",
           openstatus: "string",
           price: 0,
-          space: 0
-        }
-      ]
-    }
+          space: 0,
+        },
+      ],
+    },
   },
   area: {
-    data: []
-  }
+    data: [],
+  },
 };
 const mockStore = configureStore();
 
@@ -58,36 +58,36 @@ test("render card field", async () => {
   const wrapper = mount(
     <Provider store={store}>
       <Router>
-        <ModalCreateDetector {...initData}/>
+        <ModalCreateDetector {...initData} />
       </Router>
     </Provider>
   );
-  const formik = wrapper.find("form").first();
+  const formik = wrapper.find("Formik").first();
   act(() => {
     formik.simulate("submit");
-   })
+  });
   expect(wrapper).toBeTruthy();
 });
 
 test("render card field", async () => {
-    const newData = {
-        ...initData,
-        checkField: false,
-    }
-    const store = mockStore(initialState);
-    const wrapper = mount(
-      <Provider store={store}>
-        <Router>
-          <ModalCreateDetector {...newData}/>
-        </Router>
-      </Provider>
-    );
-    console.log(wrapper.debug());
-    const formik = wrapper.find("form").first();
-    act(() => {
-     formik.simulate("submit");
-    })
-    const btn = wrapper.find("button").first();
-    btn.simulate("click");
-    expect(wrapper).toBeTruthy();
+  const newData = {
+    ...initData,
+    checkField: false,
+  };
+  const store = mockStore(initialState);
+  const wrapper = mount(
+    <Provider store={store}>
+      <Router>
+        <ModalCreateDetector {...newData} />
+      </Router>
+    </Provider>
+  );
+  console.log(wrapper.debug());
+  const formik = wrapper.find("Formik").first();
+  act(() => {
+    formik.simulate("submit");
   });
+  const btn = wrapper.find("button").first();
+  btn.simulate("click");
+  expect(wrapper).toBeTruthy();
+});

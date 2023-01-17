@@ -51,23 +51,49 @@ const initialState = {
 };
 const mockStore = configureStore();
 
-test("render card field", () => {
-  const store = mockStore(initialState);
-  const wrapper = mount(
-    <Provider store={store}>
-      <Router>
-        <CardField {...initData}/>
-      </Router>
-    </Provider>
-  );
-  console.log(wrapper.debug());
-  const event = {ctrlKey: true};
-  const div1 = wrapper.find(".text-gray-800").first();
-  div1.simulate("keydown", event);
-  div1.simulate("click");
+describe("testing 1", () => {
+  test("render card field", () => {
+    const store = mockStore(initialState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router>
+          <CardField {...initData}/>
+        </Router>
+      </Provider>
+    );
+    const event = {ctrlKey: true};
+    const div1 = wrapper.find(".text-gray-800").first();
+    div1.simulate("keydown", event);
+    div1.simulate("click");
+  
+    const tooltip = wrapper.find("#tooltipCreateGW").first();
+    tooltip.simulate("keydown", event);
+    tooltip.simulate("click");
+  
+    const modalOption = wrapper.find("ModalOption").first().props();
+    modalOption.onClose();
+    expect(wrapper).toBeTruthy();
+  });
+})
 
-  const tooltip = wrapper.find("#tooltipCreateGW").first();
-  tooltip.simulate("keydown", event);
-  tooltip.simulate("click");
-  expect(wrapper).toBeTruthy();
+describe("testing 2", () => {
+  test("render card field", () => {
+    const store = mockStore(initialState);
+    const newData = {
+      ...initData,
+      GW: [{id:1}, {id:2}]
+    }
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router>
+          <CardField {...newData}/>
+        </Router>
+      </Provider>
+    );
+    const event = {ctrlKey: true};
+    const tooltip = wrapper.find("#tooltipCreateGW").first();
+    tooltip.simulate("keydown", event);
+    tooltip.simulate("click");
+    expect(wrapper).toBeTruthy();
+  });
 });

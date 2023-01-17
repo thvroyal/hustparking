@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Spinner } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router';
-import { getArea } from '../../apis/areaApi';
-import { getDistrict } from '../../apis/districtApi';
-import { getField, getFieldByDistrict } from '../../apis/fieldApi';
-import { getGateway } from '../../apis/GatewayApi';
-import CardField from '../../components/CardField';
-import ModalCreateField from '../../components/Modal/ModalField/ModalCreateField';
-import ModalTableMap from '../../components/Modal/ModalTableMap';
-import { SET_AD } from '../../helpers/constants';
+import React, { useEffect, useRef, useState } from "react";
+import { Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router";
+import { getArea } from "../../apis/areaApi";
+import { getDistrict } from "../../apis/districtApi";
+import { getField, getFieldByDistrict } from "../../apis/fieldApi";
+import { getGateway } from "../../apis/GatewayApi";
+import CardField from "../../components/CardField";
+import ModalCreateField from "../../components/Modal/ModalField/ModalCreateField";
+import ModalTableMap from "../../components/Modal/ModalTableMap";
+import { SET_AD } from "../../helpers/constants";
 
 function Fields() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function Fields() {
   }, [dispatch]);
 
   const getListFieldsByDistrict = (idDistrict) => {
-    if (valueOptionDistrict === 'all') {
+    if (valueOptionDistrict === "all") {
       dispatch(getField());
     } else {
       dispatch(getFieldByDistrict(idDistrict));
@@ -48,11 +48,12 @@ function Fields() {
 
   const drawCreateField = () => (
     <div
+      id="cardDrow"
       className="col-xl-3 col-md-6 mb-4"
       key="create-new-field"
       onClick={() => setOpenCreateField(true)}
       aria-hidden="true"
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: "pointer" }}
     >
       <div className="card h-100 py-2 card-field card-border-dash">
         <div className="card-body d-flex align-items-center justify-content-center">
@@ -73,15 +74,29 @@ function Fields() {
           Fields
         </button>
         <div className="input-group user mb-5 w-50">
-          <select className="custom-select" id="fieldList" ref={selectDistrictRef} onChange={onChangeValueDistrict}>
-            <option value="all" defaultChecked>What district do you want to view?</option>
-            {listDistrict && listDistrict.map((district) => (
-              <option value={district.id} key={district.id}>{district.district}</option>
-            ))}
+          <select
+            className="custom-select"
+            id="fieldList"
+            ref={selectDistrictRef}
+            onChange={onChangeValueDistrict}
+          >
+            <option value="all" defaultChecked>
+              What district do you want to view?
+            </option>
+            {listDistrict &&
+              listDistrict.map((district) => (
+                <option value={district.id} key={district.id}>
+                  {district.district}
+                </option>
+              ))}
           </select>
           <div className="input-group-append">
-            <button className="btn btn-outline-primary" type="button" onClick={() => getListFieldsByDistrict(valueOptionDistrict)}>
-              {' '}
+            <button
+              className="btn btn-outline-primary"
+              type="button"
+              onClick={() => getListFieldsByDistrict(valueOptionDistrict)}
+            >
+              {" "}
               {/* {loading && (
               <Spinner
                 animation="border"
@@ -91,7 +106,6 @@ function Fields() {
               />
             )} */}
               Check now
-
             </button>
           </div>
         </div>
@@ -115,7 +129,10 @@ function Fields() {
         ) : (
           <Spinner animation="border" color="primary" />
         )}
-        <ModalCreateField onClose={() => setOpenCreateField(false)} open={isOpenCreateField} />
+        <ModalCreateField
+          onClose={() => setOpenCreateField(false)}
+          open={isOpenCreateField}
+        />
       </div>
       <ModalTableMap
         onClose={() => setShowTable(false)}

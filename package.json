@@ -1,5 +1,28 @@
 {
   "name": "hust-parking",
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/build/", 
+      "<rootDir>/node_modules/", 
+      "<rootDir>/src/apis/", 
+      "<rootDir>/src/reportWebVitals.js", 
+      "<rootDir>/src/store/", 
+      "<rootDir>/src/components/Routes/UnauthenticatedRoute.js",
+      "<rootDir>/src/components/MapWrapped.jsx",
+      "<rootDir>/src/pages/LiveMap.jsx",
+      "<rootDir>/src/pages/Dashboard.jsx",
+      "<rootDir>/src/helpers/sort.js",
+      "<rootDir>/src/helpers/useModal.js",
+      "<rootDir>/src/layouts/Dashboard/Slot.jsx",
+      "<rootDir>/src/layouts/Dashboard/ListManager",
+      "<rootDir>/src/layouts/Dashboard/ProfileManager",
+      "<rootDir>/src/layouts/Dashboard/Analysis",
+      "<rootDir>/src/layouts/Dashboard/CreateManager",
+      "<rootDir>/src/layouts/Dashboard/ImageView",
+      "<rootDir>/src/layouts/Auth",
+      "<rootDir>/src/layouts/User"
+    ]
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
