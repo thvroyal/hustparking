@@ -18,6 +18,7 @@ import packageTagReducer from './debug/packageTagSlice';
 import notifyReducer from './notifySlice';
 import listContractReducer from './user/listContractSlice';
 import utilsReducer from './utilsSlice';
+import historyDemoReducer from './historyDemo';
 
 const rootReducer = {
   detector: detectorReducer,
@@ -39,6 +40,7 @@ const rootReducer = {
   notify: notifyReducer,
   area: areaReducer,
   district: districtReducer,
+  historyDemo: historyDemoReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

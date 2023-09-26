@@ -40,3 +40,21 @@
     }
   }
 }
+
+.center{
+  width: 100%;
+  height: 600px;
+}
+
+.my-modal{
+  margin: auto;
+  width: 1000px !important;
+  max-width: 1000px !important;
+  height: 800px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  .modal-dialog{
+    max-width: 100%;
+    width: 100%;
+  }
+}

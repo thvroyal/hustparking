@@ -6,7 +6,7 @@ import {
 } from '../store/debug/packageTagSlice';
 import store from '../store';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getTagPackage = () => (dispatch) => {
   const { auth } = store.getState();
   dispatch(loadingPackageTag);

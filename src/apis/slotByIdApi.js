@@ -5,7 +5,7 @@ import {
   successSlotById,
 } from '../store/admin/slotByIdSlice';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getSlotById = (id) => (dispatch) => {
   dispatch(loadingSlotById);
   axios({

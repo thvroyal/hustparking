@@ -6,7 +6,7 @@ import {
 } from '../store/admin/gatewayfieldSlice';
 import store from '../store/index';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getGWField = () => (dispatch) => {
   const { auth } = store.getState();
   dispatch(loadingGatewayField);

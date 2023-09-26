@@ -5,7 +5,7 @@ import {
   handleError,
 } from '../store/user/listContractSlice';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getListContract = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {

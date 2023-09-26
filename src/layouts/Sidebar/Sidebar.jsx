@@ -162,6 +162,20 @@ const Sidebar = React.memo(() => {
           </Link>
         </li>
 
+        {/* History Demo */}
+        <li
+          className={`nav-item ${current === '/dashboard/historyDemo' ? 'active' : null}`}
+        >
+          <Link
+            className="nav-link"
+            to="/dashboard/historyDemo"
+            onClick={() => updateCurrentUrl('/dashboard/historyDemo')}
+          >
+            <i className="fas fa-fw fa-spinner" />
+            <span>History Demo</span>
+          </Link>
+        </li>
+
         <hr className="sidebar-divider d-none d-md-block" />
 
         <div className="text-center d-none d-md-inline">

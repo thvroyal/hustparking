@@ -6,12 +6,13 @@ import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { fireEvent } from "@testing-library/react";
-import thunk from "redux-thunk";
+
 Enzyme.configure({ adapter: new Adapter() });
 
-const initialState = { auth: { info: { image: "string" }, role: 2 } };
-const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+const initialState = { auth: { info: {image: "string"}, role: 2 } };
+const mockStore = configureStore();
+const dispatch = jest.fn();
+jest.spyOn(ReactRedux, "useDispatch").mockReturnValue(dispatch);
 
 test("render app", () => {
   const store = mockStore(initialState);

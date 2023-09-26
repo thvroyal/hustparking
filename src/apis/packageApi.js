@@ -6,7 +6,7 @@ import {
 } from '../store/debug/packageSlice';
 import store from '../store';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getPacket = () => (dispatch) => {
   const { auth } = store.getState();
   dispatch(loadingPackage);

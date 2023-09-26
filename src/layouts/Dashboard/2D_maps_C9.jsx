@@ -18,7 +18,7 @@ const Maps2D = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getSlotOfFieldViewMin(fieldId));
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [dispatch]);
 

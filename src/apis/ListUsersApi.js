@@ -6,7 +6,7 @@ import {
 } from '../store/admin/UsersSlice';
 import store from '../store';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const fetchListUser = () => (dispatch) => {
   const { auth } = store.getState();
   dispatch(loadingListUsers(true));

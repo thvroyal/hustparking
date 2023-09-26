@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { Modal, Spinner } from "react-bootstrap";
-import { func, bool, number } from "prop-types";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import TextField from "../../TextField";
-import { getGateway } from "../../../apis/GatewayApi";
+import React, { useState, useEffect } from 'react';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { Modal, Spinner } from 'react-bootstrap';
+import { func, bool, number } from 'prop-types';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import TextField from '../../TextField';
+import { getGateway } from '../../../apis/GatewayApi';
 
-const ModalUpdateGW = ({ onClose, open, id, idGW }) => {
+const ModalUpdateGW = ({
+  onClose, open, id, idGW,
+}) => {
   const [isLoading, setLoading] = useState(false);
   const { alias } = useSelector((state) => state.auth);
   const gateway = useSelector((state) => state.gateway.data);
@@ -28,7 +30,7 @@ const ModalUpdateGW = ({ onClose, open, id, idGW }) => {
   const gatewaySelectedFilter = gatewaySelected.filter((item) => item >= 0);
 
   const validateField = Yup.object({
-    addressGateway: Yup.string().required("Address is required"),
+    addressGateway: Yup.string().required('Address is required'),
     fieldId: Yup.number(),
   });
 
@@ -44,9 +46,7 @@ const ModalUpdateGW = ({ onClose, open, id, idGW }) => {
       <Modal.Body>
         <Formik
           initialValues={{
-            addressGateway: gateway
-              ? gateway[gatewaySelectedFilter].address
-              : "",
+            addressGateway: gateway ? gateway[gatewaySelectedFilter].address : '',
             fieldId: id,
           }}
           validationSchema={validateField}
@@ -55,17 +55,17 @@ const ModalUpdateGW = ({ onClose, open, id, idGW }) => {
             try {
               setLoading(true);
               const response = await axios({
-                method: "POST",
+                method: 'POST',
                 url: `${process.env.REACT_APP_BASE_URL}/api/${alias}/gateway/create_and_update`,
                 headers: {
-                  token: localStorage.getItem("AccessToken"),
-                  "Content-Type": "application/json",
+                  token: localStorage.getItem('AccessToken'),
+                  'Content-Type': 'application/json',
                 },
                 data: JSON.stringify(data),
               });
 
               setLoading(false);
-              if (response.data.message === "success") {
+              if (response.data.message === 'success') {
                 const responseGateway = response.data.data;
 
                 toast.success(`Gateway ${responseGateway.id} is updated`, {
@@ -76,7 +76,7 @@ const ModalUpdateGW = ({ onClose, open, id, idGW }) => {
               }
             } catch (error) {
               setLoading(false);
-              toast.error("Can't update gateway. Please try again!");
+              toast.error('Can\'t update gateway. Please try again!');
               console.log(error);
             }
           }}
@@ -85,20 +85,8 @@ const ModalUpdateGW = ({ onClose, open, id, idGW }) => {
             console.log(errors);
             return (
               <Form className="user">
-                <TextField
-                  label="address Gateway"
-                  name="addressGateway"
-                  type="text"
-                  placeholder="Enter address field such as a.b.c.d"
-                  showLabel
-                />
-                <TextField
-                  label="field id"
-                  name="fieldId"
-                  type="text"
-                  placeholder="Enter field id"
-                  showLabel
-                />
+                <TextField label="address Gateway" name="addressGateway" type="text" placeholder="Enter address field such as a.b.c.d" showLabel />
+                <TextField label="field id" name="fieldId" type="text" placeholder="Enter field id" showLabel />
                 <button
                   type="submit"
                   className="btn btn-primary mt-4"

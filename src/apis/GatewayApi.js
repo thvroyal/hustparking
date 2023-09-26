@@ -6,7 +6,7 @@ import {
 } from '../store/admin/gatewaySlice';
 import store from '../store/index';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getGateway = () => (dispatch) => {
   const { auth } = store.getState();
   dispatch(loadingGateway);

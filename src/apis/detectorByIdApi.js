@@ -6,7 +6,7 @@ import {
 } from '../store/admin/detectorByIdSlice';
 import store from '../store';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const getDetectorById = (id) => (dispatch) => {
   const { auth } = store.getState();
   dispatch(loadingDetectorById);

@@ -112,6 +112,25 @@ const ModalDeleteField = ({ onClose, open, id }) => {
             ) : (
               ''
             )}
+            {id === 71 ? (
+              <>
+                <Link to="/dashboard/imageView?tab=TĐN">
+                  <button type="button" className="btn btn-success">
+                    View camera
+                  </button>
+                </Link>
+                <Link
+                  to={`/dashboard/fields/${id}/2d_maps_TDN`}
+                  className="card-link mt-1"
+                >
+                  <button type="button" className="btn btn-warning">
+                    Go to 2D maps
+                  </button>
+                </Link>
+              </>
+            ) : (
+              ''
+            )}
           </div>
         </form>
       </Modal.Body>

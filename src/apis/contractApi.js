@@ -6,7 +6,7 @@ import {
 } from '../store/admin/contractSlice';
 import store from '../store';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export function getContract(idUser) {
   return async (dispatch) => {
     const { auth } = store.getState();

@@ -6,7 +6,7 @@ import {
   successTag,
 } from '../store/admin/tagsSlice';
 
-// eslint-disable-next-line import/prefer-default-export
+
 export function getTag() {
   const { auth } = store.getState();
   return async (dispatch) => {
